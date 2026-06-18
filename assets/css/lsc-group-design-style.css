@@ -1027,7 +1027,7 @@ h6,.h6-style {
     font-family: var(--lsc-font-body);
     font-weight: var(--lsc-btn-font-weight);
     text-decoration: none;
-    border-radius: var(--lsc-border-radius);
+    border-radius: .375rem;
     border: 2px solid transparent;
     transition: all var(--lsc-transition);
     cursor: pointer;
