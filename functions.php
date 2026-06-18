@@ -110,6 +110,10 @@ function lsc_scripts() {
 	wp_enqueue_style( 'lsc-group-starter-style',  get_template_directory_uri() . '/assets/css/lsc-group-starter-style.css',   array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-style',          get_stylesheet_uri(),                                                           array(), LSC_GROUP_VERSION );
 
+	// ── Developer CSS (Temporary) ────────────────────────────────
+	wp_enqueue_style( 'lsc-imran-style',          get_template_directory_uri() . '/imran.css',                                    array(), LSC_GROUP_VERSION );
+	wp_enqueue_style( 'lsc-faisal-style',         get_template_directory_uri() . '/faisal.css',                                   array(), LSC_GROUP_VERSION );
+
 	// ── Core JS ──────────────────────────────────────────────────
 	wp_enqueue_script( 'jquery-vimeo-player',         get_template_directory_uri() . '/assets/js/jquery.mb.vimeo_player.min.js', array( 'jquery' ), LSC_GROUP_VERSION, true );
 	wp_enqueue_script( 'slick-carousel',              get_template_directory_uri() . '/assets/js/slick.js',                       array( 'jquery' ), LSC_GROUP_VERSION, true );
