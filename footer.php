@@ -5,10 +5,10 @@
 
 ?>
 
-<footer id="colophon" class="site-footer">
+<footer id="colophon" class="site-footer layout-padding">
 
-	<div class="footer-top lsc-container layout-padding">
-
+<div class="lsc-container">
+     <div class="footer-top pt-50 pt-lg-65">
 		<div class="footer-brand-column">
 			<?php if ( function_exists( 'lsc_render_footer_logo' ) ) : ?>
 				<?php lsc_render_footer_logo(); ?>
@@ -39,7 +39,7 @@
 		<?php lsc_render_footer_company_registrations(); ?>
 	<?php endif; ?>
 
-	<div class="footer-bottom lsc-container layout-padding">
+	<div class="footer-bottom">
 
 		<?php if ( function_exists( 'lsc_render_footer_copyright' ) ) : ?>
 			<?php lsc_render_footer_copyright(); ?>
@@ -50,6 +50,7 @@
 		<?php endif; ?>
 
 	</div>
+</div>
 
 </footer>
 
