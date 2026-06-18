@@ -1,1 +1,53 @@
 /* Faisal's Custom Styles */
+
+.header-main-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+.site-branding {
+  max-width: 12.125rem;
+}
+.main-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  column-gap: 3.5rem;
+}
+.main-menu > li {
+  position: relative;
+}
+.main-menu > li > a {
+  color: var(--lsc-color-primary);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 131.25%;
+  letter-spacing: 0.28px;
+  display: block;
+  text-decoration: none;
+  transition: 0.3s all ease;
+}
+.main-menu > li:hover > a {
+  color: var(--lsc-color-accent);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  column-gap: 3.1875rem;
+}
+.header-phone-link {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 105%;
+  letter-spacing: 1px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.9375rem;
+}
