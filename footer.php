@@ -7,7 +7,7 @@
 
 <footer id="colophon" class="site-footer">
 
-	<div class="footer-top layout-padding">
+	<div class="footer-top lsc-container layout-padding">
 
 		<div class="footer-brand-column">
 			<?php if ( function_exists( 'lsc_render_footer_logo' ) ) : ?>
@@ -39,7 +39,7 @@
 		<?php lsc_render_footer_company_registrations(); ?>
 	<?php endif; ?>
 
-	<div class="footer-bottom layout-padding">
+	<div class="footer-bottom lsc-container layout-padding">
 
 		<?php if ( function_exists( 'lsc_render_footer_copyright' ) ) : ?>
 			<?php lsc_render_footer_copyright(); ?>

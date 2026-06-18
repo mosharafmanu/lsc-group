@@ -19,7 +19,6 @@ $posts_per_page = $posts_per_page ? (int) $posts_per_page : -1;
 
 $section_classes = [
 	'finance-products-section',
-	'layout-padding',
 	'bg-lsc-subtle',
 ];
 
@@ -65,7 +64,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="finance-products-section__inner">
+	<div class="finance-products-section__inner lsc-container layout-padding">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="finance-products-section__header">
 				<?php if ( $eyebrow ) : ?>

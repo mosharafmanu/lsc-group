@@ -16,7 +16,6 @@ if ( ! $title_lines && ! $description && ! $contact_info && ! $form_card ) {
 
 $section_classes = [
 	'contact-section',
-	'layout-padding',
 	'bg-lsc-light',
 ];
 
@@ -27,7 +26,7 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="container">
+	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="contact-section__header text-center mb-50 mb-md-80">
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>

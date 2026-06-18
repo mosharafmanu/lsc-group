@@ -16,7 +16,7 @@
 
 <div id="page" class="site">
 
-<header class="site-header layout-padding">
+<header class="site-header lsc-container layout-padding">
 	<div class="header-main-inner">
 		<div class="site-branding">
 			<?php lsc_render_site_logo(); ?>

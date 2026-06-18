@@ -487,7 +487,7 @@ if ( ! function_exists( 'lsc_render_footer_company_registrations' ) ) {
 		}
 
 		$defaults = [
-			'class' => 'footer-company-registrations layout-padding',
+			'class' => 'footer-company-registrations lsc-container layout-padding',
 			'echo'  => true,
 		];
 		$args = wp_parse_args( $args, $defaults );
@@ -600,10 +600,10 @@ if ( ! function_exists( 'lsc_render_website_credit' ) ) {
 
 			<?php if ( $url ) : ?>
 				<a href="<?php echo esc_url( $url ); ?>"<?php echo $target ? ' target="' . esc_attr( $target ) . '" rel="noopener noreferrer"' : ''; ?> aria-label="<?php echo esc_attr( $title ?: $text ); ?>">
-					<?php echo lsc_get_icon_svg( 'arrow', 'website-credit-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php get_template_part( 'assets/svgs/so-marketing' ); ?>
 				</a>
 			<?php else : ?>
-				<?php echo lsc_get_icon_svg( 'arrow', 'website-credit-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php get_template_part( 'assets/svgs/so-marketing' ); ?>
 			<?php endif; ?>
 		</div>
 		<?php

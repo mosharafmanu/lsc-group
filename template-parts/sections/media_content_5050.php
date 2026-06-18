@@ -22,14 +22,13 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image &&
 
 $section_classes = [
 	'media-content-5050',
-	'layout-padding',
 	'media-content-5050--media-' . sanitize_html_class( $media_position ),
 	'media-content-5050--' . sanitize_html_class( $media_type ),
 ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="media-content-5050__inner">
+	<div class="media-content-5050__inner lsc-container layout-padding">
 		<div class="media-content-5050__content">
 			<?php if ( $eyebrow ) : ?>
 				<p class="media-content-5050__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>

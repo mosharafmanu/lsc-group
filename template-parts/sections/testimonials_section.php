@@ -16,12 +16,11 @@ if ( ! $title_lines && ! $description && ! $testimonials ) {
 
 $section_classes = [
 	'testimonials-section',
-	'layout-padding',
 ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="testimonials-section__header container">
+	<div class="testimonials-section__header lsc-container layout-padding">
 		<?php if ( $eyebrow ) : ?>
 			<div class="testimonials-section__eyebrow-wrap">
 				<span class="testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
@@ -81,7 +80,7 @@ $section_classes = [
 	</div>
 
 	<?php if ( $testimonials && is_array( $testimonials ) ) : ?>
-		<div class="testimonials-section__grid card-grid columns-3 container mt-50 mt-md-60">
+		<div class="testimonials-section__grid card-grid columns-3 lsc-container mt-50 mt-md-60">
 			<?php foreach ( $testimonials as $index => $testimonial ) : ?>
 				<?php
 				$rating         = intval( $testimonial['rating'] ?? 5 );

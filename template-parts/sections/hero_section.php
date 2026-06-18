@@ -23,7 +23,6 @@ if ( ! $eyebrow && ! $title_lines && ! $legacy_title && ! $description && ! $ima
 
 $section_classes = [
 	'hero-section',
-	'layout-padding',
 	'hero-section--media-' . sanitize_html_class( $media_type ),
 ];
 
@@ -83,7 +82,7 @@ if ( 0 === $section_index ) {
 
 	<div class="hero-section__overlay" aria-hidden="true"></div>
 
-	<div class="hero-section__inner">
+	<div class="hero-section__inner lsc-container layout-padding">
 		<div class="hero-section__content">
 			<?php if ( $eyebrow ) : ?>
 				<p class="hero-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>

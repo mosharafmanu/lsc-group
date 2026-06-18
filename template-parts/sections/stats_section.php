@@ -13,7 +13,6 @@ if ( ! $stats || ! is_array( $stats ) ) {
 
 $section_classes = [
 	'stats-section',
-	'layout-padding',
 	'bg-lsc-light',
 ];
 
@@ -25,7 +24,7 @@ $grid_classes = [
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?>">
+	<div class="lsc-container layout-padding <?php echo esc_attr( implode( ' ', $grid_classes ) ); ?>">
 		<?php foreach ( $stats as $stat ) : ?>
 			<?php
 			$value = $stat['value'] ?? '';
