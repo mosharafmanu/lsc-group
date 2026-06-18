@@ -95,11 +95,6 @@ $section_classes = [
 				}
 
 				$card_classes = [ 'testimonial-card' ];
-				// Design shows middle card with different background. 
-				// For a simple implementation, let's alternate or use index.
-				if ( 1 === $index % 2 ) {
-					$card_classes[] = 'testimonial-card--featured';
-				}
 				?>
 				<div class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>">
 					<div class="testimonial-card__header">
