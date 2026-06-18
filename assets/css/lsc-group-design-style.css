@@ -1022,7 +1022,7 @@ h6,.h6-style {
     align-items: center;
     gap: 0.5rem;
     padding: var(--lsc-btn-padding-y) var(--lsc-btn-padding-x);
-    font-size: var(--lsc-btn-font-size);
+    font-size: .9375rem;
     line-height: normal;
     font-family: var(--lsc-font-body);
     font-weight: var(--lsc-btn-font-weight);
@@ -1062,7 +1062,7 @@ h6,.h6-style {
 .btn-outline {
     background: transparent;
     color: var(--lsc-color-primary);
-    border-color: var(--lsc-color-primary);
+    border-color: var(--lsc-color-light);
 }
 .btn-outline:hover {
     background: var(--lsc-color-primary);
