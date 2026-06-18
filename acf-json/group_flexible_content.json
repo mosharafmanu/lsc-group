@@ -1,0 +1,1419 @@
+{
+    "key": "group_flexible_content",
+    "title": "Page Builder",
+    "fields": [
+        {
+            "key": "field_cms",
+            "label": "Content Sections",
+            "name": "cms",
+            "aria-label": "",
+            "type": "flexible_content",
+            "instructions": "Build your page by adding and arranging content sections below. Each section is a modular layout component that you can customize independently. Drag sections to reorder them, and use the collapse/expand controls to manage your workspace efficiently. <strong>Note:</strong> When using the Page Builder, the standard WordPress content editor is hidden and the 'Show Page Title' setting in the sidebar is ignored.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_hero_section": {
+                    "key": "layout_hero_section",
+                    "name": "hero_section",
+                    "label": "Hero Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_hero_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_hero_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Small label above the hero title.",
+                            "placeholder": "UK Specialist Finance"
+                        },
+                        {
+                            "key": "field_hero_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_hero_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_hero_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "A COMMON",
+                                            "parent_repeater": "field_hero_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_hero_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_hero_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_hero_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_hero_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short hero body copy.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_hero_buttons",
+                            "label": "Buttons",
+                            "name": "buttons",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Primary and secondary hero buttons.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 2,
+                            "button_label": "Add Button",
+                            "sub_fields": [
+                                {
+                                    "key": "field_hero_button_link",
+                                    "label": "Button Link",
+                                    "name": "button_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "parent_repeater": "field_hero_buttons"
+                                },
+                                {
+                                    "key": "field_hero_button_style",
+                                    "label": "Button Style",
+                                    "name": "button_style",
+                                    "type": "button_group",
+                                    "required": 0,
+                                    "choices": {
+                                        "btn-primary": "Primary",
+                                        "btn-outline": "Outline",
+                                        "btn-secondary": "Secondary"
+                                    },
+                                    "default_value": "btn-primary",
+                                    "allow_null": 0,
+                                    "layout": "horizontal",
+                                    "return_format": "value",
+                                    "parent_repeater": "field_hero_buttons"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_hero_features",
+                            "label": "Feature Chips",
+                            "name": "features",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Small finance category chips shown under the buttons.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Feature",
+                            "sub_fields": [
+                                {
+                                    "key": "field_hero_feature_label",
+                                    "label": "Label",
+                                    "name": "label",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Bridging Finance",
+                                    "parent_repeater": "field_hero_features"
+                                },
+                                {
+                                    "key": "field_hero_feature_icon",
+                                    "label": "Icon",
+                                    "name": "icon",
+                                    "type": "image",
+                                    "required": 0,
+                                    "instructions": "Upload an SVG icon for this chip.",
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "svg,png,jpg,jpeg",
+                                    "preview_size": "thumbnail",
+                                    "parent_repeater": "field_hero_features"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_hero_media_tab",
+                            "label": "Media",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_hero_media_type",
+                            "label": "Media Type",
+                            "name": "media_type",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Choose whether the hero background uses an image or video.",
+                            "choices": {
+                                "image": "Image",
+                                "video": "Video"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_hero_image",
+                            "label": "Hero Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "Desktop hero background image.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hero_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ],
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_hero_mobile_image",
+                            "label": "Mobile Hero Image",
+                            "name": "mobile_image",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "Optional mobile-specific hero background image.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hero_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ],
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_hero_video",
+                            "label": "Hero Video",
+                            "name": "video",
+                            "type": "group",
+                            "required": 0,
+                            "instructions": "Background video for the hero section.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hero_media_type",
+                                        "operator": "==",
+                                        "value": "video"
+                                    }
+                                ]
+                            ],
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_hero_video_source",
+                                    "label": "Video Source",
+                                    "name": "video_source",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "self_host": "Self-Hosted (WordPress Media)",
+                                        "youtube": "YouTube",
+                                        "vimeo": "Vimeo",
+                                        "cdn": "CDN\/External URL"
+                                    },
+                                    "default_value": "self_host",
+                                    "return_format": "value",
+                                    "allow_null": 0
+                                },
+                                {
+                                    "key": "field_hero_video_self_host_file",
+                                    "label": "Video File",
+                                    "name": "video_self_host_file",
+                                    "type": "file",
+                                    "required": 0,
+                                    "instructions": "Upload MP4 or WebM video file.",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "mp4,webm"
+                                },
+                                {
+                                    "key": "field_hero_video_self_host_poster",
+                                    "label": "Poster Image",
+                                    "name": "video_self_host_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_hero_video_youtube_url",
+                                    "label": "YouTube URL",
+                                    "name": "video_youtube_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "youtube"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/www.youtube.com\/watch?v=..."
+                                },
+                                {
+                                    "key": "field_hero_video_vimeo_url",
+                                    "label": "Vimeo MP4 URL",
+                                    "name": "video_vimeo_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/player.vimeo.com\/..."
+                                },
+                                {
+                                    "key": "field_hero_video_vimeo_poster",
+                                    "label": "Vimeo Poster Image",
+                                    "name": "video_vimeo_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_hero_video_cdn_url",
+                                    "label": "CDN Video URL",
+                                    "name": "video_cdn_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/cdn.example.com\/video.mp4"
+                                },
+                                {
+                                    "key": "field_hero_video_cdn_poster",
+                                    "label": "CDN Poster Image",
+                                    "name": "video_cdn_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_finance_products_grid": {
+                    "key": "layout_finance_products_grid",
+                    "name": "finance_products_grid",
+                    "label": "Finance Products Grid",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_finance_products_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_finance_products_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_finance_products_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Section heading.",
+                            "placeholder": "Finance Products"
+                        },
+                        {
+                            "key": "field_finance_products_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_finance_products_grid_tab",
+                            "label": "Products Grid",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_finance_products_product_source",
+                            "label": "Product Source",
+                            "name": "product_source",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show all published Finance Products or manually select specific products.",
+                            "choices": {
+                                "all": "All Products",
+                                "selected": "Selected Products"
+                            },
+                            "default_value": "all",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_finance_products_selected_products",
+                            "label": "Selected Products",
+                            "name": "selected_products",
+                            "type": "relationship",
+                            "required": 0,
+                            "instructions": "Choose products and drag to set their display order.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_finance_products_product_source",
+                                        "operator": "==",
+                                        "value": "selected"
+                                    }
+                                ]
+                            ],
+                            "post_type": [
+                                "finance_product"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": [
+                                "featured_image"
+                            ],
+                            "min": "",
+                            "max": "",
+                            "return_format": "object"
+                        },
+                        {
+                            "key": "field_finance_products_posts_per_page",
+                            "label": "Number of Products",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "Used when Product Source is All Products. Leave empty to show all.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_finance_products_product_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "default_value": "",
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "Show all"
+                        },
+                        {
+                            "key": "field_finance_products_columns",
+                            "label": "Grid Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Uses existing card-grid column utility classes.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4",
+                                "columns-5": "5"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_finance_products_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "Used when Product Source is All Products.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_finance_products_product_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Title"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_finance_products_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Used when Product Source is All Products.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_finance_products_product_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_stats_section": {
+                    "key": "layout_stats_section",
+                    "name": "stats_section",
+                    "label": "Stats Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_stats_section_stats",
+                            "label": "Stats",
+                            "name": "stats",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add each metric shown in the stats band.",
+                            "layout": "table",
+                            "min": 1,
+                            "max": 6,
+                            "button_label": "Add Stat",
+                            "sub_fields": [
+                                {
+                                    "key": "field_stats_section_value",
+                                    "label": "Value",
+                                    "name": "value",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "15+",
+                                    "parent_repeater": "field_stats_section_stats"
+                                },
+                                {
+                                    "key": "field_stats_section_label",
+                                    "label": "Label",
+                                    "name": "label",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Years Experience",
+                                    "parent_repeater": "field_stats_section_stats"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_media_content_5050": {
+                    "key": "layout_media_content_5050",
+                    "name": "media_content_5050",
+                    "label": "Media Content 50/50",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_media_content_5050_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Small label above the heading.",
+                            "placeholder": "Our Approach"
+                        },
+                        {
+                            "key": "field_media_content_5050_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_media_content_5050_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "WE ARE READY,",
+                                            "parent_repeater": "field_media_content_5050_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_media_content_5050_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_media_content_5050_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_media_content_5050_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Main body copy.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_buttons",
+                            "label": "Buttons",
+                            "name": "buttons",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Optional CTA buttons.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 2,
+                            "button_label": "Add Button",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_button_link",
+                                    "label": "Button Link",
+                                    "name": "button_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "parent_repeater": "field_media_content_5050_buttons"
+                                },
+                                {
+                                    "key": "field_media_content_5050_button_style",
+                                    "label": "Button Style",
+                                    "name": "button_style",
+                                    "type": "button_group",
+                                    "required": 0,
+                                    "choices": {
+                                        "btn-primary": "Primary",
+                                        "btn-outline": "Outline",
+                                        "btn-secondary": "Secondary"
+                                    },
+                                    "default_value": "btn-primary",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "layout": "horizontal",
+                                    "parent_repeater": "field_media_content_5050_buttons"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_media_tab",
+                            "label": "Media",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_media_position",
+                            "label": "Media Position",
+                            "name": "media_position",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Choose which side the media appears on.",
+                            "choices": {
+                                "left": "Left",
+                                "right": "Right"
+                            },
+                            "default_value": "right",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_media_content_5050_media_type",
+                            "label": "Media Type",
+                            "name": "media_type",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Choose whether this section uses an image or video.",
+                            "choices": {
+                                "image": "Image",
+                                "video": "Video"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_media_content_5050_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ],
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium"
+                        },
+                        {
+                            "key": "field_media_content_5050_video",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "group",
+                            "required": 0,
+                            "instructions": "Video media for this section.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "video"
+                                    }
+                                ]
+                            ],
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_video_source",
+                                    "label": "Video Source",
+                                    "name": "video_source",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "self_host": "Self-Hosted (WordPress Media)",
+                                        "youtube": "YouTube",
+                                        "vimeo": "Vimeo",
+                                        "cdn": "CDN\/External URL"
+                                    },
+                                    "default_value": "self_host",
+                                    "return_format": "value",
+                                    "allow_null": 0
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_self_host_file",
+                                    "label": "Video File",
+                                    "name": "video_self_host_file",
+                                    "type": "file",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "mp4,webm"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_self_host_poster",
+                                    "label": "Poster Image",
+                                    "name": "video_self_host_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_youtube_url",
+                                    "label": "YouTube URL",
+                                    "name": "video_youtube_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "youtube"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/www.youtube.com\/watch?v=..."
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_vimeo_url",
+                                    "label": "Vimeo MP4 URL",
+                                    "name": "video_vimeo_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/player.vimeo.com\/..."
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_vimeo_poster",
+                                    "label": "Vimeo Poster Image",
+                                    "name": "video_vimeo_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_cdn_url",
+                                    "label": "CDN Video URL",
+                                    "name": "video_cdn_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https:\/\/cdn.example.com\/video.mp4"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_cdn_poster",
+                                    "label": "CDN Poster Image",
+                                    "name": "video_cdn_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_media_label",
+                            "label": "Media Label",
+                            "name": "media_label",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional label shown over or near the media.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ],
+                            "placeholder": "Trusted specialist lending"
+                        },
+                        {
+                            "key": "field_media_content_5050_media_caption",
+                            "label": "Media Caption",
+                            "name": "media_caption",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional supporting caption shown with the media.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ],
+                            "placeholder": "Bridging - Land - Development - Business Finance"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_testimonials_section": {
+                    "key": "layout_testimonials_section",
+                    "name": "testimonials_section",
+                    "label": "Testimonials Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_testimonials_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_testimonials_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Small label above the heading.",
+                            "placeholder": "TRUSTED BY CLIENTS"
+                        },
+                        {
+                            "key": "field_testimonials_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_testimonials_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_testimonials_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "TRUSTED BY CLIENTS",
+                                            "parent_repeater": "field_testimonials_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_testimonials_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_testimonials_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_testimonials_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_testimonials_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_testimonials_testimonials_tab",
+                            "label": "Testimonials",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_testimonials_testimonials",
+                            "label": "Testimonials",
+                            "name": "testimonials",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add the testimonials shown in the grid.",
+                            "layout": "block",
+                            "min": 1,
+                            "max": 12,
+                            "button_label": "Add Testimonial",
+                            "sub_fields": [
+                                {
+                                    "key": "field_testimonials_rating",
+                                    "label": "Rating",
+                                    "name": "rating",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "1": "1 Star",
+                                        "2": "2 Stars",
+                                        "3": "3 Stars",
+                                        "4": "4 Stars",
+                                        "5": "5 Stars"
+                                    },
+                                    "default_value": "5",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                },
+                                {
+                                    "key": "field_testimonials_quote",
+                                    "label": "Quote",
+                                    "name": "quote",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "placeholder": "Testimonial text...",
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                },
+                                {
+                                    "key": "field_testimonials_author_name",
+                                    "label": "Author Name",
+                                    "name": "author_name",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "John Doe",
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                },
+                                {
+                                    "key": "field_testimonials_author_role",
+                                    "label": "Author Role/Company",
+                                    "name": "author_role",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "CEO at Acme Corp",
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                },
+                                {
+                                    "key": "field_testimonials_author_initial",
+                                    "label": "Author Initial",
+                                    "name": "author_initial",
+                                    "type": "text",
+                                    "required": 0,
+                                    "instructions": "Optional single letter. Defaults to first letter of Name.",
+                                    "placeholder": "J",
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_contact_section": {
+                    "key": "layout_contact_section",
+                    "name": "contact_section",
+                    "label": "Contact Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_contact_content_tab",
+                            "label": "Section Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_contact_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_contact_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_contact_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "WE ARE ALWAYS LOOKING FOR BROKERS",
+                                            "parent_repeater": "field_contact_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_contact_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_contact_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_contact_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_contact_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_contact_cards_tab",
+                            "label": "Cards Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_contact_info_group",
+                            "label": "Contact Info Card",
+                            "name": "contact_info",
+                            "type": "group",
+                            "required": 0,
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_contact_info_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "default_value": "Get in Touch"
+                                },
+                                {
+                                    "key": "field_contact_info_text",
+                                    "label": "Intro Text",
+                                    "name": "text",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "rows": 3
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_contact_form_group",
+                            "label": "Form Card",
+                            "name": "form_card",
+                            "type": "group",
+                            "required": 0,
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_contact_form_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "default_value": "Submit an Enquiry"
+                                },
+                                {
+                                    "key": "field_contact_form_code",
+                                    "label": "Form Shortcode / Integration Code",
+                                    "name": "form_code",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "instructions": "Paste your form shortcode or third-party integration script here.",
+                                    "rows": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "min": "",
+            "max": "",
+            "button_label": "Add Section"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "finance_product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1781757697
+}

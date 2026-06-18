@@ -1,0 +1,107 @@
+/*!
+Theme Name: LSC Group
+Theme URI: 
+Author: 
+Author URI: 
+Description: 
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: lsc-group
+Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexible-content, starter
+*/
+
+/*
+=============================================================================
+Fonts
+=============================================================================
+*/
+
+@font-face {
+	font-family: 'Instrument Sans';
+	src: url('assets/fonts/instrument-sans-latin-variable.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Instrument Sans';
+	src: url('assets/fonts/instrument-sans-latin-variable-italic.woff2') format('woff2');
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+/*
+=============================================================================
+Design Tokens
+=============================================================================
+*/
+
+:root {
+
+	/* Brand Colors */
+    --lsc-color-primary:   #1a1614;   /* Warm black — core brand text and primary surfaces */
+    --lsc-color-secondary: #101419;   /* Deep black — dark surfaces and hover states */
+    --lsc-color-accent:    #ff8a3b;   /* Orange — CTA, highlight, active state, link accent */
+
+    /* Neutral */
+    --lsc-color-dark:   #101419;      /* Dark text and dark section backgrounds */
+    --lsc-color-mid:    rgba(26, 22, 20, 0.55); /* Muted body text */
+    --lsc-color-subtle: #eceae3;      /* Warm stone section background */
+    --lsc-color-light:  #fefadc;      /* Cream reversed-text backgrounds */
+    --lsc-color-white:  #ffffff;
+    --lsc-color-panel:  #f5f3ef;
+    --lsc-color-border: rgba(26, 22, 20, 0.08);
+
+    /* Semantic aliases — wire once, change via brand colors above */
+    --lsc-color-text:       var(--lsc-color-primary);
+    --lsc-color-background: var(--lsc-color-white);
+    --lsc-color-heading:    var(--lsc-color-primary);
+    --lsc-color-link:       var(--lsc-color-accent);
+
+    /* Typography */
+    --lsc-font-heading: 'Instrument Sans', sans-serif;
+    --lsc-font-body:    'Instrument Sans', sans-serif;
+
+	/* Container */
+    --lsc-container-max: 80rem;       /* 1280px */
+
+
+	/* Buttons */
+    --lsc-btn-padding-y:   0.5rem;  /* 8px */
+    --lsc-btn-padding-x:   1.25rem;    /* 20px */
+    --lsc-btn-font-size:   0.875rem;  /* 14px */
+    --lsc-btn-font-weight: 600;
+
+	/* Border Radius */
+    --lsc-border-radius:    0.75rem;    /* 12px */
+    --lsc-border-radius-sm: 0.375rem;   /* 6px  */
+
+
+	/* Transition */
+    --lsc-transition: 0.3s ease;
+
+
+    /*
+	-----------------------------------------------------------------------
+       Breakpoints (reference)
+       CSS custom properties can't be used in @media queries.
+       xs: 0  sm: 576  md: 768  lg: 992  xl: 1200  xxl: 1400
+    -----------------------------------------------------------------------
+	*/
+}
+
+/*
+=============================================================================
+Client Project Styles
+=============================================================================
+Add all project-specific overrides and custom styles below.
+*/
+
+
+

@@ -1,0 +1,341 @@
+{
+    "key": "group_site_settings",
+    "title": "Site Settings",
+    "fields": [
+        {
+            "key": "field_header_settings_tab",
+            "label": "Header Settings",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_logo",
+            "label": "Site Logo",
+            "name": "site_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload the LSC group logo used in the header and footer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,svg",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_header_phone",
+            "label": "Header Phone",
+            "name": "header_phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Phone number shown in the desktop header.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "01706 234623",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_header_button",
+            "label": "Header Button",
+            "name": "header_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Call-to-action button shown at the right of the desktop header.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_footer_settings_tab",
+            "label": "Footer Settings",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_footer_tagline",
+            "label": "Footer Tagline",
+            "name": "footer_tagline",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Short description displayed below the footer logo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Specialist UK finance for property professionals, developers and businesses.",
+            "rows": 4,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_footer_contact_address",
+            "label": "Footer Address",
+            "name": "footer_contact_address",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Address shown in the footer contact column.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "1-7 Fallbarn Road\nBB4 7NT",
+            "rows": 2,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_footer_contact_phone",
+            "label": "Footer Phone",
+            "name": "footer_contact_phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Phone number shown in the footer contact column and phone action icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "+44 (0)1706 234623",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_footer_contact_email",
+            "label": "Footer Email",
+            "name": "footer_contact_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "Email shown in the footer contact column and email action icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "applications@lscfinance.co.uk",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_footer_linkedin_url",
+            "label": "Footer LinkedIn URL",
+            "name": "footer_linkedin_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "LinkedIn profile URL used by the footer LinkedIn action icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://www.linkedin.com/company/..."
+        },
+        {
+            "key": "field_footer_company_registrations",
+            "label": "Footer Company Registrations",
+            "name": "footer_company_registrations",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Company registration blurbs shown in the footer registration row.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_footer_company_name",
+            "button_label": "Add Company",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_footer_company_name",
+                    "label": "Company Name",
+                    "name": "company_name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "LSC Capital",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_footer_company_registrations"
+                },
+                {
+                    "key": "field_footer_registration_text",
+                    "label": "Registration Text",
+                    "name": "registration_text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "LSC Capital Limited is registered in England & Wales...",
+                    "rows": 3,
+                    "new_lines": "br",
+                    "parent_repeater": "field_footer_company_registrations"
+                }
+            ]
+        },
+        {
+            "key": "field_footer_copyright",
+            "label": "Copyright Text",
+            "name": "footer_copyright",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Copyright text displayed in the footer. Use {year} to output the current year.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "© {year} LSC Capital. All rights reserved.",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_website_credit_text",
+            "label": "Website Credit Text",
+            "name": "website_credit_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Text shown before the website credit icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Website by",
+            "maxlength": "",
+            "placeholder": "Website by",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_website_credit_link",
+            "label": "Website Credit Link",
+            "name": "website_credit_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Optional link for the website credit icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Configure the global header and footer content.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1781750849
+}
