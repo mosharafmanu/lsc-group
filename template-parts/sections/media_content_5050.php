@@ -27,7 +27,7 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-110 pb-lg-90">
 	<div class="media-content-5050__inner lsc-container layout-padding">
 		<div class="media-content-5050__content">
 			<?php if ( $eyebrow ) : ?>
@@ -114,7 +114,7 @@ $section_classes = [
 				);
 				?>
 			<?php elseif ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
-				<figure class="media-content-5050__figure">
+				<figure class="media-content-5050__figure media">
 					<?php
 					lsc_render_responsive_picture(
 						$image,

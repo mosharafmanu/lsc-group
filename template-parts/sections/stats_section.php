@@ -13,7 +13,7 @@ if ( ! $stats || ! is_array( $stats ) ) {
 
 $section_classes = [
 	'stats-section',
-	'bg-lsc-light',
+	'bg-lsc-subtle',
 ];
 
 $grid_classes = [
