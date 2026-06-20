@@ -64,7 +64,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="finance-products-section__inner lsc-container layout-padding">
+	<div class="finance-products-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="finance-products-section__header">
 				<?php if ( $eyebrow ) : ?>
@@ -84,7 +84,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 		<?php endif; ?>
 
 		<?php if ( $products ) : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-40 mt-lg-65">
 				<?php foreach ( $products as $product ) : ?>
 					<?php
 					$product_id = $product->ID;
@@ -101,9 +101,9 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 
 						<div class="finance-product-card__content">
 							<?php if ( $title ) : ?>
-								<h3 class="finance-product-card__title">
+								<h6 class="finance-product-card__title">
 									<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $title ); ?></a>
-								</h3>
+								</h6>
 							<?php endif; ?>
 
 							<?php if ( $excerpt ) : ?>
