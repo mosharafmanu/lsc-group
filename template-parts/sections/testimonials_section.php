@@ -20,7 +20,7 @@ $section_classes = [
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="testimonials-section__header lsc-container layout-padding">
+	<div class="testimonials-section__header lsc-container layout-padding pt-50 pb-50 pt-lg-100 pb-lg-100">
 		<?php if ( $eyebrow ) : ?>
 			<div class="testimonials-section__eyebrow-wrap">
 				<span class="testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>

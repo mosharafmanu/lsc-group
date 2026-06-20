@@ -27,7 +27,7 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-110 pb-lg-90">
+<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-70 pt-lg-110 pb-lg-120">
 	<div class="media-content-5050__inner lsc-container layout-padding">
 		<div class="media-content-5050__content">
 			<?php if ( $eyebrow ) : ?>

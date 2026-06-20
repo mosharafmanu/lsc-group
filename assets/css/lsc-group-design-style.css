@@ -1027,8 +1027,11 @@ h6,.h6-style {
     font-family: var(--lsc-font-body);
     font-weight: var(--lsc-btn-font-weight);
     text-decoration: none;
+	font-weight: 700;
+	line-height: 150%;
     border-radius: .375rem;
-    border: 2px solid transparent;
+	letter-spacing: 0.009rem;
+    border: .125rem solid transparent;
     transition: all var(--lsc-transition);
     cursor: pointer;
     text-align: center;
