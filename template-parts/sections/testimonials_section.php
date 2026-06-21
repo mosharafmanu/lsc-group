@@ -15,12 +15,12 @@ if ( ! $title_lines && ! $description && ! $testimonials ) {
 }
 
 $section_classes = [
-	'testimonials-section',
+	'testimonials-section layout-padding pt-50 pb-50 pt-lg-100 pb-lg-110',
 ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="testimonials-section__header lsc-container layout-padding pt-50 pb-50 pt-lg-100 pb-lg-100">
+	<div class="testimonials-section__header lsc-container">
 		<?php if ( $eyebrow ) : ?>
 			<div class="testimonials-section__eyebrow-wrap">
 				<span class="testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
@@ -73,14 +73,14 @@ $section_classes = [
 
 			<?php if ( $description ) : ?>
 				<div class="testimonials-section__description">
-					<?php echo wp_kses_post( $description ); ?>
+					<?php echo wp_trim_words( $description, 27, '...'); ?>
 				</div>
 			<?php endif; ?>
 		</div>
 	</div>
 
 	<?php if ( $testimonials && is_array( $testimonials ) ) : ?>
-		<div class="testimonials-section__grid card-grid columns-3 lsc-container mt-50 mt-md-60">
+		<div class="testimonials-section__grid card-grid columns-3 lsc-container mt-60">
 			<?php foreach ( $testimonials as $index => $testimonial ) : ?>
 				<?php
 				$rating         = intval( $testimonial['rating'] ?? 5 );
