@@ -532,7 +532,7 @@
 }
 .testimonials-section__title {
   line-height: 115%;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.05rem;
   margin-top: 1.25rem;
   font-size: 2.5rem;
 }
@@ -562,26 +562,24 @@
 .testimonials-section__description p {
   line-height: 165%;
 }
-
 .testimonial-card {
-  border-radius: 12px;
+  border-radius: .75rem;
   padding: 2.0625rem;
   position: relative;
   overflow: hidden;
-  min-height: 320px;
   display: flex;
   flex-direction: column;
   background-color: var(--lsc-color-white);
 }
-.testimonial-card::before {
-  content: "❞";
+.testimonial-card:nth-child(2) {
+	border-radius: .875rem;
+	border: 0.063rem solid rgba(255, 138, 59, 0.20);
+	background: rgba(26, 22, 20, 0.05);
+}
+.testimonial-card__quote-watermark {
   position: absolute;
-  top: .9375rem;
-  right: 1.25rem;
-  font-size: 5rem;
-  line-height: 1;
-  color: #f5ebe5;
-  font-family: serif;
+  right: 1.5rem;
+  top: .625rem;
 }
 .testimonial-card__quote {
 	margin: 0;
