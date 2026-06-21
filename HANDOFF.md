@@ -8,6 +8,27 @@ The theme is being built from the LSC Capital homepage design direction:
 - Section implementation is code-first: PHP templates and ACF JSON only. CSS is handled separately when requested.
 - Local WordPress is currently reachable at `http://localhost/ClientProjects/WordPress/2026/lsc/` and returns `200`.
 
+## CSS State
+
+Section styling lives in `faisal.css` (authored on the `faisal` branch by the front-end designer). Styled so far:
+
+- Header
+- Hero
+- Finance products grid
+- Stats
+- Media Content 50/50
+- Footer
+
+Not yet styled: `testimonials-section` (markup and `quote-watermark` are in place; CSS pending).
+
+## Git / Branch Workflow
+
+- Remote: `https://github.com/mosharafmanu/lsc-group.git`
+- Branches: `main` (integration), `faisal` (designer/front-end), `imran`.
+- `main` is the integration branch; `faisal` and `imran` are kept in sync with it after each merge.
+- Faisal pushes design/CSS work to `origin/faisal`. Before merging, always `git fetch` first — he pushes frequently and merging without fetching can reject or miss his latest.
+- All branches are currently aligned on GitHub (same commit, identical files).
+
 ## Implemented Content Architecture
 
 ### Custom Post Types
