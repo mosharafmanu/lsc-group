@@ -51,6 +51,12 @@ All section templates live in `template-parts/sections/` and are loaded by `lsc_
   - Buttons repeater rendered with `lsc_render_button()`.
   - Image media uses `<figure>` and `<figcaption>`.
   - Media label/caption fields only apply when media type is image.
+  - The `__inner` wrapper also outputs a short-form `media-left` / `media-right` class (from `media_position`) for CSS layout ordering, alongside the BEM `media-content-5050--media-*` modifier on the section.
+
+- `testimonials_section.php`
+  - Header (eyebrow, `title_lines -> line_parts`, description) plus a 3-column card grid.
+  - Each `testimonial-card` renders: star rating (`assets/svgs/star`), inline quote icon (`assets/svgs/quote`), quote text, and author block (initial, name, role).
+  - A decorative background quote mark is rendered as the card's first child via `testimonial-card__quote-watermark` (`assets/svgs/quote-watermark`, `aria-hidden`). Positioning is left to CSS.
 
 ## ACF Notes
 
@@ -122,5 +128,6 @@ Documented in:
    - `finance-products-section`
    - `stats-section`
    - `media-content-5050`
+   - `testimonials-section`
 4. Add remaining homepage sections from the design as dedicated flexible content templates.
 5. After all CPT/layout changes are stable, visit Settings > Permalinks and save once.

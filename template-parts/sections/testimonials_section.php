@@ -96,6 +96,10 @@ $section_classes = [
 				$card_classes = [ 'testimonial-card' ];
 				?>
 				<div class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>">
+					<div class="testimonial-card__quote-watermark" aria-hidden="true">
+						<?php get_template_part( 'assets/svgs/quote-watermark' ); ?>
+					</div>
+
 					<div class="testimonial-card__header">
 						<?php if ( $rating > 0 ) : ?>
 							<div class="testimonial-card__rating">
