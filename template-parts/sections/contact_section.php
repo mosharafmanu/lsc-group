@@ -16,7 +16,7 @@ if ( ! $title_lines && ! $description && ! $contact_info && ! $form_card ) {
 
 $section_classes = [
 	'contact-section',
-	'bg-lsc-light',
+	'pt-50 pb-50 pt-lg-90 pb-lg-90',
 ];
 
 // Get contact info from site settings
@@ -28,7 +28,7 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
-			<div class="contact-section__header text-center mb-50 mb-md-80">
+			<div class="contact-section__header text-center">
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
 					<h2 class="contact-section__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
@@ -80,12 +80,12 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 			</div>
 		<?php endif; ?>
 
-		<div class="contact-section__grid">
+		<div class="contact-section__grid mt-40 mt-lg-65">
 			<div class="contact-section__col contact-section__col--info">
 				<?php if ( $contact_info ) : ?>
 					<div class="contact-info-card">
 						<?php if ( ! empty( $contact_info['title'] ) ) : ?>
-							<h3 class="contact-info-card__title"><?php echo esc_html( $contact_info['title'] ); ?></h3>
+							<h5 class="contact-info-card__title"><?php echo esc_html( $contact_info['title'] ); ?></h5>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $contact_info['text'] ) ) : ?>
@@ -158,7 +158,7 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 				<?php if ( $form_card ) : ?>
 					<div class="contact-form-card">
 						<?php if ( ! empty( $form_card['title'] ) ) : ?>
-							<h3 class="contact-form-card__title"><?php echo esc_html( $form_card['title'] ); ?></h3>
+							<h5 class="contact-form-card__title"><?php echo esc_html( $form_card['title'] ); ?></h5>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $form_card['form_code'] ) ) : ?>
