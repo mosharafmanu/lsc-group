@@ -365,7 +365,20 @@
 }
 .media-content-5050__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 6.3125rem;
+}
+.media-content-5050__content {
+    grid-area: content;
+}
+.media-content-5050__media {
+    grid-area: media;
+}
+.media-content-5050__inner.media-left {
+    grid-template-areas: "media content";
+}
+.media-content-5050__inner.media-right {
+    grid-template-areas: "content media";
 }
 .media-content-5050__eyebrow {
   color: var(--lsc-color-accent);
