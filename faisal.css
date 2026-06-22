@@ -227,17 +227,7 @@
 }
 .finance-products-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
     gap: 1.5rem;
-}
-.finance-product-card {
-    grid-column: span 4;
-}
-.finance-product-card:nth-child(4) {
-    grid-column: 3 / span 4;
-}
-.finance-product-card:nth-child(5) {
-    grid-column: 7 / span 4;
 }
 .finance-product-card img {
     width: 100%;
@@ -247,13 +237,7 @@
     .finance-products-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .finance-product-card,
-    .finance-product-card:nth-child(4),
-    .finance-product-card:nth-child(5) {
-        grid-column: auto;
-    }
 }
-
 @media (max-width: 767px) {
     .finance-products-grid {
         grid-template-columns: 1fr;
