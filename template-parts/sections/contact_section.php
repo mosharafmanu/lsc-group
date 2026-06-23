@@ -21,7 +21,6 @@ $section_classes = [
 
 // Get contact info from site settings
 $site_settings = function_exists( 'lsc_get_footer_contact_details' ) ? lsc_get_footer_contact_details() : [];
-$linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_medias() : []; // This returns the LinkedIn URL from site settings
 
 ?>
 
@@ -97,7 +96,7 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 							$addr  = $site_settings['address'] ?? '';
 							$phone = $site_settings['phone'] ?? '';
 							$mail  = $site_settings['email'] ?? '';
-							$link  = $site_settings['linkedin_url'] ?? '';
+							$link  = $site_settings['linkedin'] ?? '';
 							?>
 
 							<?php if ( $addr ) : ?>
@@ -142,7 +141,7 @@ $linkedin_url  = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_med
 								<span class="contact-info-card__label"><?php esc_html_e( 'CONNECT', 'lsc-group' ); ?></span>
 								<div class="contact-info-card__social-link-wrap">
 									<span class="contact-info-card__social-icon" aria-hidden="true">
-										<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'linkedin', 'contact-icon' ); ?>
+										<?php get_template_part( 'assets/svgs/linkedin' ); ?>
 									</span>
 									<a href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener" class="contact-info-card__social-link">
 										<?php esc_html_e( 'Follow us on LinkedIn', 'lsc-group' ); ?>
