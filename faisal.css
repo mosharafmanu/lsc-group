@@ -510,6 +510,9 @@
 	 grid-template-columns: 1fr;
    row-gap: 2.5rem;
   }
+  .video-container.media-content-5050__video-wrap.media {
+	 margin: 0;
+  }
   .media-content-5050__inner.media-left {
     grid-template-areas: "content" "media";
   }
@@ -523,17 +526,13 @@
 	 height: 20rem;
   }
  .media-content-5050__media::before {
-    bottom: -0.875rem;
-    width: 4rem;
-    height: 4rem;
-}
+   display: none;
+  }
   .media-content-5050__media::after {
-    top: -1rem;
-    width: 5rem;
-    height: 5rem;
+   display: none;
   }
   .media-content-5050__figure {
-	 margin: .625rem 1rem;
+	 margin: 0;
   }
   .media-content-5050__buttons {
    margin-top: 2rem;
