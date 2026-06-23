@@ -25,6 +25,7 @@ $section_classes = [
 $grid_classes = [
 	'finance-products-grid',
 	'card-grid',
+	'card-grid--center-last-row',
 	sanitize_html_class( $columns ),
 ];
 

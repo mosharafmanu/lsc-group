@@ -1,6 +1,6 @@
 <?php
 /**
- * Media Content 50/50 Section
+ * Media Card 50/50 Section
  *
  * @package lsc-group
  */
@@ -21,21 +21,21 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image &&
 }
 
 $section_classes = [
-	'media-content-5050',
-	'media-content-5050--media-' . sanitize_html_class( $media_position ),
-	'media-content-5050--' . sanitize_html_class( $media_type ),
+	'media-card-5050',
+	'media-card-5050--media-' . sanitize_html_class( $media_position ),
+	'media-card-5050--' . sanitize_html_class( $media_type ),
 ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-70 pt-lg-110 pb-lg-120">
-	<div class="media-content-5050__inner media-<?php echo esc_attr( sanitize_html_class( $media_position ) ); ?> lsc-container layout-padding">
-		<div class="media-content-5050__content">
+	<div class="media-card-5050__inner media-<?php echo esc_attr( sanitize_html_class( $media_position ) ); ?> lsc-container layout-padding">
+		<div class="media-card-5050__content">
 			<?php if ( $eyebrow ) : ?>
-				<p class="media-content-5050__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+				<p class="media-card-5050__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 			<?php endif; ?>
 
 			<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-				<h2 class="media-content-5050__title">
+				<h2 class="media-card-5050__title">
 					<?php foreach ( $title_lines as $title_line ) : ?>
 						<?php
 						$line_parts = $title_line['line_parts'] ?? [];
@@ -44,7 +44,7 @@ $section_classes = [
 							continue;
 						}
 						?>
-						<span class="media-content-5050__title-line">
+						<span class="media-card-5050__title-line">
 							<?php foreach ( $line_parts as $line_part ) : ?>
 								<?php
 								$part_text = $line_part['text'] ?? '';
@@ -53,7 +53,7 @@ $section_classes = [
 									continue;
 								}
 
-								$part_classes = [ 'media-content-5050__title-part' ];
+								$part_classes = [ 'media-card-5050__title-part' ];
 
 								if ( ! empty( $line_part['highlight'] ) ) {
 									$part_classes[] = 'color-lsc-accent';
@@ -67,13 +67,13 @@ $section_classes = [
 			<?php endif; ?>
 
 			<?php if ( $description ) : ?>
-				<div class="media-content-5050__description">
+				<div class="media-card-5050__description">
 					<?php echo wp_kses_post( $description ); ?>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( $buttons && is_array( $buttons ) ) : ?>
-				<div class="media-content-5050__buttons btns">
+				<div class="media-card-5050__buttons btns">
 					<?php foreach ( $buttons as $button ) : ?>
 						<?php
 						$button_link  = $button['button_link'] ?? [];
@@ -87,7 +87,7 @@ $section_classes = [
 							$button_link,
 							[
 								'style'     => $button_style,
-								'class'     => 'media-content-5050__button',
+								'class'     => 'media-card-5050__button',
 								'show_icon' => false,
 							]
 						);
@@ -97,42 +97,47 @@ $section_classes = [
 			<?php endif; ?>
 		</div>
 
-		<div class="media-content-5050__media">
+		<div class="media-card-5050__media">
 			<?php if ( 'video' === $media_type && $video && function_exists( 'lsc_render_video' ) ) : ?>
 				<?php
+				$video_behavior = $video['video_behavior'] ?? 'autoplay';
+
 				lsc_render_video(
 					$video,
 					[
-						'behavior'        => 'autoplay',
-						'autoplay'        => true,
-						'class'           => 'media-content-5050__video',
-						'container_class' => 'media-content-5050__video-wrap media',
-						'controls'        => false,
-						'muted'           => true,
-						'loop'            => true,
+						'behavior'           => $video_behavior,
+						'autoplay'           => ! empty( $video['video_autoplay'] ),
+						'autoplay_on_scroll' => ! empty( $video['video_autoplay_on_scroll'] ),
+						'controls'           => 'autoplay' === $video_behavior && ! empty( $video['video_controls'] ),
+						'muted'              => ! empty( $video['video_muted'] ),
+						'loop'               => ! empty( $video['video_loop'] ),
+						'popup_autoplay'     => ! empty( $video['video_popup_autoplay'] ),
+						'popup_controls'     => ! empty( $video['video_popup_controls'] ),
+						'class'              => 'media-card-5050__video',
+						'container_class'    => 'media-card-5050__video-wrap media',
 					]
 				);
 				?>
 			<?php elseif ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
-				<figure class="media-content-5050__figure media">
+				<figure class="media-card-5050__figure media">
 					<?php
 					lsc_render_responsive_picture(
 						$image,
 						[
-							'class' => 'media-content-5050__image',
+							'class' => 'media-card-5050__image',
 							'sizes' => '(max-width: 991px) 100vw, 50vw',
 						]
 					);
 					?>
 
 					<?php if ( $media_label || $media_caption ) : ?>
-						<figcaption class="media-content-5050__caption">
+						<figcaption class="media-card-5050__caption">
 							<?php if ( $media_label ) : ?>
-								<span class="media-content-5050__caption-label"><?php echo esc_html( $media_label ); ?></span>
+								<span class="media-card-5050__caption-label"><?php echo esc_html( $media_label ); ?></span>
 							<?php endif; ?>
 
 							<?php if ( $media_caption ) : ?>
-								<span class="media-content-5050__caption-text"><?php echo esc_html( $media_caption ); ?></span>
+								<span class="media-card-5050__caption-text"><?php echo esc_html( $media_caption ); ?></span>
 							<?php endif; ?>
 						</figcaption>
 					<?php endif; ?>

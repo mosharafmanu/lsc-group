@@ -38,12 +38,28 @@
 
                     <div class="header-actions">
                         <?php
-                        if ( function_exists( 'lsc_render_header_phone' ) ) { 
+                        if ( function_exists( 'lsc_render_header_phone' ) ) {
                             lsc_render_header_phone();
                         }
 
                         if ( function_exists( 'lsc_render_header_button' ) ) {
-                            lsc_render_header_button( [ 'class' => 'site-btn btn-primary header-cta-btn' ] );
+                            ?>
+                            <div class="header-cta-group">
+                                <?php
+                                // Secondary / outline CTA (e.g. "Become A Broker") — renders only if set.
+                                lsc_render_header_button( [
+                                    'field' => 'header_button_secondary',
+                                    'class' => 'site-btn btn-outline header-cta-btn header-cta-btn--secondary',
+                                ] );
+
+                                // Primary / solid CTA (e.g. "Quick Quote").
+                                lsc_render_header_button( [
+                                    'field' => 'header_button',
+                                    'class' => 'site-btn btn-primary header-cta-btn header-cta-btn--primary',
+                                ] );
+                                ?>
+                            </div>
+                            <?php
                         }
                         ?>
                     </div>

@@ -6,28 +6,29 @@
 // Header Options
 
 if ( ! function_exists( 'lsc_get_header_button' ) ) {
-	function lsc_get_header_button() {
+	function lsc_get_header_button( $field = 'header_button' ) {
 		if ( ! function_exists( 'get_field' ) ) {
 			return false;
 		}
 
-		return get_field( 'header_button', 'options' );
+		return get_field( $field, 'options' );
 	}
 }
 
 if ( ! function_exists( 'lsc_render_header_button' ) ) {
 	function lsc_render_header_button( $args = [] ) {
-		$button = lsc_get_header_button();
-
-		if ( ! $button || ! is_array( $button ) ) {
-			return;
-		}
-
 		$defaults = [
+			'field' => 'header_button',
 			'class' => 'site-btn btn-primary',
 			'echo'  => true,
 		];
 		$args = wp_parse_args( $args, $defaults );
+
+		$button = lsc_get_header_button( $args['field'] );
+
+		if ( ! $button || ! is_array( $button ) ) {
+			return;
+		}
 
 		$url    = $button['url'] ?? '#';
 		$title  = $button['title'] ?? 'Get Started';
@@ -46,6 +47,24 @@ if ( ! function_exists( 'lsc_render_header_button' ) ) {
 		} else {
 			return $output;
 		}
+	}
+}
+
+// Global CTA (Site Settings) — used as the default content for the CTA flexible layout
+
+if ( ! function_exists( 'lsc_get_global_cta' ) ) {
+	function lsc_get_global_cta() {
+		if ( ! function_exists( 'get_field' ) ) {
+			return [];
+		}
+
+		return [
+			'eyebrow'     => get_field( 'global_cta_eyebrow', 'options' ),
+			'title_lines' => get_field( 'global_cta_title_lines', 'options' ),
+			'description' => get_field( 'global_cta_description', 'options' ),
+			'buttons'     => get_field( 'global_cta_buttons', 'options' ),
+			'background'  => get_field( 'global_cta_background', 'options' ),
+		];
 	}
 }
 

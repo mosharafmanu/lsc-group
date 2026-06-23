@@ -67,11 +67,27 @@
         },
         {
             "key": "field_header_button",
-            "label": "Header Button",
+            "label": "Header Button — Primary (Solid)",
             "name": "header_button",
             "aria-label": "",
             "type": "link",
-            "instructions": "Call-to-action button shown at the right of the desktop header.",
+            "instructions": "Solid call-to-action shown at the right of the desktop header (e.g. \"Quick Quote\").",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_header_button_secondary",
+            "label": "Header Button — Secondary (Outline)",
+            "name": "header_button_secondary",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Optional outline call-to-action shown to the left of the primary button (e.g. \"Become A Broker\"). Leave empty to show only the primary button.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -316,6 +332,155 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_global_cta_tab",
+            "label": "Global CTA",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_global_cta_intro",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "message": "**Global Call-To-Action**\n\nThis is the site-wide CTA banner (heading + buttons). Add a \"CTA\" section to any page and it shows this content by default — so you can update every CTA across the site from this one place.\n\nNeed a different CTA on a specific page? On that page, set the CTA section's **Content Source** to **Custom** and write page-specific content there.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_global_cta_eyebrow",
+            "label": "Eyebrow",
+            "name": "global_cta_eyebrow",
+            "type": "text",
+            "required": 0,
+            "instructions": "Optional small label above the heading.",
+            "placeholder": ""
+        },
+        {
+            "key": "field_global_cta_title_lines",
+            "label": "Title",
+            "name": "global_cta_title_lines",
+            "type": "repeater",
+            "required": 0,
+            "instructions": "The CTA heading. Add one row per visual line; inside each line add text parts and toggle Highlight to colour words with the accent.",
+            "layout": "block",
+            "min": 0,
+            "max": 4,
+            "button_label": "Add Title Line",
+            "sub_fields": [
+                {
+                    "key": "field_global_cta_title_line_parts",
+                    "label": "Line Parts",
+                    "name": "line_parts",
+                    "type": "repeater",
+                    "required": 0,
+                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                    "layout": "table",
+                    "min": 1,
+                    "max": 8,
+                    "button_label": "Add Line Part",
+                    "sub_fields": [
+                        {
+                            "key": "field_global_cta_title_part_text",
+                            "label": "Text",
+                            "name": "text",
+                            "type": "text",
+                            "required": 0,
+                            "placeholder": "START YOUR FINANCE APPLICATION",
+                            "parent_repeater": "field_global_cta_title_line_parts"
+                        },
+                        {
+                            "key": "field_global_cta_title_part_highlight",
+                            "label": "Highlight",
+                            "name": "highlight",
+                            "type": "true_false",
+                            "required": 0,
+                            "instructions": "Use accent color for this text part.",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No",
+                            "parent_repeater": "field_global_cta_title_line_parts"
+                        }
+                    ],
+                    "parent_repeater": "field_global_cta_title_lines"
+                }
+            ]
+        },
+        {
+            "key": "field_global_cta_description",
+            "label": "Description",
+            "name": "global_cta_description",
+            "type": "wysiwyg",
+            "required": 0,
+            "instructions": "Optional supporting copy below the heading.",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_global_cta_buttons",
+            "label": "Buttons",
+            "name": "global_cta_buttons",
+            "type": "repeater",
+            "required": 0,
+            "instructions": "Call-to-action buttons. Use Primary for the solid button and Outline for the secondary.",
+            "layout": "table",
+            "min": 0,
+            "max": 3,
+            "button_label": "Add Button",
+            "sub_fields": [
+                {
+                    "key": "field_global_cta_button_link",
+                    "label": "Button Link",
+                    "name": "button_link",
+                    "type": "link",
+                    "required": 0,
+                    "parent_repeater": "field_global_cta_buttons"
+                },
+                {
+                    "key": "field_global_cta_button_style",
+                    "label": "Button Style",
+                    "name": "button_style",
+                    "type": "button_group",
+                    "required": 0,
+                    "choices": {
+                        "btn-primary": "Primary",
+                        "btn-outline": "Outline",
+                        "btn-secondary": "Secondary"
+                    },
+                    "default_value": "btn-primary",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "layout": "horizontal",
+                    "parent_repeater": "field_global_cta_buttons"
+                }
+            ]
+        },
+        {
+            "key": "field_global_cta_background",
+            "label": "Background",
+            "name": "global_cta_background",
+            "type": "button_group",
+            "required": 0,
+            "instructions": "Background colour of the band.",
+            "choices": {
+                "light": "Light",
+                "subtle": "Subtle",
+                "primary": "Primary",
+                "dark": "Dark"
+            },
+            "default_value": "dark",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -337,5 +502,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1781750849
+    "modified": 1782239054
 }

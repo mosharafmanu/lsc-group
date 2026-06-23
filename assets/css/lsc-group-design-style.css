@@ -357,7 +357,8 @@ h6,.h6-style {
 
 .card-grid {
 	display: grid;
-	gap: 1.25rem; /* 20px */
+	--lsc-card-grid-gap: 1.25rem; /* 20px — override per section to keep widths in sync */
+	gap: var(--lsc-card-grid-gap);
 	align-items: stretch;
 }
 .columns-2{
@@ -373,6 +374,7 @@ h6,.h6-style {
 	grid-template-columns: repeat(5, 1fr);
 }
 @media only screen and (max-width: 991px) {
+	.columns-3,
 	.columns-4,
 	.columns-5 {
 		grid-template-columns: repeat(2, 1fr);
@@ -385,6 +387,30 @@ h6,.h6-style {
 	.columns-5 {
 		grid-template-columns: 1fr;
 	}
+}
+
+/* Opt-in: center the orphan items in the last row.
+   Widths derive from --lsc-card-grid-gap so they always match the actual gap.
+   Full rows fill edge-to-edge; only an incomplete last row centers. */
+.card-grid.card-grid--center-last-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.card-grid--center-last-row.columns-2 > * { flex: 0 1 calc((100% - 1 * var(--lsc-card-grid-gap)) / 2 - 0.5px); }
+.card-grid--center-last-row.columns-3 > * { flex: 0 1 calc((100% - 2 * var(--lsc-card-grid-gap)) / 3 - 0.5px); }
+.card-grid--center-last-row.columns-4 > * { flex: 0 1 calc((100% - 3 * var(--lsc-card-grid-gap)) / 4 - 0.5px); }
+.card-grid--center-last-row.columns-5 > * { flex: 0 1 calc((100% - 4 * var(--lsc-card-grid-gap)) / 5 - 0.5px); }
+@media only screen and (max-width: 991px) {
+	.card-grid--center-last-row.columns-3 > *,
+	.card-grid--center-last-row.columns-4 > *,
+	.card-grid--center-last-row.columns-5 > * { flex-basis: calc((100% - 1 * var(--lsc-card-grid-gap)) / 2 - 0.5px); }
+}
+@media only screen and (max-width: 767px) {
+	.card-grid--center-last-row.columns-2 > *,
+	.card-grid--center-last-row.columns-3 > *,
+	.card-grid--center-last-row.columns-4 > *,
+	.card-grid--center-last-row.columns-5 > * { flex-basis: 100%; }
 }
 .lsc-container {
 	max-width: var(--lsc-container-max);

@@ -1,154 +1,119 @@
 # LSC Group Theme Handoff
 
+_Last updated: 2026-06-24._
+
 ## Current State
 
-The theme is being built from the LSC Capital homepage design direction:
+The theme is being built from the LSC Capital design (homepage + inner pages).
 
-- Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans typography, uppercase compact headings, rounded product/card styling.
-- Section implementation is code-first: PHP templates and ACF JSON only. CSS is handled separately when requested.
-- Local WordPress is currently reachable at `http://localhost/ClientProjects/WordPress/2026/lsc/` and returns `200`.
+- Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
+- Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below).
+- Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
 
-## CSS State
+## ⚠️ Uncommitted work — read first
 
-Section styling lives in `faisal.css` (authored on the `faisal` branch by the front-end designer). Styled so far:
+**Everything from the 2026-06-24 session is uncommitted on `main` (still at `c395cb3`).** Nothing has been pushed. Before resuming, decide whether to commit this batch (likely on a working branch, not straight to `main`). Working-tree changes:
 
-- Header
-- Hero
-- Finance products grid
-- Stats
-- Media Content 50/50
-- Footer
+- New section templates: `broker_callout.php`, `inner_hero.php`, `content_card_5050.php`, `timeline_section.php`, `cta_section.php`
+- Renamed: `media_content_5050.php` → `media_card_5050.php`
+- Modified: `header.php`, `inc/helper-functions/site-settings.php`, `template-parts/sections/finance_products_grid.php`, `acf-json/group_flexible_content.json`, `acf-json/group_site_settings.json`, `assets/css/lsc-group-design-style.css`, `faisal.css`
+- `style.css` also shows modified (not changed by this session — verify before committing).
 
-Not yet styled: `testimonials-section` (markup and `quote-watermark` are in place; CSS pending).
+After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
+
+## Who owns the CSS (important workflow rule)
+
+- **Claude/AI does PHP + ACF JSON + markup only.** Faisal owns the design CSS in `faisal.css`.
+- **Do NOT add CSS for new sections** — only output sensible BEM classes; Faisal styles them.
+- `faisal.css` may be edited **only when explicitly authorised** (e.g. the `media-card-5050` rename, the grid-gap variable).
+- The framework grid file `assets/css/lsc-group-design-style.css` may be touched for **grid/plumbing behaviour** when genuinely required (e.g. orphan-centering) — it is theme plumbing, not Faisal's section styling.
+- Video options must map **1:1 to existing `lsc_render_video()` args** — never invent new behaviour the renderer doesn't already support.
+- Prefer **global/reusable** section names (describe what the section *is*, not the page it's used on).
+
+## Flexible Content layout order (`cms`)
+
+| # | Layout | Template | Notes |
+|---|---|---|---|
+| 0 | `hero_section` | `hero_section.php` | Image/video hero (homepage) |
+| 1 | `inner_hero` | `inner_hero.php` | **NEW** — inner-page hero, image only (no video), no overlay div |
+| 2 | `finance_products_grid` | `finance_products_grid.php` | Centers last-row orphans (see below) |
+| 3 | `broker_callout` | `broker_callout.php` | **NEW** — orange callout card |
+| 4 | `stats_section` | `stats_section.php` | |
+| 5 | `media_card_5050` | `media_card_5050.php` | **RENAMED** from `media_content_5050` |
+| 6 | `testimonials_section` | `testimonials_section.php` | Slick carousel |
+| 7 | `contact_section` | `contact_section.php` | |
+| 8 | `content_card_5050` | `content_card_5050.php` | **NEW** — content + checklist beside a card + image |
+| 9 | `timeline_section` | `timeline_section.php` | **NEW** — auto-numbered journey steps |
+| 10 | `cta_section` | `cta_section.php` | **NEW** — pulls from Global CTA by default |
+
+## New sections built this session
+
+### `broker_callout`
+- Content tab: `title_lines → line_parts`, `description` (WYSIWYG), `chips`.
+- Media tab: `media_position` (left/right), `media_type` (image/video), `image`, `video` group.
+- **Chips** = label + optional link. Renders `<span>` when no link, `<a>` when linked (FCA-status pills like "Unregulated" / "Directly Authorised" / "Appointed Representative").
+- Video group exposes the full `lsc_render_video()` option set as fields (behavior, autoplay, autoplay_on_scroll, controls, muted, loop, popup_autoplay, popup_controls) with instructions + 2-up wrapper widths. Defaults mirror the renderer's own defaults.
+
+### `inner_hero`
+- Image background (LCP: `lazy=false`, `fetchpriority=high`), eyebrow badge, `title_lines` (`<h1>`), `description`, `buttons`. **No video, no overlay div** (scrim handled in CSS).
+
+### `content_card_5050`
+- Content tab: `eyebrow`, `title_lines`, `description`, `features` (checklist — labels only; check icon via CSS `::before`).
+- Side Card tab: `card_position` (left/right), `card_title`, `card_description`, `card_buttons`, `image` (image sits below the card).
+
+### `timeline_section`
+- `eyebrow`, `title_lines`, `description`, `items` repeater (`year`, `title`, `description`). Step numbers (1,2,3…) auto-increment from the loop. Semantic `<ol>`. Connector line + number circles via CSS.
+
+### `cta_section` + Global CTA
+- **Global CTA lives in Site Settings → "Global CTA" tab** (`global_cta_eyebrow`, `global_cta_title_lines`, `global_cta_description`, `global_cta_buttons`, `global_cta_background`).
+- Helper `lsc_get_global_cta()` reads those options.
+- The CTA section has a **Content Source** toggle: `global` (default — pulls from Site Settings) or `custom` (page-specific). Custom fields are conditional and hidden unless "Custom" is selected.
+- Client instructions are embedded in the admin UI (Site Settings intro message + Content Source instructions + custom-fields notice).
+- Reuses `bg-lsc-*` background utility (default `dark`).
+
+## Other changes this session
+
+### `media_content_5050` → `media_card_5050` (full rename)
+- The new #8/#9 alternating-50/50-with-list design will become `media_content_5050` (not yet built). The captioned-media-card section was renamed to `media_card_5050` to free the name.
+- Renamed: template file, ACF layout key/name/label/field keys, BEM classes in template, **and `.media-card-5050__*` selectors in `faisal.css`** (39 selectors). Verified zero `media-content-5050` references remain.
+- ⚠️ If the old layout was already added to a page in WP Admin, re-add it as "Media Card 50/50" after syncing.
+
+### `media_card_5050` video options
+- Same renderer-backed video option fields + the `controls`-only-for-autoplay fix were wired in here too.
+
+### Video controls fix
+- Bug: `Controls` defaulted to Yes and its value leaked to hover/popup behaviors, producing native `<video controls>`. Fix (template-level, both `broker_callout` and `media_card_5050`): `'controls' => 'autoplay' === $video_behavior && ! empty($video['video_controls'])`. Renderer untouched.
+
+### Header — two CTA buttons
+- `header.php` now renders a `.header-cta-group` with **secondary (outline) first, primary (solid) second** — matches Figma ("Become A Broker" outline + "Quick Quote" solid).
+- `lsc_render_header_button()` / `lsc_get_header_button()` take a `field` arg (default `header_button`).
+- New Site Settings field `header_button_secondary` (Link). Existing `header_button` relabelled "Primary (Solid)".
+- No header CSS added — `.header-cta-group` / `.header-cta-btn--*` are markup hooks for Faisal.
+
+### Finance grid — center last-row orphans + responsive
+- Opt-in `.card-grid--center-last-row` modifier in `lsc-group-design-style.css`: flex-wrap + `justify-content: center`, widths derived from `--lsc-card-grid-gap` so they always match the actual gap.
+- `faisal.css` `.finance-products-grid` now sets `--lsc-card-grid-gap: 1.5rem` (was `gap: 1.5rem`) so gap and width math stay in sync. (Root cause of the earlier "looks like 2 columns" bug was a 1.25 vs 1.5rem gap mismatch.)
+- Base grid now collapses **columns-3/4/5 → 2 columns at ≤991px**, then 1 at ≤767px.
+
+## Reusable patterns (unchanged)
+
+- **Highlightable title:** `title_lines → line_parts (text + highlight)`; highlighted parts get `color-lsc-accent`.
+- **Buttons:** `lsc_render_button()` with `show_icon => false` for section buttons; styles `btn-primary` / `btn-outline` / `btn-secondary`.
+- **Grid:** `.card-grid.columns-N`; never redefine columns in section CSS.
+- Documented in `.ai/ACF-PATTERNS.md` and `.ai/THEME-ARCHITECTURE.md`.
 
 ## Git / Branch Workflow
 
 - Remote: `https://github.com/mosharafmanu/lsc-group.git`
-- Branches: `main` (integration), `faisal` (designer/front-end), `imran`.
-- `main` is the integration branch; `faisal` and `imran` are kept in sync with it after each merge.
-- Faisal pushes design/CSS work to `origin/faisal`. Before merging, always `git fetch` first — he pushes frequently and merging without fetching can reject or miss his latest.
-- All branches are currently aligned on GitHub (same commit, identical files).
+- Branches: `main` (integration), `faisal` (designer/CSS), `imran`. All aligned at `c395cb3` on GitHub.
+- Always `git fetch` before merging Faisal's work (he pushes CSS frequently).
 
-## Implemented Content Architecture
+## Recommended next steps (resume here)
 
-### Custom Post Types
-
-- `finance_product`
-  - Registered in `inc/post-types.php`
-  - Loaded from `functions.php`
-  - Archive disabled: `has_archive => false`
-  - Supports: `title`, `editor`, `thumbnail`, `excerpt`, `page-attributes`
-  - Intended card data:
-    - Title = card title
-    - Featured Image = card image
-    - Excerpt = card description
-    - Permalink = Learn More link
-
-### Flexible Content Sections
-
-All section templates live in `template-parts/sections/` and are loaded by `lsc_flexible_content('cms')`.
-
-- `hero_section.php`
-  - Image/video hero.
-  - Uses nested `title_lines -> line_parts` for highlighted text without editor HTML.
-  - Supports buttons repeater and feature chips with uploaded SVG/image icons rendered via `lsc_render_icon()`.
-
-- `finance_products_grid.php`
-  - Queries `finance_product` posts.
-  - Product source: all or selected products.
-  - Supports grid column selection via existing `card-grid columns-*` classes.
-  - Uses native title, featured image, excerpt, permalink.
-
-- `stats_section.php`
-  - Simple metrics band.
-  - Repeater fields: value and label.
-  - Grid is fixed to `columns-3`.
-
-- `media_content_5050.php`
-  - Reusable 50/50 content and media section.
-  - Media position: left or right.
-  - Media type: image or video.
-  - Uses nested `title_lines -> line_parts`.
-  - Buttons repeater rendered with `lsc_render_button()`.
-  - Image media uses `<figure>` and `<figcaption>`.
-  - Media label/caption fields only apply when media type is image.
-  - The `__inner` wrapper also outputs a short-form `media-left` / `media-right` class (from `media_position`) for CSS layout ordering, alongside the BEM `media-content-5050--media-*` modifier on the section.
-
-- `testimonials_section.php`
-  - Header (eyebrow, `title_lines -> line_parts`, description) plus a 3-column card grid.
-  - Each `testimonial-card` renders: star rating (`assets/svgs/star`), inline quote icon (`assets/svgs/quote`), quote text, and author block (initial, name, role).
-  - A decorative background quote mark is rendered as the card's first child via `testimonial-card__quote-watermark` (`assets/svgs/quote-watermark`, `aria-hidden`). Positioning is left to CSS.
-
-## ACF Notes
-
-- Main field group: `acf-json/group_flexible_content.json`
-- Site settings group: `acf-json/group_site_settings.json`
-- Removed the starter `example_section` layout and deleted `template-parts/sections/example_section.php`.
-- Removed the redundant `Finance Product Fields` ACF group. If it appears again in WP Admin, delete it from the database; local JSON has been removed.
-- ACF sync timestamps have been adjusted several times. If “Sync available” remains after syncing, compare local JSON `modified` timestamps against DB `post_modified` values.
-
-## Reusable Title Highlight Pattern
-
-For any heading where text may be highlighted, use:
-
-```text
-title_lines
-└── line_parts
-    ├── text
-    └── highlight
-```
-
-This supports both full-line highlights and inline highlighted words without requiring editors to enter HTML.
-
-Example:
-
-```text
-Line 1:
-- WE ARE READY,
-
-Line 2:
-- WILLING AND [highlight on]
-
-Line 3:
-- ABLE TO LEND.
-```
-
-Documented in:
-
-- `.ai/ACF-PATTERNS.md`
-- `.ai/THEME-ARCHITECTURE.md`
-
-## Header / Footer State
-
-- Header markup includes logo, main nav, phone, CTA, and mobile toggle.
-- The submenu indicator is rendered from `assets/svgs/submenu-indicator.php`; the SVG uses `currentColor`.
-- Header CSS previously added during prototyping was removed at the user’s request.
-- Footer markup has been updated to match the design structure:
-  - brand/logo/tagline/contact action icons
-  - footer menu column
-  - contact column
-  - company registration row
-  - copyright and website credit
-
-## Verification Completed
-
-- PHP lint passed for newly edited templates and includes.
-- ACF JSON parses correctly after each layout change.
-- WP-CLI confirmed `finance_product`:
-  - `supports_editor=yes`
-  - `supports_excerpt=yes`
-  - `has_archive=false`
-- Local homepage request returns `200`.
-
-## Recommended Next Steps
-
-1. Sync ACF field groups in WP Admin.
-2. Add Finance Product posts with title, featured image, excerpt, and page order.
-3. Build CSS for the implemented sections when ready:
-   - `hero-section`
-   - `finance-products-section`
-   - `stats-section`
-   - `media-content-5050`
-   - `testimonials-section`
-4. Add remaining homepage sections from the design as dedicated flexible content templates.
-5. After all CPT/layout changes are stable, visit Settings > Permalinks and save once.
+1. **Commit the session's work** (probably on a working branch; `main` is integration).
+2. **Sync ACF** in WP Admin (flexible content + site settings groups changed).
+3. **Fill Global CTA** in Site Settings (heading "START YOUR FINANCE APPLICATION" + "Apply Now", Dark bg).
+4. **Set the two header buttons** in Site Settings (Primary = "Quick Quote", Secondary/Outline = "Become A Broker").
+5. **Build the real `media_content_5050`** (#8/#9): alternating 50/50, image one side + heading/text/list the other, with a media-position toggle.
+6. Faisal: style the new sections' BEM classes, and rename `.media-card-5050` selectors are already done — confirm on his branch.
+7. Add Finance Product posts (title, featured image, excerpt, page order) so the finance grid populates.
