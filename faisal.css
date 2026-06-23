@@ -586,6 +586,15 @@
 .testimonials-section__description p {
   line-height: 165%;
 }
+.testimonials-section__carousel .slick-track {
+  display: flex;
+}
+.testimonials-section__carousel .slick-slide {
+  height: auto;
+}
+.testimonials-section__carousel .testimonial-card {
+  display: flex !important;
+}
 .testimonial-card {
   border-radius: .75rem;
   padding: 2.0625rem;
@@ -594,8 +603,9 @@
   display: flex;
   flex-direction: column;
   background-color: var(--lsc-color-white);
+  transition: background-color var(--lsc-transition), border-color var(--lsc-transition);
 }
-.testimonial-card:nth-child(2) {
+.testimonial-card.is-featured {
 	border-radius: .875rem;
 	border: 0.063rem solid rgba(255, 138, 59, 0.20);
 	background: rgba(26, 22, 20, 0.05);

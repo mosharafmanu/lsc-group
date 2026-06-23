@@ -397,7 +397,13 @@ if ( ! function_exists( 'lsc_render_social_medias' ) ) {
 
 				<li class="<?php echo esc_attr( $args['item_class'] ); ?>">
 					<a href="<?php echo esc_url( $link ); ?>" class="<?php echo esc_attr( $args['link_class'] ); ?>"<?php echo 'linkedin' === $type ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="<?php echo esc_attr( $label ); ?>">
-						<?php echo lsc_get_icon_svg( $type, $args['icon_class'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php
+						if ( 'linkedin' === $type ) {
+							get_template_part( 'assets/svgs/linkedin' );
+						} else {
+							echo lsc_get_icon_svg( $type, $args['icon_class'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						?>
 					</a>
 				</li>
 

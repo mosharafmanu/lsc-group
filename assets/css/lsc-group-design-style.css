@@ -452,12 +452,49 @@ h6,.h6-style {
 	align-items: center;
 	margin-top: 3.125rem; /* 50px */
 }
+.lsc-group-slick-arrow {
+	width: 4.25rem; /* 68px */
+	height: 2.5rem; /* 40px */
+	border: 0.063rem solid rgba(255, 138, 59, 0.35);
+	border-radius: 999rem;
+	background-color: rgba(255, 138, 59, 0.10);
+	color: var(--lsc-color-accent);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	cursor: pointer;
+	transition: background-color var(--lsc-transition), border-color var(--lsc-transition), color var(--lsc-transition), transform var(--lsc-transition);
+}
+.lsc-group-slick-arrow:hover,
+.lsc-group-slick-arrow:focus-visible {
+	border-color: var(--lsc-color-accent);
+	background-color: var(--lsc-color-accent);
+	color: var(--lsc-color-white);
+}
+.lsc-group-slick-arrow:focus-visible {
+	outline: 0.125rem solid rgba(255, 138, 59, 0.35);
+	outline-offset: 0.188rem;
+}
+.lsc-group-slick-arrow:active {
+	transform: translateY(0.063rem);
+}
+.lsc-group-slick-arrow.slick-disabled {
+	opacity: .4;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+.lsc-group-slick-arrow svg {
+	width: 1.5rem; /* 24px */
+	height: 1.5rem; /* 24px */
+	display: block;
+}
 
 /* Responsive - Mobile */
 @media only screen and (max-width: 767px) {
 	.lsc-group-slick-arrow-container {
 		flex-wrap: wrap;
-		column-gap: 3.625rem; /* 58px */
+		column-gap: .875rem; /* 14px */
 		row-gap: 1.5625rem; /* 25px */
 		margin-top: 1.25rem; /* 20px */
 	}

@@ -15,19 +15,19 @@ if ( ! $title_lines && ! $description && ! $testimonials ) {
 }
 
 $section_classes = [
-	'testimonials-section layout-padding pt-50 pb-50 pt-lg-100 pb-lg-110',
+	'testimonials-section layout-padding layout-padding0 pt-50 pb-50 pt-lg-100 pb-lg-110',
 ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="testimonials-section__header lsc-container">
 		<?php if ( $eyebrow ) : ?>
-			<div class="testimonials-section__eyebrow-wrap">
+			<div class="testimonials-section__eyebrow-wrap layout-padding-mobile">
 				<span class="testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
 			</div>
 		<?php endif; ?>
 
-		<div class="testimonials-section__intro">
+		<div class="testimonials-section__intro layout-padding-mobile">
 			<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
 				<h2 class="testimonials-section__title">
 					<?php foreach ( $title_lines as $title_line ) : ?>
@@ -80,65 +80,80 @@ $section_classes = [
 	</div>
 
 	<?php if ( $testimonials && is_array( $testimonials ) ) : ?>
-		<div class="testimonials-section__grid card-grid columns-3 lsc-container mt-60">
-			<?php foreach ( $testimonials as $index => $testimonial ) : ?>
-				<?php
-				$rating         = intval( $testimonial['rating'] ?? 5 );
-				$quote          = $testimonial['quote'] ?? '';
-				$author_name    = $testimonial['author_name'] ?? '';
-				$author_role    = $testimonial['author_role'] ?? '';
-				$author_initial = $testimonial['author_initial'] ?? ( $author_name ? substr( $author_name, 0, 1 ) : '' );
+		<div class="testimonials-section__slider-wrap lsc-container mt-60">
+			<div class="testimonials-section__carousel js-testimonials-carousel js-stage-padding">
+				<?php foreach ( $testimonials as $index => $testimonial ) : ?>
+					<?php
+					$rating         = intval( $testimonial['rating'] ?? 5 );
+					$quote          = $testimonial['quote'] ?? '';
+					$author_name    = $testimonial['author_name'] ?? '';
+					$author_role    = $testimonial['author_role'] ?? '';
+					$author_initial = $testimonial['author_initial'] ?? ( $author_name ? substr( $author_name, 0, 1 ) : '' );
 
-				if ( ! $quote ) {
-					continue;
-				}
+					if ( ! $quote ) {
+						continue;
+					}
 
-				$card_classes = [ 'testimonial-card' ];
-				?>
-				<div class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>">
-					<div class="testimonial-card__quote-watermark" aria-hidden="true">
-						<?php get_template_part( 'assets/svgs/quote-watermark' ); ?>
-					</div>
+					$card_classes = [ 'testimonial-card' ];
 
-					<div class="testimonial-card__header">
-						<?php if ( $rating > 0 ) : ?>
-							<div class="testimonial-card__rating">
-								<?php for ( $i = 0; $i < $rating; $i++ ) : ?>
-									<span class="testimonial-card__star" aria-hidden="true">
-										<?php get_template_part( 'assets/svgs/star' ); ?>
-									</span>
-								<?php endfor; ?>
+					if ( 1 === $index ) {
+						$card_classes[] = 'is-featured';
+					}
+					?>
+					<div class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>">
+						<div class="testimonial-card__quote-watermark" aria-hidden="true">
+							<?php get_template_part( 'assets/svgs/quote-watermark' ); ?>
+						</div>
+
+						<div class="testimonial-card__header">
+							<?php if ( $rating > 0 ) : ?>
+								<div class="testimonial-card__rating">
+									<?php for ( $i = 0; $i < $rating; $i++ ) : ?>
+										<span class="testimonial-card__star" aria-hidden="true">
+											<?php get_template_part( 'assets/svgs/star' ); ?>
+										</span>
+									<?php endfor; ?>
+								</div>
+							<?php endif; ?>
+
+							<div class="testimonial-card__quote-icon" aria-hidden="true">
+								<?php get_template_part( 'assets/svgs/quote' ); ?>
 							</div>
-						<?php endif; ?>
+						</div>
 
-						<div class="testimonial-card__quote-icon" aria-hidden="true">
-							<?php get_template_part( 'assets/svgs/quote' ); ?>
+						<div class="testimonial-card__body">
+							<blockquote class="testimonial-card__quote">
+								<p><?php echo esc_html( $quote ); ?></p>
+							</blockquote>
+						</div>
+
+						<div class="testimonial-card__author">
+							<?php if ( $author_initial ) : ?>
+								<div class="testimonial-card__author-initial" aria-hidden="true">
+									<?php echo esc_html( strtoupper( $author_initial ) ); ?>
+								</div>
+							<?php endif; ?>
+							<div class="testimonial-card__author-info">
+								<?php if ( $author_name ) : ?>
+									<p class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></p>
+								<?php endif; ?>
+								<?php if ( $author_role ) : ?>
+									<p class="testimonial-card__author-role"><?php echo esc_html( $author_role ); ?></p>
+								<?php endif; ?>
+							</div>
 						</div>
 					</div>
+				<?php endforeach; ?>
+			</div>
 
-					<div class="testimonial-card__body">
-						<blockquote class="testimonial-card__quote">
-							<p><?php echo esc_html( $quote ); ?></p>
-						</blockquote>
-					</div>
-
-					<div class="testimonial-card__author">
-						<?php if ( $author_initial ) : ?>
-							<div class="testimonial-card__author-initial" aria-hidden="true">
-								<?php echo esc_html( strtoupper( $author_initial ) ); ?>
-							</div>
-						<?php endif; ?>
-						<div class="testimonial-card__author-info">
-							<?php if ( $author_name ) : ?>
-								<p class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></p>
-							<?php endif; ?>
-							<?php if ( $author_role ) : ?>
-								<p class="testimonial-card__author-role"><?php echo esc_html( $author_role ); ?></p>
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			<?php endforeach; ?>
+			<div class="testimonials-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Testimonial carousel controls', 'lsc-group' ); ?>">
+				<button class="lsc-group-slick-arrow testimonials-section__arrow testimonials-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous testimonial', 'lsc-group' ); ?>">
+					<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
+				</button>
+				<button class="lsc-group-slick-arrow testimonials-section__arrow testimonials-section__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next testimonial', 'lsc-group' ); ?>">
+					<?php get_template_part( 'assets/svgs/angle-right-pagination' ); ?>
+				</button>
+			</div>
 		</div>
 	<?php endif; ?>
 </section>

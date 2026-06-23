@@ -301,7 +301,7 @@
 		}
 
 		function initStagePaddingCarousel() {
-			const $carousel = $( '.js-stage-padding' ).not( '.latest-news-grid, .related-products-grid, .logo-showcase-grid, .card-grid-carousel' );
+			const $carousel = $( '.js-stage-padding' ).not( '.latest-news-grid, .related-products-grid, .logo-showcase-grid, .card-grid-carousel, .js-testimonials-carousel' );
 
 			if ( ! $carousel.length ) return;
 
@@ -332,6 +332,60 @@
 		$( window ).on( 'resize', function () {
 			clearTimeout( carouselResizeTimer );
 			carouselResizeTimer = setTimeout( initStagePaddingCarousel, 250 );
+		} );
+
+		// ─────────────────────────────────────────────────────────────
+		// TESTIMONIALS CAROUSEL
+		// ─────────────────────────────────────────────────────────────
+
+		$( '.js-testimonials-carousel' ).each( function () {
+			const $carousel = $( this );
+
+			if ( $carousel.hasClass( 'slick-initialized' ) ) return;
+
+			const $section = $carousel.closest( '.testimonials-section__slider-wrap' );
+			const updateFeaturedCard = function ( slick ) {
+				const $slides       = $( slick.$slider ).find( '.slick-slide' );
+				const $activeSlides = $slides.filter( '.slick-active' );
+
+				$slides.find( '.testimonial-card' ).removeClass( 'is-featured' );
+
+				if ( $activeSlides.length < 3 ) return;
+
+				$activeSlides
+					.eq( Math.floor( $activeSlides.length / 2 ) )
+					.find( '.testimonial-card' )
+					.addClass( 'is-featured' );
+			};
+
+			$carousel.on( 'init afterChange breakpoint setPosition', function ( event, slick ) {
+				updateFeaturedCard( slick );
+			} );
+
+			$carousel.slick( {
+				dots:           false,
+				arrows:         true,
+				infinite:       true,
+				speed:          300,
+				slidesToShow:   3,
+				slidesToScroll: 1,
+				prevArrow:      $section.find( '.testimonials-section__arrow--prev' ),
+				nextArrow:      $section.find( '.testimonials-section__arrow--next' ),
+				responsive: [
+					{
+						breakpoint: 992,
+						settings: {
+							slidesToShow: 2,
+						},
+					},
+					{
+						breakpoint: 768,
+						settings: {
+							slidesToShow: 1,
+						},
+					},
+				],
+			} );
 		} );
 
 	} ); // end document.ready
