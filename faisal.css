@@ -507,6 +507,12 @@
 	 grid-template-columns: 1fr;
    row-gap: 2.5rem;
   }
+  .media-content-5050__inner.media-left {
+    grid-template-areas: "content" "media";
+  }
+  .media-content-5050__inner.media-right {
+      grid-template-areas: "content" "media";
+  }
   .media-content-5050__description {
 	 margin-top: 1rem;
   }
@@ -1057,6 +1063,8 @@
 .footer-company-registrations {
 	grid-template-columns: 1fr;
 	row-gap: 1.25rem;
+  padding-bottom: 4rem;
+  margin-top: 3rem;
 }
 }
  /*
