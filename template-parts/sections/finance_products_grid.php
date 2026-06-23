@@ -84,7 +84,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 		<?php endif; ?>
 
 		<?php if ( $products ) : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-40 mt-lg-65">
+			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-30 mt-lg-65">
 				<?php foreach ( $products as $product ) : ?>
 					<?php
 					$product_id = $product->ID;

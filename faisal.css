@@ -327,6 +327,9 @@
 .stats-section {
 	padding-top: 3rem;
 }
+.stats-section__grid {
+	row-gap: 2.375rem;
+}
 .stats-section__label {
 	margin-top: 0;
 }
@@ -1010,6 +1013,9 @@
 	line-height: 150%;
 	margin-bottom: 0;
 }
+ .footer-contact-item a:hover {
+  color: var(--lsc-color-accent);
+  }
 .footer-company-text {
 	color: rgba(26, 22, 20, 0.28);
 	font-size: .75rem;
@@ -1059,13 +1065,13 @@
   }
   .footer-menu-list {
 	  row-gap: 0;
-}
-.footer-company-registrations {
-	grid-template-columns: 1fr;
-	row-gap: 1.25rem;
-  padding-bottom: 4rem;
-  margin-top: 3rem;
-}
+  }
+  .footer-company-registrations {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+    padding-bottom: 4rem;
+    margin-top: 3rem;
+  }
 }
  /*
 ===============================================
