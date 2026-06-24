@@ -1,18 +1,41 @@
 # LSC Group Theme Handoff
 
-_Last updated: 2026-06-24 (session 2)._
+_Last updated: 2026-06-24 (session 3)._
 
 ## Current State
 
 The theme is being built from the LSC Capital design (homepage + inner pages).
 
 - Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
-- Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below).
+- Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below) — except the stacked-testimonials styles, written this session with explicit authorisation.
 - Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
 
-## ✅ Committed & pushed — resume point
+## 🔄 RESUME HERE (after shutdown) — session 3 end
 
-Two 2026-06-24 batches are committed and pushed; **`main`, `faisal`, and `imran` are all aligned** on GitHub (nothing lost). Faisal's CSS commits (`77aa3e2`, `93c428e`, `f5b7a71` — `faisal.css`, `lsc-group-design-style.css`, `video-behaviors.css`) are merged into `main` too.
+**Everything is committed and pushed. HEAD = `093d8f3`. `main`, `faisal`, `imran` are all aligned on GitHub at `093d8f3`** (local working tree clean). Nothing in progress, nothing uncommitted.
+
+**Do these once when you come back / on any environment that pulls `093d8f3`:**
+1. **WP Admin → Custom Fields → Sync** — picks up the *Page Builder* changes (new layouts: `case_studies_grid`, `feature_columns`, `feature_cards`, `process_steps`, `faqs`; testimonials Source/Layout fields; contact Background Style) **and** the new *Testimonial Details* group.
+2. **Settings → Permalinks** (just open it, or flush) so the new `/case-study/…` single URLs resolve. *(Already flushed on local.)*
+3. **Faisal:** `git pull` before his next `faisal.css` push — this commit touched `faisal.css` (stacked-testimonials styles), so pulling first avoids a conflict.
+
+**What this session (3) delivered (all detailed in sections below):**
+- `contact_section` light/dark Background Style toggle.
+- New sections: `feature_columns`, `feature_cards`, `process_steps`, `faqs` (jQuery accordion), `case_studies_grid`.
+- **Testimonial CPT** (reusable library) + testimonials_section **Carousel/Stacked** layout toggle + **Manual/Library** source toggle. Stacked CSS written in `faisal.css`. `bin/` migrate + cleanup + seed scripts (already run on local → 17 real testimonials live; Home + Testimonials page on Library/All).
+- **Case Study CPT** (public, single pages) + `case_studies_grid` section.
+- Cache-bust version now `LSC_GROUP_VERSION = 1.0.46` (bump it on any future CSS/JS edit or the browser serves stale assets — see ACF/asset notes).
+
+**Likely next tasks (not started):**
+- Faisal: CSS for the session-3 sections (`feature_columns`, `feature_cards`, `process_steps`, `faqs`, `case_studies_grid`, contact `--bg-dark`) — only stacked-testimonials CSS is done.
+- Author **Case Study** posts (title + featured image + excerpt + page order) so the grid populates; spot-check the 6 blank testimonial role lines + Keith M quote (see Testimonial CPT note).
+- The **DEFERRED contact-overlap section** (`contact_panel`) is still pending — full spec further below.
+
+---
+
+## ✅ Earlier batches (sessions 1–2) — context
+
+Two 2026-06-24 batches were committed and pushed; **`main`, `faisal`, and `imran` are all aligned** on GitHub (nothing lost). Faisal's CSS commits (`77aa3e2`, `93c428e`, `f5b7a71` — `faisal.css`, `lsc-group-design-style.css`, `video-behaviors.css`) are merged into `main` too.
 
 - **Batch 1 (`24d17d1`):** inner_hero, broker_callout, content_card_5050, timeline_section, cta_section, the `media_content_5050` → `media_card_5050` rename, header two-CTA, finance-grid orphan centering.
 - **Batch 2 (this session):** the inner-page hero system below. Files:
