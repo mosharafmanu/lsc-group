@@ -74,7 +74,7 @@ $section_classes = [
 			<?php endif; ?>
 
 			<?php if ( $features && is_array( $features ) ) : ?>
-				<ul class="content-card-5050__features">
+				<ul class="lsc-list content-card-5050__features">
 					<?php foreach ( $features as $feature ) : ?>
 						<?php
 						$feature_label = $feature['label'] ?? '';
