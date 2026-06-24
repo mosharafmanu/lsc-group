@@ -1,26 +1,55 @@
 <?php
 /**
- * Inner Hero Section
+ * Page Hero Section (machine name: inner_hero)
  *
- * Compact page hero for inner pages. Background image (no video),
- * eyebrow badge, heading, description and buttons.
+ * One hero for inner pages with three selectable styles:
+ *   - image : dark hero, heading over a full-width background photo
+ *   - text  : light hero, heading + text on a plain background
+ *   - split : light hero, heading + text beside a side photo
+ *
+ * Default style is "image" so existing placements render unchanged.
  *
  * @package lsc-group
  */
 
-$eyebrow     = get_sub_field( 'eyebrow' );
-$title_lines = get_sub_field( 'title_lines' );
-$description = get_sub_field( 'description' );
-$buttons     = get_sub_field( 'buttons' );
-$image       = get_sub_field( 'image' );
+$hero_style     = get_sub_field( 'hero_style' ) ?: 'image';
+$eyebrow        = get_sub_field( 'eyebrow' );
+$title_lines    = get_sub_field( 'title_lines' );
+$description    = get_sub_field( 'description' );
+$buttons        = get_sub_field( 'buttons' );
+$media_type     = get_sub_field( 'media_type' ) ?: 'image';
+$image          = get_sub_field( 'image' );
+$video          = get_sub_field( 'video' );
+$image_position = get_sub_field( 'image_position' ) ?: 'right';
+$show_facts_bar = get_sub_field( 'show_facts_bar' );
 
-if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image ) {
+if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image && ! $video ) {
 	return;
+}
+
+// The "split" (Text + Media) style can show a video; image and background styles use the image.
+$split_is_video = 'split' === $hero_style && 'video' === $media_type && $video;
+// "text" style never shows media, even if one was uploaded before switching.
+$show_image     = $image && 'text' !== $hero_style && ! $split_is_video;
+
+// Product Key Facts bar: only on the image style, only when enabled, and only
+// when the current Finance Product actually has facts. Pulls from product meta.
+$product_facts = ( 'image' === $hero_style && $show_facts_bar ) ? get_field( 'product_facts' ) : null;
+$has_facts_bar = $product_facts && is_array( $product_facts );
+
+$section_classes = [ 'inner-hero', 'inner-hero--' . $hero_style ];
+
+if ( 'split' === $hero_style ) {
+	$section_classes[] = 'inner-hero--image-' . $image_position;
+}
+
+if ( $has_facts_bar ) {
+	$section_classes[] = 'inner-hero--has-facts';
 }
 ?>
 
-<section class="inner-hero">
-	<?php if ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
+<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+	<?php if ( 'image' === $hero_style && $show_image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
 		<div class="inner-hero__media" aria-hidden="true">
 			<?php
 			lsc_render_responsive_picture(
@@ -104,5 +133,79 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image ) 
 				</div>
 			<?php endif; ?>
 		</div>
+
+		<?php if ( 'split' === $hero_style && $split_is_video && function_exists( 'lsc_render_video' ) ) : ?>
+			<div class="inner-hero__media">
+				<?php
+				$video_behavior = $video['video_behavior'] ?? 'autoplay';
+
+				lsc_render_video(
+					$video,
+					[
+						'behavior'           => $video_behavior,
+						'autoplay'           => ! empty( $video['video_autoplay'] ),
+						'autoplay_on_scroll' => ! empty( $video['video_autoplay_on_scroll'] ),
+						'controls'           => 'autoplay' === $video_behavior && ! empty( $video['video_controls'] ),
+						'muted'              => ! empty( $video['video_muted'] ),
+						'loop'               => ! empty( $video['video_loop'] ),
+						'popup_autoplay'     => ! empty( $video['video_popup_autoplay'] ),
+						'popup_controls'     => ! empty( $video['video_popup_controls'] ),
+						'class'              => 'inner-hero__video',
+						'container_class'    => 'inner-hero__video-wrap',
+					]
+				);
+				?>
+			</div>
+		<?php elseif ( 'split' === $hero_style && $show_image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
+			<div class="inner-hero__media">
+				<?php
+				lsc_render_responsive_picture(
+					$image,
+					[
+						'class'         => 'inner-hero__image',
+						'sizes'         => '(max-width: 991px) 100vw, 50vw',
+						'lazy'          => false,
+						'fetchpriority' => 'high',
+					]
+				);
+				?>
+			</div>
+		<?php endif; ?>
 	</div>
+
+	<?php if ( $has_facts_bar ) : ?>
+		<?php
+		$facts_columns = min( max( count( $product_facts ), 2 ), 5 );
+		?>
+		<div class="inner-hero__facts-wrap lsc-container">
+			<div class="inner-hero__facts card-grid columns-<?php echo esc_attr( $facts_columns ); ?>">
+				<?php foreach ( $product_facts as $fact ) : ?>
+					<?php
+					$fact_label     = $fact['label'] ?? '';
+					$fact_value     = $fact['value'] ?? '';
+					$fact_highlight = ! empty( $fact['highlight'] );
+
+					if ( ! $fact_label && ! $fact_value ) {
+						continue;
+					}
+
+					$fact_value_classes = [ 'inner-hero__fact-value' ];
+
+					if ( $fact_highlight ) {
+						$fact_value_classes[] = 'color-lsc-accent';
+					}
+					?>
+					<div class="inner-hero__fact">
+						<?php if ( $fact_label ) : ?>
+							<span class="inner-hero__fact-label"><?php echo esc_html( $fact_label ); ?></span>
+						<?php endif; ?>
+
+						<?php if ( $fact_value ) : ?>
+							<span class="<?php echo esc_attr( implode( ' ', $fact_value_classes ) ); ?>"><?php echo esc_html( $fact_value ); ?></span>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endif; ?>
 </section>

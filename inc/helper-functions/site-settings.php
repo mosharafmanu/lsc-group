@@ -263,6 +263,7 @@ if ( ! function_exists( 'lsc_get_footer_contact_details' ) ) {
 			'phone'    => get_field( 'footer_contact_phone', 'options' ),
 			'email'    => get_field( 'footer_contact_email', 'options' ),
 			'linkedin' => get_field( 'footer_linkedin_url', 'options' ),
+			'hours'    => get_field( 'footer_opening_hours', 'options' ),
 		];
 	}
 }

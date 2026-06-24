@@ -212,6 +212,18 @@
             "placeholder": "https://www.linkedin.com/company/..."
         },
         {
+            "key": "field_site_footer_opening_hours",
+            "label": "Opening Hours",
+            "name": "footer_opening_hours",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "e.g. Mon – Fri: 9:00 AM – 5:30 PM. Shown in the contact section info card.",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
             "key": "field_footer_company_registrations",
             "label": "Footer Company Registrations",
             "name": "footer_company_registrations",
@@ -502,5 +514,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782239054
+    "modified": 1782280024
 }

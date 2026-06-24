@@ -280,7 +280,12 @@
                                     },
                                     "default_value": "self_host",
                                     "return_format": "value",
-                                    "allow_null": 0
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_self_host_file",
@@ -300,7 +305,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "mime_types": "mp4,webm"
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_self_host_poster",
@@ -319,7 +329,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_youtube_url",
@@ -336,7 +351,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://www.youtube.com/watch?v=..."
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_vimeo_url",
@@ -353,7 +373,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://player.vimeo.com/..."
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_vimeo_poster",
@@ -372,7 +397,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_cdn_url",
@@ -389,7 +419,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://cdn.example.com/video.mp4"
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_hero_video_cdn_poster",
@@ -408,7 +443,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 }
                             ]
                         }
@@ -419,9 +459,59 @@
                 "layout_inner_hero": {
                     "key": "layout_inner_hero",
                     "name": "inner_hero",
-                    "label": "Inner Hero",
+                    "label": "Page Hero",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_inner_hero_hero_style",
+                            "label": "Hero Style",
+                            "name": "hero_style",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Choose the layout. <strong>Image Background</strong> = dark hero with the heading over a full-width photo. <strong>Text Only</strong> = light hero, heading + text on a plain background. <strong>Text + Media</strong> = light hero with an image or video beside the text.",
+                            "choices": {
+                                "image": "Image Background",
+                                "text": "Text Only",
+                                "split": "Text + Media"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_inner_hero_show_facts_bar",
+                            "label": "Show Product Key Facts Bar",
+                            "name": "show_facts_bar",
+                            "type": "true_false",
+                            "required": 0,
+                            "instructions": "On a Finance Product page, show this product's Key Facts as a bar overlapping the bottom of the hero. Edit the facts in the \"Finance Product Details\" box on the product.",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "key": "field_inner_hero_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_inner_hero_eyebrow",
                             "label": "Eyebrow",
@@ -534,15 +624,515 @@
                             ]
                         },
                         {
+                            "key": "field_inner_hero_media_tab",
+                            "label": "Media",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "!=",
+                                        "value": "text"
+                                    }
+                                ]
+                            ],
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_inner_hero_media_type",
+                            "label": "Media Type",
+                            "name": "media_type",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "For the Text + Media style: show an image or a video beside the text.",
+                            "choices": {
+                                "image": "Image",
+                                "video": "Video"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "split"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "class": "",
+                                "id": "",
+                                "width": "50"
+                            }
+                        },
+                        {
+                            "key": "field_inner_hero_image_position",
+                            "label": "Media Position",
+                            "name": "image_position",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Which side the image or video appears on (Text + Media style only).",
+                            "choices": {
+                                "left": "Left",
+                                "right": "Right"
+                            },
+                            "default_value": "right",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "split"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "class": "",
+                                "id": "",
+                                "width": "50"
+                            }
+                        },
+                        {
                             "key": "field_inner_hero_image",
-                            "label": "Background Image",
+                            "label": "Image",
                             "name": "image",
                             "type": "image",
                             "required": 0,
-                            "instructions": "Full-width background image for the hero.",
+                            "instructions": "Background photo for the Image Background style, or the side photo for the Text + Media style when Media Type is Image.",
                             "return_format": "array",
                             "library": "all",
-                            "preview_size": "medium"
+                            "preview_size": "medium",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "split"
+                                    },
+                                    {
+                                        "field": "field_inner_hero_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "key": "field_inner_hero_video",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "group",
+                            "required": 0,
+                            "instructions": "Video media for this section.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_inner_hero_hero_style",
+                                        "operator": "==",
+                                        "value": "split"
+                                    },
+                                    {
+                                        "field": "field_inner_hero_media_type",
+                                        "operator": "==",
+                                        "value": "video"
+                                    }
+                                ]
+                            ],
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_inner_hero_video_source",
+                                    "label": "Video Source",
+                                    "name": "video_source",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "self_host": "Self-Hosted (WordPress Media)",
+                                        "youtube": "YouTube",
+                                        "vimeo": "Vimeo",
+                                        "cdn": "CDN/External URL"
+                                    },
+                                    "default_value": "self_host",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_self_host_file",
+                                    "label": "Video File",
+                                    "name": "video_self_host_file",
+                                    "type": "file",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_self_host_poster",
+                                    "label": "Poster Image",
+                                    "name": "video_self_host_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_youtube_url",
+                                    "label": "YouTube URL",
+                                    "name": "video_youtube_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "youtube"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_vimeo_url",
+                                    "label": "Vimeo MP4 URL",
+                                    "name": "video_vimeo_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_vimeo_poster",
+                                    "label": "Vimeo Poster Image",
+                                    "name": "video_vimeo_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_cdn_url",
+                                    "label": "CDN Video URL",
+                                    "name": "video_cdn_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_cdn_poster",
+                                    "label": "CDN Poster Image",
+                                    "name": "video_cdn_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_inner_hero_video_behavior",
+                                    "label": "Behavior",
+                                    "name": "video_behavior",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "autoplay": "Autoplay",
+                                        "hover": "Hover",
+                                        "onclick-popup": "Onclick Popup"
+                                    },
+                                    "default_value": "autoplay",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "How the video plays. Autoplay = muted looping background video that pauses when off-screen. Hover = plays while the mouse is over it, resets on leave. Onclick Popup = shows a play button and opens the video in a lightbox (sound allowed)."
+                                },
+                                {
+                                    "key": "field_inner_hero_video_autoplay",
+                                    "label": "Autoplay",
+                                    "name": "video_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing as soon as the section loads. Browsers force it to be muted. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_inner_hero_video_autoplay_on_scroll",
+                                    "label": "Autoplay On Scroll",
+                                    "name": "video_autoplay_on_scroll",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Only start when the video scrolls into view (50% visible) and pause when it leaves. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_inner_hero_video_controls",
+                                    "label": "Controls",
+                                    "name": "video_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the custom play/pause and mute buttons overlaid on the video. (Autoplay behavior, not available for YouTube.)"
+                                },
+                                {
+                                    "key": "field_inner_hero_video_muted",
+                                    "label": "Muted",
+                                    "name": "video_muted",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Mute the audio. Note: Autoplay and Hover are always muted by the browser regardless of this setting."
+                                },
+                                {
+                                    "key": "field_inner_hero_video_loop",
+                                    "label": "Loop",
+                                    "name": "video_loop",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Automatically restart the video from the beginning when it ends."
+                                },
+                                {
+                                    "key": "field_inner_hero_video_popup_autoplay",
+                                    "label": "Popup Autoplay",
+                                    "name": "video_popup_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing automatically when the popup opens. (Onclick Popup behavior only.)"
+                                },
+                                {
+                                    "key": "field_inner_hero_video_popup_controls",
+                                    "label": "Popup Controls",
+                                    "name": "video_popup_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_inner_hero_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the native video controls inside the popup. (Onclick Popup behavior only.)"
+                                }
+                            ]
                         }
                     ],
                     "min": "",
@@ -950,7 +1540,12 @@
                                     },
                                     "default_value": "self_host",
                                     "return_format": "value",
-                                    "allow_null": 0
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_self_host_file",
@@ -969,7 +1564,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "mime_types": "mp4,webm"
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_self_host_poster",
@@ -988,7 +1588,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_youtube_url",
@@ -1005,7 +1610,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://www.youtube.com/watch?v=..."
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_vimeo_url",
@@ -1022,7 +1632,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://player.vimeo.com/..."
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_vimeo_poster",
@@ -1041,7 +1656,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_cdn_url",
@@ -1058,7 +1678,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://cdn.example.com/video.mp4"
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_cdn_poster",
@@ -1077,7 +1702,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_broker_callout_video_behavior",
@@ -1094,7 +1724,7 @@
                                     "return_format": "value",
                                     "allow_null": 0,
                                     "wrapper": {
-                                        "width": "100",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
@@ -1541,7 +2171,12 @@
                                     },
                                     "default_value": "self_host",
                                     "return_format": "value",
-                                    "allow_null": 0
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_self_host_file",
@@ -1560,7 +2195,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "mime_types": "mp4,webm"
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_self_host_poster",
@@ -1579,7 +2219,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_youtube_url",
@@ -1596,7 +2241,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://www.youtube.com/watch?v=..."
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_vimeo_url",
@@ -1613,7 +2263,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://player.vimeo.com/..."
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_vimeo_poster",
@@ -1632,7 +2287,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_cdn_url",
@@ -1649,7 +2309,12 @@
                                             }
                                         ]
                                     ],
-                                    "placeholder": "https://cdn.example.com/video.mp4"
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_cdn_poster",
@@ -1668,7 +2333,12 @@
                                     ],
                                     "return_format": "array",
                                     "library": "all",
-                                    "preview_size": "medium"
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
                                 },
                                 {
                                     "key": "field_media_card_5050_video_behavior",
@@ -1686,7 +2356,7 @@
                                     "return_format": "value",
                                     "allow_null": 0,
                                     "wrapper": {
-                                        "width": "100",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     }
@@ -1899,6 +2569,632 @@
                                 ]
                             ],
                             "placeholder": "Bridging - Land - Development - Business Finance"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_media_content_5050": {
+                    "key": "layout_media_content_5050",
+                    "name": "media_content_5050",
+                    "label": "Media + Content 50/50",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_media_content_5050_enable_background",
+                            "label": "Enable Background",
+                            "name": "enable_background",
+                            "type": "true_false",
+                            "required": 0,
+                            "instructions": "Turn on to place this section on a coloured background (with padding). Off = plain, no background and no top/bottom padding.",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No"
+                        },
+                        {
+                            "key": "field_media_content_5050_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_media_content_5050_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line; highlight only the words that need the accent colour.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_media_content_5050_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "WHO THIS IS FOR",
+                                            "parent_repeater": "field_media_content_5050_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_media_content_5050_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_media_content_5050_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_media_content_5050_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Body copy. Supports multiple paragraphs.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_features",
+                            "label": "Checklist",
+                            "name": "features",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Optional checklist items (label only). The marker icon is added by CSS.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 12,
+                            "button_label": "Add Item",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_feature_label",
+                                    "label": "Label",
+                                    "name": "label",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Experienced Property Developers",
+                                    "parent_repeater": "field_media_content_5050_features"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_buttons",
+                            "label": "Buttons",
+                            "name": "buttons",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Optional call-to-action buttons.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 3,
+                            "button_label": "Add Button",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_button_link",
+                                    "label": "Button Link",
+                                    "name": "button_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "parent_repeater": "field_media_content_5050_buttons"
+                                },
+                                {
+                                    "key": "field_media_content_5050_button_style",
+                                    "label": "Button Style",
+                                    "name": "button_style",
+                                    "type": "button_group",
+                                    "required": 0,
+                                    "choices": {
+                                        "btn-primary": "Primary",
+                                        "btn-outline": "Outline",
+                                        "btn-secondary": "Secondary"
+                                    },
+                                    "default_value": "btn-primary",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "layout": "horizontal",
+                                    "parent_repeater": "field_media_content_5050_buttons"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_media_tab",
+                            "label": "Media",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_media_content_5050_media_position",
+                            "label": "Media Position",
+                            "name": "media_position",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Which side the image or video appears on.",
+                            "choices": {
+                                "left": "Left",
+                                "right": "Right"
+                            },
+                            "default_value": "right",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_media_content_5050_media_type",
+                            "label": "Media Type",
+                            "name": "media_type",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show an image or a video.",
+                            "choices": {
+                                "image": "Image",
+                                "video": "Video"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_media_content_5050_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "",
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "key": "field_media_content_5050_video",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "group",
+                            "required": 0,
+                            "instructions": "Video media for this section.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_content_5050_media_type",
+                                        "operator": "==",
+                                        "value": "video"
+                                    }
+                                ]
+                            ],
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_content_5050_video_source",
+                                    "label": "Video Source",
+                                    "name": "video_source",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "self_host": "Self-Hosted (WordPress Media)",
+                                        "youtube": "YouTube",
+                                        "vimeo": "Vimeo",
+                                        "cdn": "CDN/External URL"
+                                    },
+                                    "default_value": "self_host",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_self_host_file",
+                                    "label": "Video File",
+                                    "name": "video_self_host_file",
+                                    "type": "file",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_self_host_poster",
+                                    "label": "Poster Image",
+                                    "name": "video_self_host_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_youtube_url",
+                                    "label": "YouTube URL",
+                                    "name": "video_youtube_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "youtube"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_vimeo_url",
+                                    "label": "Vimeo MP4 URL",
+                                    "name": "video_vimeo_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_vimeo_poster",
+                                    "label": "Vimeo Poster Image",
+                                    "name": "video_vimeo_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_cdn_url",
+                                    "label": "CDN Video URL",
+                                    "name": "video_cdn_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_cdn_poster",
+                                    "label": "CDN Poster Image",
+                                    "name": "video_cdn_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_behavior",
+                                    "label": "Behavior",
+                                    "name": "video_behavior",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "autoplay": "Autoplay",
+                                        "hover": "Hover",
+                                        "onclick-popup": "Onclick Popup"
+                                    },
+                                    "default_value": "autoplay",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "How the video plays. Autoplay = muted looping background video that pauses when off-screen. Hover = plays while the mouse is over it, resets on leave. Onclick Popup = shows a play button and opens the video in a lightbox (sound allowed)."
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_autoplay",
+                                    "label": "Autoplay",
+                                    "name": "video_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing as soon as the section loads. Browsers force it to be muted. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_autoplay_on_scroll",
+                                    "label": "Autoplay On Scroll",
+                                    "name": "video_autoplay_on_scroll",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Only start when the video scrolls into view (50% visible) and pause when it leaves. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_controls",
+                                    "label": "Controls",
+                                    "name": "video_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the custom play/pause and mute buttons overlaid on the video. (Autoplay behavior, not available for YouTube.)"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_muted",
+                                    "label": "Muted",
+                                    "name": "video_muted",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Mute the audio. Note: Autoplay and Hover are always muted by the browser regardless of this setting."
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_loop",
+                                    "label": "Loop",
+                                    "name": "video_loop",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Automatically restart the video from the beginning when it ends."
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_popup_autoplay",
+                                    "label": "Popup Autoplay",
+                                    "name": "video_popup_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing automatically when the popup opens. (Onclick Popup behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_content_5050_video_popup_controls",
+                                    "label": "Popup Controls",
+                                    "name": "video_popup_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_content_5050_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the native video controls inside the popup. (Onclick Popup behavior only.)"
+                                }
+                            ]
                         }
                     ],
                     "min": "",
@@ -2825,5 +4121,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782239029
+    "modified": 1782282558
 }
