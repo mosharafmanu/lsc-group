@@ -77,41 +77,41 @@
  Hero Style Start
 ===============================================
  */
-.hero-section {
+.inner-hero {
     position: relative;
     display: grid;
     overflow: hidden;
 }
-.hero-section__media {
+.inner-hero__media {
 	height: 49.9375rem;
   min-height: 100%;
 }
-.hero-section__media,
-.hero-section__overlay,
-.hero-section__inner {
+.inner-hero__media,
+.inner-hero__overlay,
+.inner-hero__inner {
 	grid-area: 1 / 1;
 }
-.hero-section__media img {
+.inner-hero__media img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
-.hero-section__overlay {
+.inner-hero__overlay {
    background: linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.45) 100%);
   z-index: 1;
 }
-.hero-section__inner {
+.inner-hero__inner {
   position: relative;
   z-index: 2;
   padding-top: 6.25rem;
   padding-bottom: 4.375rem;
   overflow: hidden;
 }
-.hero-section__content {
+.inner-hero__content {
   max-width: 50rem;
   color: var(--lsc-color-light);
 }
-.hero-section__eyebrow {
+.inner-hero__eyebrow {
   display: inline-block;
   border-radius: 62.4375rem;
   border: 0.063rem solid rgba(255, 138, 59, 0.20);
@@ -128,7 +128,7 @@
   padding-left: 1.5rem;
 }
 
-.hero-section__eyebrow:before {
+.inner-hero__eyebrow:before {
   position: absolute;
   content: "";
   left: .625rem;
@@ -139,7 +139,7 @@
   background-color: var(--lsc-color-accent);
   border-radius: 50%;
 }
-.hero-section__title {
+.inner-hero__title {
 	font-style: normal;
 	font-weight: 700;
 	letter-spacing: -.08rem;
@@ -149,29 +149,29 @@
 	display: block;
   max-width: 23.75rem;
 }
-.hero-section__description {
+.inner-hero__description {
 	margin-top: 1.25rem;
 }
-.hero-section__description p {
+.inner-hero__description p {
 	line-height: 170%;
 	max-width: 30rem;
 }
-.hero-section__buttons {
+.inner-hero__buttons {
   margin-top: 1.5rem;
 }
-.hero-section__buttons .btn-outline {
+.inner-hero__buttons .btn-outline {
   border-radius: .375rem;
   border: 0.063rem solid #FEFADC;
   color: var(--lsc-color-light);
 }
-.hero-section__buttons .site-btn {
+.inner-hero__buttons .site-btn {
   padding: .875rem 1.75rem;
 }
-.hero-section__buttons .site-btn:hover {
+.inner-hero__buttons .site-btn:hover {
   color: var(--lsc-color-primary);
   background-color: var(--lsc-color-light);
 }
-.hero-section__features {
+.inner-hero__features {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -182,7 +182,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.hero-section__feature {
+.inner-hero__feature {
   display: flex;
   border-radius: 62.4375rem;
   border: 0.063rem solid var(--lsc-color-accent);
@@ -195,16 +195,16 @@
   gap: .375rem;
 }
 @media only screen and (max-width:991px) {
-.hero-section__media {
+.inner-hero__media {
 	height: 100%;
 }
 }
 @media only screen and (max-width:767px) {
-.hero-section__inner {
+.inner-hero__inner {
   padding-top: 4.25rem;
   padding-bottom: 3.375rem;
 }
-.hero-section__features {
+.inner-hero__features {
 	margin-top: 2.3rem;
 }
 }
@@ -926,6 +926,12 @@
 ===============================================
  */
 
+
+/*
+==============================================
+ Broker Callout Style Start
+===============================================
+ */
 .broker-callout__card {
 	border-radius: .75rem;
 	background-color: var(--lsc-color-accent);
@@ -1054,6 +1060,124 @@
 	 margin-top: 0;
   }
 }
+/*
+==============================================
+ Broker Callout Style End
+===============================================
+ */
+
+/*
+===============================================
+Inner Hero Style Start
+===============================================
+ */
+.inner-hero {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+}
+.inner-hero__media {
+	height: 35rem;
+  min-height: 100%;
+}
+.inner-hero__media,
+.inner-hero__inner {
+	grid-area: 1 / 1;
+}
+.inner-hero__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.inner-hero__inner {
+  position: relative;
+  z-index: 2;
+  padding-top: 6.25rem;
+  padding-bottom: 4.375rem;
+  overflow: hidden;
+}
+.inner-hero__eyebrow {
+  display: inline-block;
+  border-radius: 62.4375rem;
+  border: 0.063rem solid rgba(255, 138, 59, 0.20);
+  background: rgba(255, 138, 59, 0.10);
+  padding: .5rem 1.0625rem;
+  color: var(--lsc-color-accent);
+  font-size: .75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: .075rem;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.inner-hero__eyebrow:before {
+  position: absolute;
+  content: "";
+  left: .625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: .3125rem;
+  height: .3125rem;
+  background-color: var(--lsc-color-accent);
+  border-radius: 50%;
+}
+.inner-hero__title {
+	font-style: normal;
+	font-weight: 700;
+	letter-spacing: -.08rem;
+	text-transform: uppercase;
+	color: var(--lsc-color-light);
+	margin-top: 1.125rem;
+	display: block;
+}
+.inner-hero__description {
+	margin-top: 1.25rem;
+}
+.inner-hero__description p {
+	line-height: 170%;
+}
+.inner-hero__buttons {
+  margin-top: 1.5rem;
+}
+.inner-hero__buttons .btn-outline {
+  border-radius: .375rem;
+  border: 0.063rem solid #FEFADC;
+  color: var(--lsc-color-light);
+}
+.inner-hero__buttons .site-btn {
+  padding: .875rem 1.75rem;
+}
+.inner-hero__buttons .site-btn:hover {
+  color: var(--lsc-color-primary);
+  background-color: var(--lsc-color-light);
+}
+@media only screen and (max-width:991px) {
+.inner-hero__media {
+	height: 100%;
+}
+}
+@media only screen and (max-width:767px) {
+.inner-hero__inner {
+  padding-top: 4.25rem;
+  padding-bottom: 3.375rem;
+}
+}
+/*
+===============================================
+Inner Hero Style End
+===============================================
+ */
+
+
+
+
+
+
+
  /*
 ===============================================
  Footer Style Start
