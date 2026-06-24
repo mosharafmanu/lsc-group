@@ -77,41 +77,41 @@
  Hero Style Start
 ===============================================
  */
-.inner-hero {
+.hero-section {
     position: relative;
     display: grid;
     overflow: hidden;
 }
-.inner-hero__media {
+.hero-section__media {
 	height: 49.9375rem;
   min-height: 100%;
 }
-.inner-hero__media,
-.inner-hero__overlay,
-.inner-hero__inner {
+.hero-section__media,
+.hero-section__overlay,
+.hero-section__inner {
 	grid-area: 1 / 1;
 }
-.inner-hero__media img {
+.hero-section__media img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
-.inner-hero__overlay {
+.hero-section__overlay {
    background: linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.45) 100%);
   z-index: 1;
 }
-.inner-hero__inner {
+.hero-section__inner {
   position: relative;
   z-index: 2;
   padding-top: 6.25rem;
   padding-bottom: 4.375rem;
   overflow: hidden;
 }
-.inner-hero__content {
+.hero-section__content {
   max-width: 50rem;
   color: var(--lsc-color-light);
 }
-.inner-hero__eyebrow {
+.hero-section__eyebrow {
   display: inline-block;
   border-radius: 62.4375rem;
   border: 0.063rem solid rgba(255, 138, 59, 0.20);
@@ -128,7 +128,7 @@
   padding-left: 1.5rem;
 }
 
-.inner-hero__eyebrow:before {
+.hero-section__eyebrow:before {
   position: absolute;
   content: "";
   left: .625rem;
@@ -139,7 +139,7 @@
   background-color: var(--lsc-color-accent);
   border-radius: 50%;
 }
-.inner-hero__title {
+.hero-section__title {
 	font-style: normal;
 	font-weight: 700;
 	letter-spacing: -.08rem;
@@ -149,29 +149,29 @@
 	display: block;
   max-width: 23.75rem;
 }
-.inner-hero__description {
+.hero-section__description {
 	margin-top: 1.25rem;
 }
-.inner-hero__description p {
+.hero-section__description p {
 	line-height: 170%;
 	max-width: 30rem;
 }
-.inner-hero__buttons {
+.hero-section__buttons {
   margin-top: 1.5rem;
 }
-.inner-hero__buttons .btn-outline {
+.hero-section__buttons .btn-outline {
   border-radius: .375rem;
   border: 0.063rem solid #FEFADC;
   color: var(--lsc-color-light);
 }
-.inner-hero__buttons .site-btn {
+.hero-section__buttons .site-btn {
   padding: .875rem 1.75rem;
 }
-.inner-hero__buttons .site-btn:hover {
+.hero-section__buttons .site-btn:hover {
   color: var(--lsc-color-primary);
   background-color: var(--lsc-color-light);
 }
-.inner-hero__features {
+.hero-section__features {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -182,7 +182,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.inner-hero__feature {
+.hero-section__feature {
   display: flex;
   border-radius: 62.4375rem;
   border: 0.063rem solid var(--lsc-color-accent);
@@ -195,16 +195,16 @@
   gap: .375rem;
 }
 @media only screen and (max-width:991px) {
-.inner-hero__media {
+.hero-section__media {
 	height: 100%;
 }
 }
 @media only screen and (max-width:767px) {
-.inner-hero__inner {
+.hero-section__inner {
   padding-top: 4.25rem;
   padding-bottom: 3.375rem;
 }
-.inner-hero__features {
+.hero-section__features {
 	margin-top: 2.3rem;
 }
 }
@@ -1066,9 +1066,10 @@
 ===============================================
  */
 
+
 /*
 ===============================================
-Inner Hero Style Start
+ Hero Style Start
 ===============================================
  */
 .inner-hero {
@@ -1077,7 +1078,7 @@ Inner Hero Style Start
     overflow: hidden;
 }
 .inner-hero__media {
-	height: 35rem;
+	height: 35.4375rem;
   min-height: 100%;
 }
 .inner-hero__media,
@@ -1089,13 +1090,16 @@ Inner Hero Style Start
 	height: 100%;
 	object-fit: cover;
 }
-
 .inner-hero__inner {
   position: relative;
   z-index: 2;
   padding-top: 6.25rem;
   padding-bottom: 4.375rem;
   overflow: hidden;
+}
+.inner-hero__content {
+  max-width: 50rem;
+  color: var(--lsc-color-light);
 }
 .inner-hero__eyebrow {
   display: inline-block;
@@ -1113,7 +1117,6 @@ Inner Hero Style Start
   position: relative;
   padding-left: 1.5rem;
 }
-
 .inner-hero__eyebrow:before {
   position: absolute;
   content: "";
@@ -1133,12 +1136,14 @@ Inner Hero Style Start
 	color: var(--lsc-color-light);
 	margin-top: 1.125rem;
 	display: block;
+  max-width: 23.75rem;
 }
 .inner-hero__description {
 	margin-top: 1.25rem;
 }
 .inner-hero__description p {
 	line-height: 170%;
+	max-width: 30rem;
 }
 .inner-hero__buttons {
   margin-top: 1.5rem;
@@ -1155,6 +1160,7 @@ Inner Hero Style Start
   color: var(--lsc-color-primary);
   background-color: var(--lsc-color-light);
 }
+
 @media only screen and (max-width:991px) {
 .inner-hero__media {
 	height: 100%;
@@ -1166,12 +1172,11 @@ Inner Hero Style Start
   padding-bottom: 3.375rem;
 }
 }
-/*
+ /*
 ===============================================
-Inner Hero Style End
+ Hero Style End
 ===============================================
  */
-
 
 
 
