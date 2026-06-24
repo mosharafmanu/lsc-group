@@ -980,20 +980,21 @@
   margin-top: 2.8125rem;
 }
 .broker-callout__chips .broker-callout__chip {
-  border-radius: .375rem;
-  background-color: var(--lsc-color-white);
-  color: var(--lsc-color-primary);
-  font-size: .875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: 0.026rem;
-  padding: 0rem .9375rem;
-  height: 2.8125rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+	border-radius: .375rem;
+	background-color: var(--lsc-color-white);
+	color: var(--lsc-color-primary);
+	font-size: .875rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	letter-spacing: 0.026rem;
+	padding: 0rem .9375rem;
+	height: 2.8125rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
 }
 .broker-callout__chips {
   display: flex;
