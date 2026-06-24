@@ -674,6 +674,123 @@
   line-height: 150%;
   margin-top: .3125rem;
 }
+
+/* ---- Stacked layout (full-width blocks, alternating backgrounds) ---- */
+.testimonials-section--stacked {
+  background-color: transparent;
+}
+.testimonials-section--stacked .testimonials-section__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.testimonial-card--stacked {
+  width: 100%;
+  padding: 2.5rem 2.75rem;
+  border-radius: .875rem;
+}
+/* Stacked: the original quote icon sits in normal flow above the copy. */
+.testimonial-card--stacked .testimonial-card__quote-icon {
+  margin: 0 0 .75rem;
+  line-height: 0;
+}
+.testimonial-card--stacked .testimonial-card__quote-icon svg {
+  width: 3rem;
+  height: auto;
+}
+.testimonial-card--stacked .testimonial-card__body {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  margin-top: 0;
+}
+.testimonial-card--stacked .testimonial-card__quote p {
+  margin: 0;
+}
+.testimonial-card--stacked .testimonial-card__author {
+  margin-top: 1.875rem;
+}
+.testimonial-card--stacked .testimonial-card__author-initial {
+  border-color: transparent;
+  background-color: var(--lsc-color-white);
+}
+
+/* Theme: Dark */
+.testimonial-card--theme-dark {
+  background-color: var(--lsc-color-dark);
+}
+.testimonial-card--theme-dark .testimonial-card__body {
+  color: rgba(255, 255, 255, 0.82);
+}
+.testimonial-card--theme-dark .testimonial-card__author-name {
+  color: var(--lsc-color-white);
+}
+.testimonial-card--theme-dark .testimonial-card__author-role {
+  color: rgba(255, 255, 255, 0.55);
+}
+.testimonial-card--theme-dark .testimonial-card__author-initial {
+  color: var(--lsc-color-accent);
+}
+.testimonial-card--theme-dark .testimonial-card__quote-icon svg path {
+  stroke: var(--lsc-color-accent);
+}
+
+/* Theme: Orange */
+.testimonial-card--theme-orange {
+  background-color: var(--lsc-color-accent);
+}
+.testimonial-card--theme-orange .testimonial-card__body {
+  color: rgba(26, 22, 20, 0.92);
+}
+.testimonial-card--theme-orange .testimonial-card__author-name {
+  color: var(--lsc-color-white);
+}
+.testimonial-card--theme-orange .testimonial-card__author-role {
+  color: rgba(255, 255, 255, 0.80);
+}
+.testimonial-card--theme-orange .testimonial-card__author-initial {
+  color: var(--lsc-color-accent);
+}
+.testimonial-card--theme-orange .testimonial-card__quote-icon svg path {
+  stroke: var(--lsc-color-primary);
+}
+.testimonial-card--theme-orange .testimonial-card__quote-icon svg g {
+  opacity: .45;
+}
+
+/* Theme: Light */
+.testimonial-card--theme-light {
+  background-color: #ECEAE3;
+}
+.testimonial-card--theme-light .testimonial-card__body {
+  color: rgba(26, 22, 20, 0.82);
+}
+.testimonial-card--theme-light .testimonial-card__author-name {
+  color: var(--lsc-color-primary);
+}
+.testimonial-card--theme-light .testimonial-card__author-role {
+  color: rgba(26, 22, 20, 0.45);
+}
+.testimonial-card--theme-light .testimonial-card__author-initial {
+  color: var(--lsc-color-primary);
+}
+.testimonial-card--theme-light .testimonial-card__quote-icon svg path {
+  stroke: var(--lsc-color-accent);
+}
+
+@media (max-width: 767px) {
+  .testimonial-card--stacked {
+    padding: 1.75rem 1.5rem;
+  }
+  .testimonial-card--stacked .testimonial-card__quote-icon svg {
+    width: 2.5rem;
+  }
+  .testimonial-card--stacked .testimonial-card__body {
+    font-size: 1rem;
+  }
+}
 /*
 ===============================================
  Testimonial Style End

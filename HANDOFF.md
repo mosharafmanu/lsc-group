@@ -105,7 +105,7 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 4 | `stats_section` | `stats_section.php` | General stats grid (untouched) |
 | 5 | `media_card_5050` | `media_card_5050.php` | **RENAMED** from `media_content_5050` |
 | 5b | `media_content_5050` | `media_content_5050.php` | **NEW** — 50/50 content + checklist beside image/video; optional bg + Top Spacing |
-| 6 | `testimonials_section` | `testimonials_section.php` | Slick carousel |
+| 6 | `testimonials_section` | `testimonials_section.php` | Slick carousel **or** stacked full-width blocks (Layout toggle) |
 | 7 | `contact_section` | `contact_section.php` | General contact section (untouched) |
 | 8 | `content_card_5050` | `content_card_5050.php` | **NEW** — content + checklist beside a card + image |
 | 9 | `timeline_section` | `timeline_section.php` | **NEW** — auto-numbered journey steps |
@@ -114,6 +114,7 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 12 | `feature_cards` | `feature_cards.php` | **NEW** — centered header + icon/title/copy card grid (2/3/4 cols) |
 | 13 | `process_steps` | `process_steps.php` | **NEW** — centered header + auto-numbered step row (2/3/4 cols) |
 | 14 | `faqs` | `faqs.php` | **NEW** — centered header + jQuery slide-toggle accordion (plus/minus) |
+| 15 | `case_studies_grid` | `case_studies_grid.php` | **NEW** — header + grid of Case Study CPT cards (image/title/excerpt/link) |
 
 ## New sections built this session
 
@@ -132,6 +133,40 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 
 ### `timeline_section`
 - `eyebrow`, `title_lines`, `description`, `items` repeater (`year`, `title`, `description`). Step numbers (1,2,3…) auto-increment from the loop. Semantic `<ol>`. Connector line + number circles via CSS.
+
+### Testimonial CPT — reusable testimonial library — session 3
+So testimonials are authored **once** and reused across pages instead of re-typed per section (mirrors the `finance_product` CPT + finance-grid Source pattern).
+- **New CPT `testimonial`** (`inc/post-types.php`, `lsc_register_testimonial_post_type`) — content library, **not public** (`public/publicly_queryable/query_var` false, `rewrite` false, `exclude_from_search` true, no archive/single). Admin only. `supports` = `title` + `page-attributes`; **post title = author name**, page order drives "Page Order" sorting. Menu icon `dashicons-format-quote`, position 21 (under Finance Products).
+- **New ACF group `group_testimonial.json`** on the CPT: `quote` (textarea, required), `author_role` (text), `author_initial` (text, defaults to first letter of title), `rating` (select 1–5). No `theme`/`layout` here — those are per-placement (live on the section).
+- **`testimonials_section` gained a Source toggle** (mirrors finance grid): `source` (`manual`/`library`, default `manual`), and when `library`: `library_selection` (`all`/`selected`), `selected_testimonials` (relationship → testimonial CPT), `posts_per_page`, `orderby` (Page Order/Date/Author Name), `order`. The original `testimonials` repeater is now conditional on `source = manual` (min dropped 1→0).
+- **Template** normalises **both** sources into one `$items` shape `[rating, quote, author_name, author_role, author_initial, theme]`, then the Carousel/Stacked loops iterate `$items`. Library items map post title → `author_name`, ACF fields → the rest, and `theme = auto` (so Stacked still position-cycles dark→orange→light). `WP_Query` uses `no_found_rows`.
+- Default `source = manual` → **existing sections unchanged**; nothing to migrate.
+- ⚠️ Sync needed: Custom Fields → Sync picks up **two** changes — *Page Builder* (Source fields) **and** the new *Testimonial Details* group. Then author testimonials under the new **Testimonials** admin menu.
+- **Migration scripts (`bin/`, both CLI-only, idempotent, support `--dry-run`):**
+  1. `migrate-testimonials.php` — walks every `cms` `testimonials_section` Manual repeater and creates one Testimonial post per entry (title = author name; maps quote/role/initial/rating; stamps `_lsc_migrated_hash`). **Run on local** → created #650 Brian R, #651 John W, #652 Samantha Williamson (1 dup skipped).
+  2. `cleanup-testimonial-repeaters.php` — for each still-Manual section whose entries **all** map back to CPT posts (by the same hash), switches it to **Source = Library / Selected** with those testimonials (in order, deduped) and empties the Manual repeater. Sections with any unmapped entry are skipped (so run #1 first; no data loss). **Run on local** → Home (#81) testimonials section now `source=library, selection=selected` → #650/#651/#652, manual repeater emptied.
+  - **Order matters on other environments:** run #1 then #2 after pulling on staging/live. Both one-off; safe to delete once all environments are done.
+  3. `seed-testimonials.php` — **deletes all `testimonial` posts and reseeds the real 17** transcribed from the live Testimonials page (page order, rating 5). Re-points any Library/Selected section by author name (none currently — both testimonials sections are Library/**All**, so they pick up all 17 automatically). **Run on local** → testimonials #655–#671. ⚠️ **Spot-check needed:** 6 role/subtitle lines were illegible in the source and left **blank** — fill in admin: Sebastiano Carrelli, William H, Michael D, Dave Cookson, Property Saints, Marc Green. Also Keith M's quote: read "would **not** have been able" (the source word was unclear) — verify. Quotes were transcribed from a screenshot; a proofread against the live site is recommended.
+
+### `testimonials_section` — Carousel / Stacked Layout toggle — session 3
+Same section now drives **both** testimonial designs (screenshots #27 homepage / #28 testimonial page) off one testimonials repeater — no duplicate content model.
+- ACF: new **Layout** button-group (`layout`, `carousel`/`stacked`, default `carousel`) at the top of the Content tab. Per-testimonial **Background** select (`theme`: `auto`/`dark`/`orange`/`light`, default `auto`, conditional on Stacked). `rating` is now conditional on **Carousel** only.
+- **Carousel** = unchanged existing Slick markup (stars, quote icon, featured 2nd card).
+- **Stacked** = full-width blocks, no stars/quote-icon, big quote watermark + italic quote + author row. Background **auto-cycles dark → orange → light by position** (`$stacked_palette` in the template, `$index % 3`); a per-item `theme` other than `auto` pins that block's colour.
+- Template branches on `$layout`; the Slick init only ever sees `.js-testimonials-carousel` (absent in stacked), so no JS change needed.
+- **BEM:** section modifier `.testimonials-section--carousel|--stacked`; stacked cards `.testimonial-card--stacked` + `.testimonial-card--theme-dark|orange|light`. Reuses the existing `.testimonial-card__*` author/quote/watermark hooks.
+- **Stacked quote mark = the original quote icon (`assets/svgs/quote.php`), NOT the `quote-watermark` glyph.** Stacked branch renders `quote` in `.testimonial-card__quote-icon` (carousel still uses both its own `.testimonial-card__quote-icon` in the header and the faint `.testimonial-card__quote-watermark`). In stacked it sits in **normal flow above the copy** (`margin: 0 0 .75rem`, `line-height: 0`), sized `svg { width: 3rem }` (2.5rem mobile). Coloured via **stroke** per theme: dark/light = accent orange; orange = primary dark + `svg g { opacity: .45 }`.
+- **Stacked CSS — written (explicitly authorised exception to the CSS boundary, session 3).** Lives in `faisal.css` just after the carousel testimonial block: `.testimonials-section--stacked .testimonials-section__stack` (flex column, gap), `.testimonial-card--stacked` (full-width, larger padding, un-clamped italic quote, top-left quote-icon watermark), and the three theme blocks (dark = `--lsc-color-dark` + light text; orange = `--lsc-color-accent` + dark quote/white author; light = `#ECEAE3` + dark text), each re-tinting the avatar (white circle) and the watermark stroke. Mobile padding tweak < 768px. ⚠️ **Faisal owns `faisal.css`** — he should `git pull` before his next CSS push so this doesn't conflict; consider folding it into his own structure later. Version bumped to **1.0.43** for cache-bust.
+- ⚠️ Sync needed: `"modified"` bumped — Custom Fields → Sync.
+
+### Case Study CPT + `case_studies_grid` — session 3
+"Our Case Studies" grid (screenshot #35), mirroring the `finance_product` CPT + finance-grid pattern.
+- **New CPT `case_study`** (`inc/post-types.php`, `lsc_register_case_study_post_type`) — **public, with single pages** (the cards link to "Read Case Study"). `rewrite` slug `case-study`, `has_archive` false (listing is the section), `supports` = title/editor/thumbnail/excerpt/page-attributes, icon `dashicons-portfolio`, position 22. Permalinks **flushed** on local; ⚠️ on other environments visit Settings → Permalinks (or flush) once so `/case-study/...` resolves.
+- **`case_study` added to the flexible-content `cms` location** (now page/post/product/finance_product/case_study) so single case-study pages build with the page builder, like finance products.
+- **New ACF layout `case_studies_grid`** (cloned from `finance_products_grid`): Content tab (eyebrow, title, description) + Grid tab (`case_study_source` all/selected, `selected_case_studies` relationship, `posts_per_page`, `columns` 2/3/4 default 3, `orderby`, `order`).
+- **Template `case_studies_grid.php`** — auto-dispatched. Card = featured image (linked) + `<h6>` title (linked) + excerpt + "Read Case Study →" link. Grid reuses `card-grid card-grid--center-last-row columns-N`. Orange divider above heading = `.case-studies-section__divider` hook.
+- **BEM (CSS is Faisal's):** `.case-studies-section` › `__inner` / `__header` (`__divider`, `__eyebrow`, `__title`, `__description`) + `.case-studies-grid` (`card-grid…`) › `.case-study-card` › `__media`/`__image`, `__content` (`__title`, `__excerpt`, `__link`). No section bg utility (sits on page cream bg).
+- ⚠️ Sync needed: Custom Fields → Sync (Page Builder changed). Then add Case Studies under the new admin menu (title + featured image + excerpt + page order).
 
 ### `feature_columns` — Feature Columns (3-Column) — session 3
 A 3-column section (screenshot #23): **left** intro content, **middle** a stack of small white info-cards, **right** a highlighted dark action card over an image. Built by extending the `content_card_5050` pattern with a middle info-cards repeater.

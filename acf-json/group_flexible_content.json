@@ -3218,6 +3218,22 @@
                             "endpoint": 0
                         },
                         {
+                            "key": "field_testimonials_layout",
+                            "label": "Layout",
+                            "name": "layout",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Carousel = sliding cards with star ratings (homepage). Stacked = full-width blocks with alternating dark / orange / light backgrounds (testimonial page).",
+                            "choices": {
+                                "carousel": "Carousel",
+                                "stacked": "Stacked"
+                            },
+                            "default_value": "carousel",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
                             "key": "field_testimonials_eyebrow",
                             "label": "Eyebrow",
                             "name": "eyebrow",
@@ -3301,14 +3317,184 @@
                             "endpoint": 0
                         },
                         {
+                            "key": "field_testimonials_source",
+                            "label": "Source",
+                            "name": "source",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Testimonial Library = reuse testimonials authored once under the Testimonials menu (recommended). Manual = type testimonials directly into this section (for one-offs).",
+                            "choices": {
+                                "manual": "Manual",
+                                "library": "Testimonial Library"
+                            },
+                            "default_value": "manual",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_testimonials_library_selection",
+                            "label": "Which Testimonials",
+                            "name": "library_selection",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show all published testimonials or hand-pick specific ones.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "all": "All",
+                                "selected": "Selected"
+                            },
+                            "default_value": "all",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_testimonials_selected_testimonials",
+                            "label": "Selected Testimonials",
+                            "name": "selected_testimonials",
+                            "type": "relationship",
+                            "required": 0,
+                            "instructions": "Choose testimonials and drag to set their display order.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    },
+                                    {
+                                        "field": "field_testimonials_library_selection",
+                                        "operator": "==",
+                                        "value": "selected"
+                                    }
+                                ]
+                            ],
+                            "post_type": [
+                                "testimonial"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": "",
+                            "return_format": "object"
+                        },
+                        {
+                            "key": "field_testimonials_posts_per_page",
+                            "label": "Number of Testimonials",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "Used when showing All. Leave empty to show all.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    },
+                                    {
+                                        "field": "field_testimonials_library_selection",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "default_value": "",
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "Show all"
+                        },
+                        {
+                            "key": "field_testimonials_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "Used when showing All.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    },
+                                    {
+                                        "field": "field_testimonials_library_selection",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Author Name"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_testimonials_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Used when showing All.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    },
+                                    {
+                                        "field": "field_testimonials_library_selection",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
                             "key": "field_testimonials_testimonials",
                             "label": "Testimonials",
                             "name": "testimonials",
                             "type": "repeater",
                             "required": 0,
-                            "instructions": "Add the testimonials shown in the grid.",
+                            "instructions": "Typed directly into this section. Used when Source is Manual.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_testimonials_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
                             "layout": "block",
-                            "min": 1,
+                            "min": 0,
                             "max": 12,
                             "button_label": "Add Testimonial",
                             "sub_fields": [
@@ -3318,6 +3504,7 @@
                                     "name": "rating",
                                     "type": "select",
                                     "required": 0,
+                                    "instructions": "Shown in Carousel layout only.",
                                     "choices": {
                                         "1": "1 Star",
                                         "2": "2 Stars",
@@ -3328,6 +3515,15 @@
                                     "default_value": "5",
                                     "return_format": "value",
                                     "allow_null": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_testimonials_layout",
+                                                "operator": "==",
+                                                "value": "carousel"
+                                            }
+                                        ]
+                                    ],
                                     "parent_repeater": "field_testimonials_testimonials"
                                 },
                                 {
@@ -3365,6 +3561,33 @@
                                     "required": 0,
                                     "instructions": "Optional single letter. Defaults to first letter of Name.",
                                     "placeholder": "J",
+                                    "parent_repeater": "field_testimonials_testimonials"
+                                },
+                                {
+                                    "key": "field_testimonials_theme",
+                                    "label": "Background",
+                                    "name": "theme",
+                                    "type": "select",
+                                    "required": 0,
+                                    "instructions": "Stacked layout only. Auto cycles dark → orange → light by position. Pick a value to pin this block's background.",
+                                    "choices": {
+                                        "auto": "Auto (cycle)",
+                                        "dark": "Dark",
+                                        "orange": "Orange",
+                                        "light": "Light"
+                                    },
+                                    "default_value": "auto",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_testimonials_layout",
+                                                "operator": "==",
+                                                "value": "stacked"
+                                            }
+                                        ]
+                                    ],
                                     "parent_repeater": "field_testimonials_testimonials"
                                 }
                             ]
@@ -4763,6 +4986,202 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_case_studies_grid": {
+                    "key": "layout_case_studies_grid",
+                    "name": "case_studies_grid",
+                    "label": "Case Studies Grid",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_case_studies_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_case_studies_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_case_studies_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Section heading.",
+                            "placeholder": "Our Case Studies"
+                        },
+                        {
+                            "key": "field_case_studies_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_case_studies_grid_tab",
+                            "label": "Case Studies Grid",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_case_studies_source",
+                            "label": "Case Study Source",
+                            "name": "case_study_source",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show all published Case Studies or manually select specific ones.",
+                            "choices": {
+                                "all": "All Case Studies",
+                                "selected": "Selected Case Studies"
+                            },
+                            "default_value": "all",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_case_studies_selected",
+                            "label": "Selected Case Studies",
+                            "name": "selected_case_studies",
+                            "type": "relationship",
+                            "required": 0,
+                            "instructions": "Choose case studies and drag to set their display order.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_case_studies_source",
+                                        "operator": "==",
+                                        "value": "selected"
+                                    }
+                                ]
+                            ],
+                            "post_type": [
+                                "case_study"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": [
+                                "featured_image"
+                            ],
+                            "min": "",
+                            "max": "",
+                            "return_format": "object"
+                        },
+                        {
+                            "key": "field_case_studies_posts_per_page",
+                            "label": "Number of Case Studies",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "Used when Source is All Case Studies. Leave empty to show all.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_case_studies_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "default_value": "",
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "Show all"
+                        },
+                        {
+                            "key": "field_case_studies_columns",
+                            "label": "Grid Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Uses existing card-grid column utility classes.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_case_studies_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "Used when Source is All Case Studies.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_case_studies_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Title"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_case_studies_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Used when Source is All Case Studies.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_case_studies_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -4798,6 +5217,13 @@
                 "operator": "==",
                 "value": "finance_product"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "case_study"
+            }
         ]
     ],
     "menu_order": 0,
@@ -4810,5 +5236,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782291365
+    "modified": 1782297005
 }
