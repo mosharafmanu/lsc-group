@@ -377,7 +377,7 @@ h6,.h6-style {
 	.columns-3,
 	.columns-4,
 	.columns-5 {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 @media only screen and (max-width: 767px) {
@@ -1094,7 +1094,7 @@ h6,.h6-style {
 	line-height: 150%;
     border-radius: .375rem;
 	letter-spacing: 0.009rem;
-    border: .125rem solid transparent;
+    border: 1px solid transparent;
     transition: all var(--lsc-transition);
     cursor: pointer;
     text-align: center;
@@ -1128,12 +1128,12 @@ h6,.h6-style {
 .btn-outline {
     background: transparent;
     color: var(--lsc-color-primary);
-    border-color: var(--lsc-color-light);
+    border-color: var(--lsc-color-accent);
 }
 .btn-outline:hover {
-    background: var(--lsc-color-primary);
-    color: var(--lsc-color-light);
-    border-color: var(--lsc-color-primary);
+    background: var(--lsc-color-accent);
+    color: var(--lsc-color-primary);
+    border-color: var(--lsc-color-accent);
 }
 
 /* ── Text link: no background or border, just styled text */
