@@ -995,11 +995,17 @@
 	justify-content: center;
 	text-align: center;
 	text-decoration: none;
+  transition: 0.3s all ease;
+}
+.broker-callout__chips a:hover {
+  color: var(--lsc-color-white);
+  background-color: var(--lsc-color-primary);
 }
 .broker-callout__chips {
-  display: flex;
-  column-gap: 1rem;
-  row-gap: 1rem;
+	display: flex;
+	column-gap: 1rem;
+	row-gap: 1rem;
+	flex-wrap: wrap;
 }
 @media only screen and (max-width: 1199px) {
   .broker-callout__card {
@@ -1027,7 +1033,6 @@
   }
   .broker-callout__chips {
 	  margin-top: 2rem;
-    flex-wrap: wrap;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -1040,11 +1045,7 @@
   }
  .broker-callout__chips {
 	 row-gap: 1.25rem;
-	 display:grid;
-   grid-template-columns: 1fr 1fr;
-  }
-  .broker-callout__chip:last-child {
-	grid-column: span 2;
+   flex-direction: column;
   }
   .broker-callout__figure {
 	 height: 18.75rem;
