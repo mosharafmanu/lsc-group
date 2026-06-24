@@ -394,6 +394,58 @@
 
 
 // ─────────────────────────────────────────────────────────────────
+// FAQ ACCORDION
+// jQuery slide-toggle; each item opens/closes independently.
+// Isolated in its own ready handler so unrelated scripts can't block it.
+// Icon swap (plus/minus) is driven by .is-open / aria-expanded (CSS),
+// with a JS display fallback so it still works before that CSS lands.
+// ─────────────────────────────────────────────────────────────────
+
+( function ( $ ) {
+	'use strict';
+
+	$( function () {
+
+		const $items = $( '.faqs__item' );
+		if ( ! $items.length ) return;
+
+		// Start fully closed regardless of any markup/CSS state.
+		$items.each( function () {
+			const $item   = $( this );
+			const $button = $item.find( '.faqs__question' );
+			const $panel  = $item.find( '.faqs__answer' );
+
+			$item.removeClass( 'is-open' );
+			$button.attr( 'aria-expanded', 'false' );
+			$panel.removeAttr( 'hidden' ).hide();
+			$item.find( '.faqs__icon-minus' ).hide();
+		} );
+
+		// Delegated so it survives any DOM re-render.
+		$( document ).on( 'click', '.faqs__question', function ( e ) {
+			e.preventDefault();
+
+			const $button = $( this );
+			const $item   = $button.closest( '.faqs__item' );
+			const $panel  = $item.find( '.faqs__answer' );
+			const isOpen  = $button.attr( 'aria-expanded' ) === 'true';
+
+			$button.attr( 'aria-expanded', isOpen ? 'false' : 'true' );
+			$item.toggleClass( 'is-open', ! isOpen );
+
+			// Icon fallback (CSS may also handle this).
+			$item.find( '.faqs__icon-plus' ).toggle( isOpen );
+			$item.find( '.faqs__icon-minus' ).toggle( ! isOpen );
+
+			$panel.stop( true, true ).slideToggle( 300 );
+		} );
+
+	} );
+
+} )( jQuery );
+
+
+// ─────────────────────────────────────────────────────────────────
 // VIDEO AUTOPLAY ON SCROLL
 // Plays/pauses .autoplay-video containers on intersection.
 // Kept outside jQuery wrapper — no jQuery dependency needed.

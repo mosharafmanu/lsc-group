@@ -3391,6 +3391,22 @@
                             "endpoint": 0
                         },
                         {
+                            "key": "field_contact_background_style",
+                            "label": "Background Style",
+                            "name": "background_style",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Light is the default beige background. Dark uses the dark page background with light text.",
+                            "choices": {
+                                "light": "Light",
+                                "dark": "Dark"
+                            },
+                            "default_value": "light",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
                             "key": "field_contact_title_lines",
                             "label": "Title Lines",
                             "name": "title_lines",
@@ -4074,6 +4090,679 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_feature_columns": {
+                    "key": "layout_feature_columns",
+                    "name": "feature_columns",
+                    "label": "Feature Columns (3-Column)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_feature_columns_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_feature_columns_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": "About Us"
+                        },
+                        {
+                            "key": "field_feature_columns_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_columns_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_feature_columns_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "LOREM IPSUM DOLOR SIT AMET CONSECTETUR.",
+                                            "parent_repeater": "field_feature_columns_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_feature_columns_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_feature_columns_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_feature_columns_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_feature_columns_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Main body copy for the left column.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_feature_columns_features",
+                            "label": "Checklist",
+                            "name": "features",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Bullet/check list items shown below the body copy.",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 10,
+                            "button_label": "Add Item",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_columns_feature_label",
+                                    "label": "Label",
+                                    "name": "label",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Bespoke financial structures",
+                                    "parent_repeater": "field_feature_columns_features"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_feature_columns_cards_tab",
+                            "label": "Info Cards",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_feature_columns_info_cards",
+                            "label": "Info Cards",
+                            "name": "info_cards",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Stacked cards in the middle column. Each card has a title and a short description.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Card",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_columns_info_card_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Lorem ipsum dolor",
+                                    "parent_repeater": "field_feature_columns_info_cards"
+                                },
+                                {
+                                    "key": "field_feature_columns_info_card_description",
+                                    "label": "Description",
+                                    "name": "description",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "rows": 3,
+                                    "new_lines": "",
+                                    "parent_repeater": "field_feature_columns_info_cards"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_feature_columns_aside_tab",
+                            "label": "Highlight Card",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_feature_columns_card_title",
+                            "label": "Card Title",
+                            "name": "card_title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Heading inside the highlighted (dark) card.",
+                            "placeholder": "Lorem ipsum dolor"
+                        },
+                        {
+                            "key": "field_feature_columns_card_description",
+                            "label": "Card Description",
+                            "name": "card_description",
+                            "type": "textarea",
+                            "required": 0,
+                            "instructions": "Short copy inside the card.",
+                            "rows": 4,
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_feature_columns_card_buttons",
+                            "label": "Card Buttons",
+                            "name": "card_buttons",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Buttons inside the card. Use Primary for the solid button (e.g. Email us) and Outline for the secondary (e.g. a phone number, link to tel:...).",
+                            "layout": "table",
+                            "min": 0,
+                            "max": 3,
+                            "button_label": "Add Button",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_columns_card_button_link",
+                                    "label": "Button Link",
+                                    "name": "button_link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "parent_repeater": "field_feature_columns_card_buttons"
+                                },
+                                {
+                                    "key": "field_feature_columns_card_button_style",
+                                    "label": "Button Style",
+                                    "name": "button_style",
+                                    "type": "button_group",
+                                    "required": 0,
+                                    "choices": {
+                                        "btn-primary": "Primary",
+                                        "btn-outline": "Outline",
+                                        "btn-secondary": "Secondary"
+                                    },
+                                    "default_value": "btn-primary",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "layout": "horizontal",
+                                    "parent_repeater": "field_feature_columns_card_buttons"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_feature_columns_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "Image shown below the highlighted card in the right column.",
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_feature_cards": {
+                    "key": "layout_feature_cards",
+                    "name": "feature_cards",
+                    "label": "Feature Cards (Icon Grid)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_feature_cards_header_tab",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_feature_cards_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_cards_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_feature_cards_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "FLEXIBLE FUNDING FOR PROPERTY DEVELOPMENT",
+                                            "parent_repeater": "field_feature_cards_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_feature_cards_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_feature_cards_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_feature_cards_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_feature_cards_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_feature_cards_columns",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Number of cards per row on desktop. Collapses responsively on smaller screens.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-4",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_feature_cards_cards_tab",
+                            "label": "Cards",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_feature_cards_cards",
+                            "label": "Cards",
+                            "name": "cards",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Each card shows an icon, a title and a short description.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 12,
+                            "button_label": "Add Card",
+                            "sub_fields": [
+                                {
+                                    "key": "field_feature_cards_card_icon",
+                                    "label": "Icon",
+                                    "name": "icon",
+                                    "type": "image",
+                                    "required": 0,
+                                    "instructions": "Optional. Upload an SVG/PNG icon. Leave empty to use the default circle-check icon.",
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "thumbnail",
+                                    "mime_types": "svg,png",
+                                    "parent_repeater": "field_feature_cards_cards"
+                                },
+                                {
+                                    "key": "field_feature_cards_card_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Fast Decision Making",
+                                    "parent_repeater": "field_feature_cards_cards"
+                                },
+                                {
+                                    "key": "field_feature_cards_card_description",
+                                    "label": "Description",
+                                    "name": "description",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "rows": 3,
+                                    "new_lines": "",
+                                    "parent_repeater": "field_feature_cards_cards"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_process_steps": {
+                    "key": "layout_process_steps",
+                    "name": "process_steps",
+                    "label": "Process Steps",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_process_steps_header_tab",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_process_steps_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_process_steps_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_process_steps_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "HOW THE PROCESS WORKS",
+                                            "parent_repeater": "field_process_steps_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_process_steps_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_process_steps_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_process_steps_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_process_steps_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Optional intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_process_steps_columns",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Number of steps per row on desktop. Collapses responsively on smaller screens.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-4",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_process_steps_steps_tab",
+                            "label": "Steps",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_process_steps_steps",
+                            "label": "Steps",
+                            "name": "steps",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Step numbers (1, 2, 3...) are generated automatically from the order of these rows.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 8,
+                            "button_label": "Add Step",
+                            "sub_fields": [
+                                {
+                                    "key": "field_process_steps_step_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Initial Consultation",
+                                    "parent_repeater": "field_process_steps_steps"
+                                },
+                                {
+                                    "key": "field_process_steps_step_description",
+                                    "label": "Description",
+                                    "name": "description",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "rows": 3,
+                                    "new_lines": "",
+                                    "parent_repeater": "field_process_steps_steps"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_faqs": {
+                    "key": "layout_faqs",
+                    "name": "faqs",
+                    "label": "FAQs (Accordion)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_faqs_header_tab",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_faqs_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_faqs_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_faqs_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "FREQUENTLY ASKED QUESTIONS",
+                                            "parent_repeater": "field_faqs_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_faqs_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_faqs_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_faqs_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_faqs_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Optional intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_faqs_items_tab",
+                            "label": "Questions",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_faqs_faqs",
+                            "label": "FAQs",
+                            "name": "faqs",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Each row is a question that expands to reveal its answer.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 30,
+                            "button_label": "Add Question",
+                            "sub_fields": [
+                                {
+                                    "key": "field_faqs_question",
+                                    "label": "Question",
+                                    "name": "question",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "What is the maximum loan-to-value (LTV) available?",
+                                    "parent_repeater": "field_faqs_faqs"
+                                },
+                                {
+                                    "key": "field_faqs_answer",
+                                    "label": "Answer",
+                                    "name": "answer",
+                                    "type": "wysiwyg",
+                                    "required": 0,
+                                    "instructions": "Shown when the question is expanded.",
+                                    "tabs": "all",
+                                    "toolbar": "basic",
+                                    "media_upload": 0,
+                                    "parent_repeater": "field_faqs_faqs"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -4121,5 +4810,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782282558
+    "modified": 1782291365
 }

@@ -96,6 +96,22 @@ Add the layout to a page in WP Admin, fill in content, view the frontend.
 
 ---
 
+## ⚠️ Hand-editing `acf-json/*.json` — bump `"modified"` or no "Sync available"
+
+ACF Local JSON decides whether to show **Custom Fields → Field Groups → "Sync available"** by comparing the JSON file's top-level `"modified"` Unix timestamp against the field group's timestamp in the database. It does **not** diff the actual fields.
+
+So when you edit a JSON file **by hand** (adding/changing fields outside the WP admin), ACF leaves `"modified"` untouched, the two timestamps still match, and **no sync is offered** — even though the fields differ. The admin looks like nothing changed.
+
+**Fix:** after any hand-edit to an `acf-json/*.json` file, bump its `"modified"` value to a current/future Unix timestamp (it just has to be greater than the DB's). Then WP Admin → Custom Fields → Field Groups shows "Sync available" for that group → click **Sync**.
+
+```
+"modified": 1782290070   ← set greater than the value last written by an admin Save
+```
+
+(When you edit fields *through the WP admin* instead, ACF bumps `"modified"` for you on Save — this only bites on manual file edits, which is the normal Claude/AI workflow here.)
+
+---
+
 ## Section Template Pattern
 
 Every section template should follow the same structure:

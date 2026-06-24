@@ -22,11 +22,20 @@ Two 2026-06-24 batches are committed and pushed; **`main`, `faisal`, and `imran`
   - `acf-json/group_finance_product.json` (NEW) — product **Key Facts** meta (`product_facts` repeater) on the `finance_product` CPT.
   - `inc/helper-functions/acf-field-visibility.php` (NEW) — `lsc_get_admin_post_type()` + filter that hides the facts-bar toggle off Finance Products.
   - `acf-json/group_site_settings.json` + `inc/helper-functions/site-settings.php` — Opening Hours (staged for the deferred contact panel).
-- `stats_section.php` / `contact_section.php` are **untouched** — general-purpose, not the overlap sections.
+- `stats_section.php` is **untouched** — general-purpose, not an overlap section.
+
+### `contact_section` — Background Style (light/dark) — session 3
+The general `contact_section` (the "WE ARE ALWAYS LOOKING FOR BROKERS" enquiry block) now works on **both** the light homepage background and the dark inner-page background via one toggle — same section, no duplicate layout.
+- ACF: new **Background Style** button-group (`background_style`, choices `light`/`dark`, default `light`) under the Section Header tab in `group_flexible_content.json`. Existing rows default to Light → homepage unaffected.
+- Template (`contact_section.php`): emits a modifier class `.contact-section--bg-light` / `.contact-section--bg-dark` on the `<section>`.
+- **CSS is Faisal's:** `.contact-section--bg-dark` is the hook for the dark look (dark page bg, orange "GET IN TOUCH" heading, light body/label text). Markup/class are in place; dark visual rules to be added in `faisal.css`.
+- ⚠️ Sync needed: `group_flexible_content.json` `"modified"` was bumped — Custom Fields → Sync to pick up the new field.
 
 **After pulling: WP Admin → Custom Fields → Sync** (Page Builder changed + new *Finance Product Details* group).
 
 After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
+
+> ⚠️ **Hand-edited JSON won't show "Sync available" unless you bump `"modified"`.** ACF compares the JSON file's top-level `"modified"` timestamp to the group's DB timestamp; a manual file edit leaves it unchanged so no sync is offered. After editing any `acf-json/*.json` by hand, set `"modified"` to a current Unix timestamp (greater than the last admin-Save value), then Sync. Full note in `.ai/ACF-PATTERNS.md`.
 
 ## Inner-page hero system (session 2)
 
@@ -101,6 +110,10 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 8 | `content_card_5050` | `content_card_5050.php` | **NEW** — content + checklist beside a card + image |
 | 9 | `timeline_section` | `timeline_section.php` | **NEW** — auto-numbered journey steps |
 | 10 | `cta_section` | `cta_section.php` | **NEW** — pulls from Global CTA by default |
+| 11 | `feature_columns` | `feature_columns.php` | **NEW** — 3-column: intro content + info-card stack + dark action card over image |
+| 12 | `feature_cards` | `feature_cards.php` | **NEW** — centered header + icon/title/copy card grid (2/3/4 cols) |
+| 13 | `process_steps` | `process_steps.php` | **NEW** — centered header + auto-numbered step row (2/3/4 cols) |
+| 14 | `faqs` | `faqs.php` | **NEW** — centered header + jQuery slide-toggle accordion (plus/minus) |
 
 ## New sections built this session
 
@@ -119,6 +132,47 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 
 ### `timeline_section`
 - `eyebrow`, `title_lines`, `description`, `items` repeater (`year`, `title`, `description`). Step numbers (1,2,3…) auto-increment from the loop. Semantic `<ol>`. Connector line + number circles via CSS.
+
+### `feature_columns` — Feature Columns (3-Column) — session 3
+A 3-column section (screenshot #23): **left** intro content, **middle** a stack of small white info-cards, **right** a highlighted dark action card over an image. Built by extending the `content_card_5050` pattern with a middle info-cards repeater.
+- ACF layout `feature_columns` ("Feature Columns (3-Column)") in `group_flexible_content.json`, three tabs:
+  - **Content:** `eyebrow`, `title_lines → line_parts` (text + highlight), `description` (WYSIWYG), `features` checklist.
+  - **Info Cards:** `info_cards` repeater (`title` + `description`) — the middle stack.
+  - **Highlight Card:** `card_title`, `card_description`, `card_buttons` (link + style: primary/outline/secondary — design shows solid "Email us" + outline phone), `image` (sits below the card).
+- Template `feature_columns.php` — auto-dispatched by `flexible-content.php` (no dispatcher edit). Title is `<h2>`. Uses `lsc_render_button()` (`show_icon => false`) and `lsc_render_responsive_picture()`.
+- **BEM (CSS is Faisal's):** `.feature-columns` › `__inner` › `__content` (`__eyebrow`, `__title`/`__title-line`/`__title-part` + `color-lsc-accent`, `__description`, `__features`/`__feature`) + `__cards` (`__info-card` › `__info-card-title` + `__info-card-description`) + `__aside` (`__card` › `__card-title`/`__card-description`/`__card-buttons` + `__figure`/`__image`). The dark highlight card = `.feature-columns__card`; the three-column grid + dark card styling are Faisal's.
+- ⚠️ Sync needed: `"modified"` bumped — Custom Fields → Sync to pick up the new layout.
+
+### `feature_cards` — Feature Cards (Icon Grid) — session 3
+Centered header + a responsive grid of icon/title/copy cards (screenshot #24).
+- ACF layout `feature_cards` ("Feature Cards (Icon Grid)") in `group_flexible_content.json`, two tabs:
+  - **Header:** `title_lines → line_parts` (text + highlight), `description` (WYSIWYG), `columns` button-group (`columns-2/3/4`, default `columns-4`).
+  - **Cards:** `cards` repeater — `icon` (optional image, SVG/PNG), `title`, `description`.
+- Template `feature_cards.php` — auto-dispatched. Grid reuses `card-grid card-grid--center-last-row columns-N` (same orphan-centering + responsive collapse as the finance grid). Cards titles are `<h3>`.
+- **Icon:** each card defaults to a built-in **`check-circle`** icon (added to `lsc_get_icon_svg()` in `inc/helper-functions/site-settings.php`, `currentColor`-based so the accent comes from CSS). An uploaded per-card SVG/PNG overrides it via `lsc_render_icon()`.
+- The small orange divider above the heading is a markup hook `.feature-cards__divider` (decorative, styled in CSS).
+- **BEM (CSS is Faisal's):** `.feature-cards` › `__header` (`__divider`, `__title`/`__title-line`/`__title-part` + `color-lsc-accent`, `__description`) + `__grid` (`card-grid…`) › `__card` › `__icon` (`color-lsc-accent`, `__icon-svg`) + `__card-title` + `__card-description`. White cards on the page (cream) background; no section bg utility applied.
+- ⚠️ Sync needed: `"modified"` bumped — Custom Fields → Sync.
+
+### `process_steps` — Process Steps — session 3
+Centered header + a row of auto-numbered steps (screenshot #25).
+- ACF layout `process_steps` ("Process Steps") in `group_flexible_content.json`, two tabs:
+  - **Header:** `title_lines → line_parts` (text + highlight), `description` (WYSIWYG, optional), `columns` button-group (`columns-2/3/4`, default `columns-4`).
+  - **Steps:** `steps` repeater — `title` + `description` only. **No number field** — the badge number comes from the loop index (`$index + 1`), like `timeline_section`.
+- Template `process_steps.php` — auto-dispatched. Semantic `<ol>`/`<li>`; grid reuses `card-grid card-grid--center-last-row columns-N`. Step titles are `<h3>`. The orange divider above the heading is a `.process-steps__divider` hook.
+- **BEM (CSS is Faisal's):** `.process-steps` › `__header` (`__divider`, `__title`/`__title-line`/`__title-part` + `color-lsc-accent`, `__description`) + `__grid` (`card-grid…`, an `<ol>`) › `__step` (`<li>`) › `__number` (the rounded badge) + `__step-title` + `__step-description`. Number badge styling (rounded white tile, orange numeral) is Faisal's.
+- ⚠️ Sync needed: `"modified"` bumped — Custom Fields → Sync.
+
+### `faqs` — FAQs (Accordion) — session 3
+Centered header + a jQuery slide-toggle accordion (screenshot #26).
+- ACF layout `faqs` ("FAQs (Accordion)") in `group_flexible_content.json`, two tabs:
+  - **Header:** `title_lines → line_parts`, `description` (WYSIWYG, optional).
+  - **Questions:** `faqs` repeater — `question` (text) + `answer` (WYSIWYG).
+- Template `faqs.php` — auto-dispatched. Accessible disclosure pattern: each question is a `<button>` (`aria-expanded`, `aria-controls`) inside an `<h3>`; the answer panel is a `role="region"` with `hidden` until opened. A `static $faq_section_index` keeps aria ids unique when multiple FAQ sections share a page.
+- **Icons:** new `assets/svgs/minus.php` (created — the plus with only the horizontal stroke). Each item renders **both** `assets/svgs/plus` (`.faqs__icon-plus`) and `assets/svgs/minus` (`.faqs__icon-minus`); the open/closed swap is driven by `.faqs__item.is-open` / the button's `aria-expanded` — **Faisal's CSS must show minus / hide plus when open** (until then both icons show). The plus SVG uses a hardcoded `#1A1614` @ 0.4 opacity stroke (from the existing `plus.php`).
+- **JS:** accordion logic added to `assets/js/scripts.js` (inside the existing jQuery `document.ready`), delegated on `[data-faq-accordion]` → `.faqs__question`. `slideDown`/`slideUp` (300ms), each item toggles **independently** (siblings stay open). Toggles `aria-expanded`, `.is-open`, and the panel's `hidden` prop. No new JS file/enqueue — rides the already-enqueued `lsc-group-scripts`.
+- **BEM (CSS is Faisal's):** `.faqs` › `__header` (`__title`/`__title-line`/`__title-part`, `__description`) + `__list[data-faq-accordion]` › `__item`(`.is-open`) › `__question-heading` ‹h3› › `__question` ‹button› (`__question-text` + `__icon` › `__icon-plus`/`__icon-minus`) + `__answer`‹region, hidden› › `__answer-inner`.
+- ⚠️ Sync needed: `"modified"` bumped — Custom Fields → Sync.
 
 ### `cta_section` + Global CTA
 - **Global CTA lives in Site Settings → "Global CTA" tab** (`global_cta_eyebrow`, `global_cta_title_lines`, `global_cta_description`, `global_cta_buttons`, `global_cta_background`).
