@@ -1397,7 +1397,38 @@
 .content-card-5050__figure img {
   border-radius: .75rem;
 }
-
+.btn-primary.content-card-5050__card-button:hover {
+  color: var(--lsc-color-accent);
+  background-color: var(--lsc-color-white);
+}
+.site-btn.btn-outline.content-card-5050__card-button:hover {
+  color: var(--lsc-color-primary);
+}
+@media only screen and (max-width:1199px) {
+.content-card-5050__inner {
+	column-gap: 6rem;
+}
+}
+@media only screen and (max-width: 991px) {
+.content-card-5050__inner {
+	column-gap: 3rem;
+}
+}
+@media only screen and (max-width:767px) {
+.content-card-5050__inner {
+  grid-template-columns: 1fr;
+	row-gap: 1.875rem;
+}
+.content-card-5050__description {
+	margin-top: 1rem;
+}
+.lsc-list.content-card-5050__features {
+	margin-top: 1.5rem;
+}
+.content-card-5050__card-buttons .site-btn {
+	font-size: 1rem;
+}
+}
  /*
 ===============================================
  Footer Style Start

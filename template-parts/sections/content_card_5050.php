@@ -28,7 +28,7 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-100 pb-lg-110">
+<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-100">
 	<div class="content-card-5050__inner card-<?php echo esc_attr( sanitize_html_class( $card_position ) ); ?> lsc-container layout-padding">
 		<div class="content-card-5050__content">
 			<?php if ( $eyebrow ) : ?>
