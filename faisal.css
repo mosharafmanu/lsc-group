@@ -1342,7 +1342,7 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 12.5rem;
 }
-/* .content-card-5050__content{
+ /* .content-card-5050__content{
     grid-area: content;
 }
 .content-card-5050__aside{
@@ -1353,7 +1353,7 @@
 }
 .content-card-5050__inner .card-right{
     grid-template-areas: "media content";
-} */
+}  */
 .content-card-5050__inner .content-card-5050__title {
   margin-top: 1.25rem;
 }
