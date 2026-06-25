@@ -388,6 +388,44 @@
 			} );
 		} );
 
+		// ─────────────────────────────────────────────────────────────
+		// PRODUCT HERO — FACTS OVERLAP
+		// Pulls the .inner-hero__facts-wrap up over the hero by the
+		// rendered height of its .inner-hero__facts card, so the overlap
+		// always equals the card height regardless of content/columns.
+		// Recalculated on load and resize. Desktop only (>991px); on
+		// mobile the inline margin is cleared so the CSS fallback wins.
+		// ─────────────────────────────────────────────────────────────
+
+		const $heroFactsWraps = $( '.inner-hero__facts-wrap' );
+
+		function updateHeroFactsOverlap() {
+			if ( ! $heroFactsWraps.length ) return;
+
+			$heroFactsWraps.each( function () {
+				const $wrap = $( this );
+				const $card = $wrap.find( '.inner-hero__facts' );
+				if ( ! $card.length ) return;
+
+				if ( window.innerWidth <= 991 ) {
+					$wrap.css( 'margin-top', '' );
+					return;
+				}
+
+				$wrap.css( 'margin-top', ( -$card.outerHeight() ) + 'px' );
+			} );
+		}
+
+		updateHeroFactsOverlap();
+
+		let heroFactsResizeTimer;
+		$( window ).on( 'resize', function () {
+			clearTimeout( heroFactsResizeTimer );
+			heroFactsResizeTimer = setTimeout( updateHeroFactsOverlap, 100 );
+		} );
+
+		$( window ).on( 'load', updateHeroFactsOverlap );
+
 	} ); // end document.ready
 
 } )( jQuery );
