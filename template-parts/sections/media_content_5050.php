@@ -32,8 +32,10 @@ $section_classes = [
 	'media-content-5050',
 	'media-content-5050--media-' . sanitize_html_class( $media_position ),
 	// Default top gap between sections (managed here, not by the editor).
-	'mt-50',
-	'mt-lg-90',
+	'pt-50',
+	'pb-50',
+	'pt-lg-90',
+	'pb-lg-90'
 ];
 
 // Background is a toggle; Faisal's CSS gives this modifier its colour + padding.
@@ -45,7 +47,7 @@ if ( $enable_background ) {
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<div class="media-content-5050__grid">
-			<div class="media-content-5050__media">
+			<div class="media-content-5050__media media">
 				<?php if ( $is_video && function_exists( 'lsc_render_video' ) ) : ?>
 					<?php
 					$video_behavior = $video['video_behavior'] ?? 'autoplay';

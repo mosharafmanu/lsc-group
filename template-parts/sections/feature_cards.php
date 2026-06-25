@@ -25,7 +25,7 @@ $grid_classes = [
 ];
 ?>
 
-<section class="feature-cards pt-50 pb-50 pt-lg-90 pb-lg-90">
+<section class="feature-cards pt-50 pb-50 pt-lg-90 pb-lg-100">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="feature-cards__header text-center">
@@ -95,7 +95,7 @@ $grid_classes = [
 						</span>
 
 						<?php if ( $card_title ) : ?>
-							<h3 class="feature-cards__card-title"><?php echo esc_html( $card_title ); ?></h3>
+							<h5 class="feature-cards__card-title"><?php echo esc_html( $card_title ); ?></h5>
 						<?php endif; ?>
 
 						<?php if ( $card_description ) : ?>

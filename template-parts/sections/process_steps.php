@@ -86,7 +86,7 @@ $grid_classes = [
 						<span class="process-steps__number" aria-hidden="true"><?php echo esc_html( $index + 1 ); ?></span>
 
 						<?php if ( $step_title ) : ?>
-							<h3 class="process-steps__step-title"><?php echo esc_html( $step_title ); ?></h3>
+							<h5 class="process-steps__step-title"><?php echo esc_html( $step_title ); ?></h5>
 						<?php endif; ?>
 
 						<?php if ( $step_description ) : ?>
