@@ -5,9 +5,10 @@
  * @package lsc-group
  */
 
-$stats   = get_sub_field( 'stats' );
-$style   = get_sub_field( 'style' ) ?: 'band';
-$columns = get_sub_field( 'columns' ) ?: 'columns-3';
+$stats      = get_sub_field( 'stats' );
+$style      = get_sub_field( 'style' ) ?: 'band';
+$columns    = get_sub_field( 'columns' ) ?: 'columns-3';
+$background  = get_sub_field( 'background_color' );
 
 if ( ! $stats || ! is_array( $stats ) ) {
 	return;
@@ -15,14 +16,20 @@ if ( ! $stats || ! is_array( $stats ) ) {
 
 $is_cards = 'cards' === $style;
 
+// Backward-compatible default for rows saved before the Background field existed:
+// band kept a subtle background, cards sat on the page background.
+if ( null === $background || '' === $background ) {
+	$background = $is_cards ? 'none' : 'subtle';
+}
+
 $section_classes = [
 	'stats-section',
 	'stats-section--' . ( $is_cards ? 'cards' : 'band' ),
 ];
 
-// Band keeps its subtle background; cards sit on the page background.
-if ( ! $is_cards ) {
-	$section_classes[] = 'bg-lsc-subtle';
+// Background colour utility (Faisal's CSS); 'none' = sit on the page background.
+if ( 'none' !== $background ) {
+	$section_classes[] = 'bg-lsc-' . sanitize_html_class( $background );
 }
 
 $grid_classes = [
