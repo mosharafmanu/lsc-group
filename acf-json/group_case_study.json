@@ -1,0 +1,123 @@
+{
+    "key": "group_case_study",
+    "title": "Case Study Details",
+    "fields": [
+        {
+            "key": "field_case_study_summary_tab",
+            "label": "Case Summary",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "Shown in the \"Case Summary\" sidebar on the single case study page. Leave a field blank to hide that row.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_case_study_client_type",
+            "label": "Client Type",
+            "name": "client_type",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "e.g. Mid-Market Enterprise",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_case_study_sector",
+            "label": "Sector",
+            "name": "sector",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "e.g. Manufacturing & Logistics",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_case_study_funding_requirement",
+            "label": "Funding Requirement",
+            "name": "funding_requirement",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "e.g. Acquisition Finance",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_case_study_outcome",
+            "label": "Outcome",
+            "name": "outcome",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "e.g. Completed within timeline",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "case_study"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Structured Case Summary shown in the sidebar of a single case study.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1782358408
+}

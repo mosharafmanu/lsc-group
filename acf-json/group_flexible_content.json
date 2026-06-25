@@ -1914,6 +1914,39 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_stats_section_style",
+                            "label": "Style",
+                            "name": "style",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Band = stat strip on a subtle background. Cards = white bordered cards (used on case studies).",
+                            "choices": {
+                                "band": "Band",
+                                "cards": "Cards"
+                            },
+                            "default_value": "band",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_stats_section_columns",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Number of stats per row on desktop.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
                             "key": "field_stats_section_stats",
                             "label": "Stats",
                             "name": "stats",
@@ -5182,6 +5215,790 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_media_full": {
+                    "key": "layout_media_full",
+                    "name": "media_full",
+                    "label": "Full-Width Media",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_media_full_media_type",
+                            "label": "Media Type",
+                            "name": "media_type",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show an image or a video. Renders as one full-width rounded media block.",
+                            "choices": {
+                                "image": "Image",
+                                "video": "Video"
+                            },
+                            "default_value": "image",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_media_full_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "",
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "medium",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_full_media_type",
+                                        "operator": "==",
+                                        "value": "image"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "key": "field_media_full_video",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "group",
+                            "required": 0,
+                            "instructions": "Video media for this section.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_media_full_media_type",
+                                        "operator": "==",
+                                        "value": "video"
+                                    }
+                                ]
+                            ],
+                            "layout": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_media_full_video_source",
+                                    "label": "Video Source",
+                                    "name": "video_source",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "self_host": "Self-Hosted (WordPress Media)",
+                                        "youtube": "YouTube",
+                                        "vimeo": "Vimeo",
+                                        "cdn": "CDN/External URL"
+                                    },
+                                    "default_value": "self_host",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_self_host_file",
+                                    "label": "Video File",
+                                    "name": "video_self_host_file",
+                                    "type": "file",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "mime_types": "mp4,webm",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_self_host_poster",
+                                    "label": "Poster Image",
+                                    "name": "video_self_host_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "self_host"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_youtube_url",
+                                    "label": "YouTube URL",
+                                    "name": "video_youtube_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "youtube"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://www.youtube.com/watch?v=...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_vimeo_url",
+                                    "label": "Vimeo MP4 URL",
+                                    "name": "video_vimeo_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://player.vimeo.com/...",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_vimeo_poster",
+                                    "label": "Vimeo Poster Image",
+                                    "name": "video_vimeo_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "vimeo"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_cdn_url",
+                                    "label": "CDN Video URL",
+                                    "name": "video_cdn_url",
+                                    "type": "url",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "placeholder": "https://cdn.example.com/video.mp4",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_cdn_poster",
+                                    "label": "CDN Poster Image",
+                                    "name": "video_cdn_poster",
+                                    "type": "image",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_source",
+                                                "operator": "==",
+                                                "value": "cdn"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "wrapper": {
+                                        "class": "",
+                                        "id": "",
+                                        "width": "50"
+                                    }
+                                },
+                                {
+                                    "key": "field_media_full_video_behavior",
+                                    "label": "Behavior",
+                                    "name": "video_behavior",
+                                    "type": "select",
+                                    "required": 0,
+                                    "choices": {
+                                        "autoplay": "Autoplay",
+                                        "hover": "Hover",
+                                        "onclick-popup": "Onclick Popup"
+                                    },
+                                    "default_value": "autoplay",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "How the video plays. Autoplay = muted looping background video that pauses when off-screen. Hover = plays while the mouse is over it, resets on leave. Onclick Popup = shows a play button and opens the video in a lightbox (sound allowed)."
+                                },
+                                {
+                                    "key": "field_media_full_video_autoplay",
+                                    "label": "Autoplay",
+                                    "name": "video_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing as soon as the section loads. Browsers force it to be muted. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_full_video_autoplay_on_scroll",
+                                    "label": "Autoplay On Scroll",
+                                    "name": "video_autoplay_on_scroll",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Only start when the video scrolls into view (50% visible) and pause when it leaves. (Autoplay behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_full_video_controls",
+                                    "label": "Controls",
+                                    "name": "video_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_behavior",
+                                                "operator": "==",
+                                                "value": "autoplay"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the custom play/pause and mute buttons overlaid on the video. (Autoplay behavior, not available for YouTube.)"
+                                },
+                                {
+                                    "key": "field_media_full_video_muted",
+                                    "label": "Muted",
+                                    "name": "video_muted",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Mute the audio. Note: Autoplay and Hover are always muted by the browser regardless of this setting."
+                                },
+                                {
+                                    "key": "field_media_full_video_loop",
+                                    "label": "Loop",
+                                    "name": "video_loop",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Automatically restart the video from the beginning when it ends."
+                                },
+                                {
+                                    "key": "field_media_full_video_popup_autoplay",
+                                    "label": "Popup Autoplay",
+                                    "name": "video_popup_autoplay",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Start playing automatically when the popup opens. (Onclick Popup behavior only.)"
+                                },
+                                {
+                                    "key": "field_media_full_video_popup_controls",
+                                    "label": "Popup Controls",
+                                    "name": "video_popup_controls",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "message": "",
+                                    "default_value": 1,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_media_full_video_behavior",
+                                                "operator": "==",
+                                                "value": "onclick-popup"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "instructions": "Show the native video controls inside the popup. (Onclick Popup behavior only.)"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_rich_text": {
+                    "key": "layout_rich_text",
+                    "name": "rich_text",
+                    "label": "Rich Text",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_rich_text_content",
+                            "label": "Content",
+                            "name": "content",
+                            "aria-label": "",
+                            "type": "wysiwyg",
+                            "instructions": "Free-form rich text. Use the editor's headings, lists, links and formatting as needed.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_quote_block": {
+                    "key": "layout_quote_block",
+                    "name": "quote_block",
+                    "label": "Quote Block",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_quote_block_source",
+                            "label": "Source",
+                            "name": "source",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Manual = type a one-off quote into this section (recommended for a case study's own quote). Testimonial Library = reuse a testimonial authored under the Testimonials menu.",
+                            "choices": {
+                                "manual": "Manual",
+                                "library": "Testimonial Library"
+                            },
+                            "default_value": "manual",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_quote_block_quote",
+                            "label": "Quote",
+                            "name": "quote",
+                            "type": "textarea",
+                            "required": 0,
+                            "instructions": "",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_quote_block_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "rows": 3,
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_quote_block_author_name",
+                            "label": "Author Name",
+                            "name": "author_name",
+                            "type": "text",
+                            "required": 0,
+                            "placeholder": "Mark Davies",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_quote_block_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            }
+                        },
+                        {
+                            "key": "field_quote_block_author_role",
+                            "label": "Author Role",
+                            "name": "author_role",
+                            "type": "text",
+                            "required": 0,
+                            "placeholder": "CEO, Manufacturing Group",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_quote_block_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            }
+                        },
+                        {
+                            "key": "field_quote_block_avatar",
+                            "label": "Avatar",
+                            "name": "avatar",
+                            "type": "image",
+                            "required": 0,
+                            "instructions": "Optional headshot. If empty, the author's initial is shown in a circle.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_quote_block_source",
+                                        "operator": "==",
+                                        "value": "manual"
+                                    }
+                                ]
+                            ],
+                            "return_format": "array",
+                            "library": "all",
+                            "preview_size": "thumbnail"
+                        },
+                        {
+                            "key": "field_quote_block_testimonial",
+                            "label": "Testimonial",
+                            "name": "testimonial",
+                            "type": "relationship",
+                            "required": 0,
+                            "instructions": "Pick one testimonial from the library.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_quote_block_source",
+                                        "operator": "==",
+                                        "value": "library"
+                                    }
+                                ]
+                            ],
+                            "post_type": [
+                                "testimonial"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": 1,
+                            "return_format": "object"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_downloads_section": {
+                    "key": "layout_downloads_section",
+                    "name": "downloads_section",
+                    "label": "Downloads",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_downloads_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_downloads_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_downloads_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional section heading (the page hero usually provides the main title).",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_downloads_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Optional intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_downloads_list_tab",
+                            "label": "Downloads",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_downloads_source",
+                            "label": "Source",
+                            "name": "download_source",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Show all published Downloads or manually select specific ones.",
+                            "choices": {
+                                "all": "All Downloads",
+                                "selected": "Selected Downloads"
+                            },
+                            "default_value": "all",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_downloads_selected",
+                            "label": "Selected Downloads",
+                            "name": "selected_downloads",
+                            "type": "relationship",
+                            "required": 0,
+                            "instructions": "Choose downloads and drag to set their display order.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_downloads_source",
+                                        "operator": "==",
+                                        "value": "selected"
+                                    }
+                                ]
+                            ],
+                            "post_type": [
+                                "download"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": "",
+                            "return_format": "object"
+                        },
+                        {
+                            "key": "field_downloads_posts_per_page",
+                            "label": "Number of Downloads",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "Used when Source is All Downloads. Leave empty to show all.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_downloads_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "default_value": "",
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "Show all"
+                        },
+                        {
+                            "key": "field_downloads_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "Used when Source is All Downloads.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_downloads_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Title"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_downloads_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "Used when Source is All Downloads.",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_downloads_source",
+                                        "operator": "==",
+                                        "value": "all"
+                                    }
+                                ]
+                            ],
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -5236,5 +6053,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782297005
+    "modified": 1782361088
 }

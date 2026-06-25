@@ -1,6 +1,6 @@
 # LSC Group Theme Handoff
 
-_Last updated: 2026-06-24 (session 3)._
+_Last updated: 2026-06-25 (session 4)._
 
 ## Current State
 
@@ -9,6 +9,61 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 - Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
 - Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below) — except the stacked-testimonials styles, written this session with explicit authorisation.
 - Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
+
+## 🔄 RESUME HERE (after shutdown) — session 4 end
+
+**Single Case Study page + Downloads CPT — DONE, committed and pushed.** `main`, `faisal`, `imran` are all aligned on GitHub at the session-4 commit (local working tree clean). Nothing in progress.
+
+**What session 4 delivered (all detailed below):**
+- **Single Case Study page** via a dedicated `single-case_study.php` template (full-width hero → two-column [cms left + Case Summary sidebar right] → template-rendered Related Case Studies → template-rendered Global CTA).
+- New cms sections for the case study left column: **`rich_text`** (body copy), **`stats_section` Cards style** (merged — was a short-lived `stat_cards`), **`quote_block`** (Manual / Testimonial Library). Plus **`media_full`** (reusable full-width media band).
+- New global **`apply_now_link`** (Site Settings → Global CTA) + `lsc_get_apply_now_link()` — the sidebar button.
+- **Case Study Details** group (`group_case_study.json`) — the sidebar meta.
+- Shared partials: `template-parts/cards/case-study-card.php` + `template-parts/cta-band.php` (both `case_studies_grid` / `cta_section` refactored to use them).
+- **Downloads:** new **`download` CPT** (library, like Testimonial) + `group_download.json` (subtitle + PDF) + **`downloads_section`** layout + `assets/svgs/download.php`.
+
+**Do these on any environment that pulls this commit (local already done except where noted):**
+1. **WP Admin → Custom Fields → Sync** — picks up: *Page Builder* (new layouts: `media_full`, `rich_text`, `quote_block`, `downloads_section`; `stats_section` Style/Columns; `cta_section` unchanged markup), *Site Settings* (Apply Now Link), and two **new groups** *Case Study Details* + *Download Details*.
+2. **Settings → Permalinks** flush (case study singles; `download`/`testimonial` are non-public).
+3. **Set Apply Now Link** + fill **Global CTA** in Site Settings.
+4. **Faisal:** `git pull` before his next `faisal.css` push. **CSS still to do** (BEM hooks emitted, unstyled): `.case-study-layout` two-column grid + nested-container reset + sticky `.case-summary` sidebar; `.rich-text`; `.stats-section--cards`; `.quote-block`; `.media-full`; `.downloads-section`/`.download-item`; `.case-studies-section--related`.
+5. Author **Downloads** (title + subtitle + PDF + order) and build the **Downloads page** (`inner_hero` + `downloads_section`); author **Case Study** posts.
+
+### `single-case_study.php` — the case study page skeleton (NEW, the agreed architecture)
+
+The single case study is **not** built from one mega-section. A dedicated `single-case_study.php` template (WP picks it up automatically for the `case_study` CPT) owns the skeleton and **runs the `cms` flexible content itself** (a custom loop, not the plain `lsc_flexible_content()` dispatcher) so it can split the sections:
+
+```
+HERO (inner_hero)        → full width (breaks out of the columns)
+┌──────────────────────────┬─────────────────┐
+│  rest of cms → LEFT col  │  Case Summary    │  ← two-column band
+│  (body / stats / quote / │  sidebar (right, │     sidebar = template,
+│   media, etc.)           │  sticky)         │     reads CPT meta + Apply Now
+└──────────────────────────┴─────────────────┘
+Related Case Studies + CTA → handled SEPARATELY (not in this loop — TBD)
+```
+
+**The loop's rule (locked with the user):**
+- **Breakout list = `inner_hero` only** (`$lsc_fullwidth_layouts` in the template). When it's the first section it renders full-width at the top, like a normal page hero.
+- **Every other cms section** flows into the **left column** of the two-column band.
+- The **Case Summary sidebar is part of the template, not a flexible section.** It's built once (output-buffered into `$lsc_sidebar_html`) and dropped into the right column. It reads the `client_type` / `sector` / `funding_requirement` / `outcome` post meta and the global `apply_now_link`. Blank meta rows hide themselves.
+- **Related Case Studies is rendered by the template** (below the band, full-width) — **not** a cms section. A `WP_Query` pulls the 3 latest *other* `case_study` posts (`post__not_in` the current one, `no_found_rows`), under a fixed "Related Case Studies" header, and renders each via the shared card partial. Hidden when there are no other case studies. **CTA is rendered by the template** (full-width, below Related) straight from the **Global CTA** (Site Settings) via `lsc_get_global_cta()` — no per-case-study fields. Fill the Global CTA once and every case study shows it; it self-hides if the Global CTA is empty.
+
+**Shared case study card partial (NEW):** `template-parts/cards/case-study-card.php` renders one card (image/title/excerpt/"Read Case Study" link) from `$args['post_id']`. Used by **both** `case_studies_grid.php` (the flexible section, refactored to call it) **and** the single template's Related block — one source of truth for the card markup. BEM unchanged: `.case-study-card › __media/__image, __content › __title/__excerpt/__link`. Related section reuses `.case-studies-section` (+ `--related` modifier for any distinct bg) so Faisal's existing CSS applies.
+
+**Shared CTA band partial (NEW):** `template-parts/cta-band.php` renders the CTA band (eyebrow/title/copy/buttons on a `bg-lsc-*` background) from normalised `$args`. `cta_section.php` was refactored to a thin wrapper that resolves global-vs-custom and delegates to it; the single template calls it directly with `lsc_get_global_cta()`. BEM unchanged (`.cta-section …`) so Faisal's existing CSS applies.
+- ⚠️ **Constraint:** left-column sections must stay **contiguous** between the hero and anything full-width. A breakout layout dropped mid-body would close the band and re-emit a second sidebar. For the case study design that never happens; the close-on-breakout branch is kept only for robustness.
+
+**No dedicated body section.** The left column just runs whatever cms sections the editor stacks (body copy, stats, quote, media). Author the Challenge/Strategy/Solution/Result with existing content sections — we did **not** build a bespoke `case_study_content` layout (the user explicitly wanted everything managed from the template).
+
+**BEM the template emits (CSS is Faisal's):**
+- Band: `.case-study-layout` › `.lsc-container.layout-padding` › `.case-study-layout__grid` › `.case-study-layout__main` (left) + `.case-study-layout__sidebar`‹aside› (right).
+- Sidebar: `.case-summary` › `__title` + `__list`‹dl› › `__row` › `__label`‹dt› / `__value`‹dd› + `__apply` › `__apply-btn`.
+- ⚠️ **Faisal must reset the nested container inside the left column** — the cms sections bring their own `.lsc-container.layout-padding`, which double-wraps inside `.case-study-layout__main`. Reset it to `max-width:none; padding-inline:0` there. The two-column grid + sticky sidebar are his too.
+
+**`media_full`** stays as a reusable generic full-width media section — it's no longer the case study lead (the lead is just a cms section in the left column). Remove it if you don't want the spare layout.
+
+---
 
 ## 🔄 RESUME HERE (after shutdown) — session 3 end
 
@@ -30,6 +85,26 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 - Faisal: CSS for the session-3 sections (`feature_columns`, `feature_cards`, `process_steps`, `faqs`, `case_studies_grid`, contact `--bg-dark`) — only stacked-testimonials CSS is done.
 - Author **Case Study** posts (title + featured image + excerpt + page order) so the grid populates; spot-check the 6 blank testimonial role lines + Keith M quote (see Testimonial CPT note).
 - The **DEFERRED contact-overlap section** (`contact_panel`) is still pending — full spec further below.
+
+---
+
+## New this session (4) — Single Case Study page (in progress)
+
+Started building the **single Case Study** page (design: dark hero → two-column body+sidebar → Related Case Studies → dark CTA). Composed in the `cms` flexible builder on each `case_study` post. Two pieces landed; the two-column content section is next.
+
+### Case Study Details — the Case Summary sidebar meta (`group_case_study.json`, NEW)
+- New ACF field group **"Case Study Details"** attached to the `case_study` CPT (post meta, mirroring the `finance_product` → Key Facts precedent — chosen because the summary is intrinsic post data, filled once, queryable, and survives section reordering).
+- Four **fixed** text fields under a **Case Summary** tab (we chose fixed named fields over a label/value repeater because the design's schema is standardized): `client_type`, `sector`, `funding_requirement`, `outcome`. All optional — a blank field hides its row in the sidebar (guard in the template when built). Each has `wrapper.width: 50` so the admin lays them out 2-per-row.
+- **Apply Now** intentionally has **no field** — it comes from a global link (Site Settings) so it's not re-typed per post.
+- The sidebar markup itself is **not built yet** — it renders inside the two-column `case_study_content` section (section #6 in the resume table). This commit only adds the data model.
+- ⚠️ Brand-new group → Custom Fields → Sync offers it regardless of timestamp.
+
+### `media_full` — Full-Width Media section (NEW)
+The lead media on the case study page (rounded full-width image or video). Reusable anywhere a standalone media band is needed.
+- ACF layout `media_full` ("Full-Width Media") appended to `group_flexible_content.json` `cms`. Minimal fields: `media_type` button-group (image/video, default image), `image` (conditional on image), `video` **group cloned 1:1 from `media_content_5050`** (full `lsc_render_video()` option set + conditional logic, key prefix `field_media_full_*`).
+- Template `template-parts/sections/media_full.php` — auto-dispatched. One full-width media block inside `lsc-container layout-padding`; bails if neither image nor video set. Same **`controls`-only-on-autoplay** fix as the other video sections.
+- **BEM (CSS is Faisal's):** `.media-full` (+ `--image`/`--video`) › `__media` › `__figure`/`__image` (image) or `__video-wrap`/`__video` (video). Rounded corners / aspect ratio are his.
+- ⚠️ `"modified"` bumped — Custom Fields → Sync.
 
 ---
 
@@ -125,7 +200,7 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 1 | `inner_hero` | `inner_hero.php` | Labelled **"Page Hero"** — Hero Style image/text/split; image style can show the product Key Facts bar |
 | 2 | `finance_products_grid` | `finance_products_grid.php` | Centers last-row orphans (see below) |
 | 3 | `broker_callout` | `broker_callout.php` | **NEW** — orange callout card |
-| 4 | `stats_section` | `stats_section.php` | General stats grid (untouched) |
+| 4 | `stats_section` | `stats_section.php` | General stats grid — **Style** toggle Band/Cards (default Band) + Columns 2/3/4 (session 4) |
 | 5 | `media_card_5050` | `media_card_5050.php` | **RENAMED** from `media_content_5050` |
 | 5b | `media_content_5050` | `media_content_5050.php` | **NEW** — 50/50 content + checklist beside image/video; optional bg + Top Spacing |
 | 6 | `testimonials_section` | `testimonials_section.php` | Slick carousel **or** stacked full-width blocks (Layout toggle) |
@@ -138,6 +213,20 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 13 | `process_steps` | `process_steps.php` | **NEW** — centered header + auto-numbered step row (2/3/4 cols) |
 | 14 | `faqs` | `faqs.php` | **NEW** — centered header + jQuery slide-toggle accordion (plus/minus) |
 | 15 | `case_studies_grid` | `case_studies_grid.php` | **NEW** — header + grid of Case Study CPT cards (image/title/excerpt/link) |
+| 16 | `media_full` | `media_full.php` | **NEW (session 4)** — full-width rounded media block, image **or** video (renderer-backed). Reusable generic band |
+| 17 | `rich_text` | `rich_text.php` | **NEW (session 4)** — single free-form WYSIWYG block; reuses global `.entry-content` typography. Used for case study body copy (Challenge/Strategy/…) and reusable anywhere |
+| 18 | `quote_block` | `quote_block.php` | **NEW (session 4)** — single dark pull-quote (mark + quote + author/avatar). **Source toggle** Manual / Testimonial Library (pick one). Used for the case study client quote |
+| 19 | `downloads_section` | `downloads_section.php` | **NEW (session 4)** — optional header + stacked list of PDF download rows (icon + title + subtitle + Download button). Pulls from the **Download CPT** (Source all/selected). Drives the Downloads page |
+
+> **Download CPT + `downloads_section`** (row 19) — the Downloads page, modelled like the Testimonial CPT (reusable library). **CPT `download`** (`inc/post-types.php`, `lsc_register_download_post_type`): not public, admin-only, `supports` title + page-attributes (title = document name, page order = list order), menu icon `dashicons-media-document`, position 23. **ACF group `group_download.json`** on it: `subtitle` (text) + `file` (File, **PDF**, required). **`downloads_section`** has the same Source pattern as the finance/case-study grids — `download_source` all/selected, `selected_downloads` relationship, `posts_per_page`, `orderby`, `order` — plus optional eyebrow/title/description. Renders a stacked `<ul>` list (full-width rows, not a grid). New SVG `assets/svgs/download.php` (currentColor download arrow) used for the row icon and inside the Download button. Download button reuses `site-btn btn-primary` + emits `download target="_blank"` to the PDF. **BEM (Faisal's CSS):** `.downloads-section › __inner/__header (__eyebrow/__title/__description) + __list‹ul› › .download-item › __icon + __content (__title‹h3›/__subtitle) + __button (site-btn btn-primary) › __button-text/__button-icon`. The Downloads **page** = a normal Page: `inner_hero` (USEFUL DOCUMENTS / DOWNLOADS) + `downloads_section`. ⚠️ Sync picks up the new *Download Details* group **and** the *Page Builder* (new Downloads layout); then author Downloads under the new admin menu.
+>
+> **`quote_block`** (row 18) — single dark pull-quote for the case study client quote. **Source toggle** (mirrors `testimonials_section`): **Manual** (default — `quote`, `author_name`, `author_role`, `avatar`) **or** **Testimonial Library** (a relationship limited to **one** testimonial; maps title→name, CPT `quote`/`author_role`/`author_initial`). Both sources normalise to one shape; bails if no quote. **Avatar fallback:** no image → the author's **initial** in a circle (first letter of the name, or the CPT's `author_initial`). Quote mark = `assets/svgs/quote` (orange). **BEM (Faisal's CSS):** `.quote-block` › `.lsc-container.layout-padding` › `__card`‹figure› › `__mark` + `__quote`‹blockquote› + `__author`‹figcaption› › `__avatar` (`__avatar-img` / `__avatar-initial`) + `__meta` › `__name` / `__role`. Dark rounded card is his.
+>
+> `stats_section` (row 4) now carries a **Style** toggle (Band / Cards) — the case study stat cards are the **Cards** style, not a separate section. A short-lived standalone `stat_cards` layout was built then **merged into `stats_section`** to avoid two near-identical sections confusing editors.
+>
+> **Same data model + markup, two looks via a modifier.** Template emits `.stats-section--band` (keeps `bg-lsc-subtle`, the existing look — default, so existing placements are unchanged) **or** `.stats-section--cards` (no subtle bg; grid gains `card-grid--center-last-row`). Inner markup is identical in both: `.stats-section__item › __value + __label`. **Faisal (CSS):** style `.stats-section--cards .stats-section__item` as the white rounded bordered card with the big orange `__value` + uppercase `__label`. The Band look is already done. Columns come from the `columns-N` class on `.stats-section__grid`.
+
+> The single Case Study page is **not** a flexible layout — it's the dedicated `single-case_study.php` template that runs `cms` in its left column beside a template-rendered Case Summary sidebar (see the session-4 resume section).
 
 ## New sections built this session
 

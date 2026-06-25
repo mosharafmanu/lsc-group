@@ -68,6 +68,18 @@ if ( ! function_exists( 'lsc_get_global_cta' ) ) {
 	}
 }
 
+// Global "Apply Now" link (Site Settings) — used by the Case Study sidebar
+
+if ( ! function_exists( 'lsc_get_apply_now_link' ) ) {
+	function lsc_get_apply_now_link() {
+		if ( ! function_exists( 'get_field' ) ) {
+			return false;
+		}
+
+		return get_field( 'apply_now_link', 'options' );
+	}
+}
+
 if ( ! function_exists( 'lsc_get_header_phone' ) ) {
 	function lsc_get_header_phone() {
 		if ( ! function_exists( 'get_field' ) ) {
