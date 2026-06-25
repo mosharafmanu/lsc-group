@@ -390,9 +390,9 @@
 
 		// ─────────────────────────────────────────────────────────────
 		// PRODUCT HERO — FACTS OVERLAP
-		// Pulls the .inner-hero__facts-wrap up over the hero by the
-		// rendered height of its .inner-hero__facts card, so the overlap
-		// always equals the card height regardless of content/columns.
+		// Pulls the .inner-hero__facts-wrap up over the hero by half the
+		// rendered height of its .inner-hero__facts card, so the card
+		// straddles the hero edge regardless of content/columns.
 		// Recalculated on load and resize. Desktop only (>991px); on
 		// mobile the inline margin is cleared so the CSS fallback wins.
 		// ─────────────────────────────────────────────────────────────
@@ -412,7 +412,7 @@
 					return;
 				}
 
-				$wrap.css( 'margin-top', ( -$card.outerHeight() ) + 'px' );
+				$wrap.css( 'margin-top', ( -$card.outerHeight() / 2 ) + 'px' );
 			} );
 		}
 
