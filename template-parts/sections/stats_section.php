@@ -8,7 +8,7 @@
 $stats      = get_sub_field( 'stats' );
 $style      = get_sub_field( 'style' ) ?: 'band';
 $columns    = get_sub_field( 'columns' ) ?: 'columns-3';
-$background  = get_sub_field( 'background_color' );
+$background  = get_sub_field( 'background_color' ) ?: 'light';
 
 if ( ! $stats || ! is_array( $stats ) ) {
 	return;
@@ -16,21 +16,14 @@ if ( ! $stats || ! is_array( $stats ) ) {
 
 $is_cards = 'cards' === $style;
 
-// Backward-compatible default for rows saved before the Background field existed:
-// band kept a subtle background, cards sat on the page background.
-if ( null === $background || '' === $background ) {
-	$background = $is_cards ? 'none' : 'subtle';
-}
+// Background: White (default) or Cream. Field values: light = White, subtle = Cream.
+$bg_modifier = 'subtle' === $background ? 'cream' : 'white';
 
 $section_classes = [
 	'stats-section',
 	'stats-section--' . ( $is_cards ? 'cards' : 'band' ),
+	'stats-section--bg-' . $bg_modifier,
 ];
-
-// Background colour utility (Faisal's CSS); 'none' = sit on the page background.
-if ( 'none' !== $background ) {
-	$section_classes[] = 'bg-lsc-' . sanitize_html_class( $background );
-}
 
 $grid_classes = [
 	'stats-section__grid',

@@ -298,9 +298,15 @@
  */
 .stats-section {
   border: .125rem solid rgba(16, 20, 25, 0.10);
-  background-color: #F5F3EF;
+  background-color: #ffffff;
   padding-top: 5.875rem;
   padding-bottom: 3rem;
+}
+.stats-section--bg-white {
+  background-color: #ffffff;
+}
+.stats-section--bg-cream {
+  background-color: #F5F3EF;
 }
 .stats-section__item {
   text-align: center;
