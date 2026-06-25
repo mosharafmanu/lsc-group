@@ -177,7 +177,7 @@ if ( $has_facts_bar ) {
 		<?php
 		$facts_columns = min( max( count( $product_facts ), 2 ), 5 );
 		?>
-		<div class="inner-hero__facts-wrap lsc-container layout-padding">
+		<div class="inner-hero__facts-wrap lsc-container">
 			<div class="inner-hero__facts card-grid columns-<?php echo esc_attr( $facts_columns ); ?>">
 				<?php foreach ( $product_facts as $fact ) : ?>
 					<?php
