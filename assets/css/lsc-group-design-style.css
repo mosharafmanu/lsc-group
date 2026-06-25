@@ -1104,25 +1104,25 @@ h6,.h6-style {
 
 /* Base button styles — shared across all variants */
 .site-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: var(--lsc-btn-padding-y) var(--lsc-btn-padding-x);
+    display: inline-block;
+    padding: .875rem 1.75rem;
     font-size: .9375rem;
-    line-height: normal;
+    line-height: 150%;
     font-family: var(--lsc-font-body);
-    font-weight: var(--lsc-btn-font-weight);
     text-decoration: none;
 	font-weight: 700;
 	line-height: 150%;
-    border-radius: .375rem;
+    border-radius: .5rem;
 	letter-spacing: 0.009rem;
     border: 1px solid transparent;
     transition: all var(--lsc-transition);
-    cursor: pointer;
     text-align: center;
 }
-
+@media only screen and (max-width: 767px) {
+	.site-btn {
+     padding: .75rem 1.75rem;
+  }
+}
 /* ── Primary action: orange accent fill, dark text → dark fill on hover */
 .btn-primary {
     background: var(--lsc-color-accent);
@@ -1130,8 +1130,8 @@ h6,.h6-style {
     border-color: var(--lsc-color-accent);
 }
 .btn-primary:hover {
-    background: var(--lsc-color-secondary);
-    color: var(--lsc-color-light);
+    background: var(--lsc-color-white);
+    color: var(--lsc-color-primary);
     border-color: var(--lsc-color-secondary);
 }
 
