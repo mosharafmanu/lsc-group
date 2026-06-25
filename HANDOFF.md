@@ -1,6 +1,6 @@
 # LSC Group Theme Handoff
 
-_Last updated: 2026-06-25 (session 4)._
+_Last updated: 2026-06-26 (session 5)._
 
 ## Current State
 
@@ -9,6 +9,33 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 - Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
 - Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below) — except the stacked-testimonials styles, written this session with explicit authorisation.
 - Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
+
+## 🔄 RESUME HERE (after shutdown) — session 5 end
+
+**Everything is committed and pushed. HEAD = `f86a23d`. `main`, `faisal`, `imran` are all aligned on GitHub** (working tree clean). Current cache-bust `LSC_GROUP_VERSION = 1.0.51`.
+
+**Do these once on any environment that pulls this state:**
+1. **WP Admin → Custom Fields → Sync** — picks up the *Page Builder* change (new **Background** button group on `stats_section`).
+2. **Hard refresh** (or bump again) so the new CSS/JS is served — version is `1.0.51`.
+
+**What session 5 delivered:**
+
+- **Branch hygiene / Faisal JSON revert.** Pulled Faisal's CSS work (`origin/faisal`) into `main`; then **reverted his accidental rewrite of `acf-json/group_flexible_content.json`** (his WP-admin re-save at `a8db821` rewrote field structure). The **local JSON is the source of truth** — restored from the pre-rewrite version; all 23 layouts were identical, only the JSON was reverted (his CSS + section `.php` tweaks kept). **Rule of thumb:** if `origin/faisal` ever shows a big `group_flexible_content.json` diff, it's an accidental admin re-save — keep `main`'s version.
+
+- **`stats_section` Background toggle (White / Cream).** New **Background** field (button group, `field_stats_section_background_color`, choices `light`=White / `subtle`=Cream, default **White**) on the Stats Section layout. Template emits `.stats-section--bg-white | --bg-cream`. **CSS fix in `faisal.css`:** `.stats-section` base background changed `#F5F3EF` → `#ffffff` (White default) and added `.stats-section--bg-cream { #F5F3EF }`. *Why CSS:* `faisal.css` loads **last** and hardcoded the section background, so the toggle class alone did nothing; and the `bg-lsc-*` tokens aren't White/Cream (`light` is `#fefadc`, `subtle` `#eceae3`). Legacy rows (no saved value) keep their look: band→cream-ish via fallback, but the **new default is White**.
+
+- **Product hero facts bar — dynamic overlap (JS, `assets/js/scripts.js`).** The `inner_hero` Key Facts bar now overlaps via JS, not a fixed margin. One measurement of `.inner-hero__facts` height drives three values, recalculated on **load + resize**, **desktop only (>991px)**; on mobile all inline values are cleared so the CSS fallback (`.inner-hero__facts-wrap { margin-top: -2rem }` at ≤991px) wins:
+  - `.inner-hero__facts-wrap` → `margin-top: -(cardHeight / 2)` (card straddles the hero edge — half overlap).
+  - `.inner-hero--has-facts` (the section) → `margin-bottom: -(cardHeight / 2)` (the next section rises to meet the card).
+  - **next section** (`$section.next()`) → `padding-top: existingCssPadding + (cardHeight / 2)` (content clears the overlapping card). Reads the **real CSS padding each run** (resets inline first) so it never compounds on resize.
+  - The old fixed `.inner-hero__facts-wrap { margin-top: -5.0625rem }` was **removed from `faisal.css`** (desktop base now JS-driven; the empty rule was left in place).
+  - ⚠️ An earlier attempt added `layout-padding` to `.inner-hero__facts-wrap` to align the card with the hero content — **reverted** at the user's request (commit `907affd`). The card width/padding/Figma-match for the facts bar is still **open** (needs the Figma link to do precisely — read tools require `fileKey`+`nodeId`).
+
+**Likely next tasks:**
+- Faisal: spot-check `.stats-section--cards` (cards style) now that the base bg is White, and the facts-bar look vs Figma (share the Figma link for exact specs).
+- Still pending from session 4: build the **Contact** page (`contact_panel`) and place `specialist_cards`; author Case Studies / Downloads / Finance Products; fill **Global CTA** and the two header buttons.
+
+> ⚠️ **This session edited `faisal.css`** (stats background colours + removed the fixed facts margin). Tell Faisal to `git pull` / reset to `origin/faisal` before his next push so he doesn't reintroduce the old `#F5F3EF` stats base or the `-5.0625rem` facts margin.
 
 ## 🔄 RESUME HERE (after shutdown) — session 4 end
 
