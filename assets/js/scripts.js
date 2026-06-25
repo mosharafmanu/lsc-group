@@ -394,9 +394,11 @@
 		// rendered height of its .inner-hero__facts card, so the card
 		// straddles the hero edge regardless of content/columns. The same
 		// negative value is applied as margin-bottom on .inner-hero--has-facts
-		// so the following section rises to meet the straddling card.
+		// so the following section rises to meet the straddling card, and the
+		// same positive value is ADDED to that next section's existing top
+		// padding so its content clears the overlapping card.
 		// Recalculated on load and resize. Desktop only (>991px); on
-		// mobile the inline margins are cleared so the CSS fallback wins.
+		// mobile the inline values are cleared so the CSS fallback wins.
 		// ─────────────────────────────────────────────────────────────
 
 		const $heroFactsWraps = $( '.inner-hero__facts-wrap' );
@@ -408,17 +410,28 @@
 				const $wrap = $( this );
 				const $card = $wrap.find( '.inner-hero__facts' );
 				const $section = $wrap.closest( '.inner-hero--has-facts' );
+				const $next = $section.next();
 				if ( ! $card.length ) return;
 
 				if ( window.innerWidth <= 991 ) {
 					$wrap.css( 'margin-top', '' );
 					$section.css( 'margin-bottom', '' );
+					$next.css( 'padding-top', '' );
 					return;
 				}
 
-				const offset = -$card.outerHeight() / 2;
-				$wrap.css( 'margin-top', offset + 'px' );
-				$section.css( 'margin-bottom', offset + 'px' );
+				const half = $card.outerHeight() / 2;
+				$wrap.css( 'margin-top', -half + 'px' );
+				$section.css( 'margin-bottom', -half + 'px' );
+
+				// Add the overlap to the next section's existing top padding.
+				// Reset the inline value first so we always read the real CSS
+				// base — prevents the value compounding on every resize.
+				if ( $next.length ) {
+					$next.css( 'padding-top', '' );
+					const basePad = parseFloat( $next.css( 'padding-top' ) ) || 0;
+					$next.css( 'padding-top', ( basePad + half ) + 'px' );
+				}
 			} );
 		}
 
