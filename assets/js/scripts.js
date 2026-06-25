@@ -392,9 +392,11 @@
 		// PRODUCT HERO — FACTS OVERLAP
 		// Pulls the .inner-hero__facts-wrap up over the hero by half the
 		// rendered height of its .inner-hero__facts card, so the card
-		// straddles the hero edge regardless of content/columns.
+		// straddles the hero edge regardless of content/columns. The same
+		// negative value is applied as margin-bottom on .inner-hero--has-facts
+		// so the following section rises to meet the straddling card.
 		// Recalculated on load and resize. Desktop only (>991px); on
-		// mobile the inline margin is cleared so the CSS fallback wins.
+		// mobile the inline margins are cleared so the CSS fallback wins.
 		// ─────────────────────────────────────────────────────────────
 
 		const $heroFactsWraps = $( '.inner-hero__facts-wrap' );
@@ -405,14 +407,18 @@
 			$heroFactsWraps.each( function () {
 				const $wrap = $( this );
 				const $card = $wrap.find( '.inner-hero__facts' );
+				const $section = $wrap.closest( '.inner-hero--has-facts' );
 				if ( ! $card.length ) return;
 
 				if ( window.innerWidth <= 991 ) {
 					$wrap.css( 'margin-top', '' );
+					$section.css( 'margin-bottom', '' );
 					return;
 				}
 
-				$wrap.css( 'margin-top', ( -$card.outerHeight() / 2 ) + 'px' );
+				const offset = -$card.outerHeight() / 2;
+				$wrap.css( 'margin-top', offset + 'px' );
+				$section.css( 'margin-bottom', offset + 'px' );
 			} );
 		}
 
