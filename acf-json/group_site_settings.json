@@ -493,6 +493,22 @@
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
+        },
+        {
+            "key": "field_apply_now_link",
+            "label": "Apply Now Link",
+            "name": "apply_now_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Global \"Apply Now\" call-to-action. Used in the Case Summary sidebar on single case study pages (and reusable anywhere a global apply link is needed). Leave empty to hide the button.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [
@@ -514,5 +530,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782280024
+    "modified": 1782358408
 }

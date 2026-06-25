@@ -1,0 +1,48 @@
+{
+    "key": "group_download",
+    "title": "Download Details",
+    "fields": [
+        {
+            "key": "field_download_subtitle",
+            "label": "Subtitle",
+            "name": "subtitle",
+            "type": "text",
+            "required": 0,
+            "instructions": "Short line shown under the title (e.g. \"Development and Refurbishment\").",
+            "placeholder": "Development and Refurbishment"
+        },
+        {
+            "key": "field_download_file",
+            "label": "File",
+            "name": "file",
+            "type": "file",
+            "required": 1,
+            "instructions": "The PDF document users download.",
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "download"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Reusable downloadable document (PDF). The post title is the document name; page order controls list order.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1782361088
+}

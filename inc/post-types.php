@@ -138,3 +138,45 @@ if ( ! function_exists( 'lsc_register_case_study_post_type' ) ) {
 	}
 }
 add_action( 'init', 'lsc_register_case_study_post_type' );
+
+if ( ! function_exists( 'lsc_register_download_post_type' ) ) {
+	function lsc_register_download_post_type() {
+		$labels = [
+			'name'               => _x( 'Downloads', 'Post type general name', 'lsc-group' ),
+			'singular_name'      => _x( 'Download', 'Post type singular name', 'lsc-group' ),
+			'menu_name'          => _x( 'Downloads', 'Admin menu text', 'lsc-group' ),
+			'name_admin_bar'     => _x( 'Download', 'Add new on toolbar', 'lsc-group' ),
+			'add_new'            => __( 'Add New', 'lsc-group' ),
+			'add_new_item'       => __( 'Add New Download', 'lsc-group' ),
+			'new_item'           => __( 'New Download', 'lsc-group' ),
+			'edit_item'          => __( 'Edit Download', 'lsc-group' ),
+			'view_item'          => __( 'View Download', 'lsc-group' ),
+			'all_items'          => __( 'All Downloads', 'lsc-group' ),
+			'search_items'       => __( 'Search Downloads', 'lsc-group' ),
+			'not_found'          => __( 'No downloads found.', 'lsc-group' ),
+			'not_found_in_trash' => __( 'No downloads found in Trash.', 'lsc-group' ),
+		];
+
+		register_post_type(
+			'download',
+			[
+				'labels'              => $labels,
+				'public'              => false,
+				'publicly_queryable'  => false,
+				'show_ui'             => true,
+				'show_in_menu'        => true,
+				'show_in_rest'        => true,
+				'query_var'           => false,
+				'rewrite'             => false,
+				'capability_type'     => 'post',
+				'has_archive'         => false,
+				'hierarchical'        => false,
+				'menu_position'       => 23,
+				'menu_icon'           => 'dashicons-media-document',
+				'supports'            => [ 'title', 'page-attributes' ],
+				'exclude_from_search' => true,
+			]
+		);
+	}
+}
+add_action( 'init', 'lsc_register_download_post_type' );
