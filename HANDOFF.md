@@ -12,7 +12,21 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 
 ## 🔄 RESUME HERE (after shutdown) — session 4 end
 
-**Single Case Study page + Downloads CPT — DONE, committed and pushed.** `main`, `faisal`, `imran` are all aligned on GitHub at the session-4 commit (local working tree clean). Nothing in progress.
+### ⬅️ FIRST: uncommitted work in the tree (Contact + Specialist Cards)
+
+Two more sections were built after the last commit and are **NOT committed yet** (working tree at session-4 end):
+- `template-parts/sections/contact_panel.php` *(NEW)* — the **Contact page** overlap section (enquiry form + info card + map; `overlap_hero` toggle). Was the long-deferred `contact_panel` — now built. Full detail under "Contact overlap section — ✅ BUILT".
+- `template-parts/sections/specialist_cards.php` *(NEW)* — **"Speak To The Right Specialist"** (layout 21): centered header + cards (initial circle + title + copy + "Contact Team" link).
+- `acf-json/group_flexible_content.json` *(modified)* — adds the **`contact_panel`** and **`specialist_cards`** layouts (`"modified"` already bumped ahead of clock).
+- `HANDOFF.md` *(modified)* — this file.
+
+**To do when resuming:** ① commit + push these and re-align `faisal`/`imran` (the merge-into-all-branches dance below), ② **Custom Fields → Sync** picks up the two new Page Builder layouts, ③ **Faisal CSS:** `.contact-panel`(+`--overlap`)/`.contact-form-card`/`.contact-info-card`(+`__hours`)/`.contact-panel__map`, and `.specialist-cards` (+ `__avatar`/`__initial` circle, `__card`, `__link`). Then build the **Contact page** (`inner_hero` Image Background + `contact_panel` Overlap=Yes) and place `specialist_cards` where needed.
+
+> **Git note (how branches work here):** `main` is integration; `faisal` (designer CSS) and `imran` are kept aligned with it. Workflow that's been working: commit on `main` → `git push origin main` → `git branch -f faisal main && git branch -f imran main` → `git push origin faisal imran`. **Always `git fetch` first** — Faisal pushes `faisal.css` often; if `origin/faisal` is ahead, fast-forward `main`+`imran` up to it (`git merge --ff-only origin/faisal`) instead of overwriting. ACF `"modified"` must be stamped at **real `date +%s`** (not future-dated) or Sync won't clear — see ACF note.
+
+---
+
+**Single Case Study page + Downloads CPT — committed and pushed** at `dca2a66` (includes Faisal's CSS commit `7f3a571` merged in). `main`, `faisal`, `imran` were all aligned there before the two uncommitted sections above.
 
 **What session 4 delivered (all detailed below):**
 - **Single Case Study page** via a dedicated `single-case_study.php` template (full-width hero → two-column [cms left + Case Summary sidebar right] → template-rendered Related Case Studies → template-rendered Global CTA).
@@ -159,9 +173,15 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 
 **Flexible content order:** `inner_hero` (labelled "Page Hero") stays in its existing slot, right after `hero_section`.
 
-## DEFERRED: Contact overlap section (build when we reach the contact page)
+## Contact overlap section — ✅ BUILT (session 4) as `contact_panel`
 
-> Not built yet — by the user's request. This is the design in screenshot #5/#11: the contact Page Hero (Image Background) with two white cards overlapping its bottom: an **enquiry form** on the left and a **contact-information** card on the right, with a **map** below the info card. Build it as its own NEW section — do **not** modify the existing general `contact_section`.
+> **Built.** `contact_panel` / `contact_panel.php` (layout 20). Enquiry-form card (left, `form_title` + `form_code` via `do_shortcode()`) + contact-info card (right, `info_title` + email/phone/office-address/opening-hours from **Site Settings** `lsc_get_footer_contact_details()`) with the **map below the info card** (`map_embed` via `do_shortcode()`). Self-contained **`overlap_hero`** toggle → `.contact-panel--overlap` (negative-margin overlap is Faisal's). Info/form markup was **copied** from `contact_section` (kept separate, untouched). LinkedIn row omitted to match the comp.
+>
+> **BEM (Faisal's CSS):** `.contact-panel` (+ `--overlap`) › `.lsc-container.layout-padding` › `.contact-panel__grid` › `.contact-panel__form` (`.contact-form-card › __title‹h2›/__form`) + `.contact-panel__aside` › `.contact-panel__info` (`.contact-info-card › __title/__list › __item › __icon/__details › __label/__value`, then `.contact-info-card__hours › __label/__value`) + `.contact-panel__map`. The overlap-the-hero, two-card grid, white rounded cards and map framing are his. The Contact **page** = a Page: `inner_hero` (Image Background) + `contact_panel` (Overlap = Yes).
+>
+> _Original spec retained below for reference._
+
+> This is the design in screenshot #5/#11: the contact Page Hero (Image Background) with two white cards overlapping its bottom: an **enquiry form** on the left and a **contact-information** card on the right, with a **map** below the info card. Build it as its own NEW section — do **not** modify the existing general `contact_section`.
 
 **Hard rules (decided with the user — don't relitigate):**
 - It is a **brand-new, separate** flexible-content section. The existing `contact_section.php` is general-purpose and must stay untouched.
@@ -217,6 +237,8 @@ After any ACF JSON change: **WP Admin → Custom Fields → Sync**.
 | 17 | `rich_text` | `rich_text.php` | **NEW (session 4)** — single free-form WYSIWYG block; reuses global `.entry-content` typography. Used for case study body copy (Challenge/Strategy/…) and reusable anywhere |
 | 18 | `quote_block` | `quote_block.php` | **NEW (session 4)** — single dark pull-quote (mark + quote + author/avatar). **Source toggle** Manual / Testimonial Library (pick one). Used for the case study client quote |
 | 19 | `downloads_section` | `downloads_section.php` | **NEW (session 4)** — optional header + stacked list of PDF download rows (icon + title + subtitle + Download button). Pulls from the **Download CPT** (Source all/selected). Drives the Downloads page |
+| 20 | `contact_panel` | `contact_panel.php` | **NEW (session 4)** — enquiry-form card (left) + contact-info card with map below (right); `overlap_hero` toggle. Drives the Contact page. Details from Site Settings |
+| 21 | `specialist_cards` | `specialist_cards.php` | **NEW (session 4)** — centered header + card grid; each card = initial circle + title + copy + CTA link ("Contact Team"). Columns 2/3/4 (default 3) |
 
 > **Download CPT + `downloads_section`** (row 19) — the Downloads page, modelled like the Testimonial CPT (reusable library). **CPT `download`** (`inc/post-types.php`, `lsc_register_download_post_type`): not public, admin-only, `supports` title + page-attributes (title = document name, page order = list order), menu icon `dashicons-media-document`, position 23. **ACF group `group_download.json`** on it: `subtitle` (text) + `file` (File, **PDF**, required). **`downloads_section`** has the same Source pattern as the finance/case-study grids — `download_source` all/selected, `selected_downloads` relationship, `posts_per_page`, `orderby`, `order` — plus optional eyebrow/title/description. Renders a stacked `<ul>` list (full-width rows, not a grid). New SVG `assets/svgs/download.php` (currentColor download arrow) used for the row icon and inside the Download button. Download button reuses `site-btn btn-primary` + emits `download target="_blank"` to the PDF. **BEM (Faisal's CSS):** `.downloads-section › __inner/__header (__eyebrow/__title/__description) + __list‹ul› › .download-item › __icon + __content (__title‹h3›/__subtitle) + __button (site-btn btn-primary) › __button-text/__button-icon`. The Downloads **page** = a normal Page: `inner_hero` (USEFUL DOCUMENTS / DOWNLOADS) + `downloads_section`. ⚠️ Sync picks up the new *Download Details* group **and** the *Page Builder* (new Downloads layout); then author Downloads under the new admin menu.
 >

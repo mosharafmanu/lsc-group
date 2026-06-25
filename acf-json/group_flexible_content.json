@@ -5999,6 +5999,235 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_contact_panel": {
+                    "key": "layout_contact_panel",
+                    "name": "contact_panel",
+                    "label": "Contact Panel",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_contact_panel_form_title",
+                            "label": "Form Title",
+                            "name": "form_title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Heading on the enquiry card.",
+                            "default_value": "Send An Enquiry",
+                            "placeholder": "Send An Enquiry"
+                        },
+                        {
+                            "key": "field_contact_panel_form_code",
+                            "label": "Form Embed",
+                            "name": "form_code",
+                            "type": "textarea",
+                            "required": 0,
+                            "instructions": "Paste the form shortcode (e.g. a Contact Form 7 / WPForms shortcode). Rendered via do_shortcode().",
+                            "rows": 3,
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_contact_panel_info_title",
+                            "label": "Info Title",
+                            "name": "info_title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Heading on the contact information card. The email / phone / office address / opening hours come from Site Settings.",
+                            "default_value": "Contact Information",
+                            "placeholder": "Contact Information"
+                        },
+                        {
+                            "key": "field_contact_panel_map_embed",
+                            "label": "Map Embed",
+                            "name": "map_embed",
+                            "type": "textarea",
+                            "required": 0,
+                            "instructions": "Google Maps embed iframe or a map shortcode. Shown below the contact information card. Rendered via do_shortcode(). Leave empty to hide the map.",
+                            "rows": 3,
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_contact_panel_overlap_hero",
+                            "label": "Overlap The Hero Above",
+                            "name": "overlap_hero",
+                            "type": "true_false",
+                            "required": 0,
+                            "instructions": "Enable when this section sits directly below a hero — it will move up and overlap the bottom of that hero. Leave off to render as a normal full-width section.",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_specialist_cards": {
+                    "key": "layout_specialist_cards",
+                    "name": "specialist_cards",
+                    "label": "Specialist Cards",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_specialist_cards_header_tab",
+                            "label": "Header",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_specialist_cards_title_lines",
+                            "label": "Title Lines",
+                            "name": "title_lines",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Add one row per visual title line. Inside each line, add one or more parts and highlight only the words that need the accent color.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Title Line",
+                            "sub_fields": [
+                                {
+                                    "key": "field_specialist_cards_title_line_parts",
+                                    "label": "Line Parts",
+                                    "name": "line_parts",
+                                    "type": "repeater",
+                                    "required": 0,
+                                    "instructions": "Add each inline text segment separately. Toggle Highlight for accent words.",
+                                    "layout": "table",
+                                    "min": 1,
+                                    "max": 8,
+                                    "button_label": "Add Line Part",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_specialist_cards_title_part_text",
+                                            "label": "Text",
+                                            "name": "text",
+                                            "type": "text",
+                                            "required": 0,
+                                            "placeholder": "SPEAK TO THE RIGHT SPECIALIST",
+                                            "parent_repeater": "field_specialist_cards_title_line_parts"
+                                        },
+                                        {
+                                            "key": "field_specialist_cards_title_part_highlight",
+                                            "label": "Highlight",
+                                            "name": "highlight",
+                                            "type": "true_false",
+                                            "required": 0,
+                                            "instructions": "Use accent color for this text part.",
+                                            "message": "",
+                                            "default_value": 0,
+                                            "ui": 1,
+                                            "ui_on_text": "Yes",
+                                            "ui_off_text": "No",
+                                            "parent_repeater": "field_specialist_cards_title_line_parts"
+                                        }
+                                    ],
+                                    "parent_repeater": "field_specialist_cards_title_lines"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_specialist_cards_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Optional intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_specialist_cards_columns",
+                            "label": "Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Number of cards per row on desktop. Collapses responsively on smaller screens.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_specialist_cards_cards_tab",
+                            "label": "Cards",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_specialist_cards_cards",
+                            "label": "Cards",
+                            "name": "cards",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Each card shows an initial circle, a title, a short description and a link.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 12,
+                            "button_label": "Add Card",
+                            "sub_fields": [
+                                {
+                                    "key": "field_specialist_cards_card_initial",
+                                    "label": "Initial",
+                                    "name": "initial",
+                                    "type": "text",
+                                    "required": 0,
+                                    "instructions": "Single letter shown in the circle. Defaults to the first letter of the title.",
+                                    "maxlength": 2,
+                                    "placeholder": "B",
+                                    "parent_repeater": "field_specialist_cards_cards"
+                                },
+                                {
+                                    "key": "field_specialist_cards_card_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "required": 0,
+                                    "placeholder": "Business Finance",
+                                    "parent_repeater": "field_specialist_cards_cards"
+                                },
+                                {
+                                    "key": "field_specialist_cards_card_description",
+                                    "label": "Description",
+                                    "name": "description",
+                                    "type": "textarea",
+                                    "required": 0,
+                                    "rows": 3,
+                                    "new_lines": "",
+                                    "parent_repeater": "field_specialist_cards_cards"
+                                },
+                                {
+                                    "key": "field_specialist_cards_card_link",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "type": "link",
+                                    "required": 0,
+                                    "instructions": "The card's call-to-action (e.g. \"Contact Team\").",
+                                    "return_format": "array",
+                                    "parent_repeater": "field_specialist_cards_cards"
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -6053,5 +6282,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782361088
+    "modified": 1782372896
 }
