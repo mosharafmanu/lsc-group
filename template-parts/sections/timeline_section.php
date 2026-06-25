@@ -81,6 +81,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 					<li class="timeline-section__item">
 						<div class="timeline-section__marker">
 							<span class="timeline-section__number"><?php echo esc_html( $index + 1 ); ?></span>
+							<span class="timeline-border"></span>
 						</div>
 
 						<div class="timeline-section__content">

@@ -174,11 +174,11 @@ ul.lsc-list {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  row-gap: .375rem;
+  row-gap: 1rem;
 }
 ul.lsc-list li {
 	position: relative;
-	padding-left: 1.8rem;
+	padding-left: 2.5rem;
 	font-weight: 500;
 	line-height: 162.5%;
 }
@@ -189,10 +189,13 @@ ul.lsc-list li::before {
 	top: 50%;
 	transform: translateY(-50%);
 	width: 1.25rem;
-    height: 1.25rem;
-	border: 1px solid var(--lsc-color-accent);
-	background-image: url("assets/im");
+	height: 1.25rem;
+	border: 0.063rem solid var(--lsc-color-accent);
+	background-image: url("../svgs/check.svg");
 	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 0.6rem;
+	border-radius: 50%;
 }
 h1,.h1-style,
 h2,.h2-style,
@@ -1114,7 +1117,7 @@ h6,.h6-style {
 	line-height: 150%;
     border-radius: .5rem;
 	letter-spacing: 0.009rem;
-    border: 1px solid transparent;
+    border: 0.063rem solid transparent;
     transition: all var(--lsc-transition);
     text-align: center;
 }
@@ -1131,7 +1134,7 @@ h6,.h6-style {
 }
 .btn-primary:hover {
     background: var(--lsc-color-white);
-    color: var(--lsc-color-primary);
+    color: var(--lsc-color-accent);
     border-color: var(--lsc-color-secondary);
 }
 
