@@ -494,8 +494,12 @@
   line-height: 150%;
   margin-top: .625rem;
 }
-.media-card-5050__buttons .site-btn {
+.media-card-5050__button {
 	padding: 0.5rem 3.125rem;
+}
+.media-card-5050__button:hover {
+	color: var(--lsc-color-white);
+	background-color: var(--lsc-color-primary);
 }
 @media only screen and (max-width: 991px) {
   .media-card-5050__inner {
@@ -1596,6 +1600,47 @@ Cta Style Start
 Cta Style End
 ===============================================
  */
+
+.finance_product-bridging-loan .inner-hero__media {
+	min-height: 37.5rem;
+}
+.inner-hero__facts-wrap {
+	margin-top: -5.0625rem;
+}
+.inner-hero__facts {
+  border-radius: 1rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+  box-shadow: 0 .5rem 2rem 0 rgba(0, 0, 0, 0.08);
+  padding: 3rem;
+}
+.inner-hero__fact span {
+  display: block;
+}
+.inner-hero__fact-value {
+  margin-top: .625rem;
+}
+.inner-hero__fact-label {
+  color: rgba(26, 22, 20, 0.50);
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: .0875rem;
+  text-transform: uppercase;
+}
+.inner-hero__fact-value {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+.inner-hero__fact:not(:first-child) {
+  border-left: 0.063rem solid rgba(0, 0, 0, 0.05);
+}
+.inner-hero__fact {
+  padding-left: 2rem;
+}
 
 
 

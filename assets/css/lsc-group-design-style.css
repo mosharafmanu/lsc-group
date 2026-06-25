@@ -1134,7 +1134,7 @@ h6,.h6-style {
 }
 .btn-primary:hover {
     background: var(--lsc-color-white);
-    color: var(--lsc-color-accent);
+    color: var(--lsc-color-primary);
     border-color: var(--lsc-color-secondary);
 }
 

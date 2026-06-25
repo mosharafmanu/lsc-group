@@ -37,7 +37,7 @@ $show_image     = $image && 'text' !== $hero_style && ! $split_is_video;
 $product_facts = ( 'image' === $hero_style && $show_facts_bar ) ? get_field( 'product_facts' ) : null;
 $has_facts_bar = $product_facts && is_array( $product_facts );
 
-$section_classes = [ 'inner-hero', 'inner-hero--' . $hero_style ];
+$section_classes = [ 'inner-hero ', 'inner-hero--' . $hero_style ];
 
 if ( 'split' === $hero_style ) {
 	$section_classes[] = 'inner-hero--image-' . $image_position;
