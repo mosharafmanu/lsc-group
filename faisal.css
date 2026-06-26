@@ -1737,37 +1737,41 @@ Media Content 5050 Style Start
   grid-template-columns: 34.1875rem 1fr;
   column-gap: 4rem;
 }
-/* .media-content-5050__content{
+.media-content-5050__content{
     grid-area: content;
 }
 .media-content-5050__media{
     grid-area: media;
 }
-.media-left .media-content-5050__grid{
+.media-content-5050--media-right .media-content-5050__grid {
     grid-template-areas: "content media";
 }
-.media-right .media-content-5050__grid{
+.media-content-5050--media-left .media-content-5050__grid {
     grid-template-areas: "media content";
-}   */
+}   
 .media-content-5050__figure {
   margin: 0;
+  height: 25rem;
 }
 .media-content-5050__description {
   color: rgba(26, 22, 20, 0.70);
   line-height: 162.5%;
 }
-.media-content-5050__media.media {
-	height: 25rem;
-}
 .media-content-5050__figure img {
 	border-radius: .75rem;
 	box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
 }
+.media-content-5050__video {
+	border-radius: .75rem;
+}
 .media-content-5050__features {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  margin-top: 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	margin-top: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: .625rem;
 }
 .media-content-5050__features li {
   position: relative;
@@ -1783,14 +1787,48 @@ Media Content 5050 Style Start
   background-color: var(--lsc-color-accent);
   border-radius: 50%;
 }
- /*
+@media only screen and (max-width: 1199px) {
+.media-content-5050__grid {
+  grid-template-columns: 1fr 1fr;
+}
+}
+@media only screen and (max-width: 991px) {
+.media-content-5050__figure {
+	height: 20rem;
+}
+}
+@media only screen and (max-width: 767px) {
+.media-content-5050__figure {
+	height: 15rem;
+}
+.media-content-5050__grid {
+  grid-template-columns: 1fr;
+  row-gap: 1.875rem;
+}
+.media-content-5050--media-right .media-content-5050__grid {
+    grid-template-areas: "content" "media";
+}
+.media-content-5050--media-left .media-content-5050__grid {
+    grid-template-areas: "content" "media";
+}
+.media-content-5050__features {
+	margin-top: 1rem;
+	row-gap: 0;
+}
+}
+
+/*
 ===============================================
 Media Content 5050 Style End
 ===============================================
  */
 
 
-
+ /*
+===============================================
+Process Steps Style Start
+===============================================
+ */
 .process-steps {
   background-color: #ECEAE3;
 }
@@ -1852,9 +1890,12 @@ Media Content 5050 Style End
   margin: 0;
 }
 .faqs__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+	max-width: 55.625rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 .faqs__question-text {
   font-style: normal;
@@ -1874,7 +1915,11 @@ Media Content 5050 Style End
   margin-top: 1.25rem;
   max-width: 1000px;
 }
-
+ /*
+===============================================
+Process Steps Style End
+===============================================
+ */
 
 
  /*
