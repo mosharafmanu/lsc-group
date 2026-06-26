@@ -1209,6 +1209,16 @@
 .inner-hero__media {
 	height: 35.4375rem;
   min-height: 100%;
+  position: relative;
+}
+
+.inner-hero__media:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.80) 26.92%, rgba(0, 0, 0, 0.00) 100%);
 }
 .inner-hero__media,
 .inner-hero__inner {
@@ -1618,9 +1628,6 @@ Finance Product Style Start
 .finance_product-bridging-loan .inner-hero__media {
 	min-height: 37.5rem;
 }
-.inner-hero__facts-wrap {
-
-}
 .inner-hero__facts {
   border-radius: 1rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
@@ -1681,6 +1688,11 @@ Finance Product Style End
 ===============================================
 */
 
+/*
+===============================================
+Feature Cards Style Start
+===============================================
+*/
 
 .feature-cards {
   background-color: #F5F3EF;
@@ -1721,7 +1733,11 @@ Finance Product Style End
 .feature-cards__icon-svg {
   width: .625rem;
 }
-
+/*
+===============================================
+Feature Cards Style End
+===============================================
+*/
 
 
  /*
@@ -1737,37 +1753,41 @@ Media Content 5050 Style Start
   grid-template-columns: 34.1875rem 1fr;
   column-gap: 4rem;
 }
-/* .media-content-5050__content{
+.media-content-5050__content{
     grid-area: content;
 }
 .media-content-5050__media{
     grid-area: media;
 }
-.media-left .media-content-5050__grid{
+.media-content-5050--media-right .media-content-5050__grid {
     grid-template-areas: "content media";
 }
-.media-right .media-content-5050__grid{
+.media-content-5050--media-left .media-content-5050__grid {
     grid-template-areas: "media content";
-}   */
+}   
 .media-content-5050__figure {
   margin: 0;
+  height: 25rem;
 }
 .media-content-5050__description {
   color: rgba(26, 22, 20, 0.70);
   line-height: 162.5%;
 }
-.media-content-5050__media.media {
-	height: 25rem;
-}
 .media-content-5050__figure img {
 	border-radius: .75rem;
 	box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
 }
+.media-content-5050__video {
+	border-radius: .75rem;
+}
 .media-content-5050__features {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  margin-top: 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	margin-top: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: .625rem;
 }
 .media-content-5050__features li {
   position: relative;
@@ -1783,14 +1803,48 @@ Media Content 5050 Style Start
   background-color: var(--lsc-color-accent);
   border-radius: 50%;
 }
- /*
+@media only screen and (max-width: 1199px) {
+.media-content-5050__grid {
+  grid-template-columns: 1fr 1fr;
+}
+}
+@media only screen and (max-width: 991px) {
+.media-content-5050__figure {
+	height: 20rem;
+}
+}
+@media only screen and (max-width: 767px) {
+.media-content-5050__figure {
+	height: 15rem;
+}
+.media-content-5050__grid {
+  grid-template-columns: 1fr;
+  row-gap: 1.875rem;
+}
+.media-content-5050--media-right .media-content-5050__grid {
+    grid-template-areas: "content" "media";
+}
+.media-content-5050--media-left .media-content-5050__grid {
+    grid-template-areas: "content" "media";
+}
+.media-content-5050__features {
+	margin-top: 1rem;
+	row-gap: 0;
+}
+}
+
+/*
 ===============================================
 Media Content 5050 Style End
 ===============================================
  */
 
 
-
+ /*
+===============================================
+Process Steps Style Start
+===============================================
+ */
 .process-steps {
   background-color: #ECEAE3;
 }
@@ -1835,6 +1889,17 @@ Media Content 5050 Style End
 	font-size: .9375rem;
 	line-height: 150%;
 }
+/*
+===============================================
+Process Steps Style End
+===============================================
+ */
+
+/*
+===============================================
+Faq Section Style Start
+===============================================
+ */
 .faqs__item {
   border-radius: .5rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.10);
@@ -1852,9 +1917,12 @@ Media Content 5050 Style End
   margin: 0;
 }
 .faqs__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+	max-width: 55.625rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 .faqs__question-text {
   font-style: normal;
@@ -1874,7 +1942,280 @@ Media Content 5050 Style End
   margin-top: 1.25rem;
   max-width: 1000px;
 }
+/*
+===============================================
+Faq Section Style End
+===============================================
+ */
 
+
+/*
+===============================================
+Inner Hero Split Style Start
+===============================================
+ */
+.inner-hero--split .inner-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+}
+.inner-hero--split .inner-hero__content{
+    grid-area: content;
+}
+.inner-hero--split .inner-hero__media{
+    grid-area: media;
+}
+.inner-hero--split .inner-hero--image-right .inner-hero__inner {
+    grid-template-areas: "content media";
+}
+.inner-hero--split .inner-hero--image-left .inner-hero__inner{
+    grid-template-areas: "media content";
+} 
+.inner-hero--split .inner-hero__video {
+	border-radius: .75rem;
+}  
+.inner-hero--split .inner-hero__title {
+  color: var(--lsc-color-primary);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+.inner-hero--split .inner-hero__title span {
+	display: block;
+}
+.inner-hero--split .inner-hero__media {
+	height: 29.5625rem;
+}
+.inner-hero--split  .inner-hero__image {
+	border-radius: .75rem;
+}
+@media only screen and (max-width: 991px) {
+.inner-hero--split .inner-hero__media {
+	height: 18rem;
+}
+}
+@media only screen and (max-width: 767px) {
+.inner-hero--split .inner-hero__inner {
+  grid-template-columns: 1fr;
+  row-gap: 1.875rem;
+}
+.inner-hero--split .inner-hero--image-right .inner-hero__inner {
+    grid-template-areas: "content" "media";
+}
+.inner-hero--split .inner-hero--image-left .inner-hero__inner {
+    grid-template-areas: "content" "media";
+}
+}
+/*
+===============================================
+Inner Hero Split Style End
+===============================================
+*/
+
+
+/*
+===============================================
+Testimonials Style Start
+===============================================
+*/
+.testimonials-section--stacked {
+  margin-top: 6.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.testimonials-section--stacked .testimonials-section__stack {
+	row-gap: 2.5rem;
+}
+.testimonial-card--stacked{
+  position: relative;
+  max-width: 69.625rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonial-card--stacked .testimonial-card__body {
+  max-width: 48.875rem;
+  font-weight: 500;
+  z-index: 2;
+}
+.testimonial-card--stacked .testimonial-card__quote-icon {
+	position: absolute;
+	left: 1.75rem;
+}
+@media only screen and (max-width:991px) {
+.testimonials-section--stacked {
+	margin-top: 4rem;
+}
+}
+/*
+===============================================
+Testimonials Style End
+===============================================
+*/
+
+
+/*
+===============================================
+Case Studies Style Start
+===============================================
+*/
+.case-studies-section {
+	background-color: #ECEAE3;
+}
+.case-studies-grid {
+	margin-top: 2.5rem;
+}
+.case-study-card {
+  border-radius: .75rem;
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+  padding: 1rem;
+}
+.case-study-card__media {
+  display: block;
+}
+.case-study-card__media img {
+  height: 14.1875rem;
+  object-fit: cover;
+  border-radius: .75rem;
+}
+.case-study-card__content {
+  margin-top: 1.5rem;
+}
+.case-study-card__content a {
+  text-decoration: none;
+}
+.case-study-card__title a {
+  color: var(--lsc-color-primary);
+  font-weight: 600;
+  line-height: 150%;
+}
+.case-study-card__excerpt {
+  color: rgba(26, 22, 20, 0.50);
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 137.5%;
+}
+.case-study-card__link {
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  display: flex;
+  gap: .875rem;
+}
+@media only screen and (max-width: 991px) {
+.case-study-card__media img {
+	height: 14rem;
+}
+}
+/*
+===============================================
+Case Studies Style End
+===============================================
+*/
+
+/*
+===============================================
+Case Study Style Start
+===============================================
+*/
+.case-study-layout__grid {
+  display: grid;
+  grid-template-columns: 1fr 15.9375rem;
+}
+.case-study-layout {
+	margin-top: 6.25rem;
+	margin-bottom: 6.25rem;
+}
+.media-full__figure {
+	margin: 0;
+  border-radius: .75rem;
+}
+.media-full__figure img {
+  border-radius: .75rem;
+}
+.rich-text {
+  margin-top: 4rem;
+}
+.rich-text__content.entry-content h3 {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: capitalize;
+}
+.rich-text__content.entry-content p {
+  color: rgba(26, 22, 20, 0.70);
+  line-height: 162.5%;
+}
+.stats-section--band {
+	border: 0;
+	padding: 3rem 0;
+}
+.stats-section--band .stats-section__item {
+  border-radius: .75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+  padding: 1.5rem;
+}
+.stats-section--band .stats-section__value {
+  font-size: 2rem;
+  line-height: 150%;
+  font-family: Georgia;
+  margin-bottom: 0;
+}
+.stats-section--band .stats-section__label {
+	margin-top: .625rem;
+	font-size: .875rem;
+	font-weight: 600;
+	line-height: 162.5%;
+	letter-spacing: 0.7px;
+	text-transform: uppercase;
+	color: var(--lsc-color-primary);
+}
+.case-summary {
+  border-radius: .75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  padding: 2rem;
+}
+.case-summary__title {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  padding-bottom: 20px;
+}
+.case-summary__label {
+  color: rgba(26, 22, 20, 0.50);
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+.case-summary__value {
+  margin: 0;
+  line-height: 150%;
+  font-weight: 500;
+}
+.case-summary__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.625rem;
+}
+/*
+===============================================
+Case Study Style End
+===============================================
+*/
 
 
  /*

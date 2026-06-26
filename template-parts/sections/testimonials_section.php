@@ -73,7 +73,7 @@ if ( ! $title_lines && ! $description && ! $items ) {
 $section_classes = [
 	'testimonials-section',
 	'testimonials-section--' . sanitize_html_class( $layout ),
-	'layout-padding layout-padding0 pt-50 pb-50 pt-lg-100 pb-lg-110',
+	'layout-padding pt-50 pb-50 pt-lg-100 pb-lg-110',
 ];
 
 // Background palette cycled by position when a testimonial's theme is "auto".
