@@ -16,8 +16,8 @@
 
 <div id="page" class="site">
 
-<header class="site-header layout-padding">
-    <div class="lsc-container">
+<header class="site-header">
+    <div class="lsc-container layout-padding">
         <div class="header-main-inner">
 		<div class="site-branding">
 			<?php lsc_render_site_logo(); ?>
@@ -32,6 +32,7 @@
                             'menu_class'     => 'main-menu',
                             'fallback_cb'    => false,
                             'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'walker'         => class_exists( 'LSC_Mega_Menu_Walker' ) ? new LSC_Mega_Menu_Walker() : '',
                         ] );
                         ?>
                     </nav>

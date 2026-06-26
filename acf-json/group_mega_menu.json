@@ -1,0 +1,342 @@
+{
+    "key": "group_mega_menu",
+    "title": "Menu Item Settings",
+    "fields": [
+        {
+            "key": "field_mega_menu_type",
+            "label": "Menu Type",
+            "name": "menu_type",
+            "type": "button_group",
+            "instructions": "Regular keeps the standard WordPress dropdown built from this item's child menu items. Mega Menu replaces that dropdown with a full-width mega panel built from the fields below (child menu items are ignored).",
+            "required": 0,
+            "choices": {
+                "regular": "Regular Menu",
+                "mega": "Mega Menu"
+            },
+            "default_value": "regular",
+            "allow_null": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_heading",
+            "label": "Mega Heading",
+            "name": "mega_heading",
+            "type": "text",
+            "instructions": "Optional. Leave blank to use this menu item's label as the panel heading.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_menu_type",
+                        "operator": "==",
+                        "value": "mega"
+                    }
+                ]
+            ],
+            "placeholder": "Finance Products"
+        },
+        {
+            "key": "field_mega_columns",
+            "label": "Columns",
+            "name": "mega_columns",
+            "type": "button_group",
+            "instructions": "Number of cards per row on desktop.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_menu_type",
+                        "operator": "==",
+                        "value": "mega"
+                    }
+                ]
+            ],
+            "choices": {
+                "columns-2": "2",
+                "columns-3": "3",
+                "columns-4": "4",
+                "columns-5": "5"
+            },
+            "default_value": "columns-4",
+            "allow_null": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_source",
+            "label": "Cards Source",
+            "name": "mega_source",
+            "type": "button_group",
+            "instructions": "Pull cards automatically from a post type, or build them manually.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_menu_type",
+                        "operator": "==",
+                        "value": "mega"
+                    }
+                ]
+            ],
+            "choices": {
+                "post_type": "From Post Type",
+                "manual": "Manual"
+            },
+            "default_value": "post_type",
+            "allow_null": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_post_type",
+            "label": "Post Type",
+            "name": "mega_post_type",
+            "type": "select",
+            "instructions": "Which post type the cards are pulled from. New post types added in future appear here automatically.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    }
+                ]
+            ],
+            "choices": {},
+            "default_value": "finance_product",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_selection",
+            "label": "Which Posts",
+            "name": "mega_selection",
+            "type": "button_group",
+            "instructions": "Show the latest posts automatically, or hand-pick specific ones.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    }
+                ]
+            ],
+            "choices": {
+                "all": "Latest",
+                "selected": "Selected"
+            },
+            "default_value": "all",
+            "allow_null": 0,
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_selected_posts",
+            "label": "Selected Posts",
+            "name": "mega_selected_posts",
+            "type": "relationship",
+            "instructions": "Pick the posts to show, in order. Limited to the post type chosen above.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    },
+                    {
+                        "field": "field_mega_selection",
+                        "operator": "==",
+                        "value": "selected"
+                    }
+                ]
+            ],
+            "post_type": "",
+            "post_status": "",
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": 0,
+            "max": 0,
+            "elements": [
+                "featured_image"
+            ]
+        },
+        {
+            "key": "field_mega_posts_per_page",
+            "label": "Number Of Cards",
+            "name": "mega_posts_per_page",
+            "type": "number",
+            "instructions": "Maximum cards to show. Leave blank for no limit.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    },
+                    {
+                        "field": "field_mega_selection",
+                        "operator": "==",
+                        "value": "all"
+                    }
+                ]
+            ],
+            "default_value": 5,
+            "min": 1,
+            "placeholder": "5"
+        },
+        {
+            "key": "field_mega_orderby",
+            "label": "Order By",
+            "name": "mega_orderby",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    },
+                    {
+                        "field": "field_mega_selection",
+                        "operator": "==",
+                        "value": "all"
+                    }
+                ]
+            ],
+            "choices": {
+                "menu_order": "Page Order",
+                "date": "Date",
+                "title": "Title"
+            },
+            "default_value": "menu_order",
+            "allow_null": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_order",
+            "label": "Order",
+            "name": "mega_order",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "post_type"
+                    },
+                    {
+                        "field": "field_mega_selection",
+                        "operator": "==",
+                        "value": "all"
+                    }
+                ]
+            ],
+            "choices": {
+                "ASC": "Ascending",
+                "DESC": "Descending"
+            },
+            "default_value": "ASC",
+            "allow_null": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_mega_items",
+            "label": "Cards",
+            "name": "mega_items",
+            "type": "repeater",
+            "instructions": "Each card: image, title, description and a link.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_mega_source",
+                        "operator": "==",
+                        "value": "manual"
+                    }
+                ]
+            ],
+            "layout": "block",
+            "button_label": "Add Card",
+            "min": 0,
+            "max": 0,
+            "sub_fields": [
+                {
+                    "key": "field_mega_item_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "required": 0,
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all"
+                },
+                {
+                    "key": "field_mega_item_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 0,
+                    "wrapper": {
+                        "width": "50"
+                    }
+                },
+                {
+                    "key": "field_mega_item_link",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "link",
+                    "instructions": "The card's destination. The link text is used for the card's call-to-action (defaults to \"Learn More\").",
+                    "required": 0,
+                    "return_format": "array",
+                    "wrapper": {
+                        "width": "50"
+                    }
+                },
+                {
+                    "key": "field_mega_item_description",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "required": 0,
+                    "rows": 3,
+                    "new_lines": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "nav_menu_item",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Adds a Regular / Mega Menu toggle to each navigation item. Mega items render a full-width panel of cards (pulled from a post type or built manually). The CTA bar below the cards is global — see Site Settings.",
+    "show_in_rest": 0,
+    "modified": 1782470600
+}

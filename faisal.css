@@ -25,24 +25,51 @@
   padding: 0;
   list-style: none;
   display: flex;
-  column-gap: 3.5rem;
+  align-items: center;
+  column-gap: 2.5rem;
 }
 .main-menu > li {
   position: relative;
 }
 .main-menu > li > a {
-  color: var(--lsc-color-primary);
+  color: var(--lsc-color-dark);
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 131.25%;
   letter-spacing: 0.28px;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.375rem; /* 6px — space before the dropdown caret */
   text-decoration: none;
-  transition: 0.3s all ease;
+  transition: color 0.3s ease;
+  /* Extend the hover zone down to the header's bottom edge (where the mega
+     panel begins) so moving the cursor from the link into the panel doesn't
+     cross a dead gap. Equal negative margins keep the header height unchanged. */
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  margin-top: -2.5rem;
+  margin-bottom: -2.5rem;
 }
 .main-menu > li:hover > a {
   color: var(--lsc-color-accent);
+}
+
+/* Dropdown caret on items with a submenu (regular dropdown or mega menu). */
+.main-menu > li.menu-item-has-children > a::after,
+.main-menu > li.menu-item--has-mega > a::after {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 0.1rem solid currentColor;
+  border-bottom: 0.1rem solid currentColor;
+  transform: translateY(-0.1rem) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+.main-menu > li.menu-item-has-children:hover > a::after,
+.main-menu > li.menu-item--has-mega:hover > a::after {
+  transform: translateY(0.05rem) rotate(225deg);
 }
 
 .header-right {
@@ -51,11 +78,13 @@
   column-gap: 3.1875rem;
 }
 .header-phone-link {
+  color: var(--lsc-color-accent);
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: 105%;
   letter-spacing: 0.063rem;
+  text-decoration: none;
 }
 .header-actions {
   display: flex;
@@ -978,6 +1007,15 @@
   height: 7.5rem;
   resize: none;
 }
+/* Accent focus border for the contact fields. Needed because the base
+   `.lsc-contact-field textarea` rule (0,1,1) ties with the theme's
+   `textarea:focus` and, loading later, wins — so the orange focus state never
+   showed on the textarea. This (0,2,1) rule restores it for inputs + textarea. */
+.lsc-contact-field input:focus,
+.lsc-contact-field textarea:focus {
+  border-color: var(--lsc-color-accent);
+  outline: none;
+}
 .contact-form-card__form .lsc-contact-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1007,6 +1045,36 @@
 }
 .contact-form-card__form .wpcf7-submit:hover {
     opacity: .9;
+}
+/* Submit button icon (CF7 submit is rewritten to a <button> in PHP). */
+.wpcf7-submit {
+  column-gap: 0.5rem;
+}
+/* Drop the ring on mouse click, but keep a keyboard focus indicator.
+   :focus-visible only fires for keyboard/non-pointer focus, so clicking shows
+   nothing while Tab still shows an accessible ring. Element-qualified to beat
+   the theme's button[type="submit"]:focus outline. */
+button.wpcf7-submit:focus,
+button.wpcf7-submit:active {
+  outline: none;
+}
+button.wpcf7-submit:focus-visible {
+  outline: 0.125rem solid var(--lsc-color-accent);
+  outline-offset: 0.125rem;
+}
+.wpcf7-submit__icon {
+  display: inline-flex;
+  line-height: 0;
+}
+.wpcf7-submit__icon svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+/* Make the icon follow the button text colour (overrides the SVG's hardcoded
+   stroke; CSS beats the presentation attribute). */
+.wpcf7-submit__icon svg path {
+  stroke: currentColor;
 }
 @media only screen and (max-width: 991px) {
 .contact-section__grid {
@@ -2409,5 +2477,209 @@ Case Study Style End
  /*
 ===============================================
  Footer Style End
+===============================================
+ */
+
+ /*
+===============================================
+ Mega Menu Style Start
+===============================================
+ */
+
+/* Anchor the panel to the header so it can span the full viewport width. */
+.site-header {
+  position: relative;
+}
+
+/* Let a mega item's panel escape the <li> and fill the header width. */
+.main-menu > li.menu-item--has-mega {
+  position: static;
+}
+
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: #F5F3EF;
+  border-top: 0.063rem solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 1.5rem 2.5rem rgba(16, 20, 25, 0.08);
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0.625rem);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.menu-item--has-mega:hover > .mega-menu,
+.menu-item--has-mega:focus-within > .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Heading — Instrument Sans Bold 33px, uppercase, tight tracking. */
+.mega-menu__heading {
+  margin: 0 0 2.75rem;
+  font-family: var(--lsc-font-heading);
+  font-weight: 700;
+  font-size: 2.0625rem; /* 33px */
+  line-height: 1.15;
+  letter-spacing: -0.0267em; /* -0.88px @ 33px */
+  text-transform: uppercase;
+  color: #1A1614;
+}
+
+/* Card grid — reuses .card-grid responsive behaviour with a tighter 16px gap. */
+.mega-menu__grid {
+  --lsc-card-grid-gap: 1rem; /* 16px */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mega-menu__card {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+/* The whole card is one link. */
+.mega-menu__card-link-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.mega-menu__card-media {
+  display: block;
+  margin-bottom: 0.9375rem; /* 15px */
+  border-radius: 0.75rem; /* 12px */
+  overflow: hidden;
+  aspect-ratio: 255 / 180;
+}
+
+.mega-menu__card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mega-menu__card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-menu__card-title {
+  display: block;
+  margin: 0;
+  font-size: 1.0625rem; /* 17px */
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #1A1614;
+  transition: color 0.3s ease;
+}
+
+.mega-menu__card-link-wrap:hover .mega-menu__card-title {
+  color: var(--lsc-color-accent);
+}
+
+.mega-menu__card-description {
+  display: block;
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  line-height: 1.43;
+  color: rgba(26, 22, 20, 0.5);
+}
+
+.mega-menu__card-link {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.375rem;
+  margin-top: 0.625rem;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--lsc-color-accent);
+  transition: column-gap 0.3s ease;
+}
+
+.mega-menu__card-link-wrap:hover .mega-menu__card-link {
+  column-gap: 0.625rem;
+}
+
+.mega-menu__card-link-icon {
+  display: inline-flex;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* CTA bar — centred warm-stone pill below the cards. */
+.mega-menu__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 2.5rem auto 0;
+  padding: 1.25rem 3rem;
+  background-color: var(--lsc-color-subtle);
+  border-radius: 0.75rem; /* 12px */
+}
+
+.mega-menu__cta-text {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #1A1614;
+}
+
+.mega-menu__cta-phone {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--lsc-color-accent);
+  text-decoration: none;
+}
+
+.mega-menu__cta-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+/* The panel is a desktop hover affordance; small screens use the mobile nav. */
+@media only screen and (max-width: 991px) {
+  .mega-menu {
+    position: static;
+    border-top: 0;
+    box-shadow: none;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .mega-menu__cta {
+    padding: 1rem 1.5rem;
+  }
+}
+
+ /*
+===============================================
+ Mega Menu Style End
 ===============================================
  */
