@@ -1628,9 +1628,6 @@ Finance Product Style Start
 .finance_product-bridging-loan .inner-hero__media {
 	min-height: 37.5rem;
 }
-.inner-hero__facts-wrap {
-
-}
 .inner-hero__facts {
   border-radius: 1rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
@@ -1691,6 +1688,11 @@ Finance Product Style End
 ===============================================
 */
 
+/*
+===============================================
+Feature Cards Style Start
+===============================================
+*/
 
 .feature-cards {
   background-color: #F5F3EF;
@@ -1731,7 +1733,11 @@ Finance Product Style End
 .feature-cards__icon-svg {
   width: .625rem;
 }
-
+/*
+===============================================
+Feature Cards Style End
+===============================================
+*/
 
 
  /*
@@ -2008,6 +2014,7 @@ Inner Hero Split Style End
 ===============================================
 */
 
+
 /*
 ===============================================
 Testimonials Style Start
@@ -2046,7 +2053,6 @@ Testimonials Style Start
 Testimonials Style End
 ===============================================
 */
-
 
 
 /*
@@ -2111,7 +2117,105 @@ Case Studies Style End
 ===============================================
 */
 
-
+/*
+===============================================
+Case Study Style Start
+===============================================
+*/
+.case-study-layout__grid {
+  display: grid;
+  grid-template-columns: 1fr 15.9375rem;
+}
+.case-study-layout {
+	margin-top: 6.25rem;
+	margin-bottom: 6.25rem;
+}
+.media-full__figure {
+	margin: 0;
+  border-radius: .75rem;
+}
+.media-full__figure img {
+  border-radius: .75rem;
+}
+.rich-text {
+  margin-top: 4rem;
+}
+.rich-text__content.entry-content h3 {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: capitalize;
+}
+.rich-text__content.entry-content p {
+  color: rgba(26, 22, 20, 0.70);
+  line-height: 162.5%;
+}
+.stats-section--band {
+	border: 0;
+	padding: 3rem 0;
+}
+.stats-section--band .stats-section__item {
+  border-radius: .75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+  padding: 1.5rem;
+}
+.stats-section--band .stats-section__value {
+  font-size: 2rem;
+  line-height: 150%;
+  font-family: Georgia;
+  margin-bottom: 0;
+}
+.stats-section--band .stats-section__label {
+	margin-top: .625rem;
+	font-size: .875rem;
+	font-weight: 600;
+	line-height: 162.5%;
+	letter-spacing: 0.7px;
+	text-transform: uppercase;
+	color: var(--lsc-color-primary);
+}
+.case-summary {
+  border-radius: .75rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #FFF;
+  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  padding: 2rem;
+}
+.case-summary__title {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  padding-bottom: 20px;
+}
+.case-summary__label {
+  color: rgba(26, 22, 20, 0.50);
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+.case-summary__value {
+  margin: 0;
+  line-height: 150%;
+  font-weight: 500;
+}
+.case-summary__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.625rem;
+}
+/*
+===============================================
+Case Study Style End
+===============================================
+*/
 
 
  /*
