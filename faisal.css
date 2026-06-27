@@ -718,7 +718,7 @@
 ===============================================
  */
 .contact-section {
-  background-color: var(--lsc-color-subtle);
+	background-color: #F5F3EF;
 }
 .contact-section__title {
   margin-bottom: 0;
@@ -1502,15 +1502,21 @@ button.wpcf7-submit:focus-visible {
 	row-gap: 2.1875rem;
 }
 }
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
 .timeline-section__list {
-	grid-template-columns: 1fr;
+	grid-template-columns: repeat(4, 1fr);
 	row-gap: 2rem;
 }
 .timeline-section__number {
 	width: 2.6rem;
 	height: 2.6rem;
 }
+}
+@media only screen and (max-width: 767px) {
+.timeline-section__list {
+	grid-template-columns: 1fr;
+}
+
 }
 /*
 ===============================================
