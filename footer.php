@@ -58,7 +58,7 @@
 
 </div><!-- #page -->
 
-<?php //  lsc_render_mobile_navigation(); ?>
+<?php lsc_render_mobile_navigation(); ?>
 
 <?php wp_footer(); ?>
 

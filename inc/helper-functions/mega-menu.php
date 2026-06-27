@@ -233,7 +233,8 @@ if ( ! function_exists( 'lsc_render_mega_menu_panel' ) ) {
 		ob_start();
 		?>
 		<div class="mega-menu" role="region" aria-label="<?php echo esc_attr( $heading ); ?>">
-			<div class="mega-menu__container lsc-container">
+			<div class="mega-menu__panel">
+			<div class="mega-menu__container lsc-container layout-padding">
 				<?php if ( $heading ) : ?>
 					<h2 class="mega-menu__heading"><?php echo esc_html( $heading ); ?></h2>
 				<?php endif; ?>
@@ -296,6 +297,7 @@ if ( ! function_exists( 'lsc_render_mega_menu_panel' ) ) {
 					</div>
 				<?php endif; ?>
 			</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
@@ -328,6 +330,65 @@ if ( ! class_exists( 'LSC_Mega_Menu_Walker' ) ) {
 
 			if ( 'mega' === lsc_get_menu_item_type( $item->ID ) ) {
 				$output .= lsc_render_mega_menu_panel( $item );
+			}
+		}
+	}
+}
+
+/**
+ * Mobile nav walker: there is no hover panel on touch, so a mega item's ACF cards
+ * are rendered as a collapsible sub-menu (links only) and the <li> is flagged
+ * `menu-item-has-children` so the existing accordion JS adds a chevron + slide
+ * toggle. WP children of mega items are dropped (the cards are the source), matching
+ * the desktop walker.
+ */
+if ( ! class_exists( 'LSC_Mobile_Mega_Walker' ) ) {
+	class LSC_Mobile_Mega_Walker extends Walker_Nav_Menu {
+
+		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
+			if ( $element && isset( $element->ID ) && 0 === $depth && 'mega' === lsc_get_menu_item_type( $element->ID ) ) {
+				unset( $children_elements[ $element->ID ] );
+			}
+
+			parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
+		}
+
+		public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+			$is_mega = ( 0 === $depth && 'mega' === lsc_get_menu_item_type( $item->ID ) );
+
+			// Flag the item so the accordion JS treats it like a dropdown.
+			if ( $is_mega && ! in_array( 'menu-item-has-children', (array) $item->classes, true ) ) {
+				$item->classes[] = 'menu-item-has-children';
+			}
+
+			parent::start_el( $output, $item, $depth, $args, $id );
+
+			if ( $is_mega ) {
+				$cards = lsc_get_mega_menu_cards( $item->ID );
+
+				if ( $cards ) {
+					// Image cards (image with title overlaid), mirroring the desktop
+					// mega panel. `--i` drives the staggered reveal in CSS.
+					$output .= '<ul class="sub-menu mega-mobile-grid">';
+
+					$i = 0;
+					foreach ( $cards as $card ) {
+						$url   = ! empty( $card['url'] ) ? $card['url'] : '#';
+						$title = isset( $card['title'] ) ? $card['title'] : '';
+						$img   = isset( $card['image_html'] ) ? $card['image_html'] : '';
+
+						$output .= '<li class="menu-item mega-mobile-card-item" style="--i:' . (int) $i . '">';
+						$output .= '<a class="mega-mobile-card" href="' . esc_url( $url ) . '">';
+						if ( $img ) {
+							$output .= '<span class="mega-mobile-card__media">' . $img . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						$output .= '<span class="mega-mobile-card__title"><span class="mega-mobile-card__title-text">' . esc_html( $title ) . '</span><span class="mega-mobile-card__arrow" aria-hidden="true">&rarr;</span></span>';
+						$output .= '</a></li>';
+						$i++;
+					}
+
+					$output .= '</ul>';
+				}
 			}
 		}
 	}

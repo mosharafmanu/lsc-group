@@ -130,35 +130,34 @@
 
 		// ─────────────────────────────────────────────────────────────
 		// MOBILE SUBMENU TOGGLES
-		// Injects a chevron button next to each parent link and
-		// handles expand / collapse with aria state.
+		// Reuses the walker's own .submenu-indicator chevron as the toggle
+		// (no second button is injected). Tapping the chevron expands/collapses;
+		// tapping the link text still navigates. The `is-open` class on the <li>
+		// drives the chevron rotation and the staggered card reveal in CSS.
 		// ─────────────────────────────────────────────────────────────
 
-		const chevronSVG = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
 		$( '.mobile-menu li.menu-item-has-children' ).each( function () {
-			const $li      = $( this );
-			const $submenu = $li.children( '.sub-menu' ).hide();
-			const $btn     = $( '<button>', {
-				class:           'submenu-toggle',
-				'aria-expanded': 'false',
-				'aria-label':    'Expand submenu',
-				html:            chevronSVG,
-			} );
+			const $li        = $( this );
+			const $submenu   = $li.children( '.sub-menu' ).hide();
+			const $indicator = $li.children( 'a' ).find( '.submenu-indicator' );
 
-			$li.children( 'a' ).after( $btn );
+			// Fallback: if the walker indicator is missing, make the whole link toggle.
+			const $trigger = $indicator.length ? $indicator : $li.children( 'a' );
 
-			$btn.on( 'click', function () {
-				const isExpanded = $btn.attr( 'aria-expanded' ) === 'true';
+			$trigger.on( 'click', function ( e ) {
+				e.preventDefault();
+				e.stopPropagation();
 
-				// Close all other open submenus
-				$( '.mobile-menu li.menu-item-has-children' ).not( $li ).each( function () {
-					$( this ).children( '.sub-menu' ).slideUp( 300 );
-					$( this ).find( '.submenu-toggle' ).attr( 'aria-expanded', 'false' );
+				const willOpen = ! $li.hasClass( 'is-open' );
+
+				// Close any other open submenu.
+				$( '.mobile-menu li.menu-item-has-children.is-open' ).not( $li ).each( function () {
+					$( this ).removeClass( 'is-open' ).children( '.sub-menu' ).stop( true, true ).slideUp( 300 );
 				} );
 
-				$btn.attr( 'aria-expanded', String( ! isExpanded ) );
-				$submenu.slideToggle( 300 );
+				$li.toggleClass( 'is-open', willOpen );
+				$li.children( 'a' ).attr( 'aria-expanded', String( willOpen ) );
+				$submenu.stop( true, true ).slideToggle( 300 );
 			} );
 		} );
 
