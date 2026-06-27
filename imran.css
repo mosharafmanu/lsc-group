@@ -201,6 +201,64 @@
 	line-height: 1.5;
 	letter-spacing: 0.02625rem;
 }
+
+@media only screen and ( max-width: 1499px ) {
+  .site-branding {
+    max-width: 11rem;
+  }
+
+  .header-right {
+    column-gap: 1.5rem;
+  }
+
+  .main-menu {
+    column-gap: 1.5rem;
+  }
+
+  .header-phone-link {
+    color: var(--lsc-color-accent);
+    font-size: 1rem;
+  }
+
+}
+
+@media only screen and ( max-width: 1299px ) {
+  .site-branding {
+    max-width: 10.125rem;
+  }
+
+  .header-right {
+    column-gap: 1.5rem;
+  }
+
+  .header-actions {
+    gap: 1rem;
+  }
+
+  .main-menu {
+    column-gap: 1.2rem;
+  }
+
+  .header-cta-group {
+    column-gap: 1.2rem;
+  }
+
+}
+
+@media only screen and ( max-width: 1199px ) {
+
+  .site-branding {
+    max-width: 9rem;
+  }
+
+  .header-phone-link {
+    display: none;
+  }
+
+  .header-cta-btn {
+    font-size: .75rem;
+  }
+}
 /*
 ===============================================
  Header Style End

@@ -19,7 +19,7 @@ $background_style = get_sub_field( 'background_style' ) ?: 'light';
 $section_classes = [
 	'contact-section',
 	'contact-section--bg-' . $background_style,
-	'pt-50 pb-50 pt-lg-90 pb-lg-90',
+	'pt-50 pt-lg-90',
 ];
 
 // Get contact info from site settings
