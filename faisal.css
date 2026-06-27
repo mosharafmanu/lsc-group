@@ -1790,7 +1790,7 @@ Process Steps Style Start
 ===============================================
  */
 .process-steps {
-  background-color: #ECEAE3;
+  background-color: var(--lsc-color-subtle);
 }
 .process-steps__grid {
   margin: 0;
@@ -1800,7 +1800,7 @@ Process Steps Style Start
 }
 .process-steps__number {
   border-radius: .75rem;
-  background: #FFF;
+  background-color: var(--lsc-color-white);
   box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   display: flex;
   width: 4rem;
@@ -1954,7 +1954,7 @@ Single Case Study Style Start
 ===============================================
 */
 .case-studies-section {
-	background-color: #ECEAE3;
+	background-color: var(--lsc-color-subtle);
 }
 .case-studies-grid {
 	margin-top: 2.5rem;
@@ -2180,8 +2180,8 @@ Single Case Study Style Start
 }
 .stats-section--cards .stats-section__item {
   border-radius: .75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  background: #FFF;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+  background-color: var(--lsc-color-white);
   padding: 1.5rem;
 }
 .stats-section--cards .stats-section__value {
@@ -2201,9 +2201,9 @@ Single Case Study Style Start
 }
 .case-summary {
   border-radius: .75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
   background: #FFF;
-  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   padding: 2rem;
 }
 .case-summary__title {
@@ -2212,8 +2212,8 @@ Single Case Study Style Start
   font-weight: 700;
   line-height: 150%;
   text-transform: capitalize;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
-  padding-bottom: 20px;
+  border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
+  padding-bottom: 1.25rem;
 }
 .case-summary__label {
   color: rgba(26, 22, 20, 0.50);
@@ -2221,7 +2221,7 @@ Single Case Study Style Start
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  letter-spacing: 0.7px;
+  letter-spacing: 0.044rem;
   text-transform: uppercase;
 }
 .case-summary__value {
@@ -2318,6 +2318,12 @@ Brokers Section Style End
 ===============================================
 */
 
+
+/*
+===============================================
+Downloads Section Style Start
+===============================================
+*/
 .downloads-section__list {
   margin: 0;
   padding: 0;
@@ -2367,7 +2373,7 @@ border-radius: .75rem;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  letter-spacing: 0.42px;
+  letter-spacing: 0.026rem;
   display: inline-flex;
   gap: .625rem;
   align-items: center;
@@ -2400,11 +2406,13 @@ border-radius: .75rem;
 	align-items: center;
 	text-align: center;
 }
-
-
-
-
 }
+/*
+===============================================
+Downloads Section Style End
+===============================================
+*/
+
 
  /*
 ===============================================
