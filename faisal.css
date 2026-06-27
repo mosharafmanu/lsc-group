@@ -1944,7 +1944,7 @@ Testimonials Style End
 
 /*
 ===============================================
-Case Studies Style Start
+Single Case Study Style Start
 ===============================================
 */
 .case-studies-section {
@@ -2000,22 +2000,18 @@ Case Studies Style Start
 }
 /*
 ===============================================
-Case Studies Style End
+Single Case Study Style End
 ===============================================
 */
 
 /*
 ===============================================
-Case Study Style Start
+Media Full Style Start
 ===============================================
 */
-
-
 .media-full__video {
 	border-radius: 1rem;
 }
-
-
 .quote-block {
 	margin-top: 1.25rem;
 }
@@ -2067,13 +2063,12 @@ Case Study Style Start
   font-weight: 700;
   line-height: 150%;
 }
-
-
 /*
 ===============================================
-Case Study Style End
+Media Full Style End
 ===============================================
 */
+
 
 /*
 ===============================================
@@ -2081,18 +2076,29 @@ Inner Hero Split Style Start
 ===============================================
  */
 .inner-hero--split .inner-hero__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 1rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1rem;
 }
-.inner-hero--split .inner-hero__content{
-    grid-area: content;
+.inner-hero--split .inner-hero__content {
+	grid-area: content;
+	max-width: 100%;
+	padding-top: 3.4375rem;
 }
-
-.inner-hero--split .inner-hero--image-right .inner-hero__inner {
+.inner-hero--split .inner-hero__media {
+    grid-area: media;
+    height: 29.5625rem;
+}
+.inner-hero--split .inner-hero__media img {
+   border-radius: 1rem;
+}
+.inner-hero--split .inner-hero__media::before {
+	display: none;
+}
+.inner-hero--split.inner-hero--image-right .inner-hero__inner {
     grid-template-areas: "content media";
 }
-.inner-hero--split .inner-hero--image-left .inner-hero__inner{
+.inner-hero--split.inner-hero--image-left .inner-hero__inner{
     grid-template-areas: "media content";
 } 
 .inner-hero--split .inner-hero__video {
@@ -2106,13 +2112,7 @@ Inner Hero Split Style Start
   letter-spacing: -1px;
   text-transform: uppercase;
 }
-.inner-hero--split .inner-hero__title span {
-	display: block;
-}
-.inner-hero--split .inner-hero__media {
-  grid-area: media;
-  height: 29.5625rem;
-}
+
 @media only screen and (max-width: 991px) {
 .inner-hero--split .inner-hero__media {
 	height: 18rem;
@@ -2123,10 +2123,10 @@ Inner Hero Split Style Start
   grid-template-columns: 1fr;
   row-gap: 1.875rem;
 }
-.inner-hero--split .inner-hero--image-right .inner-hero__inner {
+.inner-hero--split.inner-hero--image-right .inner-hero__inner {
     grid-template-areas: "content" "media";
 }
-.inner-hero--split .inner-hero--image-left .inner-hero__inner {
+.inner-hero--split.inner-hero--image-left .inner-hero__inner {
     grid-template-areas: "content" "media";
 }
 }
@@ -2139,12 +2139,13 @@ Inner Hero Split Style End
 
 /*
 ===============================================
-Case Study Style Start
+Single Case Study Style Start
 ===============================================
 */
 .case-study-layout__grid {
-  display: grid;
-  grid-template-columns: 1fr 15.9375rem;
+	display: grid;
+	grid-template-columns: 1fr 20.0625rem;
+	column-gap: 8.4375rem;
 }
 .case-study-layout {
 	margin-top: 6.25rem;
@@ -2171,24 +2172,24 @@ Case Study Style Start
   color: rgba(26, 22, 20, 0.70);
   line-height: 162.5%;
 }
-.stats-section--band {
+.stats-section--cards {
   padding-top: 2.4rem;
   border: 0;
   padding: 3rem 0;
 }
-.stats-section--band .stats-section__item {
+.stats-section--cards .stats-section__item {
   border-radius: .75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   background: #FFF;
   padding: 1.5rem;
 }
-.stats-section--band .stats-section__value {
+.stats-section--cards .stats-section__value {
   font-size: 2rem;
   line-height: 150%;
   font-family: Georgia;
   margin-bottom: 0;
 }
-.stats-section--band .stats-section__label {
+.stats-section--cards .stats-section__label {
 	margin-top: .625rem;
 	font-size: .875rem;
 	font-weight: 600;
@@ -2234,7 +2235,7 @@ Case Study Style Start
 }
 /*
 ===============================================
-Case Study Style End
+Single Case Study Style End
 ===============================================
 */
 
