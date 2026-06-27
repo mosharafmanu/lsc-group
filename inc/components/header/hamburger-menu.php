@@ -6,8 +6,10 @@
 
 if ( ! function_exists( 'lsc_render_mobile_navigation' ) ) {
 	function lsc_render_mobile_navigation() {
-		$header_cta    = function_exists( 'lsc_get_header_button' ) ? lsc_get_header_button() : false;
-		$social_medias = function_exists( 'lsc_get_social_medias' ) ? lsc_get_social_medias() : false;
+		// The bar is just logo + hamburger; both CTAs and the phone live in the drawer.
+		$primary_cta   = function_exists( 'lsc_get_header_button' ) ? lsc_get_header_button() : false;
+		$secondary_cta = function_exists( 'lsc_get_header_button' ) ? lsc_get_header_button( 'header_button_secondary' ) : false;
+		$header_phone  = function_exists( 'lsc_get_header_phone' ) ? lsc_get_header_phone() : false;
 		?>
 
 		<div class="mobile-menu-overlay" aria-hidden="true"></div>
@@ -33,34 +35,31 @@ if ( ! function_exists( 'lsc_render_mobile_navigation' ) ) {
 						'menu_class'     => 'mobile-menu',
 						'fallback_cb'    => false,
 						'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						'walker'         => class_exists( 'LSC_Mobile_Mega_Walker' ) ? new LSC_Mobile_Mega_Walker() : '',
 					] );
 					?>
 				</div>
 
-				<?php if ( $header_cta ) : ?>
+				<?php if ( $header_phone || $primary_cta || $secondary_cta ) : ?>
 				<div class="mobile-nav-cta">
-					<a href="<?php echo esc_url( $header_cta['url'] ?? '#' ); ?>" class="site-btn btn-primary mobile-cta-btn"<?php echo isset( $header_cta['target'] ) && $header_cta['target'] ? ' target="' . esc_attr( $header_cta['target'] ) . '" rel="noopener noreferrer"' : ''; ?>>
-						<?php echo esc_html( $header_cta['title'] ?? 'Get Started' ); ?>
-					</a>
-				</div>
-				<?php endif; ?>
-
-				<?php if ( $social_medias && is_array( $social_medias ) && function_exists( 'lsc_render_social_medias' ) ) : ?>
-				<div class="mobile-nav-social">
 					<?php
-					// Reuse the same helper the footer calls (lsc_render_social_medias)
-					// rather than re-deriving SVG-vs-image handling and aria-labels here —
-					// it already injects an icon class onto each SVG's root element, which
-					// is what lets CSS size them; the hand-rolled markup this replaced
-					// echoed raw, unconstrained file_get_contents() output with no class
-					// to hook into, rendering each icon at its native (huge) viewBox size
-					// in a bare bulleted <ul>.
-					lsc_render_social_medias( [
-						'list_class' => 'mobile-social-list',
-						'item_class' => 'mobile-social-item',
-						'link_class' => 'mobile-social-link',
-						'icon_class' => 'mobile-social-icon',
-					] );
+					if ( $primary_cta && function_exists( 'lsc_render_header_button' ) ) {
+						lsc_render_header_button( [
+							'field' => 'header_button',
+							'class' => 'site-btn btn-primary mobile-cta-btn',
+						] );
+					}
+
+					if ( $secondary_cta && function_exists( 'lsc_render_header_button' ) ) {
+						lsc_render_header_button( [
+							'field' => 'header_button_secondary',
+							'class' => 'site-btn btn-outline mobile-cta-btn',
+						] );
+					}
+
+					if ( $header_phone && function_exists( 'lsc_render_header_phone' ) ) {
+						lsc_render_header_phone( [ 'class' => 'mobile-nav-phone' ] );
+					}
 					?>
 				</div>
 				<?php endif; ?>
