@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.59' );
+	define( 'LSC_GROUP_VERSION', '1.0.60' );
 }
 
 
