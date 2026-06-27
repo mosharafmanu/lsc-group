@@ -1,6 +1,6 @@
 # LSC Group Theme Handoff
 
-_Last updated: 2026-06-26 (session 6)._
+_Last updated: 2026-06-27 (session 7)._
 
 ## Current State
 
@@ -9,6 +9,39 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 - Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
 - Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below) — except the stacked-testimonials styles, written this session with explicit authorisation.
 - Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
+
+## 🔄 RESUME HERE (after shutdown) — session 7 end
+
+**Everything is committed and pushed. `main`, `faisal`, `imran` are all aligned on GitHub at `15960b4`** (working tree clean). Current cache-bust `LSC_GROUP_VERSION = 1.0.73`. Session 7 was **all front-end (header + nav + blog templates)** — no ACF/JSON changes, so **no Sync needed**; just **hard refresh**.
+
+**⚠️ Biggest structural change this session: header + mega-menu CSS MOVED out of `faisal.css` into `imran.css`.** If you look for `.site-header` / `.main-menu` / `.mega-menu*` styles, they live in **`imran.css`** now (it's enqueued just before `faisal.css`). The move was verified behaviour-preserving (combined cascade identical). Tell Faisal/Imran: the header is Imran's file now; Faisal still owns the section CSS in `faisal.css`.
+
+**What session 7 delivered:**
+
+- **Header nav typography/spacing polish** (in `imran.css`): `.header-cta-btn` type; gaps (`.main-menu` 34px, `.header-right` 41px, `.header-actions` 27px); phone letter-spacing; submenu caret now **accent colour by default**; nav vertical padding moved from `.site-header` onto `.main-menu > li > a` (`padding-block: 2.3125rem`). New filled-accent chevron `assets/svgs/submenu-indicator.php`.
+
+- **`faisal.css` de-duplicated (behaviour-preserving).** 28 duplicate rule blocks accumulated from past merges were consolidated; verified via a cascade-diff script that effective styles + all `@media` blocks are byte-identical (zero visual change). Faisal had flagged duplicate CSS — this fixed it. **Rule still stands:** if `origin/faisal` shows a big `group_flexible_content.json` diff it's an accidental ACF re-save → keep `main`'s.
+
+- **Responsive header + mobile drawer (NEW, all in `imran.css` + markup).** Hamburger now appears at **`@media (max-width:1024px), (pointer: coarse)`** (touch devices get it regardless of width). Bar is **minimal: logo + hamburger only**; the existing slide-in drawer (`hamburger-menu.php`, JS already in `scripts.js`) got its full CSS. Drawer = vertical menu + CTAs (**Quick Quote** filled, **Become A Broker** outline) + **centred phone below the buttons**. **Social icons removed** from the drawer.
+  - Tried icon-only CTA buttons in the bar (quote/broker icons added to `lsc_get_icon_svg()`), then **reverted to the minimal bar** per the user — the `quote`/`broker` icons remain in the icon map, unused, harmless.
+
+- **Mega-aware mobile accordion (NEW).** `inc/helper-functions/mega-menu.php` → **`LSC_Mobile_Mega_Walker`** (used only by the mobile `wp_nav_menu`): for mega items it flags the `<li>` as `menu-item-has-children` and renders the ACF mega cards as a `.mega-mobile-grid` of **full-width image cards** (180px tall, image with **title + accent `→` arrow overlaid** on a gradient). Cards **stagger in one-by-one** (`@keyframes lsc-mega-card-in`, `--i` index per card). The accordion is driven by the **walker's own `.submenu-indicator`** chevron — `scripts.js` was changed to wire the toggle to it (and add an `is-open` class) and **no longer injects a second `.submenu-toggle`** (that was the "duplicate arrow"). `.submenu-indicator` is hidden on desktop (CSS caret used there). Regular text submenus in the drawer get a tap/hover/focus effect (accent + warm highlight + arrow). The mega panel `.mega-menu__container` now also carries `layout-padding`.
+
+- **Desktop regular dropdown styled (NEW, `imran.css`).** The standard (non-mega) `.main-menu .sub-menu` had no CSS; now a premium floating white panel (soft layered shadow, scale+fade entrance, **staggered items**, hover arrow micro-interaction, invisible hover-bridge across a small float gap, third-level flyout).
+
+- **Mega panel reveal:** experimented with a slide-down "drawer from behind the header" then reverted to the **original fade + small `translateY` reveal** at the user's request (they preferred it). Current `.mega-menu` reveal = opacity/visibility + `translateY(0.625rem)`.
+
+- **Blog / archive / search templates (`index.php`, `archive.php`, `search.php`).** All posts now render as **uniform cards** — dropped the first-post `featured` (big) card variant (`'variant' => 'default'`). Headers + grid/results sections wrapped in **`.lsc-container`** alongside `layout-padding` (centred max-width). **Removed bottom padding** from the index + archive grid sections. `contact_section.php` also lost its bottom padding (`pb-50/pb-lg-90`).
+
+- **Footer global top margin.** `.site-footer` got `mt-50 mt-md-70 mt-lg-100` (50/70/100px responsive) so the gap before the footer is consistent **site-wide** (replaces per-section bottom padding). Spot-check inner pages for any double gap.
+
+- **Merged Imran's "Header Responsive Design"** (`b84a903`): intermediate desktop breakpoints (≤1499/1299/1199px) that progressively shrink logo/nav gaps/phone/CTAs **before** the ≤1024px hamburger kicks in — complementary to the above. Also shrank `.site-btn` padding to `.5rem 1.5rem` in `lsc-group-design-style.css`. **Merged Faisal's "update brokers css"** (`faisal.css`).
+
+- **mosharaf-core backport (separate repo `mosharafmanu/mosharaf-core`, pushed @ `d71854f`).** The blog/archive/search **uniform cards + `.mc-container`** + grid bottom-padding removal + the **global `.site-footer` margin** were ported to core (adapting `lsc-container`→`.mc-container`, `lsc_`→`mosharaf_`). Core working copy is `…/2026/plugins-dev/wp-content/themes/mosharaf-core` (the git one). **Not yet in core:** the header/mega/mobile-nav system (project-specific, lives in `imran.css`).
+
+**Likely next tasks:**
+- Faisal/Imran: `git pull`/reset before next push (all three branches at `15960b4`). Header CSS is in `imran.css` now.
+- Still pending from earlier sessions: build the **Contact** page (`inner_hero` Image + `contact_panel` Overlap=Yes) and place `specialist_cards`; author Case Studies / Downloads / Finance Products content; fill **Global CTA** + the two header buttons; facts-bar Figma-exact specs.
 
 ## 🔄 RESUME HERE (after shutdown) — session 6 end
 

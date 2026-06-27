@@ -2112,7 +2112,13 @@ Inner Hero Split Style Start
   letter-spacing: -1px;
   text-transform: uppercase;
 }
-
+.inner-hero--split .inner-hero__description {
+	color: var(--lsc-color-primary);
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 162.5%;
+}
 @media only screen and (max-width: 991px) {
 .inner-hero--split .inner-hero__media {
 	height: 18rem;
@@ -2308,6 +2314,22 @@ Single Case Study Style End
 .case-study-card:last-child img {
   height: 235px;
 } */
+
+
+
+
+.inner-hero--text .inner-hero__title {
+  color: var(--lsc-color-primary);
+}
+.inner-hero--text .inner-hero__title span {
+  display: block;
+}
+.inner-hero--text .inner-hero__description {
+  color: var(--lsc-color-primary);
+  font-size: 1.125rem;
+}
+
+
 
  /*
 ===============================================
