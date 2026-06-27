@@ -92,24 +92,28 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 					}
 					?>
 					<li class="download-item">
-						<span class="download-item__icon" aria-hidden="true">
-							<?php get_template_part( 'assets/svgs/download' ); ?>
-						</span>
+					   <div class="download-item-wrapper">
+						 <div class="download-item-left">
+							 <span class="download-item__icon" aria-hidden="true">
+							    <?php get_template_part( 'assets/svgs/download' ); ?>
+						     </span>
+							 <div class="download-item__content">
+								<?php if ( $download_title ) : ?>
+									<h5 class="download-item__title"><?php echo esc_html( $download_title ); ?></h5>
+								<?php endif; ?>
 
-						<div class="download-item__content">
-							<?php if ( $download_title ) : ?>
-								<h3 class="download-item__title"><?php echo esc_html( $download_title ); ?></h3>
-							<?php endif; ?>
-
-							<?php if ( $subtitle ) : ?>
-								<p class="download-item__subtitle"><?php echo esc_html( $subtitle ); ?></p>
-							<?php endif; ?>
+								<?php if ( $subtitle ) : ?>
+									<p class="download-item__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+								<?php endif; ?>
+							 </div>
+					      </div>
+						<div class="download-item-right">
+							<a class="download-item__button site-btn btn-primary" href="<?php echo esc_url( $file_url ); ?>" download target="_blank" rel="noopener">
+							   <span class="download-item__button-text"><?php esc_html_e( 'Download', 'lsc-group' ); ?></span>
+							   <span class="download-item__button-icon" aria-hidden="true"><?php get_template_part( 'assets/svgs/arrow-down' ); ?></span>
+						    </a>
 						</div>
-
-						<a class="download-item__button site-btn btn-primary" href="<?php echo esc_url( $file_url ); ?>" download target="_blank" rel="noopener">
-							<span class="download-item__button-text"><?php esc_html_e( 'Download', 'lsc-group' ); ?></span>
-							<span class="download-item__button-icon" aria-hidden="true"><?php get_template_part( 'assets/svgs/download' ); ?></span>
-						</a>
+					   </div>
 					</li>
 				<?php endforeach; ?>
 			</ul>
