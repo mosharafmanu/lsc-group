@@ -1510,7 +1510,7 @@
 }
 .timeline-border {
 	width: 100%;
-	height: 2px;
+	height: .125rem;
 	display: block;
 	background: rgba(0, 0, 0, 0.10);
 }
@@ -1605,7 +1605,7 @@ Cta Style Start
 	margin-top: 1.125rem;
 }
 .site-btn.btn-outline.cta-section__button {
-  border: 1px solid rgba(255, 255, 255, 0.30);
+  border: 0.063rem solid rgba(255, 255, 255, 0.30);
   color: var(--lsc-color-white);
 }
 @media only screen and (max-width:767px) {
@@ -1634,6 +1634,7 @@ Finance Product Style Start
   background: #FFF;
   box-shadow: 0 .5rem 2rem 0 rgba(0, 0, 0, 0.08);
   padding: 3rem;
+  position: relative;
 }
 .inner-hero__fact span {
   display: block;
@@ -1670,7 +1671,7 @@ Finance Product Style Start
 	margin-top: -2rem;
 }
 .inner-hero__fact {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+	border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
 	padding-bottom: .875rem;
   text-align: center;
   padding-left: 0;
@@ -1857,7 +1858,7 @@ Process Steps Style Start
 .process-steps__number {
   border-radius: .75rem;
   background: #FFF;
-  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px .125rem -1px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   display: flex;
   width: 4rem;
   height: 4rem;
@@ -1940,7 +1941,7 @@ Faq Section Style Start
 }
 .faqs__answer-inner {
   margin-top: 1.25rem;
-  max-width: 1000px;
+  max-width: 62.5rem;
 }
 /*
 ===============================================
@@ -1979,7 +1980,7 @@ Inner Hero Split Style Start
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
-  letter-spacing: -1px;
+  letter-spacing: -0.063rem;
   text-transform: uppercase;
 }
 .inner-hero--split .inner-hero__title span {
@@ -2135,7 +2136,10 @@ Case Study Style Start
   border-radius: .75rem;
 }
 .media-full__figure img {
-  border-radius: .75rem;
+  border-radius: 1rem;
+}
+.media-full__video {
+	border-radius: 1rem;
 }
 .rich-text {
   margin-top: 4rem;
@@ -2153,11 +2157,11 @@ Case Study Style Start
 }
 .stats-section--band {
 	border: 0;
-	padding: 3rem 0;
+	padding-top: 2.4rem;
 }
 .stats-section--band .stats-section__item {
   border-radius: .75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
   background: #FFF;
   padding: 1.5rem;
 }
@@ -2172,15 +2176,66 @@ Case Study Style Start
 	font-size: .875rem;
 	font-weight: 600;
 	line-height: 162.5%;
-	letter-spacing: 0.7px;
+	letter-spacing: 0.044rem;
 	text-transform: uppercase;
 	color: var(--lsc-color-primary);
 }
+.quote-block {
+	margin-top: 1.25rem;
+}
+.quote-block__card {
+  margin: 0;
+  border-radius: 1rem;
+  color: var(--lsc-color-white);
+  background-color: var(--lsc-color-primary);
+  padding: 3rem;
+  position: relative;
+}
+.quote-block__mark {
+  display: block;
+  position: absolute;
+  left: 1.75rem;
+  top: 2rem;
+}
+.quote-block__mark svg {
+  width: 4rem;
+}
+.quote-block__quote {
+	margin: 0;
+	color: var(--lsc-color-white);
+	font-size: 1.375rem;
+	font-style: italic;
+	font-weight: 500;
+	line-height: 162.5%;
+	z-index: 2;
+	position: relative;
+}
+.quote-block__author {
+  margin-top: 2.125rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.quote-block__author span {
+  display: block;
+}
+.quote-block__role {
+  color: rgba(255, 255, 255, 0.60);
+  font-size: .875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-top: .25rem;
+}
+.quote-block__name {
+  font-weight: 700;
+  line-height: 150%;
+}
 .case-summary {
   border-radius: .75rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
   background: #FFF;
-  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   padding: 2rem;
 }
 .case-summary__title {
@@ -2189,8 +2244,8 @@ Case Study Style Start
   font-weight: 700;
   line-height: 150%;
   text-transform: capitalize;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
-  padding-bottom: 20px;
+  border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
+  padding-bottom: 1.25rem;
 }
 .case-summary__label {
   color: rgba(26, 22, 20, 0.50);
@@ -2198,7 +2253,7 @@ Case Study Style Start
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  letter-spacing: 0.7px;
+  letter-spacing: 0.044rem;
   text-transform: uppercase;
 }
 .case-summary__value {
@@ -2211,6 +2266,7 @@ Case Study Style Start
   flex-direction: column;
   row-gap: 1.625rem;
 }
+
 /*
 ===============================================
 Case Study Style End
