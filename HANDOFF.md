@@ -1,6 +1,6 @@
 # LSC Group Theme Handoff
 
-_Last updated: 2026-06-26 (session 5)._
+_Last updated: 2026-06-26 (session 6)._
 
 ## Current State
 
@@ -9,6 +9,44 @@ The theme is being built from the LSC Capital design (homepage + inner pages).
 - Visual system: warm cream/stone backgrounds, near-black text, orange accent `#ff8a3b`, Instrument Sans, uppercase compact headings, rounded cards.
 - Section work is **code-first**: PHP templates + ACF JSON only. **CSS is handled separately** (see "Who owns the CSS" below) — except the stacked-testimonials styles, written this session with explicit authorisation.
 - Local WordPress: `http://localhost/ClientProjects/WordPress/2026/lsc/`.
+
+## 🔄 RESUME HERE (after shutdown) — session 6 end
+
+**Everything is committed and pushed. `main`, `faisal`, `imran` are all aligned on GitHub** (working tree clean). Current cache-bust `LSC_GROUP_VERSION = 1.0.58`.
+
+**Do these once on any environment that pulls this state:**
+1. **WP Admin → Custom Fields → Sync** — picks up the new **Menu Item Settings** group (mega menu, on Nav Menu Items) **and** the new **Mega Menu** tab in Site Settings (global CTA).
+2. **Hard refresh** (version is `1.0.58`).
+3. **Appearance → Menus** — set a top-level item (e.g. Products) to **Mega Menu**; fill **Site Settings → Mega Menu** CTA once.
+
+**What session 6 delivered:**
+
+- **Branch merge / Faisal JSON revert (again).** Pulled `origin/faisal` (was 3 commits ahead) — kept his real work (`faisal.css` + `case_studies_grid.php`/`testimonials_section.php` spacing tweaks) but **excluded his `group_flexible_content.json` re-save** (verified all 367 fields identical → ACF admin re-save bloat, not real structure). Same rule as session 5: a big `group_flexible_content.json` diff on `origin/faisal` = accidental admin re-save, keep `main`'s.
+
+- **Mega Menu (NEW).** Per-nav-item **Regular / Mega** toggle (default Regular) via a custom `Walker_Nav_Menu`. Regular items keep the standard WP dropdown; mega items render a full-width ACF-built panel (cards from a **post type** or a **manual** repeater) + a global CTA bar. Files:
+  - `inc/helper-functions/mega-menu.php` — `LSC_Mega_Menu_Walker` (suppresses mega items' children, injects the panel), card normaliser + panel renderer, `acf/load_field` filter populating the **Post Type** select with public types (excludes Media), relationship-query scoping, and a `nav_menu_css_class` hook (`menu-item--has-mega`).
+  - `acf-json/group_mega_menu.json` — field group on **Nav Menu Item**: Menu Type, Mega Heading (falls back to the item label), Columns (2–5), Cards Source (post_type/manual), dynamic Post Type, Latest/Selected + count/order, manual Cards repeater (image/title/description/link).
+  - `acf-json/group_site_settings.json` — new **Mega Menu** tab: global `mega_cta_text` + `mega_cta_phone` (phone falls back to Header Phone). The CTA bar is the **same on every mega menu** (per the design).
+  - `header.php` — wired the walker; **moved `layout-padding` from the `<header>` onto the inner `.lsc-container`**.
+  - **CSS (authorised, in `faisal.css`):** mega panel styled from Figma (`KHKW4zDKtsMYJsvvCPtE7P`) — cream panel, uppercase heading, card grid (reuses `.card-grid.columns-N`), warm-stone CTA pill. Panel anchors to `.site-header` (full-width), reveals on hover/`:focus-within`. **Whole card is one link**; grid **left-aligns** (plain `card-grid`, no `--center-last-row`). BEM: `.menu-item--has-mega › .mega-menu › __container/__heading/__grid › .mega-menu__card › __link-wrap › __media/__image + __body › __title/__description/__link` + `.mega-menu__cta`.
+
+- **Header nav styling (Figma `EAzsntwMMAIrMyhYC3mRE2`, `faisal.css`).** Dropdown **carets** on `.menu-item-has-children` + `.menu-item--has-mega` (currentColor chevron, rotates on hover); item spacing `2.5rem`; link colour → `--lsc-color-dark`; phone → accent orange. **Hover-bridge:** `.main-menu > li > a` got `padding-block: 2.5rem` + matching negative margins so the cursor can travel from the link into the mega panel without crossing the header's padding gap (panel was closing on mouse-out).
+
+- **Container width fix (framework plumbing — `assets/css/lsc-group-design-style.css` + `style.css`).** New `--lsc-layout-padding` token (24/32/50px at the breakpoints). `.lsc-container.layout-padding` now sets `max-width: calc(var(--lsc-container-max) + 2 * var(--lsc-layout-padding))` so the **content stays a true 1342px** instead of the border-box padding eating it (was 1242–1294px). Header and mega content now align. ⚠️ **Theme-wide:** every section using `.lsc-container.layout-padding` widened ~50–100px at large screens — Faisal should spot-check sections. The `≥1600` gutter bump is kept (it still drives the gutter for full-width `layout-padding` elements like blog/footer/search). `.layout-margin` is dead code (unused in templates) if you ever want to strip it.
+
+- **Contact form (CF7).**
+  - **Textarea focus border** now shows accent on focus (was a specificity tie: `.lsc-contact-field textarea` base border beat the theme's `textarea:focus`; fixed with `.lsc-contact-field input:focus, …textarea:focus`).
+  - **Submit icon:** `inc/helper-functions/contact-form.php` (NEW) hooks `wpcf7_form_elements` to rewrite the CF7 submit `<input>` → `<button>` so it can carry the **butterfly/send icon** (`assets/svgs/butter-fly.php`) **before** the label. Icon colour follows the text via `currentColor` (CSS override of the SVG's hardcoded stroke). Applies to **all** CF7 submit buttons.
+  - **Submit focus ring:** removed for mouse (`:focus`/`:active`), kept for keyboard (`:focus-visible`) — the recommended accessible pattern.
+
+- **mosharaf-core backport (separate repo, pushed to `main` @ `2442b0c`, version `1.0.39`).** Ported to the core theme: the video `object-fit: cover` fix (`video-behaviors.css`), `contact-form.php` + `butter-fly.php` + submit icon CSS (`mosharaf_`-prefixed), the submit `:focus-visible` fix, and documented the **video ACF field instructions** (Behavior/Muted/Loop/etc. verbatim copy) + the controls-leak note in `.ai/VIDEO-SYSTEM.md`. **Still NOT in core (candidate):** the container gutter fix above (genuinely core/reusable plumbing).
+
+> ⚠️ **This session edited `faisal.css` heavily** (mega menu, header nav, contact-form textarea focus, submit icon/focus) **and the framework CSS** (`lsc-group-design-style.css` container math + `style.css` token). Tell Faisal to `git pull` / reset to `origin/faisal` before his next push, and to spot-check his sections against the new 1342px content width.
+
+**Likely next tasks:**
+- Faisal: review the mega-menu look + spot-check all sections at the wider 1342 content; facts-bar still open from session 5.
+- Optionally port the **container gutter fix** to mosharaf-core.
+- Still pending from session 4: build the **Contact** page (`contact_panel`, Overlap=Yes) and place `specialist_cards`; author Case Studies / Downloads; fill **Global CTA** + the two header buttons.
 
 ## 🔄 RESUME HERE (after shutdown) — session 5 end
 

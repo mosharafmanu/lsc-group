@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.51' );
+	define( 'LSC_GROUP_VERSION', '1.0.58' );
 }
 
 
@@ -203,3 +203,15 @@ add_filter( 'the_content', function( $content ) {
 	}
 	return preg_replace( '/(<[^>]+) style=".*?"/i', '$1', $content );
 }, 20 );
+
+function menu_width_admin_styles() {
+  echo '<style>
+	.menu-item-bar .menu-item-handle {
+	  max-width: 70% !important;
+	}
+	.menu-item-settings {
+	  max-width: 70% !important;
+	}
+  </style>';
+}
+add_action('admin_head', 'menu_width_admin_styles');

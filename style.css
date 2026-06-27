@@ -69,7 +69,8 @@ Design Tokens
     --lsc-font-body:    'Instrument Sans', sans-serif;
 
 	/* Container */
-    --lsc-container-max: 83.75rem; /* 1340px */
+    --lsc-container-max: 83.875rem; /* 1342px */
+    --lsc-layout-padding: 1.5rem;   /* 24px — base gutter; bumped at 1200/1600 (see layout-padding) */
 
 
 	/* Buttons */

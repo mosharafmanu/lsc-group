@@ -509,6 +509,47 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_mega_menu_tab",
+            "label": "Mega Menu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_options_mega_cta_text",
+            "label": "Mega Menu CTA Text",
+            "name": "mega_cta_text",
+            "type": "text",
+            "instructions": "Message shown in the bar below the cards on every mega menu (e.g. \"Call us today to discuss your funding requirements\"). Leave empty to hide the bar.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Call us today to discuss your funding requirements"
+        },
+        {
+            "key": "field_options_mega_cta_phone",
+            "label": "Mega Menu CTA Phone",
+            "name": "mega_cta_phone",
+            "type": "text",
+            "instructions": "Phone number shown in the mega menu CTA bar. Leave blank to use the Header Phone above.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "01706 234623"
         }
     ],
     "location": [
@@ -530,5 +571,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782358408
+    "modified": 1782470600
 }
