@@ -5,8 +5,6 @@
  */
 
 .site-header {
-	padding-top: 1.375rem;
-	padding-bottom: 1.375rem;
 	border: 0.063rem solid rgba(0, 0, 0, 0.10);
 	background-color: #F5F3EF;
 }
@@ -26,7 +24,7 @@
   list-style: none;
   display: flex;
   align-items: center;
-  column-gap: 2.5rem;
+  column-gap: 2.125rem;
 }
 .main-menu > li {
   position: relative;
@@ -43,13 +41,7 @@
   column-gap: 0.375rem; /* 6px — space before the dropdown caret */
   text-decoration: none;
   transition: color 0.3s ease;
-  /* Extend the hover zone down to the header's bottom edge (where the mega
-     panel begins) so moving the cursor from the link into the panel doesn't
-     cross a dead gap. Equal negative margins keep the header height unchanged. */
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-  margin-top: -2.5rem;
-  margin-bottom: -2.5rem;
+  padding-block: 1.375rem;
 }
 .main-menu > li:hover > a {
   color: var(--lsc-color-accent);
@@ -62,8 +54,8 @@
   display: inline-block;
   width: 0.4rem;
   height: 0.4rem;
-  border-right: 0.1rem solid currentColor;
-  border-bottom: 0.1rem solid currentColor;
+  border-right: 0.1rem solid var(--lsc-color-accent);
+  border-bottom: 0.1rem solid var(--lsc-color-accent);
   transform: translateY(-0.1rem) rotate(45deg);
   transition: transform 0.3s ease;
 }
@@ -75,7 +67,7 @@
 .header-right {
   display: flex;
   align-items: center;
-  column-gap: 3.1875rem;
+  column-gap: 2.5625rem;
 }
 .header-phone-link {
   color: var(--lsc-color-accent);
@@ -83,17 +75,24 @@
   font-style: normal;
   font-weight: 600;
   line-height: 105%;
-  letter-spacing: 0.063rem;
+  letter-spacing: 0.0625rem;
   text-decoration: none;
 }
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1.9375rem;
+  gap: 1.6875rem;
 }
 .header-cta-group {
 	display: flex;
 	column-gap: 1.5rem;
+}
+.header-cta-btn {
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.02625rem;
 }
 /*
 ===============================================
