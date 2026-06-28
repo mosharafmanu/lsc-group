@@ -31,7 +31,7 @@ if ( ! $has_form && ! $has_info && ! $map_embed ) {
 	return;
 }
 
-$section_classes = [ 'contact-panel' ];
+$section_classes = [ 'contact-panel pb-50 pb-lg-100' ];
 
 if ( $overlap ) {
 	$section_classes[] = 'contact-panel--overlap';

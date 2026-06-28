@@ -99,7 +99,7 @@ $grid_classes = [
 						<?php endif; ?>
 
 						<?php if ( $card_title ) : ?>
-							<h3 class="specialist-cards__card-title"><?php echo esc_html( $card_title ); ?></h3>
+							<h5 class="specialist-cards__card-title"><?php echo esc_html( $card_title ); ?></h5>
 						<?php endif; ?>
 
 						<?php if ( $card_description ) : ?>

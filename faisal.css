@@ -89,7 +89,7 @@
 }
 .hero-section__buttons .btn-outline {
   border-radius: .375rem;
-  border: 0.063rem solid #FEFADC;
+  border: 0.063rem solid var(--lsc-color-light);
   color: var(--lsc-color-light);
 }
 .hero-section__buttons .site-btn {
@@ -616,10 +616,10 @@
 /* Stacked: the original quote icon sits in normal flow above the copy. */
 
 .testimonial-card--stacked .testimonial-card__quote-icon svg {
-  width: 3rem;
-  height: auto;
+	width: 3rem;
+	height: auto;
+	opacity: 0.2;
 }
-
 .testimonial-card--stacked .testimonial-card__quote p {
   margin: 0;
 }
@@ -717,7 +717,7 @@
 ===============================================
  */
 .contact-section {
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .contact-section__title {
   margin-bottom: 0;
@@ -1319,7 +1319,7 @@ button.wpcf7-submit:focus-visible {
   margin-top: 1.25rem;
 }
 .content-card-5050 {
-  background-color: #ECEAE3;
+  background-color: var(--lsc-color-subtle);
 }
 .content-card-5050__description {
   color: rgba(26, 22, 20, 0.70);
@@ -1461,7 +1461,7 @@ button.wpcf7-submit:focus-visible {
   align-items: center;
   flex-shrink: 0;
   border-radius: 50%;
-  border: .25rem solid #ECEAE3;
+  border: .25rem solid var(--lsc-color-subtle);
   background-color: var(--lsc-color-primary);
   color: var(--lsc-color-white);
   font-size: 1.125rem;
@@ -1575,7 +1575,7 @@ Finance Product Style Start
 .inner-hero__facts {
   border-radius: 1rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
-  background: #FFF;
+  background-color: var(--lsc-color-white);
   box-shadow: 0 .5rem 2rem 0 rgba(0, 0, 0, 0.08);
   padding: 3rem;
   position: relative;
@@ -1639,7 +1639,7 @@ Feature Cards Style Start
 */
 
 .feature-cards {
-  background-color: #F5F3EF;
+  background-color: var(--lsc-color-panel);
 }
 .feature-cards__card {
   background-color: var(--lsc-color-white);
@@ -2032,7 +2032,8 @@ Media Full Style Start
   top: 2rem;
 }
 .quote-block__mark svg {
-  width: 4rem;
+	width: 4rem;
+	opacity: 0.2;
 }
 .quote-block__quote {
 	margin: 0;
@@ -2203,7 +2204,7 @@ Single Case Study Style Start
 .case-summary {
   border-radius: .75rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
-  background: #FFF;
+  background-color: var(--lsc-color-white);
   box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   padding: 2rem;
 }
@@ -2617,14 +2618,22 @@ Feature Column Style End
 */
 
 
+
+/*
+===============================================
+Contact Panel Style Start
+===============================================
+*/
 .contact-panel.contact-panel--overlap {
   background-color: var(--lsc-color-panel);
+}
+.contact-panel--overlap .contact-panel__grid {
+  margin-top: -6.25rem;
 }
 .contact-panel__grid {
 	display: grid;
 	grid-template-columns: 48.600125rem 1fr;
 	column-gap: 4rem;
-	margin-top: -6.25rem;
 	position: relative;
 	z-index: 2;
 }
@@ -2661,12 +2670,70 @@ Feature Column Style End
 }
 }
 @media only screen and (max-width: 767px) {
-.contact-panel__grid {
+.contact-panel--overlap .contact-panel__grid {
 	margin-top: -2rem;
 }
 .contact-panel__grid {
 	grid-template-columns: 1fr;
   row-gap: 2rem;
+}
+}
+/*
+===============================================
+Contact Panel Style End
+===============================================
+*/
+
+.specialist-cards__card {
+  border-radius: .75rem;
+  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px .125rem -1px rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-panel);
+  padding: 2rem;
+  text-align: center;
+}
+.specialist-cards__avatar {
+  font-family: Georgia;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 133.333%;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.specialist-cards__card-title {
+  line-height: 150%;
+  text-transform: capitalize;
+  margin-top: 1.5rem;
+}
+.specialist-cards__card-description {
+  color: rgba(26, 22, 20, 0.60);
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+.specialist-cards__link {
+  font-size: .9375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0.375px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .specialist-cards__avatar {
+  font-size: 1rem;
+  width: 3rem;
+  height: 3rem;
 }
 }
  /*
@@ -2678,7 +2745,7 @@ Feature Column Style End
 	border-top: 0.063rem solid rgba(26, 22, 20, 0.08);
 } 
 .footer-top-inner {
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .footer-top {
 	display: grid;
@@ -2810,7 +2877,7 @@ Feature Column Style End
 }
 .footer-bottom {
   border-top: 0.063rem solid rgba(26, 22, 20, 0.06);
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .footer-bottom-inner {
   display: flex;
