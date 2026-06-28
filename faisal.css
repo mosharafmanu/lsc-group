@@ -1688,12 +1688,12 @@ Feature Cards Style End
 Media Content 5050 Style Start
 ===============================================
  */
-.media-content-5050--has-bg {
+.media-content-5050 {
   background-color: var(--lsc-color-white);
 }
 .media-content-5050__grid {
   display: grid;
-  grid-template-columns: 34.1875rem 1fr;
+  grid-template-columns: 1fr 1fr;
   column-gap: 4rem;
 }
 .media-content-5050__content{
@@ -1745,7 +1745,7 @@ Media Content 5050 Style Start
   height: .375rem;
   background-color: var(--lsc-color-accent);
   border-radius: 50%;
-}
+} 
 @media only screen and (max-width: 1199px) {
 .media-content-5050__grid {
   grid-template-columns: 1fr 1fr;
@@ -1775,7 +1775,6 @@ Media Content 5050 Style Start
 	row-gap: 0;
 }
 }
-
 /*
 ===============================================
 Media Content 5050 Style End
@@ -1831,6 +1830,23 @@ Process Steps Style Start
 	text-align: center;
 	font-size: .9375rem;
 	line-height: 150%;
+}
+@media only screen and (max-width: 991px) {
+.process-steps .card-grid.card-grid--center-last-row {
+	flex-wrap: initial;
+}
+}
+@media only screen and (max-width: 767px) {
+.process-steps .card-grid.card-grid--center-last-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	row-gap: 1.5rem;
+	margin-top: 3rem;
+}
+.process-steps__number {
+	width: 3rem;
+	height: 3rem;
+}
 }
 /*
 ===============================================
@@ -2419,6 +2435,205 @@ border-radius: .75rem;
 Downloads Section Style End
 ===============================================
 */
+
+/*
+===============================================
+Inner Hero Text Style Start
+===============================================
+*/
+.media-content-5050--has-bg {
+	background-color: var(--lsc-color-subtle);
+}
+.inner-hero--text {
+  background-color: var(--lsc-color-white);
+  padding-bottom: 13.0625rem;
+}
+.media-content-5050__title {
+	line-height: 110%;
+	letter-spacing: -0.88px;
+}
+@media only screen and (max-width: 1199px) {
+.inner-hero--text {
+	padding-bottom: 8rem;
+}
+}
+@media only screen and (max-width: 991px) {
+.inner-hero--text {
+	padding-bottom: 6rem;
+}
+}
+/*
+===============================================
+Inner Hero Text Style End
+===============================================
+*/
+
+/*
+===============================================
+Contact Bg Dark Style Start
+===============================================
+*/
+.contact-section--bg-dark {
+	background-color: var(--lsc-color-primary);
+}
+
+.contact-section--bg-dark .contact-section__description p {
+  color: rgba(255, 255, 255, 0.55);
+}
+@media only screen and (max-width: 767px) {
+.contact-section--bg-dark .contact-section__description p br {
+  display: none;
+}
+}
+/*
+===============================================
+Contact Bg Dark Style End
+===============================================
+*/
+
+
+/*
+===============================================
+Feature Column Style Start
+===============================================
+*/
+.feature-columns {
+	background-color: var(--lsc-color-subtle);
+}
+.feature-columns__title {
+	font-style: normal;
+	font-weight: 700;
+	line-height: 110%;
+}
+.feature-columns__inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 6rem;
+}
+.feature-columns__description {
+  color: rgba(26, 22, 20, 0.70);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 162.5%;
+  margin-top: 1.5rem;
+}
+.lsc-list.feature-columns__features {
+	margin-top: 1.875rem;
+}
+.feature-columns__card {
+  border-radius: .75rem;
+  background-color: var(--lsc-color-primary);
+  padding: 2rem;
+}
+.feature-columns__card-title {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  color: var(--lsc-color-white);
+}
+.feature-columns__card-description {
+  color: rgba(255, 255, 255, 0.60);
+  font-size: .9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.40625rem;
+}
+.feature-columns__card-buttons{
+  margin-top: 1.5rem;
+  row-gap: 1rem;
+}
+.feature-columns__card-buttons .feature-columns__card-button:first-child {
+  font-size: .9375rem;
+}
+.feature-columns__card-buttons .feature-columns__card-button {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.25rem;
+  padding: .75rem 1.5rem;
+	line-height: 112.5%;
+}
+.feature-columns__figure {
+  margin: 0;
+  height: 15rem;
+}
+.feature-columns__figure img {
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, 0.00);
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
+}
+.feature-columns-cards-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.25rem;
+  column-gap: 1.25rem;
+  align-items: center;
+}
+.feature-columns__info-card {
+  border-radius: .75rem;
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+  padding: 2rem;
+}
+.feature-columns__info-card-title {
+	color: var(--lsc-color-primary);
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 150%;
+	margin-bottom: 0;
+}
+.feature-columns__info-card-description {
+  color: rgba(26, 22, 20, 0.60);
+  font-size: .9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-top: .625rem;
+}
+.feature-columns__cards, .feature-columns__aside {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+}
+
+@media only screen and (max-width:1199px) {
+.feature-columns__inner {
+	column-gap: 3rem;
+}
+}
+@media only screen and (max-width: 991px) {
+.feature-columns__inner{
+	column-gap: 3rem;
+}
+.feature-columns-cards-right {
+	grid-template-columns: 1fr;
+}
+}
+@media only screen and (max-width:767px) {
+.feature-columns__inner{
+  grid-template-columns: 1fr;
+	row-gap: 2rem;
+}
+.feature-columns__card-description{
+	margin-top: 1rem;
+}
+.lsc-list.feature-columns__features {
+	margin-top: 1.5rem;
+}
+.feature-columns__card-buttons .feature-columns__card-button {
+	font-size: 1rem;
+}
+}
+/*
+===============================================
+Feature Column Style End
+===============================================
+*/
+
+
 
 
  /*

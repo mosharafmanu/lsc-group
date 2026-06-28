@@ -127,7 +127,7 @@ if ( $enable_background ) {
 				<?php endif; ?>
 
 				<?php if ( $features && is_array( $features ) ) : ?>
-					<ul class="media-content-5050__features">
+					<ul class="lsc-list media-content-5050__features">
 						<?php foreach ( $features as $feature ) : ?>
 							<?php
 							$feature_label = $feature['label'] ?? '';
