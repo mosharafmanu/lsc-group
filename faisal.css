@@ -94,6 +94,7 @@
 }
 .hero-section__buttons .site-btn {
   padding: .875rem 1.75rem;
+  font-weight: 600;
 }
 .hero-section__buttons .site-btn:hover {
   color: var(--lsc-color-primary);
@@ -150,11 +151,13 @@
 .finance-products-section__title {
   margin-bottom: 0;
 }
-
 .finance-products-section__description {
   margin-top: .625rem;
   color: rgba(26, 22, 20, 0.55);
   line-height: 160%;
+}
+.finance-products-section__description {
+	max-width: 32.5rem;
 }
 .finance-products-grid {
     --lsc-card-grid-gap: 1.5rem;
@@ -175,7 +178,6 @@
 .finance-product-card__media img {
   border-radius: .75rem .75rem 0 0;
 }
-
 .finance-product-card__title a {
   color: var(--lsc-color-primary);
   font-style: normal;
@@ -334,6 +336,7 @@
 .media-card-5050__description {
 	margin-top: 1.875rem;
 	max-width: 33.75rem;
+	color: rgba(26, 22, 20, 0.60);
 }
 .media-card-5050__buttons {
   margin-top: 2.75rem;
@@ -630,7 +633,11 @@
   border-color: transparent;
   background-color: var(--lsc-color-white);
 }
-
+@media only screen and (max-width:767px) {
+  .testimonials-section__slider-wrap {
+	 padding-inline: 0;
+  }
+}
 /* Theme: Dark */
 .testimonial-card--theme-dark {
   background-color: var(--lsc-color-dark);
@@ -1005,13 +1012,12 @@ button.wpcf7-submit:focus-visible {
 .broker-callout__card {
 	border-radius: .75rem;
 	background-color: var(--lsc-color-accent);
-	padding: 3.75rem 3.25rem;
+	padding: 3.75rem 6.25rem 3.75rem 3.25rem;
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
 	column-gap: 4.8125rem;
   overflow: hidden;
 }
-
 .broker-callout__media {
     grid-area: media;
 }
@@ -1051,7 +1057,6 @@ button.wpcf7-submit:focus-visible {
 .broker-callout__description p:last-child {
   margin-top: 1.5625rem;
 }
-
 .broker-callout__chips .broker-callout__chip {
 	border-radius: .375rem;
 	background-color: var(--lsc-color-white);
@@ -1084,6 +1089,7 @@ button.wpcf7-submit:focus-visible {
 @media only screen and (max-width: 1199px) {
   .broker-callout__card {
   	column-gap: 3rem;
+   padding: 3.75rem 3.25rem 3.75rem 3.25rem;
   }
   .broker-callout__content {
 	  padding-top: 0;
@@ -1110,6 +1116,9 @@ button.wpcf7-submit:focus-visible {
   }
 }
 @media only screen and (max-width: 767px) {
+  .finance-products-grid {
+	 padding-inline: 0;
+  }
   .broker-callout__card {
     row-gap: 2rem;
     padding: 2rem;
@@ -1376,6 +1385,9 @@ button.wpcf7-submit:focus-visible {
 }
 }
 @media only screen and (max-width:767px) {
+.contact-section__grid {
+	padding-inline: 0;
+}
 .content-card-5050__inner {
   grid-template-columns: 1fr;
 	row-gap: 1.875rem;
@@ -1911,6 +1923,7 @@ Testimonials Style Start
 	margin-top: 4rem;
 }
 }
+
 /*
 ===============================================
 Testimonials Style End
