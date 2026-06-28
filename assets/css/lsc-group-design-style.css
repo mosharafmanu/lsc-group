@@ -438,6 +438,20 @@ h6,.h6-style {
 	.card-grid--center-last-row.columns-4 > *,
 	.card-grid--center-last-row.columns-5 > * { flex-basis: 100%; }
 }
+
+/* Optional inner inset: pulls the grid in from the section gutter (e.g. so the
+   cards sit narrower than the section heading). Card widths follow automatically
+   since they derive from 100% of the grid's padded content box. */
+.card-grid--inset {
+	padding-inline: var(--lsc-grid-inset);
+}
+@media only screen and (max-width: 991px) {
+	:root { --lsc-grid-inset: 1.5rem; }
+}
+@media only screen and (max-width: 767px) {
+	:root { --lsc-grid-inset: 0rem; }
+}
+
 .lsc-container {
 	max-width: var(--lsc-container-max);
 	margin-left: auto;
