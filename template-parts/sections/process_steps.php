@@ -28,11 +28,11 @@ $grid_classes = [
 <section class="process-steps pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
-			<div class="process-steps__header text-center">
-				<span class="process-steps__divider" aria-hidden="true"></span>
+			<div class="section-header process-steps__header text-center">
+				<span class="section-header__divider" aria-hidden="true"></span>
 
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-					<h2 class="process-steps__title">
+					<h2 class="section-header__title process-steps__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
 							<?php
 							$line_parts = $title_line['line_parts'] ?? [];
@@ -64,7 +64,7 @@ $grid_classes = [
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="process-steps__description mt-15">
+					<div class="section-header__description process-steps__description mt-15">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

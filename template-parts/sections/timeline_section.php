@@ -21,13 +21,15 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 <section class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-110">
 	<div class="timeline-section__inner lsc-container layout-padding">
 		<?php if ( $eyebrow || $title_lines || $description ) : ?>
-			<header class="timeline-section__header text-center">
+			<header class="section-header timeline-section__header text-center">
+					<span class="section-header__divider" aria-hidden="true"></span>
+
 				<?php if ( $eyebrow ) : ?>
-					<p class="timeline-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+					<p class="section-header__eyebrow timeline-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-					<h2 class="timeline-section__title">
+					<h2 class="section-header__title timeline-section__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
 							<?php
 							$line_parts = $title_line['line_parts'] ?? [];
@@ -59,7 +61,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="timeline-section__description">
+					<div class="section-header__description timeline-section__description">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

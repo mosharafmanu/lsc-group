@@ -81,16 +81,18 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="testimonials-section__header lsc-container">
+	<div class="section-header testimonials-section__header lsc-container">
 		<?php if ( $eyebrow ) : ?>
 			<div class="testimonials-section__eyebrow-wrap layout-padding-mobile">
-				<span class="testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
+				<span class="section-header__eyebrow testimonials-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
 			</div>
 		<?php endif; ?>
 
 		<div class="testimonials-section__intro layout-padding-mobile">
+				<span class="section-header__divider" aria-hidden="true"></span>
+
 			<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-				<h2 class="testimonials-section__title">
+				<h2 class="section-header__title testimonials-section__title">
 					<?php foreach ( $title_lines as $title_line ) : ?>
 						<?php
 						$line_parts       = $title_line['line_parts'] ?? [];
@@ -133,7 +135,7 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 			<?php endif; ?>
 
 			<?php if ( $description ) : ?>
-				<div class="testimonials-section__description">
+				<div class="section-header__description testimonials-section__description">
 					<?php echo wp_trim_words( $description, 27, '...'); ?>
 				</div>
 			<?php endif; ?>

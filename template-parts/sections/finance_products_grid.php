@@ -68,17 +68,19 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="finance-products-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
-			<header class="finance-products-section__header">
+			<header class="section-header finance-products-section__header">
+					<span class="section-header__divider" aria-hidden="true"></span>
+
 				<?php if ( $eyebrow ) : ?>
-					<p class="finance-products-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+					<p class="section-header__eyebrow finance-products-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $title ) : ?>
-					<h2 class="finance-products-section__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="section-header__title finance-products-section__title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="finance-products-section__description">
+					<div class="section-header__description finance-products-section__description">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

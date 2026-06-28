@@ -24,9 +24,11 @@ $base_id = 'faq-' . $faq_section_index;
 <section class="faqs pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
-			<div class="faqs__header text-center">
+			<div class="section-header faqs__header text-center">
+					<span class="section-header__divider" aria-hidden="true"></span>
+
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-					<h2 class="faqs__title">
+					<h2 class="section-header__title faqs__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
 							<?php
 							$line_parts = $title_line['line_parts'] ?? [];
@@ -58,7 +60,7 @@ $base_id = 'faq-' . $faq_section_index;
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="faqs__description mt-15">
+					<div class="section-header__description faqs__description mt-15">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

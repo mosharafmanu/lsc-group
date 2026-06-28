@@ -27,9 +27,11 @@ $section_classes = [
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
-			<div class="contact-section__header text-center">
+			<div class="section-header contact-section__header text-center">
+					<span class="section-header__divider" aria-hidden="true"></span>
+
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-					<h2 class="contact-section__title">
+					<h2 class="section-header__title contact-section__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
 							<?php
 							$line_parts       = $title_line['line_parts'] ?? [];
@@ -72,7 +74,7 @@ $section_classes = [
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="contact-section__description mt-20">
+					<div class="section-header__description contact-section__description mt-20">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

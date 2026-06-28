@@ -55,19 +55,19 @@ $grid_classes = [
 <section class="case-studies-section case-studies-section--list mt-50 mt-lg-150">
 	<div class="case-studies-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
-			<header class="case-studies-section__header">
-				<span class="case-studies-section__divider" aria-hidden="true"></span>
+			<header class="section-header case-studies-section__header">
+				<span class="section-header__divider" aria-hidden="true"></span>
 
 				<?php if ( $eyebrow ) : ?>
-					<p class="case-studies-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+					<p class="section-header__eyebrow case-studies-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $title ) : ?>
-					<h2 class="case-studies-section__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="section-header__title case-studies-section__title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="case-studies-section__description">
+					<div class="section-header__description case-studies-section__description">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

@@ -454,6 +454,36 @@ h6,.h6-style {
 	:root { --lsc-grid-inset: 0rem; }
 }
 
+/* ── Section header ──────────────────────────────────────────────────────────
+   Global, reusable section heading: a standard divider dash + optional eyebrow
+   + title + optional description. Alignment is controlled with the .text-center
+   utility on the .section-header wrapper. Section-specific classes load later
+   (faisal.css) and can still override any of this. */
+.section-header__divider {
+	display: block;
+	width: 2.5rem;          /* 40px */
+	height: 0.1875rem;      /* 3px  */
+	margin-bottom: 1.25rem; /* 20px */
+	background: var(--lsc-color-accent);
+}
+.section-header.text-center .section-header__divider {
+	margin-inline: auto;
+}
+.section-header__eyebrow {
+	display: block;
+	margin-bottom: 0.75rem;
+	color: var(--lsc-color-accent);
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 150%;
+	letter-spacing: 0.09rem;
+	text-transform: uppercase;
+}
+.section-header__description {
+	color: rgba(26, 22, 20, 0.55);
+	line-height: 160%;
+}
+
 .lsc-container {
 	max-width: var(--lsc-container-max);
 	margin-left: auto;

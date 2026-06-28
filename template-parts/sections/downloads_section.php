@@ -60,17 +60,19 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 <section class="downloads-section">
 	<div class="downloads-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
-			<header class="downloads-section__header">
+			<header class="section-header downloads-section__header">
+					<span class="section-header__divider" aria-hidden="true"></span>
+
 				<?php if ( $eyebrow ) : ?>
-					<p class="downloads-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+					<p class="section-header__eyebrow downloads-section__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $title ) : ?>
-					<h2 class="downloads-section__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="section-header__title downloads-section__title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="downloads-section__description">
+					<div class="section-header__description downloads-section__description">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>

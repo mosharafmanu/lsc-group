@@ -28,11 +28,11 @@ $grid_classes = [
 <section class="feature-cards pt-50 pb-50 pt-lg-90 pb-lg-100">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
-			<div class="feature-cards__header text-center">
-				<span class="feature-cards__divider" aria-hidden="true"></span>
+			<div class="section-header feature-cards__header text-center">
+				<span class="section-header__divider" aria-hidden="true"></span>
 
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
-					<h2 class="feature-cards__title">
+					<h2 class="section-header__title feature-cards__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
 							<?php
 							$line_parts = $title_line['line_parts'] ?? [];
@@ -64,7 +64,7 @@ $grid_classes = [
 				<?php endif; ?>
 
 				<?php if ( $description ) : ?>
-					<div class="feature-cards__description mt-15">
+					<div class="section-header__description feature-cards__description mt-15">
 						<?php echo wp_kses_post( $description ); ?>
 					</div>
 				<?php endif; ?>
