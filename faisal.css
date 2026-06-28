@@ -90,11 +90,12 @@
 }
 .hero-section__buttons .btn-outline {
   border-radius: .375rem;
-  border: 0.063rem solid #FEFADC;
+  border: 0.063rem solid var(--lsc-color-light);
   color: var(--lsc-color-light);
 }
 .hero-section__buttons .site-btn {
   padding: .875rem 1.75rem;
+  font-weight: 600;
 }
 .hero-section__buttons .site-btn:hover {
   color: var(--lsc-color-primary);
@@ -151,11 +152,13 @@
 .finance-products-section__title {
   margin-bottom: 0;
 }
-
 .finance-products-section__description {
   margin-top: .625rem;
   color: rgba(26, 22, 20, 0.55);
   line-height: 160%;
+}
+.finance-products-section__description {
+	max-width: 32.5rem;
 }
 .finance-products-grid {
     --lsc-card-grid-gap: 1.5rem;
@@ -176,7 +179,6 @@
 .finance-product-card__media img {
   border-radius: .75rem .75rem 0 0;
 }
-
 .finance-product-card__title a {
   color: var(--lsc-color-primary);
   font-style: normal;
@@ -231,7 +233,7 @@
   background-color: var(--lsc-color-white);
 }
 .stats-section--bg-cream {
-  background-color: #F5F3EF;
+  background-color: var(--lsc-color-panel);
 }
 .stats-section__item {
   text-align: center;
@@ -250,7 +252,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 121.875%;
-  letter-spacing: 0.26px;
+  letter-spacing: 0.016rem;
   margin-top: 1.375rem;
 }
 @media only screen and (max-width: 991px) {
@@ -288,7 +290,7 @@
  */
 
 .media-card-5050 {
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .media-card-5050__inner {
   display: grid;
@@ -335,6 +337,7 @@
 .media-card-5050__description {
 	margin-top: 1.875rem;
 	max-width: 33.75rem;
+	color: rgba(26, 22, 20, 0.60);
 }
 .media-card-5050__buttons {
   margin-top: 2.75rem;
@@ -617,10 +620,10 @@
 /* Stacked: the original quote icon sits in normal flow above the copy. */
 
 .testimonial-card--stacked .testimonial-card__quote-icon svg {
-  width: 3rem;
-  height: auto;
+	width: 3rem;
+	height: auto;
+	opacity: 0.2;
 }
-
 .testimonial-card--stacked .testimonial-card__quote p {
   margin: 0;
 }
@@ -631,7 +634,11 @@
   border-color: transparent;
   background-color: var(--lsc-color-white);
 }
-
+@media only screen and (max-width:767px) {
+  .testimonials-section__slider-wrap {
+	 padding-inline: 0;
+  }
+}
 /* Theme: Dark */
 .testimonial-card--theme-dark {
   background-color: var(--lsc-color-dark);
@@ -718,7 +725,7 @@
 ===============================================
  */
 .contact-section {
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .contact-section__title {
   margin-bottom: 0;
@@ -1006,13 +1013,12 @@ button.wpcf7-submit:focus-visible {
 .broker-callout__card {
 	border-radius: .75rem;
 	background-color: var(--lsc-color-accent);
-	padding: 3.75rem 3.25rem;
+	padding: 3.75rem 6.25rem 3.75rem 3.25rem;
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
 	column-gap: 4.8125rem;
   overflow: hidden;
 }
-
 .broker-callout__media {
     grid-area: media;
 }
@@ -1052,7 +1058,6 @@ button.wpcf7-submit:focus-visible {
 .broker-callout__description p:last-child {
   margin-top: 1.5625rem;
 }
-
 .broker-callout__chips .broker-callout__chip {
 	border-radius: .375rem;
 	background-color: var(--lsc-color-white);
@@ -1085,6 +1090,7 @@ button.wpcf7-submit:focus-visible {
 @media only screen and (max-width: 1199px) {
   .broker-callout__card {
   	column-gap: 3rem;
+   padding: 3.75rem 3.25rem 3.75rem 3.25rem;
   }
   .broker-callout__content {
 	  padding-top: 0;
@@ -1111,6 +1117,9 @@ button.wpcf7-submit:focus-visible {
   }
 }
 @media only screen and (max-width: 767px) {
+  .finance-products-grid {
+	 padding-inline: 0;
+  }
   .broker-callout__card {
     row-gap: 2rem;
     padding: 2rem;
@@ -1304,23 +1313,11 @@ button.wpcf7-submit:focus-visible {
   grid-template-columns: repeat(2, 1fr);
   column-gap: 12.5rem;
 }
- /* .content-card-5050__content{
-    grid-area: content;
-}
-.content-card-5050__aside{
-    grid-area: media;
-}
-.content-card-5050__inner .card-left{
-    grid-template-areas: "content media";
-}
-.content-card-5050__inner .card-right{
-    grid-template-areas: "media content";
-}  */
 .content-card-5050__inner .content-card-5050__title {
   margin-top: 1.25rem;
 }
 .content-card-5050 {
-  background-color: #ECEAE3;
+  background-color: var(--lsc-color-subtle);
 }
 .content-card-5050__description {
   color: rgba(26, 22, 20, 0.70);
@@ -1389,6 +1386,9 @@ button.wpcf7-submit:focus-visible {
 }
 }
 @media only screen and (max-width:767px) {
+.contact-section__grid {
+	padding-inline: 0;
+}
 .content-card-5050__inner {
   grid-template-columns: 1fr;
 	row-gap: 1.875rem;
@@ -1428,20 +1428,6 @@ button.wpcf7-submit:focus-visible {
   column-gap: 1.75rem;
   margin-top: 4.375rem;
 }
-.timeline-section__title {
-  position: relative;
-}
-.timeline-section__title:before {
-  position: absolute;
-  content: "";
-  left: 50%;
-  top: -.5rem;
-  width: 2.5rem;
-  height: .1875rem;
-  border-radius: 2.5rem;
-  background-color: var(--lsc-color-accent);
-  transform: translateX(-50%);
-}
 .timeline-section__marker {
 	display: flex;
 	align-items: center;
@@ -1462,7 +1448,7 @@ button.wpcf7-submit:focus-visible {
   align-items: center;
   flex-shrink: 0;
   border-radius: 50%;
-  border: .25rem solid #ECEAE3;
+  border: .25rem solid var(--lsc-color-subtle);
   background-color: var(--lsc-color-primary);
   color: var(--lsc-color-white);
   font-size: 1.125rem;
@@ -1543,7 +1529,7 @@ Cta Style Start
   font-style: normal;
   font-weight: 700;
   line-height: 115%;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.05rem;
   text-transform: uppercase;
 }
 .cta-section__buttons {
@@ -1576,7 +1562,7 @@ Finance Product Style Start
 .inner-hero__facts {
   border-radius: 1rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
-  background: #FFF;
+  background-color: var(--lsc-color-white);
   box-shadow: 0 .5rem 2rem 0 rgba(0, 0, 0, 0.08);
   padding: 3rem;
   position: relative;
@@ -1640,7 +1626,7 @@ Feature Cards Style Start
 */
 
 .feature-cards {
-  background-color: #F5F3EF;
+  background-color: var(--lsc-color-panel);
 }
 .feature-cards__card {
   background-color: var(--lsc-color-white);
@@ -1938,6 +1924,7 @@ Testimonials Style Start
 	margin-top: 4rem;
 }
 }
+
 /*
 ===============================================
 Testimonials Style End
@@ -2033,7 +2020,8 @@ Media Full Style Start
   top: 2rem;
 }
 .quote-block__mark svg {
-  width: 4rem;
+	width: 4rem;
+	opacity: 0.2;
 }
 .quote-block__quote {
 	margin: 0;
@@ -2103,7 +2091,7 @@ Inner Hero Split Style Start
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
-  letter-spacing: -1px;
+  letter-spacing: -0.063rem;
   text-transform: uppercase;
 }
 .inner-hero--split .inner-hero__description {
@@ -2197,14 +2185,14 @@ Single Case Study Style Start
 	font-size: .875rem;
 	font-weight: 600;
 	line-height: 162.5%;
-	letter-spacing: 0.7px;
+	letter-spacing: 0.044rem;
 	text-transform: uppercase;
 	color: var(--lsc-color-primary);
 }
 .case-summary {
   border-radius: .75rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
-  background: #FFF;
+  background-color: var(--lsc-color-white);
   box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   padding: 2rem;
 }
@@ -2432,7 +2420,7 @@ Inner Hero Text Style Start
 }
 .media-content-5050__title {
 	line-height: 110%;
-	letter-spacing: -0.88px;
+	letter-spacing: -0.055rem;
 }
 @media only screen and (max-width: 1199px) {
 .inner-hero--text {
@@ -2618,14 +2606,22 @@ Feature Column Style End
 */
 
 
+
+/*
+===============================================
+Contact Panel Style Start
+===============================================
+*/
 .contact-panel.contact-panel--overlap {
   background-color: var(--lsc-color-panel);
+}
+.contact-panel--overlap .contact-panel__grid {
+  margin-top: -6.25rem;
 }
 .contact-panel__grid {
 	display: grid;
 	grid-template-columns: 48.600125rem 1fr;
 	column-gap: 4rem;
-	margin-top: -6.25rem;
 	position: relative;
 	z-index: 2;
 }
@@ -2641,8 +2637,8 @@ Feature Column Style End
   border: 0.063rem solid rgba(0, 0, 0, 0.05);
 }
 .contact-panel__form .contact-form-card {
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px .125rem -1px rgba(0, 0, 0, 0.10);
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   background-color: var(--lsc-color-white);
 }
 .contact-panel__aside .contact-info-card {
@@ -2662,7 +2658,7 @@ Feature Column Style End
 }
 }
 @media only screen and (max-width: 767px) {
-.contact-panel__grid {
+.contact-panel--overlap .contact-panel__grid {
 	margin-top: -2rem;
 }
 .contact-panel__grid {
@@ -2670,6 +2666,77 @@ Feature Column Style End
   row-gap: 2rem;
 }
 }
+/*
+===============================================
+Contact Panel Style End
+===============================================
+*/
+
+/*
+===============================================
+Specialist Cards Style Start
+===============================================
+ */
+
+.specialist-cards__card {
+  border-radius: .75rem;
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-panel);
+  padding: 2rem;
+  text-align: center;
+}
+.specialist-cards__avatar {
+  font-family: Georgia;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 133.333%;
+  border-radius: 50%;
+  box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.specialist-cards__card-title {
+  line-height: 150%;
+  text-transform: capitalize;
+  margin-top: 1.5rem;
+}
+.specialist-cards__card-description {
+  color: rgba(26, 22, 20, 0.60);
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+.specialist-cards__link {
+  font-size: .9375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 0.023rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .specialist-cards__avatar {
+  font-size: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+}
+ /*
+===============================================
+Specialist Cards Style End
+===============================================
+ */
+
+
  /*
 ===============================================
  Footer Style Start
@@ -2679,7 +2746,7 @@ Feature Column Style End
 	border-top: 0.063rem solid rgba(26, 22, 20, 0.08);
 } 
 .footer-top-inner {
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .footer-top {
 	display: grid;
@@ -2811,7 +2878,7 @@ Feature Column Style End
 }
 .footer-bottom {
   border-top: 0.063rem solid rgba(26, 22, 20, 0.06);
-	background-color: #F5F3EF;
+	background-color: var(--lsc-color-panel);
 }
 .footer-bottom-inner {
   display: flex;

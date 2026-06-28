@@ -63,7 +63,7 @@ $grid_classes = [
 ];
 ?>
 
-<section class="case-studies-section mt-50 mt-lg-150">
+<section class="case-studies-section">
 	<div class="case-studies-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="case-studies-section__header">
