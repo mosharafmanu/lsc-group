@@ -1360,6 +1360,7 @@ button.wpcf7-submit:focus-visible {
 	justify-content: center;
 	align-items: center;
 	font-size: 1.25rem;
+  padding: .75rem 1.5rem;
 	line-height: 112.5%;
 }
 .btn-outline.content-card-5050__card-button {
@@ -1724,28 +1725,8 @@ Media Content 5050 Style Start
 	border-radius: .75rem;
 }
 .media-content-5050__features {
-	margin: 0;
-	padding: 0;
-	list-style: none;
 	margin-top: 1.25rem;
-	display: flex;
-	flex-direction: column;
-	row-gap: .625rem;
 }
-.media-content-5050__features li {
-  position: relative;
-  padding-left: 1.25rem;
-}
-.media-content-5050__features li:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: .625rem;
-  width: .375rem;
-  height: .375rem;
-  background-color: var(--lsc-color-accent);
-  border-radius: 50%;
-} 
 @media only screen and (max-width: 1199px) {
 .media-content-5050__grid {
   grid-template-columns: 1fr 1fr;
@@ -2462,6 +2443,11 @@ Inner Hero Text Style Start
 	padding-bottom: 6rem;
 }
 }
+@media only screen and (max-width: 767px) {
+.inner-hero--text {
+	padding-bottom: 2rem;
+}
+}
 /*
 ===============================================
 Inner Hero Text Style End
@@ -2516,9 +2502,6 @@ Feature Column Style Start
   font-weight: 400;
   line-height: 162.5%;
   margin-top: 1.5rem;
-}
-.lsc-list.feature-columns__features {
-	margin-top: 1.875rem;
 }
 .feature-columns__card {
   border-radius: .75rem;
@@ -2634,8 +2617,58 @@ Feature Column Style End
 */
 
 
-
-
+.contact-panel.contact-panel--overlap {
+  background-color: var(--lsc-color-panel);
+}
+.contact-panel__grid {
+	display: grid;
+	grid-template-columns: 48.600125rem 1fr;
+	column-gap: 4rem;
+	margin-top: -6.25rem;
+	position: relative;
+	z-index: 2;
+}
+.contact-info-card__hours {
+  margin-top: 3.75rem;
+}
+.contact-panel__map {
+  margin-top: 2rem;
+}
+.contact-panel__map iframe {
+  height: 15rem;
+  border-radius: 1rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+}
+.contact-panel__form .contact-form-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px .125rem -1px rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+}
+.contact-panel__aside .contact-info-card {
+	box-shadow: 0 1.25rem 1.5625rem -.3125rem rgba(0, 0, 0, 0.10), 0 .5rem .625rem -.375rem rgba(0, 0, 0, 0.10);
+	background-color: var(--lsc-color-white);
+}
+@media only screen and (max-width: 1199px) {
+  .contact-panel__grid {
+	grid-template-columns: 30rem 1fr;
+  column-gap: 3rem;
+}
+}
+@media only screen and (max-width: 991px) {
+  .contact-panel__grid {
+	grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+}
+}
+@media only screen and (max-width: 767px) {
+.contact-panel__grid {
+	margin-top: -2rem;
+}
+.contact-panel__grid {
+	grid-template-columns: 1fr;
+  row-gap: 2rem;
+}
+}
  /*
 ===============================================
  Footer Style Start
