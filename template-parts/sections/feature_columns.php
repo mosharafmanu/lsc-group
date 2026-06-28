@@ -24,7 +24,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 }
 ?>
 
-<section class="feature-columns pt-50 pb-50 pt-lg-100 pb-lg-110">
+<section class="feature-columns pt-50 pb-50 pt-lg-100">
 	<div class="feature-columns__inner lsc-container layout-padding">
 		<div class="feature-columns__content">
 			<?php if ( $eyebrow ) : ?>
@@ -70,7 +70,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 			<?php endif; ?>
 
 			<?php if ( $features && is_array( $features ) ) : ?>
-				<ul class="feature-columns__features">
+				<ul class="lsc-list feature-columns__features">
 					<?php foreach ( $features as $feature ) : ?>
 						<?php
 						$feature_label = $feature['label'] ?? '';
@@ -85,7 +85,8 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 			<?php endif; ?>
 		</div>
 
-		<?php if ( $info_cards && is_array( $info_cards ) ) : ?>
+		<div class="feature-columns-cards-right">
+			<?php if ( $info_cards && is_array( $info_cards ) ) : ?>
 			<div class="feature-columns__cards">
 				<?php foreach ( $info_cards as $info_card ) : ?>
 					<?php
@@ -159,6 +160,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 					?>
 				</figure>
 			<?php endif; ?>
+		</div>
 		</div>
 	</div>
 </section>
