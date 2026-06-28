@@ -2617,8 +2617,58 @@ Feature Column Style End
 */
 
 
-
-
+.contact-panel.contact-panel--overlap {
+  background-color: var(--lsc-color-panel);
+}
+.contact-panel__grid {
+	display: grid;
+	grid-template-columns: 48.600125rem 1fr;
+	column-gap: 4rem;
+	margin-top: -6.25rem;
+	position: relative;
+	z-index: 2;
+}
+.contact-info-card__hours {
+  margin-top: 3.75rem;
+}
+.contact-panel__map {
+  margin-top: 2rem;
+}
+.contact-panel__map iframe {
+  height: 15rem;
+  border-radius: 1rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+}
+.contact-panel__form .contact-form-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px .1875rem 0 rgba(0, 0, 0, 0.10), 0 1px .125rem -1px rgba(0, 0, 0, 0.10);
+  background-color: var(--lsc-color-white);
+}
+.contact-panel__aside .contact-info-card {
+	box-shadow: 0 1.25rem 1.5625rem -.3125rem rgba(0, 0, 0, 0.10), 0 .5rem .625rem -.375rem rgba(0, 0, 0, 0.10);
+	background-color: var(--lsc-color-white);
+}
+@media only screen and (max-width: 1199px) {
+  .contact-panel__grid {
+	grid-template-columns: 30rem 1fr;
+  column-gap: 3rem;
+}
+}
+@media only screen and (max-width: 991px) {
+  .contact-panel__grid {
+	grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+}
+}
+@media only screen and (max-width: 767px) {
+.contact-panel__grid {
+	margin-top: -2rem;
+}
+.contact-panel__grid {
+	grid-template-columns: 1fr;
+  row-gap: 2rem;
+}
+}
  /*
 ===============================================
  Footer Style Start
