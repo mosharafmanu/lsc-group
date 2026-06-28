@@ -440,10 +440,11 @@ h6,.h6-style {
 	.card-grid--center-last-row.columns-5 > * { flex-basis: 100%; }
 }
 
-/* Optional inner inset: pulls the grid in from the section gutter (e.g. so the
-   cards sit narrower than the section heading). Card widths follow automatically
-   since they derive from 100% of the grid's padded content box. */
-.card-grid--inset {
+/* Optional inner inset: pulls a block's content in from the section gutter
+   (e.g. so cards / a carousel / a grid sit narrower than the section heading).
+   Reusable on any element; widths inside follow automatically since they derive
+   from 100% of the padded content box. */
+.layout-inset {
 	padding-inline: var(--lsc-grid-inset);
 }
 @media only screen and (max-width: 991px) {

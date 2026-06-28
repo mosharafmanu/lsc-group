@@ -79,7 +79,7 @@ $section_classes = [
 			</div>
 		<?php endif; ?>
 
-		<div class="contact-section__grid card-grid--inset mt-40 mt-lg-65">
+		<div class="contact-section__grid layout-inset mt-40 mt-lg-65">
 			<div class="contact-section__col contact-section__col--info">
 				<?php if ( $contact_info ) : ?>
 					<div class="contact-info-card">
