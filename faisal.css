@@ -2615,3 +2615,38 @@ Downloads Section Style End
  Footer Style End
 ===============================================
  */
+
+
+/*
+===============================================
+Single Post Style Start
+===============================================
+*/
+
+/* Meta row: dot separators between author / date / read-time, to match the
+   blog card meta style. */
+.single-post .entry-meta > * + *::before {
+	content: "\00b7";
+	margin-right: 0.75rem;
+	color: var(--lsc-color-mid);
+	opacity: 0.6;
+}
+
+.entry-read-time {
+	color: var(--lsc-color-mid);
+}
+
+/* Comments: with no comments yet, the reply form is the first child of the
+   comments area — drop its top border so it doesn't double up with the
+   .comments-wrap border above it. */
+.comments-area > .comment-respond:first-child {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
+}
+
+/*
+===============================================
+Single Post Style End
+===============================================
+*/

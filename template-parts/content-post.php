@@ -49,16 +49,29 @@
 
 			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
+			<?php
+			$lsc_word_count = str_word_count( wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) ) );
+			$lsc_read_time  = max( 1, (int) ceil( $lsc_word_count / 220 ) );
+			?>
 			<div class="entry-meta mt-20">
-				<time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-					<?php echo esc_html( get_the_date() ); ?>
-				</time>
 				<span class="entry-author">
 					<?php
 					printf(
 						/* translators: %s: Author name */
 						esc_html__( 'By %s', 'lsc-group' ),
 						esc_html( get_the_author() )
+					);
+					?>
+				</span>
+				<time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+					<?php echo esc_html( get_the_date() ); ?>
+				</time>
+				<span class="entry-read-time">
+					<?php
+					printf(
+						/* translators: %s: estimated reading time in minutes */
+						esc_html( _n( '%s min read', '%s min read', $lsc_read_time, 'lsc-group' ) ),
+						number_format_i18n( $lsc_read_time )
 					);
 					?>
 				</span>
