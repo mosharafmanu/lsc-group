@@ -12,10 +12,11 @@
 	height: 49.9375rem;
   min-height: 100%;
 }
-.hero-section__media,
-.hero-section__overlay,
+.hero-section__media, 
+.hero-section__overlay, 
 .hero-section__inner {
-	grid-area: 1 / 1;
+	grid-column: 1;
+	grid-row: 1;
 }
 .hero-section__media img {
 	width: 100%;
