@@ -88,30 +88,8 @@ Design Tokens
     --lsc-transition: 0.3s ease;
 
 
-    /*
-	-----------------------------------------------------------------------
-       Breakpoints (reference)
-       CSS custom properties can't be used in @media queries.
-       xs: 0  sm: 576  md: 768  lg: 992  xl: 1200  xxl: 1400
-    -----------------------------------------------------------------------
-	*/
 }
 
-/*
-=============================================================================
-Client Project Styles
-=============================================================================
-Add all project-specific overrides and custom styles below.
-*/
-
-
-
-
-
-/* =============================================================================
-   SINGLE POST · BLOG · ARCHIVE · SEARCH
-   Consolidated here from lsc-group-starter-style.css and faisal.css.
-   ============================================================================= */
 
 /*
 =============================================================================
@@ -959,3 +937,47 @@ Add all project-specific overrides and custom styles below.
 	padding-top: 0;
 	border-top: 0;
 }
+
+
+/*
+=============================================================================
+   Back to Top
+=============================================================================
+*/
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--lsc-color-accent);
+    color: var(--lsc-color-primary);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.5rem);
+    transition: opacity var(--lsc-transition), visibility var(--lsc-transition), transform var(--lsc-transition), background-color var(--lsc-transition);
+    z-index: 999;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--lsc-color-secondary);
+}
+
+.back-to-top:focus-visible {
+    outline: 0.125rem solid var(--lsc-color-accent);
+    outline-offset: 0.25rem;
+}
+

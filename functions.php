@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.76' );
+	define( 'LSC_GROUP_VERSION', '1.0.77' );
 }
 
 
@@ -107,7 +107,6 @@ function lsc_scripts() {
 	wp_enqueue_style( 'lsc-group-slick-custom',   get_template_directory_uri() . '/assets/css/lsc-group-slick-custom.css',    array( 'slick-carousel' ), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-design-style',   get_template_directory_uri() . '/assets/css/lsc-group-design-style.css',    array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-form-style',    get_template_directory_uri() . '/assets/css/lsc-group-form.css',             array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'lsc-group-starter-style',  get_template_directory_uri() . '/assets/css/lsc-group-starter-style.css',   array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-style',          get_stylesheet_uri(),                                                           array(), LSC_GROUP_VERSION );
 
 	// ── Developer CSS (Temporary) ────────────────────────────────
