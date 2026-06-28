@@ -190,7 +190,7 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 				<?php endforeach; ?>
 			</div>
 		<?php else : ?>
-		<div class="testimonials-section__slider-wrap lsc-container mt-60">
+		<div class="testimonials-section__slider-wrap lsc-container card-grid--inset mt-60">
 			<div class="testimonials-section__carousel js-testimonials-carousel js-stage-padding">
 				<?php foreach ( $items as $index => $testimonial ) : ?>
 					<?php
