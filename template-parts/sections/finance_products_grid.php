@@ -26,6 +26,7 @@ $grid_classes = [
 	'finance-products-grid',
 	'card-grid',
 	'card-grid--center-last-row',
+	'card-grid--inset',
 	sanitize_html_class( $columns ),
 ];
 
