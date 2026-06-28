@@ -1361,6 +1361,7 @@ button.wpcf7-submit:focus-visible {
 	justify-content: center;
 	align-items: center;
 	font-size: 1.25rem;
+  padding: .75rem 1.5rem;
 	line-height: 112.5%;
 }
 .btn-outline.content-card-5050__card-button {
@@ -1725,28 +1726,8 @@ Media Content 5050 Style Start
 	border-radius: .75rem;
 }
 .media-content-5050__features {
-	margin: 0;
-	padding: 0;
-	list-style: none;
 	margin-top: 1.25rem;
-	display: flex;
-	flex-direction: column;
-	row-gap: .625rem;
 }
-.media-content-5050__features li {
-  position: relative;
-  padding-left: 1.25rem;
-}
-.media-content-5050__features li:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: .625rem;
-  width: .375rem;
-  height: .375rem;
-  background-color: var(--lsc-color-accent);
-  border-radius: 50%;
-} 
 @media only screen and (max-width: 1199px) {
 .media-content-5050__grid {
   grid-template-columns: 1fr 1fr;
@@ -2463,6 +2444,11 @@ Inner Hero Text Style Start
 	padding-bottom: 6rem;
 }
 }
+@media only screen and (max-width: 767px) {
+.inner-hero--text {
+	padding-bottom: 2rem;
+}
+}
 /*
 ===============================================
 Inner Hero Text Style End
@@ -2517,9 +2503,6 @@ Feature Column Style Start
   font-weight: 400;
   line-height: 162.5%;
   margin-top: 1.5rem;
-}
-.lsc-list.feature-columns__features {
-	margin-top: 1.875rem;
 }
 .feature-columns__card {
   border-radius: .75rem;

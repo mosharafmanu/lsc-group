@@ -175,6 +175,7 @@ ul.lsc-list {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  margin-top: 1.875rem;
 }
 ul.lsc-list li {
 	position: relative;
