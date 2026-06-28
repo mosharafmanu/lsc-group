@@ -64,44 +64,62 @@ if ( is_singular() ) {
 					lsc_render_back_to_blogs_button();
 				}
 
-				// Related Articles (blog posts only): same-category, most recent, excluding the current post.
+				// Related Articles (blog posts only): same-category first, then most-recent
+				// to backfill up to 3 so the row always reads as a deliberate set.
 				if ( is_singular( 'post' ) && function_exists( 'lsc_render_post_card' ) ) :
 
-					$lsc_related_args = [
-						'post_type'           => 'post',
-						'post_status'         => 'publish',
-						'posts_per_page'      => 3,
-						'post__not_in'        => [ get_the_ID() ],
-						'orderby'             => 'date',
-						'order'               => 'DESC',
-						'no_found_rows'       => true,
-						'ignore_sticky_posts' => true,
-					];
+					$lsc_related_posts = [];
+					$lsc_exclude       = [ get_the_ID() ];
+					$lsc_post_cats     = wp_get_post_categories( get_the_ID() );
 
-					$lsc_post_cats = wp_get_post_categories( get_the_ID() );
 					if ( $lsc_post_cats ) {
-						$lsc_related_args['category__in'] = $lsc_post_cats;
+						$lsc_cat_query = new WP_Query( [
+							'post_type'           => 'post',
+							'post_status'         => 'publish',
+							'posts_per_page'      => 3,
+							'post__not_in'        => $lsc_exclude,
+							'category__in'        => $lsc_post_cats,
+							'orderby'             => 'date',
+							'order'               => 'DESC',
+							'no_found_rows'       => true,
+							'ignore_sticky_posts' => true,
+						] );
+						$lsc_related_posts = $lsc_cat_query->posts;
 					}
 
-					$lsc_related = new WP_Query( $lsc_related_args );
+					if ( count( $lsc_related_posts ) < 3 ) {
+						$lsc_fill_query = new WP_Query( [
+							'post_type'           => 'post',
+							'post_status'         => 'publish',
+							'posts_per_page'      => 3 - count( $lsc_related_posts ),
+							'post__not_in'        => array_merge( $lsc_exclude, wp_list_pluck( $lsc_related_posts, 'ID' ) ),
+							'orderby'             => 'date',
+							'order'               => 'DESC',
+							'no_found_rows'       => true,
+							'ignore_sticky_posts' => true,
+						] );
+						$lsc_related_posts = array_merge( $lsc_related_posts, $lsc_fill_query->posts );
+					}
 
-					if ( $lsc_related->have_posts() ) :
+					if ( $lsc_related_posts ) :
+						$lsc_related_count = count( $lsc_related_posts );
+						// 1 item → full-width featured card; 2 → halves; 3 → thirds.
+						$lsc_related_cols    = 2 === $lsc_related_count ? 'columns-2' : 'columns-3';
+						$lsc_related_variant = 1 === $lsc_related_count ? 'featured' : 'default';
 						?>
 						<section class="related-posts lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 							<header class="related-posts__header">
 								<h2 class="related-posts__title"><?php esc_html_e( 'Related Articles', 'lsc-group' ); ?></h2>
 							</header>
 
-							<div class="blog-grid card-grid card-grid--center-last-row columns-3 mt-30 mt-lg-50">
-								<?php foreach ( $lsc_related->posts as $lsc_related_post ) : ?>
-									<?php lsc_render_post_card( $lsc_related_post->ID, [ 'variant' => 'default' ] ); ?>
+							<div class="blog-grid card-grid <?php echo esc_attr( $lsc_related_cols ); ?> mt-30 mt-lg-50">
+								<?php foreach ( $lsc_related_posts as $lsc_related_post ) : ?>
+									<?php lsc_render_post_card( $lsc_related_post->ID, [ 'variant' => $lsc_related_variant ] ); ?>
 								<?php endforeach; ?>
 							</div>
 						</section>
 						<?php
 					endif;
-
-					wp_reset_postdata();
 
 				endif;
 
