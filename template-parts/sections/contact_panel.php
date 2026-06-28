@@ -21,14 +21,11 @@ $info_title  = get_sub_field( 'info_title' );
 $map_embed   = get_sub_field( 'map_embed' );
 $overlap     = get_sub_field( 'overlap_hero' );
 
-$contact = function_exists( 'lsc_get_footer_contact_details' ) ? lsc_get_footer_contact_details() : [];
-$addr    = $contact['address'] ?? '';
-$phone   = $contact['phone'] ?? '';
-$mail    = $contact['email'] ?? '';
-$hours   = $contact['hours'] ?? '';
+$info_items = function_exists( 'lsc_get_contact_items_for' ) ? lsc_get_contact_items_for( 'contact_panel' ) : [];
+$hours_item = $info_items['hours'] ?? null;
 
 $has_form = $form_title || $form_code;
-$has_info = $info_title || $addr || $phone || $mail || $hours;
+$has_info = $info_title || (bool) $info_items;
 
 if ( ! $has_form && ! $has_info && ! $map_embed ) {
 	return;
@@ -71,48 +68,36 @@ if ( $overlap ) {
 									<h2 class="contact-info-card__title"><?php echo esc_html( $info_title ); ?></h2>
 								<?php endif; ?>
 
+								<?php
+								$panel_labels = [
+									'email'   => __( 'EMAIL', 'lsc-group' ),
+									'phone'   => __( 'TELEPHONE', 'lsc-group' ),
+									'address' => __( 'OFFICE ADDRESS', 'lsc-group' ),
+								];
+								?>
 								<ul class="contact-info-card__list">
-									<?php if ( $mail ) : ?>
+									<?php foreach ( $info_items as $item ) : ?>
+										<?php if ( ! isset( $panel_labels[ $item['key'] ] ) ) { continue; } ?>
 										<li class="contact-info-card__item">
 											<span class="contact-info-card__icon" aria-hidden="true">
-												<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'mail', 'contact-icon' ); ?>
+												<?php lsc_render_contact_icon( $item, 'contact-icon' ); ?>
 											</span>
 											<div class="contact-info-card__details">
-												<span class="contact-info-card__label"><?php esc_html_e( 'EMAIL', 'lsc-group' ); ?></span>
-												<a href="mailto:<?php echo esc_attr( $mail ); ?>" class="contact-info-card__value"><?php echo esc_html( $mail ); ?></a>
+												<span class="contact-info-card__label"><?php echo esc_html( $panel_labels[ $item['key'] ] ); ?></span>
+												<?php if ( 'address' === $item['key'] ) : ?>
+													<address class="contact-info-card__value"><?php echo nl2br( esc_html( $item['value'] ) ); ?></address>
+												<?php else : ?>
+													<a href="<?php echo esc_url( $item['url'] ); ?>" class="contact-info-card__value"><?php echo esc_html( $item['value'] ); ?></a>
+												<?php endif; ?>
 											</div>
 										</li>
-									<?php endif; ?>
-
-									<?php if ( $phone ) : ?>
-										<li class="contact-info-card__item">
-											<span class="contact-info-card__icon" aria-hidden="true">
-												<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'phone', 'contact-icon' ); ?>
-											</span>
-											<div class="contact-info-card__details">
-												<span class="contact-info-card__label"><?php esc_html_e( 'TELEPHONE', 'lsc-group' ); ?></span>
-												<a href="tel:<?php echo esc_attr( str_replace( ' ', '', $phone ) ); ?>" class="contact-info-card__value"><?php echo esc_html( $phone ); ?></a>
-											</div>
-										</li>
-									<?php endif; ?>
-
-									<?php if ( $addr ) : ?>
-										<li class="contact-info-card__item">
-											<span class="contact-info-card__icon" aria-hidden="true">
-												<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'map-pin', 'contact-icon' ); ?>
-											</span>
-											<div class="contact-info-card__details">
-												<span class="contact-info-card__label"><?php esc_html_e( 'OFFICE ADDRESS', 'lsc-group' ); ?></span>
-												<address class="contact-info-card__value"><?php echo nl2br( esc_html( $addr ) ); ?></address>
-											</div>
-										</li>
-									<?php endif; ?>
+									<?php endforeach; ?>
 								</ul>
 
-								<?php if ( $hours ) : ?>
+								<?php if ( $hours_item ) : ?>
 									<div class="contact-info-card__hours">
 										<span class="contact-info-card__label"><?php esc_html_e( 'OPENING HOURS', 'lsc-group' ); ?></span>
-										<p class="contact-info-card__value"><?php echo nl2br( esc_html( $hours ) ); ?></p>
+										<p class="contact-info-card__value"><?php echo nl2br( esc_html( $hours_item['value'] ) ); ?></p>
 									</div>
 								<?php endif; ?>
 							</div>

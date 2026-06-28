@@ -2152,6 +2152,11 @@ Single Case Study Style Start
 	margin-top: 6.25rem;
 	margin-bottom: 6.25rem;
 }
+.case-study-layout__sidebar {
+	position: sticky;
+	top: 2rem;
+	align-self: start; /* required: lets the sticky item be shorter than the grid row */
+}
 .media-full__figure {
 	margin: 0;
   border-radius: .75rem;
@@ -2281,6 +2286,9 @@ Single Case Study Style Start
 .case-study-layout__grid {
 	grid-template-columns: 1fr;
 	row-gap: 1.5rem;
+}
+.case-study-layout__sidebar {
+	position: static; /* stacked single column — nothing to stick to */
 }
 .stats-section--cards .card-grid {
 	display: grid;

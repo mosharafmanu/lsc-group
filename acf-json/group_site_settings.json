@@ -212,6 +212,248 @@
             "placeholder": "https://www.linkedin.com/company/..."
         },
         {
+            "key": "field_contact_icons_message",
+            "label": "Contact Icons & Placement",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "The address / phone / email / LinkedIn icons below use built-in defaults. Upload a file to override any of them. Then choose which items appear in each location.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_contact_icon_address",
+            "label": "Address Icon (optional)",
+            "name": "contact_icon_address",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional. Overrides the default address (map pin) icon. SVG or PNG.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg,svgz,png",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_contact_icon_phone",
+            "label": "Phone Icon (optional)",
+            "name": "contact_icon_phone",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional. Overrides the default phone icon. SVG or PNG.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg,svgz,png",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_contact_icon_email",
+            "label": "Email Icon (optional)",
+            "name": "contact_icon_email",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional. Overrides the default email icon. SVG or PNG.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg,svgz,png",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_contact_icon_linkedin",
+            "label": "LinkedIn Icon (optional)",
+            "name": "contact_icon_linkedin",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional. Overrides the default LinkedIn icon. SVG or PNG.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg,svgz,png",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_footer_icons_items",
+            "label": "Footer Icon Row — Items",
+            "name": "footer_icons_items",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "Which contact icons appear in the small icon row under the footer logo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "email": "Email",
+                "phone": "Phone",
+                "linkedin": "LinkedIn"
+            },
+            "default_value": [
+                "email",
+                "phone",
+                "linkedin"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "layout": "vertical",
+            "toggle": 0
+        },
+        {
+            "key": "field_footer_contact_items",
+            "label": "Footer Contact Column — Items",
+            "name": "footer_contact_items",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "Which contact rows appear in the footer Contact column.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "address": "Address",
+                "phone": "Phone",
+                "email": "Email"
+            },
+            "default_value": [
+                "address",
+                "phone",
+                "email"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "layout": "vertical",
+            "toggle": 0
+        },
+        {
+            "key": "field_contact_section_items",
+            "label": "Contact Section Card — Items",
+            "name": "contact_section_items",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "Which items appear in the general Contact Section info card (address / phone / email rows + the CONNECT LinkedIn row).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "address": "Address",
+                "phone": "Phone",
+                "email": "Email",
+                "linkedin": "LinkedIn"
+            },
+            "default_value": [
+                "address",
+                "phone",
+                "email",
+                "linkedin"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "layout": "vertical",
+            "toggle": 0
+        },
+        {
+            "key": "field_contact_panel_items",
+            "label": "Contact Panel Card — Items",
+            "name": "contact_panel_items",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "Which items appear in the Contact Panel info card (email / phone / office-address rows + the Opening Hours block).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "email": "Email",
+                "phone": "Phone",
+                "address": "Office Address",
+                "hours": "Opening Hours"
+            },
+            "default_value": [
+                "email",
+                "phone",
+                "address",
+                "hours"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "layout": "vertical",
+            "toggle": 0
+        },
+        {
             "key": "field_site_footer_opening_hours",
             "label": "Opening Hours",
             "name": "footer_opening_hours",
@@ -571,5 +813,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782470600
+    "modified": 1782618382
 }

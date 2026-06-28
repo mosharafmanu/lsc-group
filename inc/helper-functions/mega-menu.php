@@ -290,7 +290,7 @@ if ( ! function_exists( 'lsc_render_mega_menu_panel' ) ) {
 
 						<?php if ( $cta_phone ) : ?>
 							<a class="mega-menu__cta-phone" href="<?php echo esc_url( lsc_get_phone_href( $cta_phone ) ); ?>">
-								<?php echo lsc_get_icon_svg( 'phone', 'mega-menu__cta-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php get_template_part( 'assets/svgs/phone-mega-menu', null, [ 'class' => 'mega-menu__cta-icon' ] ); ?>
 								<span class="mega-menu__cta-phone-number"><?php echo esc_html( $cta_phone ); ?></span>
 							</a>
 						<?php endif; ?>

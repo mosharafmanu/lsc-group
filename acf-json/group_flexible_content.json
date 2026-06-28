@@ -669,37 +669,7 @@
                             "wrapper": {
                                 "class": "",
                                 "id": "",
-                                "width": "50"
-                            }
-                        },
-                        {
-                            "key": "field_inner_hero_image_position",
-                            "label": "Media Position",
-                            "name": "image_position",
-                            "type": "button_group",
-                            "required": 0,
-                            "instructions": "Which side the image or video appears on (Text + Media style only).",
-                            "choices": {
-                                "left": "Left",
-                                "right": "Right"
-                            },
-                            "default_value": "right",
-                            "return_format": "value",
-                            "allow_null": 0,
-                            "layout": "horizontal",
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_inner_hero_hero_style",
-                                        "operator": "==",
-                                        "value": "split"
-                                    }
-                                ]
-                            ],
-                            "wrapper": {
-                                "class": "",
-                                "id": "",
-                                "width": "50"
+                                "width": "100"
                             }
                         },
                         {
@@ -1322,6 +1292,129 @@
                                     }
                                 ]
                             ],
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_finance_products_list": {
+                    "key": "layout_finance_products_list",
+                    "name": "finance_products_list",
+                    "label": "Finance Products List (Paginated)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_finance_products_list_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_finance_products_list_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_finance_products_list_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Section heading.",
+                            "placeholder": "Our Finance Products"
+                        },
+                        {
+                            "key": "field_finance_products_list_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_finance_products_list_settings_tab",
+                            "label": "List Settings",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_finance_products_list_posts_per_page",
+                            "label": "Products Per Page",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "How many cards to show per page before paginating. Defaults to 6.",
+                            "default_value": 6,
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "6"
+                        },
+                        {
+                            "key": "field_finance_products_list_columns",
+                            "label": "Grid Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Uses existing card-grid column utility classes.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_finance_products_list_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "",
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Title"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_finance_products_list_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "",
                             "choices": {
                                 "ASC": "Ascending",
                                 "DESC": "Descending"
@@ -5232,6 +5325,129 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_case_studies_list": {
+                    "key": "layout_case_studies_list",
+                    "name": "case_studies_list",
+                    "label": "Case Studies List (Paginated)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_case_studies_list_content_tab",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_case_studies_list_eyebrow",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Optional small label above the heading.",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_case_studies_list_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "instructions": "Section heading.",
+                            "placeholder": "Case Studies"
+                        },
+                        {
+                            "key": "field_case_studies_list_description",
+                            "label": "Description",
+                            "name": "description",
+                            "type": "wysiwyg",
+                            "required": 0,
+                            "instructions": "Short intro copy shown below the heading.",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0
+                        },
+                        {
+                            "key": "field_case_studies_list_settings_tab",
+                            "label": "List Settings",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_case_studies_list_posts_per_page",
+                            "label": "Case Studies Per Page",
+                            "name": "posts_per_page",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "How many cards to show per page before paginating. Defaults to 6.",
+                            "default_value": 6,
+                            "min": 1,
+                            "max": "",
+                            "step": 1,
+                            "placeholder": "6"
+                        },
+                        {
+                            "key": "field_case_studies_list_columns",
+                            "label": "Grid Columns",
+                            "name": "columns",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "Uses existing card-grid column utility classes.",
+                            "choices": {
+                                "columns-2": "2",
+                                "columns-3": "3",
+                                "columns-4": "4"
+                            },
+                            "default_value": "columns-3",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        },
+                        {
+                            "key": "field_case_studies_list_orderby",
+                            "label": "Order By",
+                            "name": "orderby",
+                            "type": "select",
+                            "required": 0,
+                            "instructions": "",
+                            "choices": {
+                                "menu_order": "Page Order",
+                                "date": "Publish Date",
+                                "title": "Title"
+                            },
+                            "default_value": "menu_order",
+                            "return_format": "value",
+                            "allow_null": 0
+                        },
+                        {
+                            "key": "field_case_studies_list_order",
+                            "label": "Order",
+                            "name": "order",
+                            "type": "button_group",
+                            "required": 0,
+                            "instructions": "",
+                            "choices": {
+                                "ASC": "Ascending",
+                                "DESC": "Descending"
+                            },
+                            "default_value": "ASC",
+                            "return_format": "value",
+                            "allow_null": 0,
+                            "layout": "horizontal"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_media_full": {
                     "key": "layout_media_full",
                     "name": "media_full",
@@ -6298,5 +6514,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782407924
+    "modified": 1782620400
 }

@@ -22,9 +22,6 @@ $section_classes = [
 	'pt-50 pb-50 pt-lg-90 pb-lg-90',
 ];
 
-// Get contact info from site settings
-$site_settings = function_exists( 'lsc_get_footer_contact_details' ) ? lsc_get_footer_contact_details() : [];
-
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
@@ -94,63 +91,49 @@ $site_settings = function_exists( 'lsc_get_footer_contact_details' ) ? lsc_get_f
 							<p class="contact-info-card__text"><?php echo esc_html( $contact_info['text'] ); ?></p>
 						<?php endif; ?>
 
-						<ul class="contact-info-card__list">
-							<?php
-							$addr  = $site_settings['address'] ?? '';
-							$phone = $site_settings['phone'] ?? '';
-							$mail  = $site_settings['email'] ?? '';
-							$link  = $site_settings['linkedin'] ?? '';
-							?>
+						<?php
+						$info_items    = function_exists( 'lsc_get_contact_items_for' ) ? lsc_get_contact_items_for( 'contact_section' ) : [];
+						$info_labels   = [
+							'address' => __( 'ADDRESS', 'lsc-group' ),
+							'phone'   => __( 'TELEPHONE', 'lsc-group' ),
+							'email'   => __( 'EMAIL', 'lsc-group' ),
+						];
+						$linkedin_item = $info_items['linkedin'] ?? null;
+						?>
 
-							<?php if ( $addr ) : ?>
-								<li class="contact-info-card__item">
-									<span class="contact-info-card__icon" aria-hidden="true">
-										<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'map-pin', 'contact-icon' ); ?>
-									</span>
-									<div class="contact-info-card__details">
-										<span class="contact-info-card__label"><?php esc_html_e( 'ADDRESS', 'lsc-group' ); ?></span>
-										<address class="contact-info-card__value"><?php echo nl2br( esc_html( $addr ) ); ?></address>
+						<?php if ( $info_items ) : ?>
+							<ul class="contact-info-card__list">
+								<?php foreach ( $info_items as $item ) : ?>
+									<?php if ( ! isset( $info_labels[ $item['key'] ] ) ) { continue; } ?>
+									<li class="contact-info-card__item">
+										<span class="contact-info-card__icon" aria-hidden="true">
+											<?php lsc_render_contact_icon( $item, 'contact-icon' ); ?>
+										</span>
+										<div class="contact-info-card__details">
+											<span class="contact-info-card__label"><?php echo esc_html( $info_labels[ $item['key'] ] ); ?></span>
+											<?php if ( 'address' === $item['key'] ) : ?>
+												<address class="contact-info-card__value"><?php echo nl2br( esc_html( $item['value'] ) ); ?></address>
+											<?php else : ?>
+												<a href="<?php echo esc_url( $item['url'] ); ?>" class="contact-info-card__value"><?php echo esc_html( $item['value'] ); ?></a>
+											<?php endif; ?>
+										</div>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+
+							<?php if ( $linkedin_item ) : ?>
+								<div class="contact-info-card__social">
+									<span class="contact-info-card__label"><?php esc_html_e( 'CONNECT', 'lsc-group' ); ?></span>
+									<div class="contact-info-card__social-link-wrap">
+										<span class="contact-info-card__social-icon" aria-hidden="true">
+											<?php lsc_render_contact_icon( $linkedin_item, '' ); ?>
+										</span>
+										<a href="<?php echo esc_url( $linkedin_item['url'] ); ?>" target="_blank" rel="noopener noreferrer" class="contact-info-card__social-link">
+											<?php esc_html_e( 'Follow us on LinkedIn', 'lsc-group' ); ?>
+										</a>
 									</div>
-								</li>
-							<?php endif; ?>
-
-							<?php if ( $phone ) : ?>
-								<li class="contact-info-card__item">
-									<span class="contact-info-card__icon" aria-hidden="true">
-										<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'phone', 'contact-icon' ); ?>
-									</span>
-									<div class="contact-info-card__details">
-										<span class="contact-info-card__label"><?php esc_html_e( 'TELEPHONE', 'lsc-group' ); ?></span>
-										<a href="tel:<?php echo esc_attr( str_replace( ' ', '', $phone ) ); ?>" class="contact-info-card__value"><?php echo esc_html( $phone ); ?></a>
-									</div>
-								</li>
-							<?php endif; ?>
-
-							<?php if ( $mail ) : ?>
-								<li class="contact-info-card__item">
-									<span class="contact-info-card__icon" aria-hidden="true">
-										<?php if ( function_exists( 'lsc_get_icon_svg' ) ) echo lsc_get_icon_svg( 'mail', 'contact-icon' ); ?>
-									</span>
-									<div class="contact-info-card__details">
-										<span class="contact-info-card__label"><?php esc_html_e( 'EMAIL', 'lsc-group' ); ?></span>
-										<a href="mailto:<?php echo esc_attr( $mail ); ?>" class="contact-info-card__value"><?php echo esc_html( $mail ); ?></a>
-									</div>
-								</li>
-							<?php endif; ?>
-						</ul>
-
-						<?php if ( $link ) : ?>
-							<div class="contact-info-card__social">
-								<span class="contact-info-card__label"><?php esc_html_e( 'CONNECT', 'lsc-group' ); ?></span>
-								<div class="contact-info-card__social-link-wrap">
-									<span class="contact-info-card__social-icon" aria-hidden="true">
-										<?php get_template_part( 'assets/svgs/linkedin' ); ?>
-									</span>
-									<a href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener" class="contact-info-card__social-link">
-										<?php esc_html_e( 'Follow us on LinkedIn', 'lsc-group' ); ?>
-									</a>
 								</div>
-							</div>
+							<?php endif; ?>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>

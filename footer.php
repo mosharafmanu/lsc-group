@@ -18,8 +18,8 @@
 						<?php lsc_render_footer_tagline(); ?>
 					<?php endif; ?>
 
-					<?php if ( function_exists( 'lsc_render_social_medias' ) ) : ?>
-						<?php lsc_render_social_medias(); ?>
+					<?php if ( function_exists( 'lsc_render_footer_contact_icons' ) ) : ?>
+						<?php lsc_render_footer_contact_icons(); ?>
 					<?php endif; ?>
 				</div>
 

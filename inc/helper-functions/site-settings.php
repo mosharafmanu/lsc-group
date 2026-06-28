@@ -280,40 +280,153 @@ if ( ! function_exists( 'lsc_get_footer_contact_details' ) ) {
 	}
 }
 
-if ( ! function_exists( 'lsc_get_social_medias' ) ) {
-	function lsc_get_social_medias() {
-		$contact = lsc_get_footer_contact_details();
-		$items   = [];
+if ( ! function_exists( 'lsc_get_contact_items' ) ) {
+	/**
+	 * All available contact items, sourced once from Site Settings.
+	 *
+	 * Each item: value, link URL, link target, and an uploaded icon (Site
+	 * Settings → "{Type} Icon"). Only items that have a value are returned.
+	 *
+	 * Keys: address, phone, email, linkedin, hours.
+	 *
+	 * @return array<string,array> Keyed by item type.
+	 */
+	function lsc_get_contact_items() {
+		$contact  = function_exists( 'lsc_get_footer_contact_details' ) ? lsc_get_footer_contact_details() : [];
+		$address  = $contact['address'] ?? '';
+		$phone    = $contact['phone'] ?? '';
+		$email    = $contact['email'] ?? '';
+		$linkedin = $contact['linkedin'] ?? '';
+		$hours    = $contact['hours'] ?? '';
 
-		if ( ! empty( $contact['email'] ) ) {
-			$items[] = [
-				'type'  => 'mail',
-				'label' => __( 'Email', 'lsc-group' ),
-				'url'   => 'mailto:' . sanitize_email( $contact['email'] ),
+		$icon_override = static function ( $field ) {
+			return function_exists( 'get_field' ) ? get_field( $field, 'options' ) : null;
+		};
+
+		$items = [];
+
+		if ( $address ) {
+			$items['address'] = [
+				'key'         => 'address',
+				'aria'        => __( 'Address', 'lsc-group' ),
+				'value'       => $address,
+				'url'         => '',
+				'target'      => '',
+				'icon_custom' => $icon_override( 'contact_icon_address' ),
 			];
 		}
 
-		if ( ! empty( $contact['phone'] ) ) {
-			$phone_href = lsc_get_phone_href( $contact['phone'] );
-
-			if ( $phone_href ) {
-				$items[] = [
-					'type'  => 'phone',
-					'label' => __( 'Phone', 'lsc-group' ),
-					'url'   => $phone_href,
-				];
-			}
+		if ( $phone ) {
+			$items['phone'] = [
+				'key'         => 'phone',
+				'aria'        => __( 'Phone', 'lsc-group' ),
+				'value'       => $phone,
+				'url'         => lsc_get_phone_href( $phone ),
+				'target'      => '',
+				'icon_custom' => $icon_override( 'contact_icon_phone' ),
+			];
 		}
 
-		if ( ! empty( $contact['linkedin'] ) ) {
-			$items[] = [
-				'type'  => 'linkedin',
-				'label' => __( 'LinkedIn', 'lsc-group' ),
-				'url'   => esc_url_raw( $contact['linkedin'] ),
+		if ( $email ) {
+			$items['email'] = [
+				'key'         => 'email',
+				'aria'        => __( 'Email', 'lsc-group' ),
+				'value'       => $email,
+				'url'         => 'mailto:' . sanitize_email( $email ),
+				'target'      => '',
+				'icon_custom' => $icon_override( 'contact_icon_email' ),
+			];
+		}
+
+		if ( $linkedin ) {
+			$items['linkedin'] = [
+				'key'         => 'linkedin',
+				'aria'        => __( 'LinkedIn', 'lsc-group' ),
+				'value'       => $linkedin,
+				'url'         => esc_url_raw( $linkedin ),
+				'target'      => '_blank',
+				'icon_custom' => $icon_override( 'contact_icon_linkedin' ),
+			];
+		}
+
+		if ( $hours ) {
+			$items['hours'] = [
+				'key'         => 'hours',
+				'aria'        => __( 'Opening Hours', 'lsc-group' ),
+				'value'       => $hours,
+				'url'         => '',
+				'target'      => '',
+				'icon_custom' => null,
 			];
 		}
 
 		return $items;
+	}
+}
+
+if ( ! function_exists( 'lsc_get_contact_items_for' ) ) {
+	/**
+	 * Contact items selected for a given location, in that location's order.
+	 *
+	 * Locations: footer_icons, footer_contact, contact_section, contact_panel.
+	 * The per-location "Items" checkbox in Site Settings decides which appear;
+	 * an empty/unset selection shows every available item (the defaults).
+	 *
+	 * @param string $location Location key.
+	 * @return array<string,array> Ordered subset of lsc_get_contact_items().
+	 */
+	function lsc_get_contact_items_for( $location ) {
+		$order = [
+			'footer_icons'    => [ 'email', 'phone', 'linkedin' ],
+			'footer_contact'  => [ 'address', 'phone', 'email' ],
+			'contact_section' => [ 'address', 'phone', 'email', 'linkedin' ],
+			'contact_panel'   => [ 'email', 'phone', 'address', 'hours' ],
+		];
+
+		$fields = [
+			'footer_icons'    => 'footer_icons_items',
+			'footer_contact'  => 'footer_contact_items',
+			'contact_section' => 'contact_section_items',
+			'contact_panel'   => 'contact_panel_items',
+		];
+
+		if ( ! isset( $order[ $location ] ) ) {
+			return [];
+		}
+
+		$all      = lsc_get_contact_items();
+		$selected = ( function_exists( 'get_field' ) && isset( $fields[ $location ] ) ) ? get_field( $fields[ $location ], 'options' ) : null;
+
+		// Empty/unset selection → show all available items for this location.
+		if ( empty( $selected ) || ! is_array( $selected ) ) {
+			$selected = $order[ $location ];
+		}
+
+		$result = [];
+
+		foreach ( $order[ $location ] as $key ) {
+			if ( isset( $all[ $key ] ) && in_array( $key, $selected, true ) ) {
+				$result[ $key ] = $all[ $key ];
+			}
+		}
+
+		return $result;
+	}
+}
+
+if ( ! function_exists( 'lsc_render_contact_icon' ) ) {
+	/**
+	 * Render a contact item's uploaded icon (Site Settings → "{Type} Icon").
+	 * The class is applied to the rendered <svg>/<img>. Nothing is output when
+	 * no icon has been uploaded for the item.
+	 *
+	 * @param array  $item  A single item from lsc_get_contact_items().
+	 * @param string $class CSS class for the icon element.
+	 */
+	function lsc_render_contact_icon( $item, $class = '' ) {
+		if ( ! empty( $item['icon_custom'] ) && function_exists( 'lsc_render_icon' ) ) {
+			lsc_render_icon( $item['icon_custom'], [ 'class' => $class, 'alt' => $item['aria'] ?? '' ] );
+		}
 	}
 }
 
@@ -382,25 +495,12 @@ if ( ! function_exists( 'lsc_render_footer_menu' ) ) {
 	}
 }
 
-if ( ! function_exists( 'lsc_get_icon_svg' ) ) {
-	function lsc_get_icon_svg( $icon, $class = 'footer-icon' ) {
-		$icons = [
-			'mail' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'phone' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.5 6.8 3.8A2 2 0 0 0 3.5 5c0 8.6 6.9 15.5 15.5 15.5a2 2 0 0 0 1.2-3.3l-1.7-1.7a2 2 0 0 0-2.1-.45l-2.1.84a11.2 11.2 0 0 1-6.18-6.18l.84-2.1a2 2 0 0 0-.46-2.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'linkedin' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 9.5V18M6.5 6.5v.01M11 18v-8.5M11 13.25c0-2.5 1.4-3.9 3.35-3.9 2.05 0 3.15 1.35 3.15 3.85V18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
-			'map-pin' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s6-5.3 6-11a6 6 0 0 0-12 0c0 5.7 6 11 6 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
-			'arrow' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m7 17 10-10M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'check-circle' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.5 12 2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'quote' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-			'broker' => '<svg class="' . esc_attr( $class ) . '" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-		];
-
-		return $icons[ $icon ] ?? '';
-	}
-}
-
-if ( ! function_exists( 'lsc_render_social_medias' ) ) {
-	function lsc_render_social_medias( $args = [] ) {
+if ( ! function_exists( 'lsc_render_footer_contact_icons' ) ) {
+	/**
+	 * The compact contact-icon row under the footer logo (icon-only links).
+	 * Items chosen via Site Settings → "Footer Icon Row — Items".
+	 */
+	function lsc_render_footer_contact_icons( $args = [] ) {
 		$defaults = [
 			'list_class' => 'social-media-list',
 			'item_class' => 'social-media-item',
@@ -410,35 +510,32 @@ if ( ! function_exists( 'lsc_render_social_medias' ) ) {
 		];
 		$args = wp_parse_args( $args, $defaults );
 
-		$social_medias = lsc_get_social_medias();
+		$items = lsc_get_contact_items_for( 'footer_icons' );
 
-		if ( ! $social_medias || ! is_array( $social_medias ) ) {
+		if ( ! $items ) {
 			return;
 		}
 
 		ob_start();
 		?>
 		<ul class="<?php echo esc_attr( $args['list_class'] ); ?>">
-			<?php foreach ( $social_medias as $social ) : ?>
+			<?php foreach ( $items as $item ) : ?>
 				<?php
-				$type  = $social['type'] ?? '';
-				$link  = $social['url'] ?? '';
-				$label = $social['label'] ?? __( 'Contact link', 'lsc-group' );
+				$link   = $item['url'] ?? '';
+				$label  = $item['aria'] ?? __( 'Contact link', 'lsc-group' );
+				$target = $item['target'] ?? '';
 
-				if ( ! $type || ! $link ) {
+				if ( ! $link ) {
 					continue;
 				}
+
+				$target_attr = $target ? ' target="' . esc_attr( $target ) . '"' : '';
+				$rel_attr    = '_blank' === $target ? ' rel="noopener noreferrer"' : '';
 				?>
 
 				<li class="<?php echo esc_attr( $args['item_class'] ); ?>">
-					<a href="<?php echo esc_url( $link ); ?>" class="<?php echo esc_attr( $args['link_class'] ); ?>"<?php echo 'linkedin' === $type ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="<?php echo esc_attr( $label ); ?>">
-						<?php
-						if ( 'linkedin' === $type ) {
-							get_template_part( 'assets/svgs/linkedin' );
-						} else {
-							echo lsc_get_icon_svg( $type, $args['icon_class'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						}
-						?>
+					<a href="<?php echo esc_url( $link ); ?>" class="<?php echo esc_attr( $args['link_class'] ); ?>"<?php echo $target_attr . $rel_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> aria-label="<?php echo esc_attr( $label ); ?>">
+						<?php lsc_render_contact_icon( $item, $args['icon_class'] ); ?>
 					</a>
 				</li>
 
@@ -464,9 +561,9 @@ if ( ! function_exists( 'lsc_render_footer_contact' ) ) {
 		];
 		$args = wp_parse_args( $args, $defaults );
 
-		$contact = lsc_get_footer_contact_details();
+		$items = lsc_get_contact_items_for( 'footer_contact' );
 
-		if ( empty( $contact['address'] ) && empty( $contact['phone'] ) && empty( $contact['email'] ) ) {
+		if ( ! $items ) {
 			return;
 		}
 
@@ -476,26 +573,18 @@ if ( ! function_exists( 'lsc_render_footer_contact' ) ) {
 			<p class="<?php echo esc_attr( $args['title_class'] ); ?>"><?php esc_html_e( 'Contact', 'lsc-group' ); ?></p>
 
 			<ul class="footer-contact-list">
-				<?php if ( ! empty( $contact['address'] ) ) : ?>
+				<?php foreach ( $items as $item ) : ?>
 					<li class="footer-contact-item">
-						<?php echo lsc_get_icon_svg( 'map-pin', 'footer-contact-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<span><?php echo wp_kses_post( nl2br( $contact['address'] ) ); ?></span>
+						<?php lsc_render_contact_icon( $item, 'footer-contact-icon' ); ?>
+						<?php if ( ! empty( $item['url'] ) ) : ?>
+							<a href="<?php echo esc_url( $item['url'] ); ?>"<?php echo '_blank' === ( $item['target'] ?? '' ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $item['value'] ); ?></a>
+						<?php elseif ( 'address' === $item['key'] ) : ?>
+							<span><?php echo wp_kses_post( nl2br( $item['value'] ) ); ?></span>
+						<?php else : ?>
+							<span><?php echo esc_html( $item['value'] ); ?></span>
+						<?php endif; ?>
 					</li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $contact['phone'] ) ) : ?>
-					<li class="footer-contact-item">
-						<?php echo lsc_get_icon_svg( 'phone', 'footer-contact-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<a href="<?php echo esc_url( lsc_get_phone_href( $contact['phone'] ) ); ?>"><?php echo esc_html( $contact['phone'] ); ?></a>
-					</li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $contact['email'] ) ) : ?>
-					<li class="footer-contact-item">
-						<?php echo lsc_get_icon_svg( 'mail', 'footer-contact-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<a href="<?php echo esc_url( 'mailto:' . sanitize_email( $contact['email'] ) ); ?>"><?php echo esc_html( $contact['email'] ); ?></a>
-					</li>
-				<?php endif; ?>
+				<?php endforeach; ?>
 			</ul>
 		</div>
 		<?php

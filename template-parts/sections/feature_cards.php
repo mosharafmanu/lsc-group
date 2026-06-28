@@ -88,8 +88,6 @@ $grid_classes = [
 							<?php
 							if ( $card_icon && function_exists( 'lsc_render_icon' ) ) {
 								lsc_render_icon( $card_icon, [ 'class' => 'feature-cards__icon-svg' ] );
-							} elseif ( function_exists( 'lsc_get_icon_svg' ) ) {
-								echo lsc_get_icon_svg( 'check-circle', 'feature-cards__icon-svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							}
 							?>
 						</span>

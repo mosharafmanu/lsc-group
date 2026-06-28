@@ -20,7 +20,6 @@ $buttons        = get_sub_field( 'buttons' );
 $media_type     = get_sub_field( 'media_type' ) ?: 'image';
 $image          = get_sub_field( 'image' );
 $video          = get_sub_field( 'video' );
-$image_position = get_sub_field( 'image_position' ) ?: 'right';
 $show_facts_bar = get_sub_field( 'show_facts_bar' );
 
 if ( ! $eyebrow && ! $title_lines && ! $description && ! $buttons && ! $image && ! $video ) {
@@ -38,10 +37,6 @@ $product_facts = ( 'image' === $hero_style && $show_facts_bar ) ? get_field( 'pr
 $has_facts_bar = $product_facts && is_array( $product_facts );
 
 $section_classes = [ 'inner-hero ', 'inner-hero--' . $hero_style ];
-
-if ( 'split' === $hero_style ) {
-	$section_classes[] = 'inner-hero--image-' . $image_position;
-}
 
 if ( $has_facts_bar ) {
 	$section_classes[] = 'inner-hero--has-facts';
