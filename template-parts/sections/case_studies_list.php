@@ -77,7 +77,7 @@ $grid_classes = [
 		<?php if ( $study_query->have_posts() ) : ?>
 			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-30 mt-lg-50">
 				<?php foreach ( $study_query->posts as $case_study ) : ?>
-					<?php get_template_part( 'template-parts/cards/case-study-card', null, [ 'post_id' => $case_study->ID ] ); ?>
+					<?php lsc_render_case_study_card( $case_study->ID ); ?>
 				<?php endforeach; ?>
 			</div>
 

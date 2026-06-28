@@ -87,36 +87,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 		<?php if ( $products ) : ?>
 			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-30 mt-lg-65">
 				<?php foreach ( $products as $product ) : ?>
-					<?php
-					$product_id = $product->ID;
-					$title      = get_the_title( $product_id );
-					$url        = get_permalink( $product_id );
-					$excerpt    = has_excerpt( $product_id ) ? get_the_excerpt( $product_id ) : '';
-					?>
-					<article class="finance-product-card">
-						<?php if ( has_post_thumbnail( $product_id ) ) : ?>
-							<a class="finance-product-card__media" href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'View %s', 'lsc-group' ), $title ) ); ?>">
-								<?php echo get_the_post_thumbnail( $product_id, 'large', [ 'class' => 'finance-product-card__image' ] ); ?>
-							</a>
-						<?php endif; ?>
-
-						<div class="finance-product-card__content">
-							<?php if ( $title ) : ?>
-								<h6 class="finance-product-card__title">
-									<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $title ); ?></a>
-								</h6>
-							<?php endif; ?>
-
-							<?php if ( $excerpt ) : ?>
-								<p class="finance-product-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>
-							<?php endif; ?>
-
-							<a class="finance-product-card__link" href="<?php echo esc_url( $url ); ?>">
-								<span><?php esc_html_e( 'Learn More', 'lsc-group' ); ?></span>
-								<span aria-hidden="true">-&gt;</span>
-							</a>
-						</div>
-					</article>
+					<?php lsc_render_finance_product_card( $product->ID ); ?>
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>

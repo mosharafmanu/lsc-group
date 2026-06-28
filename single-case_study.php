@@ -168,7 +168,7 @@ $lsc_sidebar_html = ob_get_clean();
 
 					<div class="case-studies-grid card-grid card-grid--center-last-row columns-3 mt-30 mt-lg-50">
 						<?php foreach ( $lsc_related->posts as $lsc_related_study ) : ?>
-							<?php get_template_part( 'template-parts/cards/case-study-card', null, [ 'post_id' => $lsc_related_study->ID ] ); ?>
+							<?php lsc_render_case_study_card( $lsc_related_study->ID ); ?>
 						<?php endforeach; ?>
 					</div>
 				</div>
