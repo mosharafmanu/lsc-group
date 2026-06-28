@@ -2,43 +2,54 @@
 /**
  * Single post template — used when no flexible content layouts are set.
  *
+ * Layout: an overlay hero (featured image with breadcrumb, category, title and
+ * meta on top), followed by the constrained article body with a share row,
+ * tags and an author card.
+ *
  * @package lsc-group
  */
+
+$lsc_word_count = str_word_count( wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) ) );
+$lsc_read_time  = max( 1, (int) ceil( $lsc_word_count / 220 ) );
+$lsc_author_id  = (int) get_post_field( 'post_author', get_the_ID() );
+$lsc_has_image  = has_post_thumbnail();
+$lsc_hero_class = $lsc_has_image ? 'single-post__hero--has-image' : 'single-post__hero--plain';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'single-post' ); ?>>
 
-	<?php if ( has_post_thumbnail() ) :
-		$thumbnail_id = get_post_thumbnail_id();
-	?>
-		<div class="post-thumbnail">
-			<?php if ( function_exists( 'lsc_render_responsive_picture' ) ) :
-				lsc_render_responsive_picture(
-					[
-						'ID'  => $thumbnail_id,
-						'url' => wp_get_attachment_url( $thumbnail_id ),
-						'alt' => get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) ?: get_the_title(),
-					],
-					[
-						'sizes'         => '100vw',
-						'fetchpriority' => 'high',
-						'lazy'          => false,
-						'class'         => 'post-thumbnail-image',
-					]
-				);
-			else :
-				the_post_thumbnail( 'lsc-1200', [ 'class' => 'post-thumbnail-image' ] );
-			endif; ?>
-		</div>
-	<?php endif; ?>
+	<header class="single-post__hero <?php echo esc_attr( $lsc_hero_class ); ?>">
+		<?php if ( $lsc_has_image ) :
+			$thumbnail_id = get_post_thumbnail_id();
+			?>
+			<div class="single-post__hero-media" aria-hidden="true">
+				<?php if ( function_exists( 'lsc_render_responsive_picture' ) ) :
+					lsc_render_responsive_picture(
+						[
+							'ID'  => $thumbnail_id,
+							'url' => wp_get_attachment_url( $thumbnail_id ),
+							'alt' => get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) ?: get_the_title(),
+						],
+						[
+							'sizes'         => '100vw',
+							'fetchpriority' => 'high',
+							'lazy'          => false,
+							'class'         => 'single-post__hero-image',
+						]
+					);
+				else :
+					the_post_thumbnail( 'lsc-1200', [ 'class' => 'single-post__hero-image' ] );
+				endif; ?>
+			</div>
+			<span class="single-post__hero-overlay" aria-hidden="true"></span>
+		<?php endif; ?>
 
-	<div class="post-inner layout-padding">
-
-		<header class="entry-header pt-50 pt-md-70 pt-lg-100">
+		<div class="single-post__hero-inner lsc-container layout-padding">
+			<?php if ( function_exists( 'lsc_breadcrumb' ) ) { lsc_breadcrumb( false, '', '' ); } ?>
 
 			<?php $categories = get_the_category();
 			if ( $categories ) : ?>
-				<div class="entry-categories mb-20">
+				<div class="entry-categories">
 					<?php foreach ( $categories as $category ) : ?>
 						<a href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>" class="entry-category">
 							<?php echo esc_html( $category->name ); ?>
@@ -49,19 +60,18 @@
 
 			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
-			<?php
-			$lsc_word_count = str_word_count( wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) ) );
-			$lsc_read_time  = max( 1, (int) ceil( $lsc_word_count / 220 ) );
-			?>
-			<div class="entry-meta mt-20">
+			<div class="entry-meta">
 				<span class="entry-author">
-					<?php
-					printf(
-						/* translators: %s: Author name */
-						esc_html__( 'By %s', 'lsc-group' ),
-						esc_html( get_the_author() )
-					);
-					?>
+					<?php echo get_avatar( $lsc_author_id, 36, '', get_the_author(), [ 'class' => 'entry-author__avatar' ] ); ?>
+					<span class="entry-author__name">
+						<?php
+						printf(
+							/* translators: %s: Author name */
+							esc_html__( 'By %s', 'lsc-group' ),
+							esc_html( get_the_author() )
+						);
+						?>
+					</span>
 				</span>
 				<time class="entry-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
 					<?php echo esc_html( get_the_date() ); ?>
@@ -76,10 +86,12 @@
 					?>
 				</span>
 			</div>
+		</div>
+	</header>
 
-		</header>
+	<div class="post-inner layout-padding">
 
-		<div class="entry-content mt-50 mt-md-60">
+		<div class="entry-content mt-40 mt-md-50">
 			<?php
 			the_content( sprintf(
 				wp_kses(
@@ -98,7 +110,7 @@
 		</div>
 
 		<?php $tags = get_the_tags(); if ( $tags ) : ?>
-			<footer class="entry-footer pb-30">
+			<footer class="entry-footer">
 				<div class="post-tags">
 					<?php foreach ( $tags as $tag ) : ?>
 						<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>" class="post-tag">
@@ -108,6 +120,8 @@
 				</div>
 			</footer>
 		<?php endif; ?>
+
+		<?php get_template_part( 'template-parts/author-card' ); ?>
 
 	</div>
 

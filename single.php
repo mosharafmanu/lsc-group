@@ -17,6 +17,10 @@ if ( is_singular() ) {
 
 	<main id="primary" class="site-main <?php echo esc_attr( $post_slug ); ?>">
 
+		<?php if ( is_singular( 'post' ) ) : ?>
+			<div class="reading-progress" aria-hidden="true"><span class="reading-progress__bar"></span></div>
+		<?php endif; ?>
+
 		<?php
 		if ( have_posts() ) :
 			while ( have_posts() ) :
@@ -26,6 +30,34 @@ if ( is_singular() ) {
 					lsc_flexible_content( 'cms' );
 				else :
 					get_template_part( 'template-parts/content', get_post_type() );
+				endif;
+
+				// Previous / next article navigation (blog posts only).
+				if ( is_singular( 'post' ) ) :
+					$lsc_prev = get_previous_post();
+					$lsc_next = get_next_post();
+
+					if ( $lsc_prev || $lsc_next ) :
+						?>
+						<nav class="post-nav post-inner layout-padding mt-40 mt-lg-60" aria-label="<?php esc_attr_e( 'Article navigation', 'lsc-group' ); ?>">
+							<?php if ( $lsc_prev ) : ?>
+								<a class="post-nav__link post-nav__link--prev" href="<?php echo esc_url( get_permalink( $lsc_prev ) ); ?>" rel="prev">
+									<span class="post-nav__label"><span aria-hidden="true">&larr;</span> <?php esc_html_e( 'Previous', 'lsc-group' ); ?></span>
+									<span class="post-nav__title"><?php echo esc_html( get_the_title( $lsc_prev ) ); ?></span>
+								</a>
+							<?php else : ?>
+								<span class="post-nav__spacer"></span>
+							<?php endif; ?>
+
+							<?php if ( $lsc_next ) : ?>
+								<a class="post-nav__link post-nav__link--next" href="<?php echo esc_url( get_permalink( $lsc_next ) ); ?>" rel="next">
+									<span class="post-nav__label"><?php esc_html_e( 'Next', 'lsc-group' ); ?> <span aria-hidden="true">&rarr;</span></span>
+									<span class="post-nav__title"><?php echo esc_html( get_the_title( $lsc_next ) ); ?></span>
+								</a>
+							<?php endif; ?>
+						</nav>
+						<?php
+					endif;
 				endif;
 
 				if ( function_exists( 'lsc_render_back_to_blogs_button' ) ) {
@@ -60,7 +92,7 @@ if ( is_singular() ) {
 								<h2 class="related-posts__title"><?php esc_html_e( 'Related Articles', 'lsc-group' ); ?></h2>
 							</header>
 
-							<div class="blog-grid card-grid columns-3 mt-30 mt-lg-50">
+							<div class="blog-grid card-grid card-grid--center-last-row columns-3 mt-30 mt-lg-50">
 								<?php foreach ( $lsc_related->posts as $lsc_related_post ) : ?>
 									<?php lsc_render_post_card( $lsc_related_post->ID, [ 'variant' => 'default' ] ); ?>
 								<?php endforeach; ?>
