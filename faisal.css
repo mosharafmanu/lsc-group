@@ -2544,12 +2544,16 @@ Feature Column Style Start
   margin-top: 1.5rem;
   row-gap: 1rem;
 }
-.feature-columns__card-buttons .site-btn {
+.feature-columns__card-buttons .feature-columns__card-button:first-child {
+  font-size: .9375rem;
+}
+.feature-columns__card-buttons .feature-columns__card-button {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.25rem;
+  padding: .75rem 1.5rem;
 	line-height: 112.5%;
 }
 .feature-columns__figure {
@@ -2618,7 +2622,7 @@ Feature Column Style Start
 .lsc-list.feature-columns__features {
 	margin-top: 1.5rem;
 }
-.feature-columns__card-buttons .site-btn{
+.feature-columns__card-buttons .feature-columns__card-button {
 	font-size: 1rem;
 }
 }
