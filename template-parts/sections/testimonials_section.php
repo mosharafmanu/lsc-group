@@ -89,7 +89,9 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 		<?php endif; ?>
 
 		<div class="testimonials-section__intro layout-padding-mobile">
+			<?php if ( $title_lines || $description ) : ?>
 				<span class="section-header__divider" aria-hidden="true"></span>
+			<?php endif; ?>
 
 			<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
 				<h2 class="section-header__title testimonials-section__title">

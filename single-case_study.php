@@ -161,9 +161,9 @@ $lsc_sidebar_html = ob_get_clean();
 			?>
 			<section class="case-studies-section case-studies-section--related">
 				<div class="case-studies-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
-					<header class="case-studies-section__header">
-						<span class="case-studies-section__divider" aria-hidden="true"></span>
-						<h2 class="case-studies-section__title"><?php esc_html_e( 'Related Case Studies', 'lsc-group' ); ?></h2>
+					<header class="section-header case-studies-section__header">
+						<span class="section-header__divider" aria-hidden="true"></span>
+						<h2 class="section-header__title case-studies-section__title"><?php esc_html_e( 'Related Case Studies', 'lsc-group' ); ?></h2>
 					</header>
 
 					<div class="case-studies-grid card-grid card-grid--center-last-row columns-3 mt-30 mt-lg-50">

@@ -25,8 +25,6 @@ $base_id = 'faq-' . $faq_section_index;
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header faqs__header text-center">
-					<span class="section-header__divider" aria-hidden="true"></span>
-
 				<?php if ( $title_lines && is_array( $title_lines ) ) : ?>
 					<h2 class="section-header__title faqs__title">
 						<?php foreach ( $title_lines as $title_line ) : ?>
