@@ -164,7 +164,6 @@
     display: block;
 }
 .finance-product-card {
-  border: 0.063rem solid rgba(26, 22, 20, 0.08);
   border-radius: .75rem;
   height: 100%;
 }
