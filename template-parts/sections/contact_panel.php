@@ -38,7 +38,8 @@ if ( $overlap ) {
 }
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $lsc_section_el = ( ! empty( $form_title ) || ! empty( $info_title ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<div class="contact-panel__grid">
 
@@ -115,4 +116,4 @@ if ( $overlap ) {
 
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

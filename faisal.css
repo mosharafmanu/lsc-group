@@ -664,6 +664,10 @@
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
+  /* Rendered as <h3> for the document outline; keep the original (non-heading) look. */
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: normal;
 }
 .testimonial-card__author-role {
   color: rgba(26, 22, 20, 0.40);

@@ -21,7 +21,8 @@ static $faq_section_index = 0;
 $base_id = 'faq-' . $faq_section_index;
 ?>
 
-<section class="faqs pt-50 pb-50 pt-lg-90 pb-lg-90">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="faqs pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header faqs__header text-center">
@@ -100,4 +101,4 @@ $base_id = 'faq-' . $faq_section_index;
 			</div>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

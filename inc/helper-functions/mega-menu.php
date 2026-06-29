@@ -236,7 +236,7 @@ if ( ! function_exists( 'lsc_render_mega_menu_panel' ) ) {
 			<div class="mega-menu__panel">
 			<div class="mega-menu__container lsc-container layout-padding">
 				<?php if ( $heading ) : ?>
-					<h2 class="mega-menu__heading"><?php echo esc_html( $heading ); ?></h2>
+					<div class="mega-menu__heading h2-style"><?php echo esc_html( $heading ); ?></div>
 				<?php endif; ?>
 
 				<?php if ( $cards ) : ?>

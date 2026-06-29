@@ -24,7 +24,8 @@ $section_classes = [
 
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header contact-section__header text-center">
@@ -86,7 +87,7 @@ $section_classes = [
 				<?php if ( $contact_info ) : ?>
 					<div class="contact-info-card">
 						<?php if ( ! empty( $contact_info['title'] ) ) : ?>
-							<h5 class="contact-info-card__title"><?php echo esc_html( $contact_info['title'] ); ?></h5>
+							<h3 class="contact-info-card__title h5-style"><?php echo esc_html( $contact_info['title'] ); ?></h3>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $contact_info['text'] ) ) : ?>
@@ -145,7 +146,7 @@ $section_classes = [
 				<?php if ( $form_card ) : ?>
 					<div class="contact-form-card">
 						<?php if ( ! empty( $form_card['title'] ) ) : ?>
-							<h5 class="contact-form-card__title"><?php echo esc_html( $form_card['title'] ); ?></h5>
+							<h3 class="contact-form-card__title h5-style"><?php echo esc_html( $form_card['title'] ); ?></h3>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $form_card['form_code'] ) ) : ?>
@@ -158,4 +159,4 @@ $section_classes = [
 			</div>
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

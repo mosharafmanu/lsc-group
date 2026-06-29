@@ -25,7 +25,8 @@ $grid_classes = [
 ];
 ?>
 
-<section class="process-steps pt-50 pb-50 pt-lg-90 pb-lg-90">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="process-steps pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header process-steps__header text-center">
@@ -86,7 +87,7 @@ $grid_classes = [
 						<span class="process-steps__number" aria-hidden="true"><?php echo esc_html( $index + 1 ); ?></span>
 
 						<?php if ( $step_title ) : ?>
-							<h5 class="process-steps__step-title"><?php echo esc_html( $step_title ); ?></h5>
+							<h3 class="process-steps__step-title h5-style"><?php echo esc_html( $step_title ); ?></h3>
 						<?php endif; ?>
 
 						<?php if ( $step_description ) : ?>
@@ -97,4 +98,4 @@ $grid_classes = [
 			</ol>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

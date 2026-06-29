@@ -27,7 +27,7 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<div class="media-full__media">
 			<?php if ( $is_video && function_exists( 'lsc_render_video' ) ) : ?>
@@ -65,4 +65,4 @@ $section_classes = [
 			<?php endif; ?>
 		</div>
 	</div>
-</section>
+</div>

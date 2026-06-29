@@ -51,7 +51,7 @@ if ( ! $initial && $author_name ) {
 $has_author = $author_name || $author_role || $avatar || $initial;
 ?>
 
-<section class="quote-block">
+<div class="quote-block">
 	<div class="lsc-container layout-padding">
 		<figure class="quote-block__card">
 			<span class="quote-block__mark" aria-hidden="true">
@@ -92,4 +92,4 @@ $has_author = $author_name || $author_role || $avatar || $initial;
 			<?php endif; ?>
 		</figure>
 	</div>
-</section>
+</div>

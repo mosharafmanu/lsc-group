@@ -20,10 +20,13 @@ if ( ! function_exists( 'lsc_render_post_card' ) ) {
 			'variant'        => 'default',
 			'class'          => '',
 			'fetchpriority'  => 'auto',
+			'heading_level'  => 'h2',
 			'echo'           => true,
 		];
 
-		$args       = wp_parse_args( $args, $defaults );
+		$args          = wp_parse_args( $args, $defaults );
+		$heading_level = strtolower( (string) $args['heading_level'] );
+		$heading_level = in_array( $heading_level, [ 'h2', 'h3', 'h4' ], true ) ? $heading_level : 'h2';
 		$variant    = sanitize_key( $args['variant'] );
 		$variant    = in_array( $variant, [ 'default', 'featured', 'compact' ], true ) ? $variant : 'default';
 		$permalink  = get_permalink( $post_id );
@@ -92,11 +95,11 @@ if ( ! function_exists( 'lsc_render_post_card' ) ) {
 					</span>
 				</div>
 
-				<h2 class="post-card__title">
+				<<?php echo $heading_level; ?> class="post-card__title h2-style">
 					<a href="<?php echo esc_url( $permalink ); ?>" rel="bookmark">
 						<?php echo esc_html( $title ); ?>
 					</a>
-				</h2>
+				</<?php echo $heading_level; ?>>
 
 				<?php if ( $excerpt ) : ?>
 					<p class="post-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>

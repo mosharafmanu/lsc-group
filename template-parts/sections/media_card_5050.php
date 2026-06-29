@@ -27,7 +27,8 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-70 pt-lg-110 pb-lg-120">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-70 pt-lg-110 pb-lg-120">
 	<div class="media-card-5050__inner media-<?php echo esc_attr( sanitize_html_class( $media_position ) ); ?> lsc-container layout-padding">
 		<div class="media-card-5050__content">
 			<?php if ( $eyebrow ) : ?>
@@ -145,4 +146,4 @@ $section_classes = [
 			<?php endif; ?>
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

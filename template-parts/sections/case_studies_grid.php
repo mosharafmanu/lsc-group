@@ -63,7 +63,8 @@ $grid_classes = [
 ];
 ?>
 
-<section class="case-studies-section mt-50 mt-lg-70 mt-lg-150">
+<?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="case-studies-section mt-50 mt-lg-70 mt-lg-150">
 	<div class="case-studies-section__inner lsc-container layout-padding layout-padding0 pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header case-studies-section__header layout-padding-mobile">
@@ -104,7 +105,7 @@ $grid_classes = [
 			</div>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>
 
 <?php
 if ( isset( $study_query ) && $study_query instanceof WP_Query ) {

@@ -114,7 +114,7 @@ if ( is_singular() ) {
 
 							<div class="blog-grid card-grid <?php echo esc_attr( $lsc_related_cols ); ?> mt-30 mt-lg-50">
 								<?php foreach ( $lsc_related_posts as $lsc_related_post ) : ?>
-									<?php lsc_render_post_card( $lsc_related_post->ID, [ 'variant' => $lsc_related_variant ] ); ?>
+									<?php lsc_render_post_card( $lsc_related_post->ID, [ 'variant' => $lsc_related_variant, 'heading_level' => 'h3' ] ); ?>
 								<?php endforeach; ?>
 							</div>
 						</section>

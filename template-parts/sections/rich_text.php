@@ -17,10 +17,10 @@ if ( ! $content ) {
 }
 ?>
 
-<section class="rich-text">
+<div class="rich-text">
 	<div class="lsc-container layout-padding">
 		<div class="rich-text__content entry-content">
 			<?php echo wp_kses_post( $content ); ?>
 		</div>
 	</div>
-</section>
+</div>

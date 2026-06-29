@@ -24,6 +24,34 @@ get_header();
 // Layouts that break out of the two-column band and render full-width.
 $lsc_fullwidth_layouts = [ 'inner_hero' ];
 
+/**
+ * Strip the page-level container classes from a section's markup.
+ *
+ * Left-column sections live inside `.case-study-layout__main`, which already
+ * sits in the band's `.lsc-container.layout-padding`. Their own container +
+ * horizontal padding would double up, so we remove just those class tokens
+ * (leaving everything else — e.g. `layout-padding-mobile` — untouched).
+ */
+$lsc_strip_container_classes = static function ( $html ) {
+	$drop = [ 'lsc-container', 'layout-padding', 'layout-padding0' ];
+
+	return preg_replace_callback(
+		'/\s+class=(["\'])(.*?)\1/s',
+		static function ( $matches ) use ( $drop ) {
+			$classes = preg_split( '/\s+/', trim( $matches[2] ) );
+			$classes = array_values( array_diff( $classes, $drop ) );
+
+			// Drop the attribute (and its leading space) entirely if nothing is left.
+			if ( empty( $classes ) ) {
+				return '';
+			}
+
+			return ' class=' . $matches[1] . implode( ' ', $classes ) . $matches[1];
+		},
+		$html
+	);
+};
+
 // --- Case Summary sidebar (built once, dropped into the right column) -------
 $lsc_summary_rows = array_filter(
 	[
@@ -41,7 +69,7 @@ $lsc_has_sidebar = ! empty( $lsc_summary_rows ) || $lsc_has_apply;
 ob_start();
 if ( $lsc_has_sidebar ) :
 	?>
-	<aside class="case-study-layout__sidebar">
+	<div class="case-study-layout__sidebar">
 		<div class="case-summary">
 			<h2 class="case-summary__title">Case Summary</h2>
 
@@ -71,7 +99,7 @@ if ( $lsc_has_sidebar ) :
 				</div>
 			<?php endif; ?>
 		</div>
-	</aside>
+	</div>
 	<?php
 endif;
 $lsc_sidebar_html = ob_get_clean();
@@ -120,7 +148,15 @@ $lsc_sidebar_html = ob_get_clean();
 				$lsc_template_path = 'template-parts/sections/' . $lsc_layout;
 
 				if ( locate_template( $lsc_template_path . '.php' ) ) {
-					get_template_part( $lsc_template_path );
+					if ( $lsc_is_fullwidth ) {
+						get_template_part( $lsc_template_path );
+					} else {
+						// Inside the left column the band already supplies the
+						// container + padding, so drop the section's own.
+						ob_start();
+						get_template_part( $lsc_template_path );
+						echo $lsc_strip_container_classes( ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					}
 				} elseif ( current_user_can( 'manage_options' ) && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 					echo '<!-- Missing template: ' . esc_html( $lsc_template_path ) . '.php -->';
 				}

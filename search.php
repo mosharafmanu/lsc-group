@@ -66,6 +66,7 @@ get_header();
 					lsc_render_post_card( null, [
 						'variant'       => 'default',
 						'fetchpriority' => 1 === $article_index ? 'high' : 'auto',
+						'heading_level' => 'h3',
 					] );
 				} else {
 					get_template_part( 'template-parts/content', 'search' );

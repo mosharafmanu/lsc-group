@@ -57,7 +57,8 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 }
 ?>
 
-<section class="downloads-section">
+<?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="downloads-section">
 	<div class="downloads-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
@@ -101,7 +102,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 						     </span>
 							 <div class="download-item__content">
 								<?php if ( $download_title ) : ?>
-									<h5 class="download-item__title"><?php echo esc_html( $download_title ); ?></h5>
+									<h3 class="download-item__title h5-style"><?php echo esc_html( $download_title ); ?></h3>
 								<?php endif; ?>
 
 								<?php if ( $subtitle ) : ?>
@@ -121,7 +122,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 			</ul>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>
 
 <?php
 if ( isset( $download_query ) && $download_query instanceof WP_Query ) {

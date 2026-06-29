@@ -14,6 +14,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="skip-link sr-only" href="#primary"><?php esc_html_e( 'Skip to content', 'lsc-group' ); ?></a>
+
 <div id="page" class="site">
 
 <header class="site-header">
@@ -25,6 +27,7 @@
 
 		  <div class="header-right">
                     <nav id="primary-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'lsc-group' ); ?>">
+                        <h2 class="sr-only"><?php esc_html_e( 'Main navigation', 'lsc-group' ); ?></h2>
                         <?php
                         wp_nav_menu( [
                             'theme_location' => 'mainMenu',
