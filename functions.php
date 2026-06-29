@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.119' );
+	define( 'LSC_GROUP_VERSION', '1.0.120' );
 }
 
 
@@ -107,8 +107,11 @@ function lsc_scripts() {
 	// ── Core CSS ─────────────────────────────────────────────────
 	wp_enqueue_style( 'lsc-group-spacer',         get_template_directory_uri() . '/assets/css/spacer.css',                        array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-utilities',      get_template_directory_uri() . '/assets/css/utilities.css',                     array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'lsc-group-video',          get_template_directory_uri() . '/assets/css/video-behaviors.css',               array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'lsc-group-video-popup',    get_template_directory_uri() . '/assets/css/video-popup.css',                   array(), LSC_GROUP_VERSION );
+	// Video CSS is registered, not enqueued — lsc_render_video() pulls it in at
+	// render time (same as the video JS), so pages without a video ship neither.
+	// video-behaviors loads for any video; video-popup only for onclick-popup.
+	wp_register_style( 'lsc-group-video',         get_template_directory_uri() . '/assets/css/video-behaviors.css',               array(), LSC_GROUP_VERSION );
+	wp_register_style( 'lsc-group-video-popup',   get_template_directory_uri() . '/assets/css/video-popup.css',                   array(), LSC_GROUP_VERSION );
 	if ( $lsc_needs_slick ) {
 		wp_enqueue_style( 'slick-carousel',           get_template_directory_uri() . '/assets/css/slick.css',                         array(), LSC_GROUP_VERSION );
 		wp_enqueue_style( 'lsc-group-slick-custom',   get_template_directory_uri() . '/assets/css/lsc-group-slick-custom.css',    array( 'slick-carousel' ), LSC_GROUP_VERSION );

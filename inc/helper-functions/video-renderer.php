@@ -67,11 +67,16 @@ if ( ! function_exists( 'lsc_render_video' ) ) {
 			return '';
 		}
 
-		// Load only the video JS this render needs (footer scripts → safe to
-		// enqueue mid-render). Pages without any video ship none of these.
+		// Load only the video CSS + JS this render needs. Both are registered (not
+		// enqueued) globally; pulling them in here means pages without any video
+		// ship none of them. Styles enqueued mid-render print in the footer — the
+		// video-* rules are self-contained and any theme overrides use
+		// higher-specificity selectors, so source order is immaterial.
+		wp_enqueue_style( 'lsc-group-video' );
 		wp_enqueue_script( 'lsc-group-video-behaviors' );
 
 		if ( 'onclick-popup' === $args['behavior'] ) {
+			wp_enqueue_style( 'lsc-group-video-popup' );
 			wp_enqueue_script( 'lsc-group-video-popup' );
 		}
 
