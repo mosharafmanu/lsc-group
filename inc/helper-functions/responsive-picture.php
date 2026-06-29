@@ -224,11 +224,19 @@ if ( ! function_exists( 'lsc_render_responsive_picture' ) ) {
 
 			$srcset = implode( ', ', $srcset_array );
 
+			// Intrinsic dimensions so the browser can reserve space (prevents CLS).
+			// CSS (img { max-width:100%; height:auto }) still controls display size.
+			$intrinsic_w = ! empty( $image_meta['width'] ) ? (int) $image_meta['width'] : 0;
+			$intrinsic_h = ! empty( $image_meta['height'] ) ? (int) $image_meta['height'] : 0;
+
 			$html = '<picture>';
 			$html .= '<img ';
 			$html .= 'src="' . esc_url( $image_data['url'] ) . '" ';
 			$html .= 'srcset="' . esc_attr( $srcset ) . '" ';
 			$html .= 'sizes="' . $sizes . '" ';
+			if ( $intrinsic_w && $intrinsic_h ) {
+				$html .= 'width="' . $intrinsic_w . '" height="' . $intrinsic_h . '" ';
+			}
 			$html .= 'alt="' . $alt . '" ';
 			if ( $class ) {
 				$html .= 'class="' . $class . '" ';

@@ -96,6 +96,24 @@ body.no-scroll{
     white-space: nowrap !important;
     border: 0 !important;
 }
+/* Skip link: hidden via .sr-only, revealed only on keyboard focus. */
+.skip-link:focus {
+    position: fixed !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    z-index: 100000 !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: .75rem 1.25rem !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    background: var(--lsc-color-primary, #1a1614) !important;
+    color: var(--lsc-color-light, #fff) !important;
+    border-radius: .375rem !important;
+    text-decoration: none !important;
+}
 img, svg {
     vertical-align: middle;
 	max-width: 100%;
