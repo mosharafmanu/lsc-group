@@ -14,20 +14,7 @@ Text Domain: lsc-group
 Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexible-content, starter
 */
 
-/*
-==============================================================================
-  TABLE OF CONTENTS
-==============================================================================
-  1. Foundation .......... fonts, design tokens (:root)
-  2. Site Header & Nav ... header, mega menu, mobile navigation
-  3. Page Sections ....... ACF flexible-content sections (hero -> footer order)
-  4. Blog / Single / Archive ... post templates, cards, comments
-  5. Site Footer
-
-==============================================================================
-*/
-
-/* ============================== 1. FOUNDATION ============================== */
+/* 1. FOUNDATION */
 
 /* Fonts */
 
@@ -51,51 +38,50 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 
 :root {
 
-	/* Brand Colors */
-    --lsc-color-primary:   #1a1614;   /* Warm black — core brand text and primary surfaces */
-    --lsc-color-secondary: #101419;   /* Deep black — dark surfaces and hover states */
-    --lsc-color-accent:    #ff8a3b;   /* Orange — CTA, highlight, active state, link accent */
+/* Brand Colors */
+    --lsc-color-primary:   #1a1614;
+    --lsc-color-secondary: #101419;
+    --lsc-color-accent:    #ff8a3b;
 
-    /* Neutral */
-    --lsc-color-dark:   #101419;      /* Dark text and dark section backgrounds */
-    --lsc-color-mid:    rgba(26, 22, 20, 0.55); /* Muted body text */
-    --lsc-color-subtle: #eceae3;      /* Warm stone section background */
-    --lsc-color-light:  #fefadc;      /* Cream reversed-text backgrounds */
+/* Neutral */
+    --lsc-color-dark:   #101419;
+    --lsc-color-mid:    rgba(26, 22, 20, 0.55);
+    --lsc-color-subtle: #eceae3;
+    --lsc-color-light:  #fefadc;
     --lsc-color-white:  #ffffff;
     --lsc-color-panel:  #f5f3ef;
     --lsc-color-border: rgba(26, 22, 20, 0.08);
 
-    /* Semantic aliases — wire once, change via brand colors above */
     --lsc-color-text:       var(--lsc-color-primary);
     --lsc-color-background: var(--lsc-color-white);
     --lsc-color-heading:    var(--lsc-color-primary);
     --lsc-color-link:       var(--lsc-color-accent);
 
-    /* Typography */
+/* Typography */
     --lsc-font-heading: 'Instrument Sans', sans-serif;
     --lsc-font-body:    'Instrument Sans', sans-serif;
 
-	/* Container */
-    --lsc-container-max: 83.875rem; /* 1342px */
-    --lsc-layout-padding: 1.5rem;   /* 24px — base gutter; bumped at 1200/1600 (see layout-padding) */
-    --lsc-grid-inset: 3.25rem;      /* 52px — optional inner inset for .layout-inset; collapses on small screens */
+/* Container */
+    --lsc-container-max: 83.875rem;
+    --lsc-layout-padding: 1.5rem;
+    --lsc-grid-inset: 3.25rem;
 
-	/* Buttons */
-    --lsc-btn-padding-y:   0.5rem;  /* 8px */
-    --lsc-btn-padding-x:   1.25rem;    /* 20px */
-    --lsc-btn-font-size:   0.875rem;  /* 14px */
+/* Buttons */
+    --lsc-btn-padding-y:   0.5rem;
+    --lsc-btn-padding-x:   1.25rem;
+    --lsc-btn-font-size:   0.875rem;
     --lsc-btn-font-weight: 600;
 
-	/* Border Radius */
-    --lsc-border-radius:    0.75rem;    /* 12px */
-    --lsc-border-radius-sm: 0.375rem;   /* 6px  */
+/* Border Radius */
+    --lsc-border-radius:    0.75rem;
+    --lsc-border-radius-sm: 0.375rem;
 
-	/* Transition */
+/* Transition */
     --lsc-transition: 0.3s ease;
 
 }
 
-/* ============================== 2. SITE HEADER & NAVIGATION ============================== */
+/* 2. SITE HEADER & NAVIGATION */
 
 /* Header */
 
@@ -128,7 +114,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   letter-spacing: 0.28px;
   display: inline-flex;
   align-items: center;
-  column-gap: 0.375rem; /* 6px — space before the dropdown caret */
+  column-gap: 0.375rem;
   text-decoration: none;
   transition: color 0.3s ease;
   padding-top: 2.3125rem;
@@ -138,7 +124,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   color: var(--lsc-color-accent);
 }
 
-/* Dropdown caret on items with a submenu (regular dropdown or mega menu). */
 .main-menu > li.menu-item-has-children > a::after,
 .main-menu > li.menu-item--has-mega > a::after {
   content: "";
@@ -155,10 +140,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   transform: translateY(0.05rem) rotate(225deg);
 }
 
-/* ---- Desktop regular dropdown (standard sub-menu, not mega) ---- */
 .main-menu .sub-menu {
   position: absolute;
-  top: calc(100% + 0.375rem); /* small float gap; bridged below so hover holds */
+  top: calc(100% + 0.375rem);
   left: -0.5rem;
   z-index: 60;
   min-width: 15rem;
@@ -178,7 +162,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
               transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               visibility 0.3s ease;
 }
-/* Invisible bridge across the float gap so the cursor never drops the hover. */
 .main-menu .sub-menu::before {
   content: "";
   position: absolute;
@@ -196,8 +179,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .main-menu .sub-menu li {
   position: relative;
 }
-/* Stagger first-level items only (nested flyouts manage their own show/hide).
-   visibility:hidden on the panel keeps items in flow, so this animates. */
 .main-menu > li.menu-item-has-children > .sub-menu > li {
   opacity: 0;
   transform: translateX(-0.375rem);
@@ -230,7 +211,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   text-decoration: none;
   transition: background-color 0.25s ease, color 0.25s ease, padding 0.25s ease;
 }
-/* Accent arrow that slides in on hover (same → as the mega "Learn More"). */
 .main-menu .sub-menu a::after {
   content: "\2192";
   color: var(--lsc-color-accent);
@@ -250,7 +230,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   opacity: 1;
   transform: translateX(0);
 }
-/* Third-level items flow out to the side. */
 .main-menu .sub-menu .sub-menu {
   top: -0.5625rem;
   left: 100%;
@@ -292,7 +271,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	font-weight: 600;
 	line-height: 1.5;
 	letter-spacing: 0.02625rem;
-	padding: .438rem 1.5rem; /* 7px 24px */
+	padding: .438rem 1.5rem;
 }
 @media only screen and ( max-width: 1499px ) {
   .site-branding {
@@ -354,21 +333,16 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 
 /* Mega Menu */
 
-/* Anchor the panel to the header so it can span the full viewport width. */
 .site-header {
   border: 0.063rem solid rgba(0, 0, 0, 0.10);
   background-color: #F5F3EF;
   position: relative;
 }
 
-/* Let a mega item's panel escape the <li> and fill the header width. */
 .main-menu > li.menu-item--has-mega {
   position: static;
 }
 
-/* Clip viewport — sits at the header's bottom edge with overflow hidden, so the
-   panel is revealed only below the header and slides down from behind it (drawer).
-   Click-through; the panel itself takes pointer events. */
 .mega-menu {
   position: absolute;
   top: 100%;
@@ -377,11 +351,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   z-index: 50;
   overflow: hidden;
   pointer-events: none;
-  padding-bottom: 2.5rem; /* room so the panel's drop shadow isn't clipped */
+  padding-bottom: 2.5rem;
 }
 
-/* The drawer — full-width sliding layer. Starts translated up (clipped out of
-   view, behind the header) and slides straight down as one unit. */
 .mega-menu__panel {
   background-color: #F5F3EF;
   border-top: 0.063rem solid rgba(0, 0, 0, 0.10);
@@ -401,21 +373,19 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   transform: translateY(0);
 }
 
-/* Heading — Instrument Sans Bold 33px, uppercase, tight tracking. */
 .mega-menu__heading {
   margin: 0 0 2.75rem; 
   font-family: var(--lsc-font-heading);
   font-weight: 700;
-  font-size: 2.0625rem; /* 33px */
+  font-size: 2.0625rem;
   line-height: 1.15;
-  letter-spacing: -0.0267em; /* -0.88px @ 33px */
+  letter-spacing: -0.0267em;
   text-transform: uppercase;
   color: #1A1614;
 }
 
-/* Card grid — reuses .card-grid responsive behaviour with a tighter 16px gap. */
 .mega-menu__grid {
-  --lsc-card-grid-gap: 1rem; /* 16px */
+  --lsc-card-grid-gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -428,7 +398,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   list-style: none;
 }
 
-/* The whole card is one link. */
 .mega-menu__card-link-wrap {
   display: flex;
   flex-direction: column;
@@ -439,8 +408,8 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 
 .mega-menu__card-media {
   display: block;
-  margin-bottom: 0.9375rem; /* 15px */
-  border-radius: 0.75rem; /* 12px */
+  margin-bottom: 0.9375rem;
+  border-radius: 0.75rem;
   overflow: hidden;
   aspect-ratio: 255 / 180;
 }
@@ -452,8 +421,8 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   object-fit: cover;
   transform: scale(1);
   transition: transform .5s ease;
-  will-change: transform;        /* promote to its own layer up front */
-  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .mega-menu__card-link-wrap:hover .mega-menu__card-image {
   transform: scale(1.06);
@@ -467,7 +436,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .mega-menu__card-title {
   display: block;
   margin: 0;
-  font-size: 1.0625rem; /* 17px */
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -0.01em;
@@ -482,7 +451,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .mega-menu__card-description {
   display: block;
   margin: 0.5rem 0 0;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.43;
   color: rgba(26, 22, 20, 0.5);
@@ -493,7 +462,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   align-items: center;
   column-gap: 0.375rem;
   margin-top: 0.625rem;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.5;
   color: var(--lsc-color-accent);
@@ -510,7 +479,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   line-height: 1;
 }
 
-/* CTA bar — centred warm-stone pill below the cards. */
 .mega-menu__cta {
   display: flex;
   flex-wrap: wrap;
@@ -523,11 +491,11 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   margin: 3.25rem auto 0;
   padding: 1.25rem 3rem;
   background-color: var(--lsc-color-subtle);
-  border-radius: 0.75rem; /* 12px */
+  border-radius: 0.75rem;
 }
 
 .mega-menu__cta-text {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: -0.01em;
@@ -538,7 +506,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   display: inline-flex;
   align-items: center;
   column-gap: 0.5rem;
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.4;
   color: var(--lsc-color-accent);
@@ -550,8 +518,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   height: 1.125rem;
   flex-shrink: 0;
 }
-
-/* The panel is a desktop hover affordance; small screens use the mobile nav. */
 
 @media only screen and (max-width: 1199px) {
   .mega-menu__heading {
@@ -584,9 +550,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   }
 }
 
-/* Responsive Header / Mobile Navigation Start */
-
-/* ---- Hamburger toggle (icon styling is global; visibility switched below) ---- */
 .mobile-menu-toggle {
   width: 2.75rem;
   height: 2.75rem;
@@ -716,7 +679,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   color: var(--lsc-color-accent);
 }
 
-/* Parent items: link becomes a row with the walker's chevron pushed to the right. */
 .mobile-menu .menu-item-has-children > a {
   display: flex;
   align-items: center;
@@ -724,8 +686,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   gap: 0.75rem;
 }
 
-/* Keep ONLY the walker's chevron (.submenu-indicator) — it is the accordion toggle.
-   The separately-injected button is gone. Hidden on desktop (the CSS caret is used). */
 .main-menu .submenu-indicator {
   display: none;
 }
@@ -735,7 +695,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  margin: -0.625rem -0.5rem -0.625rem 0; /* enlarge tap target, pull to the edge */
+  margin: -0.625rem -0.5rem -0.625rem 0;
   flex-shrink: 0;
   color: var(--lsc-color-accent);
   cursor: pointer;
@@ -768,7 +728,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   color: rgba(26, 22, 20, 0.7);
   transition: color 0.25s ease, background-color 0.25s ease, padding-left 0.25s ease;
 }
-/* Accent arrow slides in at the right on tap/hover/focus. */
 .mobile-menu .sub-menu:not(.mega-mobile-grid) a::after {
   content: "\2192";
   margin-left: auto;
@@ -792,10 +751,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   transform: translateX(0);
 }
 
-/* ---- Mega items in the drawer: image cards with title overlaid (not text) ---- */
 .mobile-menu .mega-mobile-grid {
   display: grid;
-  grid-template-columns: 1fr; /* full-width cards on every device */
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin: 0;
   padding: 0.25rem 0 1rem;
@@ -803,9 +761,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 .mobile-menu .mega-mobile-grid .mega-mobile-card-item {
   border: 0;
-  /* Hidden until the parent opens; each card then animates in one-by-one. A
-     keyframe animation (not a transition) is used so it fires reliably when the
-     submenu flips from display:none to block on open. */
   opacity: 0;
 }
 .mobile-menu .menu-item-has-children.is-open > .mega-mobile-grid .mega-mobile-card-item {
@@ -819,7 +774,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .mobile-menu .mega-mobile-grid .mega-mobile-card {
   position: relative;
   display: block;
-  height: 11.25rem; /* 180px */
+  height: 11.25rem;
   padding: 0;
   border-radius: 0.625rem;
   overflow: hidden;
@@ -856,7 +811,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   font-weight: 600;
   line-height: 1.25;
 }
-/* Same → arrow as the desktop "Learn More" link. */
 .mobile-menu .mega-mobile-card__arrow {
   flex-shrink: 0;
   font-size: 1rem;
@@ -873,7 +827,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 .mobile-nav-phone {
   display: inline-flex;
-  align-self: center; /* centered below the CTA buttons */
+  align-self: center;
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.25rem;
@@ -888,9 +842,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   justify-content: center;
 }
 
-/* ---- The switch: hand the header over to the hamburger on small screens
-        OR on any touch (coarse-pointer) device, regardless of width. The bar is
-        kept minimal — just the logo + hamburger; all CTAs live in the drawer. ---- */
 @media (max-width: 1024px), (pointer: coarse) {
   .site-header .header-right {
     display: none;
@@ -898,7 +849,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   .site-header .mobile-menu-toggle {
     display: inline-flex;
   }
-  /* The bar has no nav-link padding on mobile, so give the header its own height. */
   .site-header {
     padding-block: 0.875rem;
   }
@@ -909,7 +859,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 
 /* Responsive Header / Mobile Navigation End */
 
-/* ============================== 3. PAGE SECTIONS ============================== */
+/* 3. PAGE SECTIONS */
 
 /* Hero */
 .hero-section {
@@ -1259,13 +1209,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .finance-products-grid {
     --lsc-card-grid-gap: 1.5rem;
 }
-/* Finance products carousel — a static card-grid on desktop that becomes a
-   Slick carousel at ≤991px (tablet/mobile). When Slick is active, override
-   the grid display so the track isn't squeezed into a single grid cell. */
 .finance-products-carousel.slick-slider {
     display: block;
 }
-/* Arrows belong to the carousel — hidden on desktop, shown once it's active. */
 .finance-products-section__arrows {
     display: none;
 }
@@ -1274,7 +1220,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
         display: flex;
     }
 }
-/* Case studies carousel — same desktop-grid → ≤991px Slick behaviour. */
 .case-studies-carousel.slick-slider {
     display: block;
 }
@@ -1303,20 +1248,19 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   border-radius: 0 0 .75rem .75rem;
 }
 .finance-product-card__media {
-  overflow: hidden; /* clip the image zoom on hover */
+  overflow: hidden;
   border-radius: .75rem .75rem 0 0;
 }
 .finance-product-card__media img {
   border-radius: .75rem .75rem 0 0;
   transform: scale(1);
   transition: transform .5s ease;
-  will-change: transform;        /* promote to its own layer up front */
-  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .finance-product-card:hover .finance-product-card__media img {
   transform: scale(1.06);
 }
-/* "Learn More" arrow nudges right on card hover */
 .finance-product-card__link-icon {
   display: inline-block;
   transition: transform .3s ease;
@@ -1479,8 +1423,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .stats-section__value {
 	font-size: 2rem;
 }
-/* Stack (band) style: refined single column — big confident numbers, a
-   readable label and even rhythm for a more premium mobile feel. */
 .stats-section--band .stats-section__grid {
 	grid-template-columns: 1fr;
 	gap: 2.75rem;
@@ -2438,8 +2380,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .testimonials-section__carousel .slick-slide {
   height: auto;
 }
-/* Slick wraps each slide's content in an extra <div>; both it and the card
-   must be full-height so every card stretches to the tallest slide. */
 .testimonials-section__carousel .slick-slide > div {
   height: 100%;
 }
@@ -2513,7 +2453,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  /* Rendered as <h3> for the document outline; keep the original (non-heading) look. */
   font-family: inherit;
   text-transform: none;
   letter-spacing: normal;
@@ -2526,10 +2465,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   line-height: 150%;
   margin-top: .3125rem;
 }
-
-/* ---- Stacked layout (full-width blocks, alternating backgrounds) ---- */
-
-/* Stacked: the original quote icon sits in normal flow above the copy. */
 
 .testimonial-card--stacked .testimonial-card__quote p {
   margin: 0;
@@ -2936,9 +2871,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .contact-icon {
   width: 1.375rem;
 }
-/* Info icons carry hardcoded mixed strokes (orange pin, muted-grey phone/mail),
-   so the wrapper's `color` can't unify them — recolor every stroke/fill to
-   accent so all icons match their accent-tinted squares. */
 .contact-icon [stroke]:not([stroke="none"]) {
   stroke: var(--lsc-color-accent);
   stroke-opacity: 1;
@@ -3041,10 +2973,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   height: 7.5rem;
   resize: none;
 }
-/* Accent focus border for the contact fields. Needed because the base
-   `.lsc-contact-field textarea` rule (0,1,1) ties with the theme's
-   `textarea:focus` and, loading later, wins — so the orange focus state never
-   showed on the textarea. This (0,2,1) rule restores it for inputs + textarea. */
 .lsc-contact-field input:focus,
 .lsc-contact-field textarea:focus {
   border-color: var(--lsc-color-accent);
@@ -3079,22 +3007,15 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   letter-spacing: 0.019rem;
   transition: 0.3s all ease;
 }
-/* Match the global .btn-primary hover: accent fill → transparent with
-   accent text/border, instead of the default dark hover. */
 .contact-form-card__form .wpcf7-submit:hover {
     background-color: transparent;
     color: var(--lsc-color-accent);
     border-color: var(--lsc-color-accent);
     opacity: 1;
 }
-/* Submit button icon (CF7 submit is rewritten to a <button> in PHP). */
 .wpcf7-submit {
   column-gap: 0.5rem;
 }
-/* Drop the ring on mouse click, but keep a keyboard focus indicator.
-   :focus-visible only fires for keyboard/non-pointer focus, so clicking shows
-   nothing while Tab still shows an accessible ring. Element-qualified to beat
-   the theme's button[type="submit"]:focus outline. */
 button.wpcf7-submit:focus,
 button.wpcf7-submit:active {
   outline: none;
@@ -3112,8 +3033,6 @@ button.wpcf7-submit:focus-visible {
   width: 1rem;
   height: 1rem;
 }
-/* Make the icon follow the button text colour (overrides the SVG's hardcoded
-   stroke; CSS beats the presentation attribute). */
 .wpcf7-submit__icon svg path {
   stroke: currentColor;
 }
@@ -3277,7 +3196,7 @@ button.wpcf7-submit:focus-visible {
 }
 .case-study-card__media {
   display: block;
-  overflow: hidden; /* clip the image zoom on hover */
+  overflow: hidden;
   border-radius: .75rem;
 }
 .case-study-card__media img {
@@ -3286,8 +3205,8 @@ button.wpcf7-submit:focus-visible {
   border-radius: .75rem;
   transform: scale(1);
   transition: transform .5s ease;
-  will-change: transform;        /* promote to its own layer up front */
-  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .case-study-card:hover .case-study-card__media img {
   transform: scale(1.06);
@@ -3303,7 +3222,6 @@ button.wpcf7-submit:focus-visible {
   font-weight: 600;
   line-height: 150%;
 }
-/* "Read Case Study" arrow nudges right on card hover */
 .case-study-card__link-icon {
   display: inline-block;
   transition: transform .3s ease;
@@ -3404,7 +3322,7 @@ button.wpcf7-submit:focus-visible {
 .case-study-layout__sidebar {
 	position: sticky;
 	top: 2rem;
-	align-self: start; /* required: lets the sticky item be shorter than the grid row */
+	align-self: start;
 }
 .media-full__figure {
 	margin: 0;
@@ -3543,7 +3461,7 @@ button.wpcf7-submit:focus-visible {
 	row-gap: 1.5rem;
 }
 .case-study-layout__sidebar {
-	position: static; /* stacked single column — nothing to stick to */
+	position: static;
 }
 .stats-section--cards .card-grid {
 	display: grid;
@@ -3554,19 +3472,15 @@ button.wpcf7-submit:focus-visible {
 }
 }
 
-/* ============================== 4. BLOG, SINGLE POST & ARCHIVE ============================== */
+/* 4. BLOG, SINGLE POST & ARCHIVE */
 
 /* Single Post */
 
-/* Constrain and centre the post body — narrower than the site container
-   for comfortable line length */
 .post-inner {
-	max-width: 50rem; /* 800px */
+	max-width: 50rem;
 	margin-left: auto;
 	margin-right: auto;
 }
-
-/* ── Featured Image ─────────────────────────────────────────────────────── */
 
 .single-post .post-thumbnail {
 	width: 100%;
@@ -3582,8 +3496,6 @@ button.wpcf7-submit:focus-visible {
 	max-height: 34rem;
 	object-fit: cover;
 }
-
-/* ── Entry Header ────────────────────────────────────────────────────────── */
 
 .entry-header {
 	padding-bottom: 2rem;
@@ -3636,8 +3548,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-mid);
 }
 
-/* ── Entry Footer — Tags ──────────────────────────────────────────────────── */
-
 .entry-footer {
 	border-top: 0.0625rem solid var(--lsc-color-subtle);
 	padding-top: 1.75rem;
@@ -3670,8 +3580,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-accent);
 }
 
-/* ── Responsive ─────────────────────────────────────────────────────────── */
-
 @media only screen and (max-width: 767px) {
 	.single-post .post-thumbnail {
 		max-height: 18rem;
@@ -3683,8 +3591,6 @@ button.wpcf7-submit:focus-visible {
 }
 
 /* BLOG ARCHIVE */
-
-/* ── Blog index header ───────────────────────────────────────────────────── */
 
 .blog-page-header {
 	padding-top: 3.125rem;
@@ -3712,13 +3618,9 @@ button.wpcf7-submit:focus-visible {
 	padding-bottom: 0.25rem;
 }
 
-/* ── Blog index search bar ───────────────────────────────────────────────── */
-
 .blog-search-bar {
 	border-bottom: 0.0625rem solid var(--lsc-color-subtle);
 }
-
-/* ── Global search form — used anywhere get_search_form() is called ──────── */
 
 .search-form {
 	display: flex;
@@ -3765,8 +3667,6 @@ button.wpcf7-submit:focus-visible {
 	max-width: 36rem;
 }
 
-/* ── Empty / No-results state ────────────────────────────────────────────── */
-
 .no-results {
 	display: flex;
 	flex-direction: column;
@@ -3792,8 +3692,6 @@ button.wpcf7-submit:focus-visible {
 	max-width: 30rem;
 	margin: 0 auto;
 }
-
-/* ── Archive header (category / tag / date / author) ─────────────────────── */
 
 .archive-header {
 	padding-bottom: 2rem;
@@ -3838,8 +3736,6 @@ button.wpcf7-submit:focus-visible {
 
 /* POST CARDS */
 
-/* ── Grid override ───────────────────────────────────────────────────────── */
-
 .blog-grid {
 	gap: 1.875rem;
 }
@@ -3849,8 +3745,6 @@ button.wpcf7-submit:focus-visible {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
-
-/* ── Base card ───────────────────────────────────────────────────────────── */
 
 .post-card {
 	display: flex;
@@ -3867,8 +3761,6 @@ button.wpcf7-submit:focus-visible {
 	box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--lsc-color-text) 7%, transparent);
 	border-color: color-mix(in srgb, var(--lsc-color-accent) 35%, transparent);
 }
-
-/* ── Media ───────────────────────────────────────────────────────────────── */
 
 .post-card__media {
 	display: block;
@@ -3890,8 +3782,6 @@ button.wpcf7-submit:focus-visible {
 	transform: scale(1.04);
 }
 
-/* ── Placeholder (no featured image) ─────────────────────────────────────── */
-
 .post-card__placeholder {
 	display: flex;
 	align-items: center;
@@ -3907,8 +3797,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-accent);
 }
 
-/* ── Content area ────────────────────────────────────────────────────────── */
-
 .post-card__content {
 	display: flex;
 	flex-direction: column;
@@ -3916,8 +3804,6 @@ button.wpcf7-submit:focus-visible {
 	padding: 1.375rem 1.5rem 1.5rem;
 	gap: 0.625rem;
 }
-
-/* ── Meta row ────────────────────────────────────────────────────────────── */
 
 .post-card__meta {
 	display: flex;
@@ -3952,8 +3838,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-mid);
 }
 
-/* ── Title ───────────────────────────────────────────────────────────────── */
-
 .post-card__title {
 	font-size: 1.0625rem;
 	font-weight: 700;
@@ -3972,16 +3856,12 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-accent);
 }
 
-/* ── Excerpt ─────────────────────────────────────────────────────────────── */
-
 .post-card__excerpt {
 	font-size: 0.9375rem;
 	color: var(--lsc-color-mid);
 	line-height: 1.6;
 	margin: 0;
 }
-
-/* ── Read link ───────────────────────────────────────────────────────────── */
 
 .post-card__link {
 	display: inline-flex;
@@ -4008,8 +3888,6 @@ button.wpcf7-submit:focus-visible {
 .post-card:hover .post-card__link-icon {
 	transform: translateX(0.1875rem);
 }
-
-/* ── Featured variant ────────────────────────────────────────────────────── */
 
 .post-card--featured {
 	grid-column: 1 / -1;
@@ -4047,14 +3925,10 @@ button.wpcf7-submit:focus-visible {
 
 /* COMMENTS */
 
-/* ── Wrapper ─────────────────────────────────────────────────────────────── */
-
 .comments-wrap {
 	border-top: 0.0625rem solid var(--lsc-color-subtle);
 	padding-top: 3.125rem;
 }
-
-/* ── Section Titles ──────────────────────────────────────────────────────── */
 
 .comments-title {
 	font-size: 1.25rem;
@@ -4078,8 +3952,6 @@ button.wpcf7-submit:focus-visible {
 	margin-left: 0.5rem;
 }
 
-/* ── Comment List ────────────────────────────────────────────────────────── */
-
 .comment-list {
 	list-style: none;
 	padding: 0;
@@ -4093,8 +3965,6 @@ button.wpcf7-submit:focus-visible {
 	border-left: 0.1875rem solid color-mix(in srgb, var(--lsc-color-accent) 20%, transparent);
 }
 
-/* ── Single Comment ──────────────────────────────────────────────────────── */
-
 .comment {
 	padding: 1.75rem 0;
 	border-bottom: 0.0625rem solid var(--lsc-color-subtle);
@@ -4104,8 +3974,6 @@ button.wpcf7-submit:focus-visible {
 	border-bottom: none;
 }
 
-/* ── Comment header: footer.comment-meta wraps author div + metadata div ─── */
-
 .comment-meta {
 	display: flex;
 	align-items: center;
@@ -4113,8 +3981,6 @@ button.wpcf7-submit:focus-visible {
 	gap: 0.75rem;
 	margin-bottom: 0.75rem;
 }
-
-/* ── Author: avatar + name inline ────────────────────────────────────────── */
 
 .comment-author {
 	display: flex;
@@ -4150,8 +4016,6 @@ button.wpcf7-submit:focus-visible {
 	display: none;
 }
 
-/* ── Date ────────────────────────────────────────────────────────────────── */
-
 .comment-metadata {
 	font-size: 0.8125rem;
 	color: var(--lsc-color-mid);
@@ -4175,8 +4039,6 @@ button.wpcf7-submit:focus-visible {
 .comment-metadata .comment-edit-link {
 	color: var(--lsc-color-accent);
 }
-
-/* ── Content & reply — indent to align with name (avatar + gap) ──────────── */
 
 .comment-content,
 .reply {
@@ -4212,8 +4074,6 @@ button.wpcf7-submit:focus-visible {
 	opacity: 0.7;
 }
 
-/* ── Awaiting Moderation ─────────────────────────────────────────────────── */
-
 .comment-awaiting-moderation {
 	display: inline-block;
 	font-size: 0.75rem;
@@ -4224,8 +4084,6 @@ button.wpcf7-submit:focus-visible {
 	border-radius: var(--lsc-border-radius-sm);
 	margin-bottom: 0.5rem;
 }
-
-/* ── Comment Form ────────────────────────────────────────────────────────── */
 
 .comment-respond {
 	padding-top: 2.5rem;
@@ -4334,8 +4192,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-light);
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
-
 @media only screen and (max-width: 767px) {
 	.comment-list .children {
 		padding-left: 0.875rem;
@@ -4365,10 +4221,6 @@ button.wpcf7-submit:focus-visible {
 	}
 }
 
-/* ── Single post meta + comment border  ────────────── */
-
-/* Meta row: dot separators between author / date / read-time, to match the
-   blog card meta style. */
 .single-post .entry-meta > * + *::before {
 	content: "\00b7";
 	margin-right: 0.75rem;
@@ -4380,9 +4232,6 @@ button.wpcf7-submit:focus-visible {
 	color: var(--lsc-color-mid);
 }
 
-/* Comments: with no comments yet, the reply form is the first child of the
-   comments area — drop its top border so it doesn't double up with the
-   .comments-wrap border above it. */
 .comments-area > .comment-respond:first-child {
 	margin-top: 0;
 	padding-top: 0;
@@ -4427,11 +4276,6 @@ button.wpcf7-submit:focus-visible {
     outline-offset: 0.25rem;
 }
 
-/* =============================================================================
-   SINGLE POST — top-tier layout (overlay hero, share, author, prev/next)
-   ============================================================================= */
-
-/* ── Reading progress bar ─────────────────────────────────────────────────── */
 .reading-progress {
 	position: fixed;
 	top: 0;
@@ -4451,7 +4295,6 @@ button.wpcf7-submit:focus-visible {
 	transition: width 0.1s linear;
 }
 
-/* ── Overlay hero ─────────────────────────────────────────────────────────── */
 .single-post__hero {
 	position: relative;
 	display: flex;
@@ -4496,7 +4339,6 @@ button.wpcf7-submit:focus-visible {
 	padding-bottom: 3.5rem;
 }
 
-/* Hero text sits on a dark surface — make it legible. */
 .single-post__hero .entry-title {
 	max-width: 60rem;
 	margin: 0;
@@ -4554,7 +4396,6 @@ button.wpcf7-submit:focus-visible {
 	border-radius: 50%;
 }
 
-/* ── Author card ──────────────────────────────────────────────────────────── */
 .author-card {
 	display: flex;
 	gap: 1.25rem;
@@ -4606,7 +4447,6 @@ button.wpcf7-submit:focus-visible {
 	gap: 0.7rem;
 }
 
-/* ── Previous / next post nav ─────────────────────────────────────────────── */
 .post-nav {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -4647,7 +4487,6 @@ button.wpcf7-submit:focus-visible {
 	line-height: 1.35;
 }
 
-/* ── Responsive ───────────────────────────────────────────────────────────── */
 @media only screen and (max-width: 767px) {
 	.single-post__hero--has-image {
 		min-height: 22rem;
@@ -4668,7 +4507,7 @@ button.wpcf7-submit:focus-visible {
 	}
 }
 
-/* ============================== 5. SITE FOOTER ============================== */
+/* 5. SITE FOOTER */
 
 /* Footer */
  .site-footer {
@@ -4727,9 +4566,6 @@ button.wpcf7-submit:focus-visible {
 .social-media-icon [fill] {
   transition: stroke 0.3s ease, fill 0.3s ease;
 }
-/* Icons are inline stroke-based SVGs, muted via stroke-opacity. The link's
-   hover color can't reach them, so recolor the stroke (and any real fill) to
-   solid white on hover — forcing opacity to 1 so it reads crisp on accent. */
 .social-media-link:hover .social-media-icon [stroke]:not([stroke="none"]) {
   stroke: var(--lsc-color-white);
   stroke-opacity: 1;
@@ -4789,9 +4625,6 @@ button.wpcf7-submit:focus-visible {
   width: 1.25rem;
   color: var(--lsc-color-accent);
 }
-/* The icon SVGs carry hardcoded strokes (some orange, some muted grey), so
-   `color` can't unify them — recolor every stroke/fill to accent for a
-   consistent orange across the pin, phone and mail icons. */
 .footer-contact-icon [stroke]:not([stroke="none"]) {
   stroke: var(--lsc-color-accent);
   stroke-opacity: 1;
