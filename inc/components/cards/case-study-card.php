@@ -28,7 +28,7 @@ if ( ! function_exists( 'lsc_render_case_study_card' ) ) {
 		<a class="case-study-card" href="<?php echo esc_url( $url ); ?>"<?php echo $study_title ? ' aria-label="' . esc_attr( $study_title ) . '"' : ''; ?>>
 			<?php if ( has_post_thumbnail( $study_id ) ) : ?>
 				<div class="case-study-card__media">
-					<?php echo get_the_post_thumbnail( $study_id, 'large', [ 'class' => 'case-study-card__image' ] ); ?>
+					<?php echo get_the_post_thumbnail( $study_id, 'lsc-900', [ 'class' => 'case-study-card__image', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw' ] ); ?>
 				</div>
 			<?php endif; ?>
 

@@ -122,7 +122,7 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
@@ -282,7 +282,7 @@ if ( ! function_exists( 'lsc_render_vimeo_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
@@ -377,7 +377,7 @@ if ( ! function_exists( 'lsc_render_cdn_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
