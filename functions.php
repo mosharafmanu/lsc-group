@@ -114,11 +114,14 @@ function lsc_scripts() {
 	wp_enqueue_style( 'lsc-faisal-style',         get_template_directory_uri() . '/faisal.css',                                   array(), LSC_GROUP_VERSION );
 
 	// ── Core JS ──────────────────────────────────────────────────
-	wp_enqueue_script( 'jquery-vimeo-player',         get_template_directory_uri() . '/assets/js/jquery.mb.vimeo_player.min.js', array( 'jquery' ), LSC_GROUP_VERSION, true );
 	wp_enqueue_script( 'slick-carousel',              get_template_directory_uri() . '/assets/js/slick.js',                       array( 'jquery' ), LSC_GROUP_VERSION, true );
-	wp_enqueue_script( 'lsc-group-video-behaviors', get_template_directory_uri() . '/assets/js/video-behaviors.js',           array( 'jquery' ), LSC_GROUP_VERSION, true );
-	wp_enqueue_script( 'lsc-group-video-popup',     get_template_directory_uri() . '/assets/js/video-popup.js',               array( 'jquery' ), LSC_GROUP_VERSION, true );
 	wp_enqueue_script( 'lsc-group-scripts',         get_template_directory_uri() . '/assets/js/scripts.js',                   array( 'jquery', 'slick-carousel' ), LSC_GROUP_VERSION, true );
+
+	// Video scripts are registered, not enqueued — lsc_render_video() pulls in
+	// only what a rendered video actually needs, so pages without video ship none.
+	wp_register_script( 'jquery-vimeo-player',      get_template_directory_uri() . '/assets/js/jquery.mb.vimeo_player.min.js', array( 'jquery' ), LSC_GROUP_VERSION, true );
+	wp_register_script( 'lsc-group-video-behaviors', get_template_directory_uri() . '/assets/js/video-behaviors.js',           array( 'jquery' ), LSC_GROUP_VERSION, true );
+	wp_register_script( 'lsc-group-video-popup',    get_template_directory_uri() . '/assets/js/video-popup.js',               array( 'jquery' ), LSC_GROUP_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'lsc_scripts' );
 

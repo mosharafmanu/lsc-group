@@ -58,6 +58,18 @@ if ( ! function_exists( 'lsc_render_video' ) ) {
 			return '';
 		}
 
+		// Load only the video JS this render needs (footer scripts → safe to
+		// enqueue mid-render). Pages without any video ship none of these.
+		wp_enqueue_script( 'lsc-group-video-behaviors' );
+
+		if ( 'onclick-popup' === $args['behavior'] ) {
+			wp_enqueue_script( 'lsc-group-video-popup' );
+		}
+
+		if ( 'vimeo' === $video_source ) {
+			wp_enqueue_script( 'jquery-vimeo-player' );
+		}
+
 		$container_class = 'video-container';
 		if ( $args['container_class'] ) {
 			$container_class .= ' ' . esc_attr( $args['container_class'] );
