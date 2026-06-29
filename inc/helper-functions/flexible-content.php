@@ -107,6 +107,46 @@ if ( ! function_exists( 'lsc_get_first_flexible_layout' ) ) {
 	}
 }
 
+if ( ! function_exists( 'lsc_queried_cms_has_layout' ) ) {
+	/**
+	 * Whether the queried page's `cms` flexible content contains any of the
+	 * given layouts. A real scan of the page's rows — not a guess — so it stays
+	 * correct no matter which section lands on which page. Used to scope
+	 * per-feature assets (Slick, Contact Form 7) to the pages that need them.
+	 *
+	 * @param string[] $layouts Layout names to look for.
+	 * @param int|null $post_id Defaults to the queried object.
+	 * @return bool
+	 */
+	function lsc_queried_cms_has_layout( $layouts, $post_id = null ) {
+		if ( ! function_exists( 'have_rows' ) ) {
+			return false;
+		}
+
+		if ( null === $post_id ) {
+			$post_id = get_queried_object_id();
+		}
+
+		if ( ! $post_id || ! have_rows( 'cms', $post_id ) ) {
+			return false;
+		}
+
+		$layouts = (array) $layouts;
+		$found   = false;
+
+		while ( have_rows( 'cms', $post_id ) ) {
+			the_row();
+			if ( in_array( get_row_layout(), $layouts, true ) ) {
+				$found = true;
+				break;
+			}
+		}
+		reset_rows();
+
+		return $found;
+	}
+}
+
 if ( ! function_exists( 'lsc_page_needs_slick' ) ) {
 	/**
 	 * Whether the page being rendered actually contains a Slick carousel.
@@ -114,11 +154,6 @@ if ( ! function_exists( 'lsc_page_needs_slick' ) ) {
 	 * Only three flexible-content layouts render a carousel, plus the single
 	 * case-study template (its "Related Case Studies" block). Everything else
 	 * ships no carousel, so Slick's CSS + JS can be skipped entirely there.
-	 *
-	 * This is a scan of the queried page's real `cms` layouts — not a guess —
-	 * so it stays correct no matter which section lands on which page. The
-	 * carousels are mobile/tablet-only, but the device is unknown server-side,
-	 * so any page that *has* a carousel layout loads Slick regardless of width.
 	 *
 	 * @return bool
 	 */
@@ -128,29 +163,32 @@ if ( ! function_exists( 'lsc_page_needs_slick' ) ) {
 			return true;
 		}
 
-		if ( ! function_exists( 'have_rows' ) ) {
-			return false;
+		return lsc_queried_cms_has_layout( [ 'case_studies_grid', 'finance_products_grid', 'testimonials_section' ] );
+	}
+}
+
+if ( ! function_exists( 'lsc_page_needs_contact_form' ) ) {
+	/**
+	 * Whether the page being rendered actually outputs a Contact Form 7 form.
+	 *
+	 * The form is rendered via do_shortcode() inside the contact_section /
+	 * contact_panel layouts. CF7 otherwise enqueues its CSS + JS on every page;
+	 * gating on this lets us skip those assets everywhere a form is absent.
+	 * Also honours a raw [contact-form-7] shortcode dropped into post content.
+	 *
+	 * @return bool
+	 */
+	function lsc_page_needs_contact_form() {
+		if ( lsc_queried_cms_has_layout( [ 'contact_section', 'contact_panel' ] ) ) {
+			return true;
 		}
 
-		$post_id = get_queried_object_id();
-
-		if ( ! $post_id || ! have_rows( 'cms', $post_id ) ) {
-			return false;
+		$queried = get_queried_object();
+		if ( $queried instanceof WP_Post && has_shortcode( (string) $queried->post_content, 'contact-form-7' ) ) {
+			return true;
 		}
 
-		$carousel_layouts = [ 'case_studies_grid', 'finance_products_grid', 'testimonials_section' ];
-
-		$needs = false;
-		while ( have_rows( 'cms', $post_id ) ) {
-			the_row();
-			if ( in_array( get_row_layout(), $carousel_layouts, true ) ) {
-				$needs = true;
-				break;
-			}
-		}
-		reset_rows();
-
-		return $needs;
+		return false;
 	}
 }
 

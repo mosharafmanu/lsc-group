@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.118' );
+	define( 'LSC_GROUP_VERSION', '1.0.119' );
 }
 
 
@@ -139,6 +139,23 @@ add_action( 'wp_enqueue_scripts', 'lsc_scripts' );
 
 
 // ─────────────────────────────────────────────────────────────────
+// CONTACT FORM 7 — load its CSS/JS only where a form renders
+// CF7 enqueues site-wide by default; the form only appears in the
+// contact_section / contact_panel layouts (a few pages). Gate its
+// own load toggles so every other page ships none of it.
+// ─────────────────────────────────────────────────────────────────
+
+function lsc_cf7_conditional_assets( $load ) {
+	if ( ! function_exists( 'lsc_page_needs_contact_form' ) ) {
+		return $load;
+	}
+	return lsc_page_needs_contact_form() ? $load : false;
+}
+add_filter( 'wpcf7_load_js',  'lsc_cf7_conditional_assets' );
+add_filter( 'wpcf7_load_css', 'lsc_cf7_conditional_assets' );
+
+
+// ─────────────────────────────────────────────────────────────────
 // EDITOR — Gutenberg disabled; theme uses ACF Flexible Content
 // ─────────────────────────────────────────────────────────────────
 
@@ -160,6 +177,37 @@ add_action( 'admin_enqueue_scripts', function() {
 	wp_dequeue_style( 'wp-block-library' );
 	wp_dequeue_style( 'wp-block-library-theme' );
 }, 100 );
+
+
+// ─────────────────────────────────────────────────────────────────
+// DISABLE EMOJI — the wp-head emoji detection script + its inline
+// <style> block load on every page; modern browsers render emoji
+// natively, so this is dead weight.
+// ─────────────────────────────────────────────────────────────────
+
+add_action( 'init', function() {
+	remove_action( 'wp_head',             'print_emoji_detection_script', 7 );
+	remove_action( 'wp_print_styles',     'print_emoji_styles' );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'admin_print_styles',  'print_emoji_styles' );
+	remove_filter( 'the_content_feed',    'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss',    'wp_staticize_emoji' );
+	remove_filter( 'wp_mail',             'wp_staticize_emoji_for_email' );
+
+	add_filter( 'tiny_mce_plugins', function( $plugins ) {
+		return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
+	} );
+
+	// Drop the emoji DNS-prefetch hint too.
+	add_filter( 'wp_resource_hints', function( $urls, $relation ) {
+		if ( 'dns-prefetch' === $relation ) {
+			$urls = array_filter( $urls, function( $url ) {
+				return false === strpos( $url, 's.w.org/images/core/emoji/' );
+			} );
+		}
+		return $urls;
+	}, 10, 2 );
+} );
 
 
 // ─────────────────────────────────────────────────────────────────
