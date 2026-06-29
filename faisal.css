@@ -1905,18 +1905,21 @@ Faq Section Style Start
 .faqs__item {
   border-radius: .5rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.10);
-  padding: 1.5rem;
 }
 .faqs__item button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+	padding: 1.5rem;
 }
 .faqs__question-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0;
+}
+.faqs__icon {
+	flex-shrink: 0;
 }
 .faqs__list {
 	display: flex;
@@ -1927,22 +1930,33 @@ Faq Section Style Start
 	margin-right: auto;
 }
 .faqs__question-text {
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	font-size: 1.0625rem;
 }
 .faqs__question {
   display: flex;
   justify-content: space-between;
+  gap: .625rem;
   width: 100%;
+}
+.faqs__answer {
+  max-width: 62.5rem;
+  padding: 0 2.1875rem 1.5rem 1.5rem;
 }
 .faqs__answer-inner p {
   font-size: .9375rem;
   line-height: 150%;
 }
-.faqs__answer-inner {
-  margin-top: 1.25rem;
-  max-width: 62.5rem;
+@media only screen and (max-width: 767px) {
+.faqs__question-text {
+	font-size: 1rem;
+  text-align: left;
+}
+.faqs__item button {
+	padding: 1.2rem;
+}
 }
 /*
 ===============================================
@@ -2625,15 +2639,16 @@ Feature Column Style Start
   color: var(--lsc-color-white);
 }
 .feature-columns__card-description {
-  color: rgba(255, 255, 255, 0.60);
-  font-size: .9375rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.40625rem;
+	color: rgba(255, 255, 255, 0.60);
+	font-size: .9375rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.40625rem;
+	margin-top: 1.25rem;
 }
-.feature-columns__card-buttons{
-  margin-top: 1.5rem;
-  row-gap: 1rem;
+.feature-columns__card-buttons {
+	margin-top: 1.25rem;
+	row-gap: 1rem;
 }
 .feature-columns__figure {
   margin: 0;
