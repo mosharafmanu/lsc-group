@@ -452,6 +452,361 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_hero_rotation_tab",
+                            "label": "Rotating Word + Media",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_hero_enable_word_rotation",
+                            "label": "Enable Rotating Word + Media",
+                            "name": "enable_word_rotation",
+                            "type": "true_false",
+                            "required": 0,
+                            "instructions": "Cycle the final word of the hero title together with the background media. The rotating words below replace the last word of your title — write a natural, complete title (e.g. \"… TO FUNDING\") and the last word is swapped automatically.",
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Yes",
+                            "ui_off_text": "No"
+                        },
+                        {
+                            "key": "field_hero_rotation_interval",
+                            "label": "Rotation Interval (ms)",
+                            "name": "rotation_interval",
+                            "type": "number",
+                            "required": 0,
+                            "instructions": "How long each word/media pair stays on screen before the dissolve, in milliseconds.",
+                            "default_value": 3000,
+                            "min": 1000,
+                            "step": 100,
+                            "append": "ms",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hero_enable_word_rotation",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ]
+                        },
+                        {
+                            "key": "field_hero_rotating_slides",
+                            "label": "Rotating Slides",
+                            "name": "rotating_slides",
+                            "type": "repeater",
+                            "required": 0,
+                            "instructions": "Each row is one rotating word paired with its own background media. Add 2 or more.",
+                            "layout": "block",
+                            "min": 0,
+                            "max": 6,
+                            "button_label": "Add Slide",
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_hero_enable_word_rotation",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "sub_fields": [
+                                {
+                                    "key": "field_hero_slide_word",
+                                    "label": "Rotating Word",
+                                    "name": "word",
+                                    "type": "text",
+                                    "required": 0,
+                                    "instructions": "The word that replaces the last word of the title for this slide. The first slide shows on load.",
+                                    "placeholder": "FUNDING",
+                                    "parent_repeater": "field_hero_rotating_slides"
+                                },
+                                {
+                                    "key": "field_hero_slide_highlight",
+                                    "label": "Highlight",
+                                    "name": "highlight",
+                                    "type": "true_false",
+                                    "required": 0,
+                                    "instructions": "Use the accent color for this word.",
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Yes",
+                                    "ui_off_text": "No",
+                                    "parent_repeater": "field_hero_rotating_slides"
+                                },
+                                {
+                                    "key": "field_hero_slide_media_type",
+                                    "label": "Media Type",
+                                    "name": "media_type",
+                                    "type": "button_group",
+                                    "required": 0,
+                                    "choices": {
+                                        "image": "Image",
+                                        "video": "Video"
+                                    },
+                                    "default_value": "image",
+                                    "return_format": "value",
+                                    "allow_null": 0,
+                                    "layout": "horizontal",
+                                    "parent_repeater": "field_hero_rotating_slides"
+                                },
+                                {
+                                    "key": "field_hero_slide_image",
+                                    "label": "Hero Image",
+                                    "name": "image",
+                                    "type": "image",
+                                    "required": 0,
+                                    "instructions": "Desktop background image for this slide.",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_slide_media_type",
+                                                "operator": "==",
+                                                "value": "image"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "parent_repeater": "field_hero_rotating_slides"
+                                },
+                                {
+                                    "key": "field_hero_slide_mobile_image",
+                                    "label": "Mobile Hero Image",
+                                    "name": "mobile_image",
+                                    "type": "image",
+                                    "required": 0,
+                                    "instructions": "Optional mobile-specific background image.",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_slide_media_type",
+                                                "operator": "==",
+                                                "value": "image"
+                                            }
+                                        ]
+                                    ],
+                                    "return_format": "array",
+                                    "library": "all",
+                                    "preview_size": "medium",
+                                    "parent_repeater": "field_hero_rotating_slides"
+                                },
+                                {
+                                    "key": "field_hero_slide_video",
+                                    "label": "Hero Video",
+                                    "name": "video",
+                                    "type": "group",
+                                    "required": 0,
+                                    "instructions": "Background video for this slide.",
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_hero_slide_media_type",
+                                                "operator": "==",
+                                                "value": "video"
+                                            }
+                                        ]
+                                    ],
+                                    "layout": "block",
+                                    "parent_repeater": "field_hero_rotating_slides",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_hero_slide_video_source",
+                                            "label": "Video Source",
+                                            "name": "video_source",
+                                            "type": "select",
+                                            "required": 0,
+                                            "choices": {
+                                                "self_host": "Self-Hosted (WordPress Media)",
+                                                "youtube": "YouTube",
+                                                "vimeo": "Vimeo",
+                                                "cdn": "CDN/External URL"
+                                            },
+                                            "default_value": "self_host",
+                                            "return_format": "value",
+                                            "allow_null": 0,
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_self_host_file",
+                                            "label": "Video File",
+                                            "name": "video_self_host_file",
+                                            "type": "file",
+                                            "required": 0,
+                                            "instructions": "Upload MP4 or WebM video file.",
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "self_host"
+                                                    }
+                                                ]
+                                            ],
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "mime_types": "mp4,webm",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_self_host_poster",
+                                            "label": "Poster Image",
+                                            "name": "video_self_host_poster",
+                                            "type": "image",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "self_host"
+                                                    }
+                                                ]
+                                            ],
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "preview_size": "medium",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_youtube_url",
+                                            "label": "YouTube URL",
+                                            "name": "video_youtube_url",
+                                            "type": "url",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "youtube"
+                                                    }
+                                                ]
+                                            ],
+                                            "placeholder": "https://www.youtube.com/watch?v=...",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_vimeo_url",
+                                            "label": "Vimeo MP4 URL",
+                                            "name": "video_vimeo_url",
+                                            "type": "url",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "vimeo"
+                                                    }
+                                                ]
+                                            ],
+                                            "placeholder": "https://player.vimeo.com/...",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_vimeo_poster",
+                                            "label": "Vimeo Poster Image",
+                                            "name": "video_vimeo_poster",
+                                            "type": "image",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "vimeo"
+                                                    }
+                                                ]
+                                            ],
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "preview_size": "medium",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_cdn_url",
+                                            "label": "CDN Video URL",
+                                            "name": "video_cdn_url",
+                                            "type": "url",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "cdn"
+                                                    }
+                                                ]
+                                            ],
+                                            "placeholder": "https://cdn.example.com/video.mp4",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        },
+                                        {
+                                            "key": "field_hero_slide_video_cdn_poster",
+                                            "label": "CDN Poster Image",
+                                            "name": "video_cdn_poster",
+                                            "type": "image",
+                                            "required": 0,
+                                            "conditional_logic": [
+                                                [
+                                                    {
+                                                        "field": "field_hero_slide_video_source",
+                                                        "operator": "==",
+                                                        "value": "cdn"
+                                                    }
+                                                ]
+                                            ],
+                                            "return_format": "array",
+                                            "library": "all",
+                                            "preview_size": "medium",
+                                            "wrapper": {
+                                                "class": "",
+                                                "id": "",
+                                                "width": "50"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ],
                     "min": "",
@@ -6521,5 +6876,5 @@
     "description": "Flexible content page builder for creating custom page layouts. Build pages using modular, reusable content sections that can be arranged in any order to create unique page designs.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782620400
+    "modified": 1782715864
 }
