@@ -1780,6 +1780,9 @@ Media Content 5050 Style Start
 	line-height: 162.5%;
  	max-width: 34.1875rem;
 }
+.lsc-list.media-content-5050__features li {
+	font-weight: 400;
+}
 .media-content-5050__figure img {
 	border-radius: .75rem;
 	box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
