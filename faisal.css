@@ -1423,7 +1423,7 @@ button.wpcf7-submit:focus-visible {
 	margin-top: 1.5rem;
 }
 .content-card-5050__card-buttons {
-	margin-top: 1.5rem;
+	margin-top: 1.2rem;
 	row-gap: 1rem;
 }
 .content-card-5050__card-buttons .site-btn {
@@ -3104,6 +3104,10 @@ Specialist Cards Style End
     row-gap: 1.25rem;
     padding-bottom: 4rem;
     margin-top: 3rem;
+  }
+  .footer-bottom-inner {
+	  text-align: left;
+    gap: .625rem;
   }
 }
  /*
