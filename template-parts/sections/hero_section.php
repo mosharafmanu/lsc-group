@@ -17,6 +17,11 @@ $mobile_image  = get_sub_field( 'mobile_image' );
 $video         = get_sub_field( 'video' );
 $section_index = isset( $GLOBALS['lsc_section_index'] ) ? (int) $GLOBALS['lsc_section_index'] : 0;
 
+// Fallback poster for video slides that don't carry their own ACF poster — keeps
+// the first slide's LCP a real image instead of a black frame, and gives deferred
+// slides a still to show before their video loads.
+$hero_fallback_poster = is_array( $image ) ? ( $image['sizes']['lsc-1600'] ?? ( $image['url'] ?? '' ) ) : '';
+
 // Rotating final word + synced background media.
 $enable_rotation   = get_sub_field( 'enable_word_rotation' );
 $rotation_interval = (int) get_sub_field( 'rotation_interval' );
@@ -123,6 +128,10 @@ if ( 0 === $section_index ) {
 								'controls'        => false,
 								'muted'           => true,
 								'loop'            => true,
+								// Only the first slide loads eagerly; the rest wait for
+								// the rotator to play them (preload="none", no autoplay).
+								'defer'           => ! $slide_is_first,
+								'poster'          => $hero_fallback_poster,
 							]
 						);
 						?>
@@ -460,12 +469,25 @@ if ( 0 === $section_index ) {
 					var count = Math.max( media.length, words.length );
 					if ( count < 2 ) { return; }
 
+					// Play the incoming slide's video (deferred slides have preload="none"
+					// + no autoplay, so .play() is what actually fetches them) and pause the
+					// outgoing one so only the visible slide ever decodes.
+					function videoIn( slide ) { return slide ? slide.querySelector( 'video' ) : null; }
+					function playSlide( i ) {
+						var v = videoIn( media[ i ] );
+						if ( v ) { var p = v.play(); if ( p && p.catch ) { p.catch( function () {} ); } }
+					}
+					function pauseSlide( i ) {
+						var v = videoIn( media[ i ] );
+						if ( v && ! v.paused ) { v.pause(); }
+					}
+
 					var index = 0;
 					window.setInterval( function () {
 						var prev = index;
 						index = ( index + 1 ) % count;
-						if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); }
-						if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); }
+						if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
+						if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
 						if ( words[ prev ] ) { words[ prev ].classList.remove( 'is-active' ); }
 						if ( words[ index ] ) { words[ index ].classList.add( 'is-active' ); }
 					}, <?php echo (int) $rotation_interval; ?> );

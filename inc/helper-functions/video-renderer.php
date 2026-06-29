@@ -19,6 +19,15 @@ if ( ! function_exists( 'lsc_render_video' ) ) {
 			'width'              => '100%',
 			'height'             => 'auto',
 			'echo'               => true,
+			// Perf knobs (opt-in; default keeps existing behavior):
+			// - preload: explicit <video preload> value ('none'|'metadata'|'auto').
+			// - defer:   render WITHOUT the autoplay attribute and preload="none"
+			//            so the file isn't fetched until JS calls .play() — used by
+			//            the hero rotator for its 2nd/3rd slides.
+			// - poster:  fallback poster URL when the video field has none of its own.
+			'preload'            => null,
+			'defer'              => false,
+			'poster'             => '',
 		];
 		$args = wp_parse_args( $args, $defaults );
 
@@ -126,7 +135,16 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 		$video_url  = esc_url( $video_file['url'] );
 		$poster_url = '';
 		if ( $poster && isset( $poster['url'] ) ) {
-			$poster_url = esc_url( $poster['url'] );
+			// A 1600px-wide poster is ample for a full-bleed video — avoid shipping
+			// the multi-hundred-KB original (it sits on the hero's LCP path).
+			$poster_url = esc_url( $poster['sizes']['lsc-1600'] ?? $poster['url'] );
+		}
+
+		// Caller-supplied fallback poster (e.g. the hero's base image) so a
+		// deferred/offscreen slide shows a still instead of black before its
+		// video loads, and the first slide has an instant LCP paint.
+		if ( empty( $poster_url ) && ! empty( $args['poster'] ) ) {
+			$poster_url = esc_url( $args['poster'] );
 		}
 
 		if ( empty( $poster_url ) && $args['autoplay_on_scroll'] ) {
@@ -145,7 +163,9 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 		if ( 'autoplay' === $args['behavior'] ) {
 			// Always add autoplay attribute for 'autoplay' behavior to load first frame/poster.
 			// JavaScript will pause immediately if autoplay parameter is false.
-			$autoplay = true;
+			// EXCEPT when deferred: the rotator starts these with JS, so no autoplay
+			// (which would otherwise force an eager download of an offscreen slide).
+			$autoplay = ! $args['defer'];
 
 			if ( $args['autoplay_on_scroll'] || $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
@@ -157,6 +177,17 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 			$autoplay = false;
 			if ( $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
+			}
+		}
+
+		// Resolve the preload hint: explicit arg wins; a deferred video must not
+		// fetch until played; autoplay-on-scroll only needs metadata up front.
+		$preload = $args['preload'];
+		if ( null === $preload ) {
+			if ( $args['defer'] ) {
+				$preload = 'none';
+			} elseif ( $args['autoplay_on_scroll'] ) {
+				$preload = 'metadata';
 			}
 		}
 
@@ -178,8 +209,8 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 		if ( $args['loop'] ) {
 			$html .= 'loop ';
 		}
-		if ( $args['autoplay_on_scroll'] ) {
-			$html .= 'preload="metadata" ';
+		if ( $preload ) {
+			$html .= 'preload="' . esc_attr( $preload ) . '" ';
 		}
 		$html .= 'playsinline '; // Required for inline playback on iOS
 		$html .= 'data-behavior="' . esc_attr( $args['behavior'] ) . '" ';
@@ -305,7 +336,9 @@ if ( ! function_exists( 'lsc_render_vimeo_video' ) ) {
 		if ( 'autoplay' === $args['behavior'] ) {
 			// Always add autoplay attribute for 'autoplay' behavior to load first frame/poster.
 			// JavaScript will pause immediately if autoplay parameter is false.
-			$autoplay = true;
+			// EXCEPT when deferred: the rotator starts these with JS, so no autoplay
+			// (which would otherwise force an eager download of an offscreen slide).
+			$autoplay = ! $args['defer'];
 
 			if ( $args['autoplay_on_scroll'] || $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
@@ -317,6 +350,17 @@ if ( ! function_exists( 'lsc_render_vimeo_video' ) ) {
 			$autoplay = false;
 			if ( $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
+			}
+		}
+
+		// Resolve the preload hint: explicit arg wins; a deferred video must not
+		// fetch until played; autoplay-on-scroll only needs metadata up front.
+		$preload = $args['preload'];
+		if ( null === $preload ) {
+			if ( $args['defer'] ) {
+				$preload = 'none';
+			} elseif ( $args['autoplay_on_scroll'] ) {
+				$preload = 'metadata';
 			}
 		}
 
@@ -338,8 +382,8 @@ if ( ! function_exists( 'lsc_render_vimeo_video' ) ) {
 		if ( $args['loop'] ) {
 			$html .= 'loop ';
 		}
-		if ( $args['autoplay_on_scroll'] ) {
-			$html .= 'preload="metadata" ';
+		if ( $preload ) {
+			$html .= 'preload="' . esc_attr( $preload ) . '" ';
 		}
 		$html .= 'playsinline '; // Required for inline playback on iOS
 		$html .= 'data-behavior="' . esc_attr( $args['behavior'] ) . '" ';
@@ -400,7 +444,9 @@ if ( ! function_exists( 'lsc_render_cdn_video' ) ) {
 		if ( 'autoplay' === $args['behavior'] ) {
 			// Always add autoplay attribute for 'autoplay' behavior to load first frame/poster.
 			// JavaScript will pause immediately if autoplay parameter is false.
-			$autoplay = true;
+			// EXCEPT when deferred: the rotator starts these with JS, so no autoplay
+			// (which would otherwise force an eager download of an offscreen slide).
+			$autoplay = ! $args['defer'];
 
 			if ( $args['autoplay_on_scroll'] || $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
@@ -412,6 +458,17 @@ if ( ! function_exists( 'lsc_render_cdn_video' ) ) {
 			$autoplay = false;
 			if ( $args['autoplay'] ) {
 				$muted = true; // Browsers require muted for autoplay
+			}
+		}
+
+		// Resolve the preload hint: explicit arg wins; a deferred video must not
+		// fetch until played; autoplay-on-scroll only needs metadata up front.
+		$preload = $args['preload'];
+		if ( null === $preload ) {
+			if ( $args['defer'] ) {
+				$preload = 'none';
+			} elseif ( $args['autoplay_on_scroll'] ) {
+				$preload = 'metadata';
 			}
 		}
 
@@ -433,8 +490,8 @@ if ( ! function_exists( 'lsc_render_cdn_video' ) ) {
 		if ( $args['loop'] ) {
 			$html .= 'loop ';
 		}
-		if ( $args['autoplay_on_scroll'] ) {
-			$html .= 'preload="metadata" ';
+		if ( $preload ) {
+			$html .= 'preload="' . esc_attr( $preload ) . '" ';
 		}
 		$html .= 'playsinline '; // Required for inline playback on iOS
 		$html .= 'data-behavior="' . esc_attr( $args['behavior'] ) . '" ';
