@@ -238,6 +238,17 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 			$html .= 'class="' . esc_attr( $args['class'] ) . '" ';
 		}
 		$html .= '>';
+		// Offer a sibling .webm (smaller, VP9) ahead of the .mp4 when one has been
+		// generated next to it — supporting browsers take the WebM, the rest fall
+		// back to the universal MP4. Convention-based: no field/DB, just a file.
+		$webm_url = preg_replace( '/\.mp4$/i', '.webm', $video_url );
+		if ( $webm_url && $webm_url !== $video_url ) {
+			$uploads   = wp_get_upload_dir();
+			$webm_path = str_replace( $uploads['baseurl'], $uploads['basedir'], $webm_url );
+			if ( file_exists( $webm_path ) ) {
+				$html .= '<source src="' . esc_url( $webm_url ) . '" type="video/webm">';
+			}
+		}
 		$html .= '<source src="' . $video_url . '" type="' . esc_attr( $video_file['mime_type'] ) . '">';
 		$html .= esc_html__( 'Your browser does not support the video tag.', 'lsc-group' );
 		$html .= '</video>';
