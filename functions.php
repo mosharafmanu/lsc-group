@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.122' );
+	define( 'LSC_GROUP_VERSION', '1.0.123' );
 }
 
 
@@ -168,6 +168,11 @@ add_filter( 'use_block_editor_for_post',      '__return_false' );
 add_action( 'after_setup_theme', function() {
 	remove_theme_support( 'widgets-block-editor' );
 } );
+
+// Route any core-block CSS through the single 'wp-block-library' handle (which
+// we dequeue below) instead of per-block stylesheets — so stray block content
+// ships zero block CSS. The theme uses ACF, not blocks, so this is belt-and-braces.
+add_filter( 'should_load_separate_core_block_assets', '__return_false' );
 
 add_action( 'wp_enqueue_scripts', function() {
 	wp_dequeue_style( 'wp-block-library' );
