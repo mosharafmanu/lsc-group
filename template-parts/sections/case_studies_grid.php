@@ -64,9 +64,9 @@ $grid_classes = [
 ?>
 
 <section class="case-studies-section mt-50 mt-lg-70 mt-lg-150">
-	<div class="case-studies-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
+	<div class="case-studies-section__inner lsc-container layout-padding layout-padding0 pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
-			<header class="section-header case-studies-section__header">
+			<header class="section-header case-studies-section__header layout-padding-mobile">
 				<span class="section-header__divider" aria-hidden="true"></span>
 
 				<?php if ( $eyebrow ) : ?>
@@ -86,10 +86,21 @@ $grid_classes = [
 		<?php endif; ?>
 
 		<?php if ( $case_studies ) : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-30 mt-lg-50">
-				<?php foreach ( $case_studies as $case_study ) : ?>
+			<div class="case-studies-section__carousel-wrap mt-30 mt-lg-50">
+				<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> case-studies-carousel js-case-studies-carousel js-stage-padding">
+					<?php foreach ( $case_studies as $case_study ) : ?>
 						<?php lsc_render_case_study_card( $case_study->ID ); ?>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
+
+				<div class="case-studies-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Case studies carousel controls', 'lsc-group' ); ?>">
+					<button class="lsc-group-slick-arrow case-studies-section__arrow case-studies-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous case study', 'lsc-group' ); ?>">
+						<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
+					</button>
+					<button class="lsc-group-slick-arrow case-studies-section__arrow case-studies-section__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next case study', 'lsc-group' ); ?>">
+						<?php get_template_part( 'assets/svgs/angle-right-pagination' ); ?>
+					</button>
+				</div>
 			</div>
 		<?php endif; ?>
 	</div>

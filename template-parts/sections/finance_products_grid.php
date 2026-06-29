@@ -22,14 +22,6 @@ $section_classes = [
 	'bg-lsc-subtle',
 ];
 
-$grid_classes = [
-	'finance-products-grid',
-	'card-grid',
-	'card-grid--center-last-row',
-	'layout-inset',
-	sanitize_html_class( $columns ),
-];
-
 $products = [];
 
 if ( 'selected' === $product_source && $selected_products && is_array( $selected_products ) ) {
@@ -66,9 +58,9 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 ?>
 
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
-	<div class="finance-products-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
+	<div class="finance-products-section__inner lsc-container layout-padding layout-padding0 pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
-			<header class="section-header finance-products-section__header">
+			<header class="section-header finance-products-section__header layout-padding-mobile">
 					<span class="section-header__divider" aria-hidden="true"></span>
 
 				<?php if ( $eyebrow ) : ?>
@@ -88,10 +80,21 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 		<?php endif; ?>
 
 		<?php if ( $products ) : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-30 mt-lg-65">
-				<?php foreach ( $products as $product ) : ?>
-					<?php lsc_render_finance_product_card( $product->ID ); ?>
-				<?php endforeach; ?>
+			<div class="finance-products-section__carousel-wrap mt-30 mt-lg-65">
+				<div class="finance-products-grid card-grid card-grid--center-last-row layout-inset <?php echo esc_attr( sanitize_html_class( $columns ) ); ?> finance-products-carousel js-finance-products-carousel js-stage-padding">
+					<?php foreach ( $products as $product ) : ?>
+						<?php lsc_render_finance_product_card( $product->ID ); ?>
+					<?php endforeach; ?>
+				</div>
+
+				<div class="finance-products-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Finance products carousel controls', 'lsc-group' ); ?>">
+					<button class="lsc-group-slick-arrow finance-products-section__arrow finance-products-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous product', 'lsc-group' ); ?>">
+						<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
+					</button>
+					<button class="lsc-group-slick-arrow finance-products-section__arrow finance-products-section__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next product', 'lsc-group' ); ?>">
+						<?php get_template_part( 'assets/svgs/angle-right-pagination' ); ?>
+					</button>
+				</div>
 			</div>
 		<?php endif; ?>
 	</div>
