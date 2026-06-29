@@ -107,6 +107,53 @@ if ( ! function_exists( 'lsc_get_first_flexible_layout' ) ) {
 	}
 }
 
+if ( ! function_exists( 'lsc_page_needs_slick' ) ) {
+	/**
+	 * Whether the page being rendered actually contains a Slick carousel.
+	 *
+	 * Only three flexible-content layouts render a carousel, plus the single
+	 * case-study template (its "Related Case Studies" block). Everything else
+	 * ships no carousel, so Slick's CSS + JS can be skipped entirely there.
+	 *
+	 * This is a scan of the queried page's real `cms` layouts — not a guess —
+	 * so it stays correct no matter which section lands on which page. The
+	 * carousels are mobile/tablet-only, but the device is unknown server-side,
+	 * so any page that *has* a carousel layout loads Slick regardless of width.
+	 *
+	 * @return bool
+	 */
+	function lsc_page_needs_slick() {
+		// Single case study always renders the related-case-studies carousel.
+		if ( is_singular( 'case_study' ) ) {
+			return true;
+		}
+
+		if ( ! function_exists( 'have_rows' ) ) {
+			return false;
+		}
+
+		$post_id = get_queried_object_id();
+
+		if ( ! $post_id || ! have_rows( 'cms', $post_id ) ) {
+			return false;
+		}
+
+		$carousel_layouts = [ 'case_studies_grid', 'finance_products_grid', 'testimonials_section' ];
+
+		$needs = false;
+		while ( have_rows( 'cms', $post_id ) ) {
+			the_row();
+			if ( in_array( get_row_layout(), $carousel_layouts, true ) ) {
+				$needs = true;
+				break;
+			}
+		}
+		reset_rows();
+
+		return $needs;
+	}
+}
+
 if ( ! function_exists( 'lsc_has_hero_first_section' ) ) {
 	function lsc_has_hero_first_section( $field_name = 'cms', $post_id = null ) {
 		// Blog page uses inner_hero from options, not flexible content

@@ -324,6 +324,8 @@
 		}
 
 		function initStagePaddingCarousel() {
+			if ( typeof $.fn.slick !== 'function' ) return;
+
 			const $carousel = $( '.js-stage-padding' ).not( '.latest-news-grid, .related-products-grid, .logo-showcase-grid, .card-grid-carousel, .js-testimonials-carousel, .js-finance-products-carousel, .js-case-studies-carousel' );
 
 			if ( ! $carousel.length ) return;
@@ -361,6 +363,7 @@
 		// TESTIMONIALS CAROUSEL
 		// ─────────────────────────────────────────────────────────────
 
+		if ( typeof $.fn.slick === 'function' )
 		$( '.js-testimonials-carousel' ).each( function () {
 			const $carousel = $( this );
 
@@ -418,6 +421,7 @@
 			// ─────────────────────────────────────────────────────────────
 
 			function initFinanceProductsCarousel() {
+				if ( typeof $.fn.slick !== 'function' ) return;
 				$( '.js-finance-products-carousel' ).each( function () {
 					const $carousel = $( this );
 					const $wrap     = $carousel.closest( '.finance-products-section__carousel-wrap' );
@@ -466,6 +470,7 @@
 			// ─────────────────────────────────────────────────────────────
 
 			function initCaseStudiesCarousel() {
+				if ( typeof $.fn.slick !== 'function' ) return;
 				$( '.js-case-studies-carousel' ).each( function () {
 					const $carousel = $( this );
 					const $wrap     = $carousel.closest( '.case-studies-section__carousel-wrap' );

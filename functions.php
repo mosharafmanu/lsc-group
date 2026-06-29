@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.116' );
+	define( 'LSC_GROUP_VERSION', '1.0.117' );
 }
 
 
@@ -98,13 +98,21 @@ add_action( 'widgets_init', 'lsc_widgets_init' );
 // ─────────────────────────────────────────────────────────────────
 
 function lsc_scripts() {
+	// Slick (carousel) ships CSS + JS only on pages that actually render a
+	// carousel — see lsc_page_needs_slick(). The enqueues stay inline below
+	// (rather than register-then-enqueue) so the cascade/load order is
+	// identical to before on the pages that do need them.
+	$lsc_needs_slick = function_exists( 'lsc_page_needs_slick' ) && lsc_page_needs_slick();
+
 	// ── Core CSS ─────────────────────────────────────────────────
 	wp_enqueue_style( 'lsc-group-spacer',         get_template_directory_uri() . '/assets/css/spacer.css',                        array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-utilities',      get_template_directory_uri() . '/assets/css/utilities.css',                     array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-video',          get_template_directory_uri() . '/assets/css/video-behaviors.css',               array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-video-popup',    get_template_directory_uri() . '/assets/css/video-popup.css',                   array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'slick-carousel',               get_template_directory_uri() . '/assets/css/slick.css',                         array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'lsc-group-slick-custom',   get_template_directory_uri() . '/assets/css/lsc-group-slick-custom.css',    array( 'slick-carousel' ), LSC_GROUP_VERSION );
+	if ( $lsc_needs_slick ) {
+		wp_enqueue_style( 'slick-carousel',           get_template_directory_uri() . '/assets/css/slick.css',                         array(), LSC_GROUP_VERSION );
+		wp_enqueue_style( 'lsc-group-slick-custom',   get_template_directory_uri() . '/assets/css/lsc-group-slick-custom.css',    array( 'slick-carousel' ), LSC_GROUP_VERSION );
+	}
 	wp_enqueue_style( 'lsc-group-design-style',   get_template_directory_uri() . '/assets/css/lsc-group-design-style.css',    array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-form-style',    get_template_directory_uri() . '/assets/css/lsc-group-form.css',             array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-style',          get_stylesheet_uri(),                                                           array(), LSC_GROUP_VERSION );
@@ -114,8 +122,12 @@ function lsc_scripts() {
 	wp_enqueue_style( 'lsc-faisal-style',         get_template_directory_uri() . '/faisal.css',                                   array(), LSC_GROUP_VERSION );
 
 	// ── Core JS ──────────────────────────────────────────────────
-	wp_enqueue_script( 'slick-carousel',              get_template_directory_uri() . '/assets/js/slick.js',                       array( 'jquery' ), LSC_GROUP_VERSION, true );
-	wp_enqueue_script( 'lsc-group-scripts',         get_template_directory_uri() . '/assets/js/scripts.js',                   array( 'jquery', 'slick-carousel' ), LSC_GROUP_VERSION, true );
+	// scripts.js no longer hard-depends on Slick — its carousel inits self-guard
+	// when $.fn.slick is absent — so it loads everywhere while Slick stays conditional.
+	if ( $lsc_needs_slick ) {
+		wp_enqueue_script( 'slick-carousel',          get_template_directory_uri() . '/assets/js/slick.js',                       array( 'jquery' ), LSC_GROUP_VERSION, true );
+	}
+	wp_enqueue_script( 'lsc-group-scripts',         get_template_directory_uri() . '/assets/js/scripts.js',                   array( 'jquery' ), LSC_GROUP_VERSION, true );
 
 	// Video scripts are registered, not enqueued — lsc_render_video() pulls in
 	// only what a rendered video actually needs, so pages without video ship none.
