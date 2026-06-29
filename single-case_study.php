@@ -160,16 +160,27 @@ $lsc_sidebar_html = ob_get_clean();
 		if ( $lsc_related->have_posts() ) :
 			?>
 			<section class="case-studies-section case-studies-section--related">
-				<div class="case-studies-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
-					<header class="section-header case-studies-section__header">
+				<div class="case-studies-section__inner lsc-container layout-padding layout-padding0 pt-50 pb-50 pt-lg-90 pb-lg-90">
+					<header class="section-header case-studies-section__header layout-padding-mobile">
 						<span class="section-header__divider" aria-hidden="true"></span>
 						<h2 class="section-header__title case-studies-section__title"><?php esc_html_e( 'Related Case Studies', 'lsc-group' ); ?></h2>
 					</header>
 
-					<div class="case-studies-grid card-grid card-grid--center-last-row columns-3 mt-30 mt-lg-50">
-						<?php foreach ( $lsc_related->posts as $lsc_related_study ) : ?>
-							<?php lsc_render_case_study_card( $lsc_related_study->ID ); ?>
-						<?php endforeach; ?>
+					<div class="case-studies-section__carousel-wrap mt-30 mt-lg-50">
+						<div class="case-studies-grid card-grid card-grid--center-last-row columns-3 case-studies-carousel js-case-studies-carousel js-stage-padding">
+							<?php foreach ( $lsc_related->posts as $lsc_related_study ) : ?>
+								<?php lsc_render_case_study_card( $lsc_related_study->ID ); ?>
+							<?php endforeach; ?>
+						</div>
+
+						<div class="case-studies-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Related case studies carousel controls', 'lsc-group' ); ?>">
+							<button class="lsc-group-slick-arrow case-studies-section__arrow case-studies-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous case study', 'lsc-group' ); ?>">
+								<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
+							</button>
+							<button class="lsc-group-slick-arrow case-studies-section__arrow case-studies-section__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next case study', 'lsc-group' ); ?>">
+								<?php get_template_part( 'assets/svgs/angle-right-pagination' ); ?>
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>

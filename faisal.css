@@ -165,6 +165,33 @@
 .finance-products-grid {
     --lsc-card-grid-gap: 1.5rem;
 }
+/* Finance products carousel — a static card-grid on desktop that becomes a
+   Slick carousel at ≤991px (tablet/mobile). When Slick is active, override
+   the grid display so the track isn't squeezed into a single grid cell. */
+.finance-products-carousel.slick-slider {
+    display: block;
+}
+/* Arrows belong to the carousel — hidden on desktop, shown once it's active. */
+.finance-products-section__arrows {
+    display: none;
+}
+@media only screen and (max-width: 991px) {
+    .finance-products-section__arrows {
+        display: flex;
+    }
+}
+/* Case studies carousel — same desktop-grid → ≤991px Slick behaviour. */
+.case-studies-carousel.slick-slider {
+    display: block;
+}
+.case-studies-section__arrows {
+    display: none;
+}
+@media only screen and (max-width: 991px) {
+    .case-studies-section__arrows {
+        display: flex;
+    }
+}
 .finance-product-card img {
     width: 100%;
     display: block;
@@ -561,8 +588,14 @@
 .testimonials-section__carousel .slick-slide {
   height: auto;
 }
+/* Slick wraps each slide's content in an extra <div>; both it and the card
+   must be full-height so every card stretches to the tallest slide. */
+.testimonials-section__carousel .slick-slide > div {
+  height: 100%;
+}
 .testimonials-section__carousel .testimonial-card {
   display: flex !important;
+  height: 100%;
 }
 .testimonial-card {
   border-radius: .75rem;

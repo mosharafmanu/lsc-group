@@ -324,7 +324,7 @@
 		}
 
 		function initStagePaddingCarousel() {
-			const $carousel = $( '.js-stage-padding' ).not( '.latest-news-grid, .related-products-grid, .logo-showcase-grid, .card-grid-carousel, .js-testimonials-carousel' );
+			const $carousel = $( '.js-stage-padding' ).not( '.latest-news-grid, .related-products-grid, .logo-showcase-grid, .card-grid-carousel, .js-testimonials-carousel, .js-finance-products-carousel, .js-case-studies-carousel' );
 
 			if ( ! $carousel.length ) return;
 
@@ -410,6 +410,101 @@
 				],
 			} );
 		} );
+			// ─────────────────────────────────────────────────────────────
+			// FINANCE PRODUCTS CAROUSEL — TABLET & MOBILE ONLY
+			// Static card-grid on desktop; below 992px it becomes a Slick
+			// carousel (2-up tablet, 1-up mobile) and un-slicks back to the
+			// grid above. Uses the shared global arrows.
+			// ─────────────────────────────────────────────────────────────
+
+			function initFinanceProductsCarousel() {
+				$( '.js-finance-products-carousel' ).each( function () {
+					const $carousel = $( this );
+					const $wrap     = $carousel.closest( '.finance-products-section__carousel-wrap' );
+
+					if ( window.innerWidth <= 991 ) {
+						if ( ! $carousel.hasClass( 'slick-initialized' ) ) {
+							$carousel.slick( {
+								dots:           false,
+								arrows:         true,
+								infinite:       true,
+								speed:          300,
+								slidesToShow:   2,
+								slidesToScroll: 1,
+								prevArrow:      $wrap.find( '.finance-products-section__arrow--prev' ),
+								nextArrow:      $wrap.find( '.finance-products-section__arrow--next' ),
+								responsive: [
+									{
+										breakpoint: 768,
+										settings: {
+											slidesToShow: 1,
+										},
+									},
+								],
+							} );
+						}
+					} else if ( $carousel.hasClass( 'slick-initialized' ) ) {
+						$carousel.slick( 'unslick' );
+					}
+				} );
+			}
+
+			setTimeout( initFinanceProductsCarousel, 100 );
+
+			let financeCarouselTimer;
+			$( window ).on( 'resize', function () {
+				clearTimeout( financeCarouselTimer );
+				financeCarouselTimer = setTimeout( initFinanceProductsCarousel, 250 );
+			} );
+
+			// ─────────────────────────────────────────────────────────────
+			// CASE STUDIES CAROUSEL — TABLET & MOBILE ONLY
+			// Same behaviour as the finance products carousel: static grid on
+			// desktop, Slick carousel (2-up tablet, 1-up mobile) below 992px.
+			// Covers both the Case Studies grid section and the single-case
+			// study "Related Case Studies" block.
+			// ─────────────────────────────────────────────────────────────
+
+			function initCaseStudiesCarousel() {
+				$( '.js-case-studies-carousel' ).each( function () {
+					const $carousel = $( this );
+					const $wrap     = $carousel.closest( '.case-studies-section__carousel-wrap' );
+
+					if ( window.innerWidth <= 991 ) {
+						if ( ! $carousel.hasClass( 'slick-initialized' ) ) {
+							$carousel.slick( {
+								dots:           false,
+								arrows:         true,
+								infinite:       true,
+								speed:          300,
+								slidesToShow:   2,
+								slidesToScroll: 1,
+								prevArrow:      $wrap.find( '.case-studies-section__arrow--prev' ),
+								nextArrow:      $wrap.find( '.case-studies-section__arrow--next' ),
+								responsive: [
+									{
+										breakpoint: 768,
+										settings: {
+											slidesToShow: 1,
+										},
+									},
+								],
+							} );
+						}
+					} else if ( $carousel.hasClass( 'slick-initialized' ) ) {
+						$carousel.slick( 'unslick' );
+					}
+				} );
+			}
+
+			setTimeout( initCaseStudiesCarousel, 100 );
+
+			let caseStudiesCarouselTimer;
+			$( window ).on( 'resize', function () {
+				clearTimeout( caseStudiesCarouselTimer );
+				caseStudiesCarouselTimer = setTimeout( initCaseStudiesCarousel, 250 );
+			} );
+
 
 		// ─────────────────────────────────────────────────────────────
 		// PRODUCT HERO — FACTS OVERLAP
