@@ -2617,7 +2617,7 @@ Feature Column Style Start
 .feature-columns__inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 6rem;
+  column-gap: 8rem;
 }
 .feature-columns__description {
   color: rgba(26, 22, 20, 0.70);
@@ -3061,6 +3061,10 @@ Specialist Cards Style End
   font-style: normal;
   font-weight: 400;
   line-height: 1.21875rem;
+}
+.website-credit {
+	display: flex;
+	gap: 1.125rem;
 }
 @media only screen and (max-width:991px) {
    .footer-logo-link {
