@@ -172,16 +172,38 @@
 .finance-product-card {
   border-radius: .75rem;
   height: 100%;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 .finance-product-card__content {
   padding: 1.5rem;
   background-color: var(--lsc-color-white);
   border-radius: 0 0 .75rem .75rem;
 }
-.finance-product-card__media img {
+.finance-product-card__media {
+  overflow: hidden; /* clip the image zoom on hover */
   border-radius: .75rem .75rem 0 0;
 }
-.finance-product-card__title a {
+.finance-product-card__media img {
+  border-radius: .75rem .75rem 0 0;
+  transform: scale(1);
+  transition: transform .5s ease;
+  will-change: transform;        /* promote to its own layer up front */
+  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+}
+.finance-product-card:hover .finance-product-card__media img {
+  transform: scale(1.06);
+}
+/* "Learn More" arrow nudges right on card hover */
+.finance-product-card__link-icon {
+  display: inline-block;
+  transition: transform .3s ease;
+}
+.finance-product-card:hover .finance-product-card__link-icon {
+  transform: translateX(.375rem);
+}
+.finance-product-card__title {
   color: var(--lsc-color-primary);
   font-style: normal;
   font-weight: 600;
@@ -189,6 +211,7 @@
   letter-spacing: -0.011rem;
   text-decoration: none;
   display: block;
+  text-transform: inherit;
 }
 .finance-product-card__title {
   margin-bottom: 0;
@@ -277,6 +300,25 @@
 }
 .stats-section__value {
 	font-size: 2rem;
+}
+/* Stack (band) style: refined single column — big confident numbers, a
+   readable label and even rhythm for a more premium mobile feel. */
+.stats-section--band .stats-section__grid {
+	grid-template-columns: 1fr;
+	gap: 2.75rem;
+}
+.stats-section--band .stats-section__value {
+	font-size: 3rem;
+	line-height: 1;
+	letter-spacing: -0.06rem;
+}
+.stats-section--band .stats-section__label {
+	margin-top: 0.75rem;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	color: rgba(26, 22, 20, 0.6);
 }
 }
  /*
@@ -1924,14 +1966,26 @@ Single Case Study Style Start
   box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
   background-color: var(--lsc-color-white);
   padding: 1rem;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 .case-study-card__media {
   display: block;
+  overflow: hidden; /* clip the image zoom on hover */
+  border-radius: .75rem;
 }
 .case-study-card__media img {
   height: 14.1875rem;
   object-fit: cover;
   border-radius: .75rem;
+  transform: scale(1);
+  transition: transform .5s ease;
+  will-change: transform;        /* promote to its own layer up front */
+  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+}
+.case-study-card:hover .case-study-card__media img {
+  transform: scale(1.06);
 }
 .case-study-card__content {
   margin-top: 1.5rem;
@@ -1939,10 +1993,18 @@ Single Case Study Style Start
 .case-study-card__content a {
   text-decoration: none;
 }
-.case-study-card__title a {
+.case-study-card__title {
   color: var(--lsc-color-primary);
   font-weight: 600;
   line-height: 150%;
+}
+/* "Read Case Study" arrow nudges right on card hover */
+.case-study-card__link-icon {
+  display: inline-block;
+  transition: transform .3s ease;
+}
+.case-study-card:hover .case-study-card__link-icon {
+  transform: translateX(.375rem);
 }
 .case-study-card__excerpt {
   color: rgba(26, 22, 20, 0.50);
@@ -1952,6 +2014,7 @@ Single Case Study Style Start
   line-height: 137.5%;
 }
 .case-study-card__link {
+  color: var(--lsc-color-accent);
   font-size: .875rem;
   font-style: normal;
   font-weight: 600;

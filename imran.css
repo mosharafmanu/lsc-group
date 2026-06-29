@@ -367,6 +367,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1);
+  transition: transform .5s ease;
+  will-change: transform;        /* promote to its own layer up front */
+  backface-visibility: hidden;   /* avoid sub-pixel jitter during scale */
+}
+.mega-menu__card-link-wrap:hover .mega-menu__card-image {
+  transform: scale(1.06);
 }
 
 .mega-menu__card-body {

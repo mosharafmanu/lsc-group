@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main search-results-page">
+	<main id="primary" class="site-main search-results-page pb-50 pb-md-70 pb-lg-100">
 
 		<?php if ( function_exists( 'lsc_breadcrumb' ) ) : ?>
 			<?php lsc_breadcrumb( true ); ?>
@@ -88,7 +88,7 @@ get_header();
 			<?php endif; ?>
 
 			<?php if ( $articles_html ) : ?>
-				<section class="search-results-group search-results-group--articles lsc-container layout-padding pt-40 pt-md-50 pb-50 pb-md-70 pb-lg-100">
+				<section class="search-results-group search-results-group--articles lsc-container layout-padding pt-40 pt-md-50">
 					<h2 class="search-results-group__title">
 						<?php esc_html_e( 'Articles', 'lsc-group' ); ?>
 						<span class="search-results-group__count"><?php echo esc_html( number_format_i18n( $article_count ) ); ?></span>

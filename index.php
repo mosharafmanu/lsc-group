@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main blog-page">
+	<main id="primary" class="site-main blog-page pb-50 pb-md-70 pb-lg-100">
 
 		<?php get_template_part( 'template-parts/blog', 'hero' ); ?>
 

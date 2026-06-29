@@ -258,6 +258,7 @@ h6,.h6-style {
 	font-weight: 600;
 	line-height: 150%; /* 25.5px */
 	letter-spacing: -0.17px;
+	text-transform: inherit;
 }
 
 

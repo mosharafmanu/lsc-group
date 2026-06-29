@@ -25,30 +25,28 @@ if ( ! function_exists( 'lsc_render_case_study_card' ) ) {
 		$url         = get_permalink( $study_id );
 		$excerpt     = has_excerpt( $study_id ) ? get_the_excerpt( $study_id ) : '';
 		?>
-		<article class="case-study-card">
+		<a class="case-study-card" href="<?php echo esc_url( $url ); ?>"<?php echo $study_title ? ' aria-label="' . esc_attr( $study_title ) . '"' : ''; ?>>
 			<?php if ( has_post_thumbnail( $study_id ) ) : ?>
-				<a class="case-study-card__media" href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Read %s', 'lsc-group' ), $study_title ) ); ?>">
+				<div class="case-study-card__media">
 					<?php echo get_the_post_thumbnail( $study_id, 'large', [ 'class' => 'case-study-card__image' ] ); ?>
-				</a>
+				</div>
 			<?php endif; ?>
 
 			<div class="case-study-card__content">
 				<?php if ( $study_title ) : ?>
-					<h6 class="case-study-card__title">
-						<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $study_title ); ?></a>
-					</h6>
+					<h3 class="case-study-card__title h6-style"><?php echo esc_html( $study_title ); ?></h3>
 				<?php endif; ?>
 
 				<?php if ( $excerpt ) : ?>
 					<p class="case-study-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>
 				<?php endif; ?>
 
-				<a class="case-study-card__link" href="<?php echo esc_url( $url ); ?>">
+				<span class="case-study-card__link" aria-hidden="true">
 					<span><?php esc_html_e( 'Read Case Study', 'lsc-group' ); ?></span>
-					<span aria-hidden="true">-&gt;</span>
-				</a>
+					<span class="case-study-card__link-icon">-&gt;</span>
+				</span>
 			</div>
-		</article>
+		</a>
 		<?php
 	}
 }

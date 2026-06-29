@@ -6,7 +6,7 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main blog-archive-page">
+	<main id="primary" class="site-main blog-archive-page pb-50 pb-md-70 pb-lg-100">
 
 		<?php if ( function_exists( 'lsc_breadcrumb' ) ) : ?>
 			<?php lsc_breadcrumb( true ); ?>
