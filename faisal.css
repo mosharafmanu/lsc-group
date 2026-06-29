@@ -2196,7 +2196,7 @@ Inner Hero Split Style Start
  */
 .inner-hero--split .inner-hero__inner {
 	display: grid;
-	grid-template-columns: 1fr 48.4375rem;
+	grid-template-columns: 1fr 1fr;
 	column-gap: 1rem;
 }
 .inner-hero--split .inner-hero__content {
@@ -2462,9 +2462,9 @@ Downloads Section Style Start
   margin-right: auto;
 }
 .download-item {
-border-radius: .75rem;
+  border-radius: .75rem;
   background-color: var(--lsc-color-subtle);
-  padding: 3.9375rem 7.0625rem;
+  padding: 3.9375rem 7.0625rem 2.8125rem 7.0625rem;
 }
 .download-item-wrapper {
 	display: flex;
@@ -2472,7 +2472,7 @@ border-radius: .75rem;
 	justify-content: space-between;
 	column-gap: 1.875rem;
 	border-bottom: .125rem solid var(--lsc-color-accent);
-	padding-bottom: 1.4375rem;
+	padding-bottom: 1rem;
 }
 .download-item-left {
   display: flex;
