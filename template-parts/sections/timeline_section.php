@@ -18,7 +18,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 }
 ?>
 
-<section class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-110">
+<section class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-100">
 	<div class="timeline-section__inner lsc-container layout-padding">
 		<?php if ( $eyebrow || $title_lines || $description ) : ?>
 			<header class="section-header timeline-section__header text-center">

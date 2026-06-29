@@ -73,7 +73,7 @@ if ( ! $title_lines && ! $description && ! $items ) {
 $section_classes = [
 	'testimonials-section',
 	'testimonials-section--' . sanitize_html_class( $layout ),
-	'layout-padding pt-50 pb-50 pt-lg-100 pb-lg-110 layout-padding0',
+	'layout-padding pt-50 pb-50 pt-lg-100 pb-lg-60 layout-padding0',
 ];
 
 // Background palette cycled by position when a testimonial's theme is "auto".
@@ -146,7 +146,7 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 
 	<?php if ( $items ) : ?>
 		<?php if ( 'stacked' === $layout ) : ?>
-			<div class="testimonials-section__stack lsc-container mt-40 mt-lg-60">
+			<div class="testimonials-section__stack lsc-container layout-padding mt-40 mt-lg-60">
 				<?php foreach ( $items as $index => $testimonial ) : ?>
 					<?php
 					$quote          = $testimonial['quote'] ?? '';

@@ -72,7 +72,7 @@ $grid_classes = [
 		<?php endif; ?>
 
 		<?php if ( $cards && is_array( $cards ) ) : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-40 mt-lg-55">
+			<div class="<?php echo esc_attr( implode( ' ', $grid_classes ) ); ?> mt-40 mt-lg-60">
 				<?php foreach ( $cards as $card ) : ?>
 					<?php
 					$card_icon        = $card['icon'] ?? '';
