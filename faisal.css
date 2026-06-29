@@ -1989,14 +1989,14 @@ Testimonials Style Start
   z-index: 2;
 }
 .testimonial-card--stacked .testimonial-card__quote-icon {
-  margin: 0;
-  line-height: 0;
-  position: absolute;
-  left: 1.25rem;
-  top: 1.875rem;
-  width: 4rem;
-  height: 4rem;
-  opacity: 0.2;
+	margin: 0;
+	line-height: 0;
+	position: absolute;
+	left: 1.5rem;
+	top: 2.1875rem;
+	width: 4rem;
+	height: 4rem;
+	opacity: 0.2;
 }
 .testimonial-card--stacked .testimonial-card__quote-icon svg,
 .testimonial-card--stacked .testimonial-card__quote-icon png {
@@ -2007,6 +2007,14 @@ Testimonials Style Start
   .testimonials-section--stacked {
     margin-top: 4rem;
   }
+  .testimonial-card--stacked .testimonial-card__quote-icon {
+	top: 2rem;
+	width: 3rem;
+	height: 3rem;
+}
+.testimonial-card--stacked {
+	padding: 2.2rem 2.2rem 2.0625rem 2.2rem;
+}
 }
 
 /*
