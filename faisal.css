@@ -312,7 +312,7 @@
 	padding-top: 4rem;
 }
 .stats-section__value {
-	font-size: 2rem;
+	font-size: 2.2rem;
 }
 }
 @media only screen and (max-width: 767px) {
@@ -335,7 +335,7 @@
 	gap: 2.75rem;
 }
 .stats-section--band .stats-section__value {
-	font-size: 3rem;
+	font-size: 2rem;
 	line-height: 1;
 	letter-spacing: -0.06rem;
 }
@@ -479,6 +479,7 @@
 	border-radius: .625rem;
 	background: rgba(16, 20, 25, 0.75);
 	margin: 0 1.5rem;
+	border: 0.063rem solid rgba(255, 138, 59, 0.20);
 }
 .media-card-5050__caption-label {
   font-size: .9375rem;
@@ -917,9 +918,10 @@
 }
 /* Contact Form Style */
 .contact-form-card {
-  border-radius: 1rem;
-  background-color: var(--lsc-color-white);
-  padding: 2.5rem;
+	border-radius: 1rem;
+	background-color: var(--lsc-color-white);
+	padding: 2.5rem;
+	border: 0.063rem solid rgba(26, 22, 20, 0.08);
 }
 .contact-form-card__title {
   font-size: 1.25rem;
@@ -1206,7 +1208,6 @@ button.wpcf7-submit:focus-visible {
   }
  .broker-callout__chips {
 	 row-gap: 1.25rem;
-   flex-direction: column;
   }
   .broker-callout__figure {
 	 height: 18.75rem;
@@ -1388,11 +1389,14 @@ button.wpcf7-submit:focus-visible {
   background-color: var(--lsc-color-subtle);
 }
 .content-card-5050__description {
-  color: rgba(26, 22, 20, 0.70);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 162.5%;
-  margin-top: 1.5rem;
+	color: rgba(26, 22, 20, 0.70);
+	font-style: normal;
+	font-weight: 400;
+	line-height: 162.5%;
+	margin-top: 1.875rem;
+}
+.content-card-5050__description p:last-child {
+	margin-top: 1.5625rem;
 }
 .lsc-list.content-card-5050__features {
 	margin-top: 2.1875rem;
@@ -1410,15 +1414,17 @@ button.wpcf7-submit:focus-visible {
   color: var(--lsc-color-white);
 }
 .content-card-5050__card-description {
-  color: rgba(255, 255, 255, 0.60);
-  font-size: .9375rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.40625rem;
-  max-width: 18rem;
+	color: rgba(255, 255, 255, 0.60);
+	font-size: .9375rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.40625rem;
+	max-width: 18rem;
+	margin-top: 1.5rem;
 }
 .content-card-5050__card-buttons {
-  margin-top: 1.5rem;
+	margin-top: 1.5rem;
+	row-gap: 1rem;
 }
 .content-card-5050__card-buttons .site-btn {
 	width: 100%;
@@ -1661,12 +1667,12 @@ Finance Product Style Start
   .inner-hero__fact-value {
 	font-size: 1.3rem;
   }
-  .inner-hero__facts-wrap {
-	margin-top: -2rem;
+.inner-hero__facts-wrap {
+	margin-top: -8rem;
 }
 .inner-hero__fact {
 	border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
-	padding-bottom: .875rem;
+	padding-bottom: 2rem;
   text-align: center;
   padding-left: 0;
 }
@@ -1675,6 +1681,11 @@ Finance Product Style Start
 }
 .inner-hero__fact:not(:first-child) {
 	border-left: 0;
+}
+}
+@media only screen and (max-width:767px) {
+.inner-hero__facts-wrap {
+  margin-top: -2rem;
 }
 }
 /*
@@ -1765,8 +1776,9 @@ Media Content 5050 Style Start
   height: 25rem;
 }
 .media-content-5050__description {
-  color: rgba(26, 22, 20, 0.70);
-  line-height: 162.5%;
+	color: rgba(26, 22, 20, 0.70);
+	line-height: 162.5%;
+ 	max-width: 34.1875rem;
 }
 .media-content-5050__figure img {
 	border-radius: .75rem;
@@ -1777,6 +1789,10 @@ Media Content 5050 Style Start
 }
 .media-content-5050__features {
 	margin-top: 1.25rem;
+}
+.media-content-5050__features li {
+	color: rgba(26, 22, 20, 0.70);
+  font-weight: 400;
 }
 @media only screen and (max-width: 1199px) {
 .media-content-5050__grid {
@@ -1894,18 +1910,21 @@ Faq Section Style Start
 .faqs__item {
   border-radius: .5rem;
   border: 0.063rem solid rgba(0, 0, 0, 0.10);
-  padding: 1.5rem;
 }
 .faqs__item button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+	padding: 1.5rem;
 }
 .faqs__question-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0;
+}
+.faqs__icon {
+	flex-shrink: 0;
 }
 .faqs__list {
 	display: flex;
@@ -1916,22 +1935,33 @@ Faq Section Style Start
 	margin-right: auto;
 }
 .faqs__question-text {
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	font-size: 1.0625rem;
 }
 .faqs__question {
   display: flex;
   justify-content: space-between;
+  gap: .625rem;
   width: 100%;
+}
+.faqs__answer {
+  max-width: 62.5rem;
+  padding: 0 2.1875rem 1.5rem 1.5rem;
 }
 .faqs__answer-inner p {
   font-size: .9375rem;
   line-height: 150%;
 }
-.faqs__answer-inner {
-  margin-top: 1.25rem;
-  max-width: 62.5rem;
+@media only screen and (max-width: 767px) {
+.faqs__question-text {
+	font-size: 1rem;
+  text-align: left;
+}
+.faqs__item button {
+	padding: 1.2rem;
+}
 }
 /*
 ===============================================
@@ -1958,13 +1988,13 @@ Testimonials Style Start
   row-gap: 2.5rem;
 }
 .testimonial-card--stacked {
-  width: 100%;
-  padding: 2.5rem 2.75rem;
-  border-radius: .875rem;
-  position: relative;
-  max-width: 69.625rem;
-  margin-left: auto;
-  margin-right: auto;
+	width: 100%;
+	padding: 3rem 3rem 2.0625rem 3rem;
+	border-radius: .875rem;
+	position: relative;
+	max-width: 69.625rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 .testimonial-card--stacked .testimonial-card__body {
   display: block;
@@ -1978,14 +2008,14 @@ Testimonials Style Start
   z-index: 2;
 }
 .testimonial-card--stacked .testimonial-card__quote-icon {
-  margin: 0;
-  line-height: 0;
-  position: absolute;
-  left: 1.25rem;
-  top: 1.875rem;
-  width: 4rem;
-  height: 4rem;
-  opacity: 0.2;
+	margin: 0;
+	line-height: 0;
+	position: absolute;
+	left: 1.5rem;
+	top: 2.1875rem;
+	width: 4rem;
+	height: 4rem;
+	opacity: 0.2;
 }
 .testimonial-card--stacked .testimonial-card__quote-icon svg,
 .testimonial-card--stacked .testimonial-card__quote-icon png {
@@ -1996,6 +2026,14 @@ Testimonials Style Start
   .testimonials-section--stacked {
     margin-top: 4rem;
   }
+  .testimonial-card--stacked .testimonial-card__quote-icon {
+	top: 2rem;
+	width: 3rem;
+	height: 3rem;
+}
+.testimonial-card--stacked {
+	padding: 2.2rem 2.2rem 2.0625rem 2.2rem;
+}
 }
 
 /*
@@ -2069,13 +2107,14 @@ Single Case Study Style Start
   line-height: 137.5%;
 }
 .case-study-card__link {
-  color: var(--lsc-color-accent);
-  font-size: .875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  display: flex;
-  gap: .875rem;
+	color: var(--lsc-color-accent);
+	font-size: .875rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	display: flex;
+	gap: .875rem;
+	margin-top: 1.7rem;
 }
 @media only screen and (max-width: 991px) {
 .case-study-card__media img {
@@ -2162,7 +2201,7 @@ Inner Hero Split Style Start
  */
 .inner-hero--split .inner-hero__inner {
 	display: grid;
-	grid-template-columns: 1fr 48.4375rem;
+	grid-template-columns: 1fr 1fr;
 	column-gap: 1rem;
 }
 .inner-hero--split .inner-hero__content {
@@ -2247,11 +2286,12 @@ Single Case Study Style Start
   margin-top: 4rem;
 }
 .rich-text__content.entry-content h3 {
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
-  text-transform: capitalize;
+	font-size: 2rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 150%;
+	text-transform: capitalize;
+	margin-bottom: 1.25rem;
 }
 .rich-text__content.entry-content p {
   color: rgba(26, 22, 20, 0.70);
@@ -2260,7 +2300,6 @@ Single Case Study Style Start
 .stats-section--cards {
   padding-top: 2.4rem;
   border: 0;
-  padding: 3rem 0;
 }
 .stats-section--cards .stats-section__item {
   border-radius: .75rem;
@@ -2309,17 +2348,22 @@ Single Case Study Style Start
   text-transform: uppercase;
 }
 .case-summary__value {
-  margin: 0;
-  line-height: 150%;
-  font-weight: 500;
+	margin: 0;
+	line-height: 150%;
+	font-weight: 500;
+	margin-top: .25rem;
 }
 .case-summary__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.625rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.625rem;
+	margin-top: 2.1875rem;
 }
-
-
+.case-summary__apply {
+  margin-top: 1.875rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  padding-top: 2.1875rem;
+}
 @media only screen and (max-width:1199px) {
 .case-study-layout__grid {
 	column-gap: 4rem;
@@ -2423,9 +2467,9 @@ Downloads Section Style Start
   margin-right: auto;
 }
 .download-item {
-border-radius: .75rem;
+  border-radius: .75rem;
   background-color: var(--lsc-color-subtle);
-  padding: 3.9375rem 7.0625rem;
+  padding: 3.9375rem 7.0625rem 2.8125rem 7.0625rem;
 }
 .download-item-wrapper {
 	display: flex;
@@ -2433,7 +2477,7 @@ border-radius: .75rem;
 	justify-content: space-between;
 	column-gap: 1.875rem;
 	border-bottom: .125rem solid var(--lsc-color-accent);
-	padding-bottom: 1.4375rem;
+	padding-bottom: 1rem;
 }
 .download-item-left {
   display: flex;
@@ -2468,8 +2512,9 @@ border-radius: .75rem;
   justify-content: center;
 }
 .download-item__button:hover {
-  color: var(--lsc-color-white);
-  background-color: var(--lsc-color-primary);
+	color: var(--lsc-color-white);
+	background-color: var(--lsc-color-primary);
+	border-color: var(--lsc-color-primary);
 }
 .download-item__button-icon svg {
   width: .75rem;
@@ -2577,7 +2622,7 @@ Feature Column Style Start
 .feature-columns__inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 6rem;
+  column-gap: 8rem;
 }
 .feature-columns__description {
   color: rgba(26, 22, 20, 0.70);
@@ -2599,15 +2644,16 @@ Feature Column Style Start
   color: var(--lsc-color-white);
 }
 .feature-columns__card-description {
-  color: rgba(255, 255, 255, 0.60);
-  font-size: .9375rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.40625rem;
+	color: rgba(255, 255, 255, 0.60);
+	font-size: .9375rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.40625rem;
+	margin-top: 1.25rem;
 }
-.feature-columns__card-buttons{
-  margin-top: 1.5rem;
-  row-gap: 1rem;
+.feature-columns__card-buttons {
+	margin-top: 1.25rem;
+	row-gap: 1rem;
 }
 .feature-columns__figure {
   margin: 0;
@@ -2704,16 +2750,27 @@ Contact Panel Style Start
 	position: relative;
 	z-index: 2;
 }
+.contact-panel--overlap .contact-form-card__title {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 150%;
+	letter-spacing: -0.031rem;
+	text-transform: uppercase;
+}
+.contact-panel--overlap .contact-info-card__title {
+	font-size: 1.5rem;
+}
 .contact-info-card__hours {
   margin-top: 3.75rem;
 }
 .contact-panel__map {
   margin-top: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 1rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  height: 15rem;
 }
 .contact-panel__map iframe {
-  height: 15rem;
+  height: 100%;
   border-radius: 1rem;
 }
 .contact-panel__form .contact-form-card {
@@ -2733,9 +2790,15 @@ Contact Panel Style Start
 }
 @media only screen and (max-width: 991px) {
   .contact-panel__grid {
-	grid-template-columns: 1fr 1fr;
-  column-gap: 2rem;
-}
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .contact-panel--overlap .contact-form-card__title {
+    font-size: 1.5rem;
+  }
+  .contact-panel--overlap .contact-info-card__title {
+    font-size: 1.3rem;
+  }
 }
 @media only screen and (max-width: 767px) {
 .contact-panel--overlap .contact-panel__grid {
@@ -2745,6 +2808,9 @@ Contact Panel Style Start
 	grid-template-columns: 1fr;
   row-gap: 2rem;
 }
+.contact-panel--overlap .contact-form-card__title {
+    font-size: 1.25rem;
+  }
 }
 /*
 ===============================================
@@ -2838,13 +2904,13 @@ Specialist Cards Style End
   max-width: 12.125rem;
 }
 .footer-tagline {
-	margin-top: 1.875rem;
+	margin-top: 2.5rem;
 	color: rgba(26, 22, 20, 0.40);
 	font-size: .875rem;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 170%;
-	 max-width: 18.75rem;
+	max-width: 18.75rem;
 }
 .social-media-list {
 	margin: 0;
@@ -2898,12 +2964,13 @@ Specialist Cards Style End
   text-transform: uppercase;
 }
 .footer-menu-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  row-gap: .5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	row-gap: .5rem;
+	margin-top: 1.25rem;
 }
 .footer-menu-list a {
   color: rgba(26, 22, 20, 0.50);
@@ -2918,12 +2985,13 @@ Specialist Cards Style End
   color: var(--lsc-color-accent);
 }
 .footer-contact-list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  row-gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	row-gap: 1rem;
+	margin-top: 1.25rem;
 }
 .footer-contact-item {
   display: flex;
@@ -2983,8 +3051,8 @@ Specialist Cards Style End
 	 margin-top: .625rem;
 }
 .footer-bottom {
-  border-top: 0.063rem solid rgba(26, 22, 20, 0.06);
-	background-color: var(--lsc-color-panel);
+	border-top: 0.063rem solid rgba(26, 22, 20, 0.06);
+	background-color: rgba(0, 0, 0, 0.04);
 }
 .footer-bottom-inner {
   display: flex;
@@ -2998,6 +3066,10 @@ Specialist Cards Style End
   font-style: normal;
   font-weight: 400;
   line-height: 1.21875rem;
+}
+.website-credit {
+	display: flex;
+	gap: 1.125rem;
 }
 @media only screen and (max-width:991px) {
    .footer-logo-link {

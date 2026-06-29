@@ -19,7 +19,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
-<<?php echo $lsc_section_el; ?> class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-110">
+<<?php echo $lsc_section_el; ?> class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-100">
 	<div class="timeline-section__inner lsc-container layout-padding">
 		<?php if ( $eyebrow || $title_lines || $description ) : ?>
 			<header class="section-header timeline-section__header text-center">
