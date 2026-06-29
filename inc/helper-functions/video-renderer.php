@@ -58,6 +58,18 @@ if ( ! function_exists( 'lsc_render_video' ) ) {
 			return '';
 		}
 
+		// Load only the video JS this render needs (footer scripts → safe to
+		// enqueue mid-render). Pages without any video ship none of these.
+		wp_enqueue_script( 'lsc-group-video-behaviors' );
+
+		if ( 'onclick-popup' === $args['behavior'] ) {
+			wp_enqueue_script( 'lsc-group-video-popup' );
+		}
+
+		if ( 'vimeo' === $video_source ) {
+			wp_enqueue_script( 'jquery-vimeo-player' );
+		}
+
 		$container_class = 'video-container';
 		if ( $args['container_class'] ) {
 			$container_class .= ' ' . esc_attr( $args['container_class'] );
@@ -122,7 +134,7 @@ if ( ! function_exists( 'lsc_render_self_hosted_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
@@ -282,7 +294,7 @@ if ( ! function_exists( 'lsc_render_vimeo_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
@@ -377,7 +389,7 @@ if ( ! function_exists( 'lsc_render_cdn_video' ) ) {
 			if ( $product && method_exists( $product, 'get_image_id' ) ) {
 				$image_id = $product->get_image_id();
 				if ( $image_id ) {
-					$poster_url = wp_get_attachment_image_url( $image_id, 'full' );
+					$poster_url = wp_get_attachment_image_url( $image_id, 'lsc-1600' );
 				}
 			}
 		}
