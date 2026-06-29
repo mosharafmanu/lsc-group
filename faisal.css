@@ -2088,13 +2088,14 @@ Single Case Study Style Start
   line-height: 137.5%;
 }
 .case-study-card__link {
-  color: var(--lsc-color-accent);
-  font-size: .875rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  display: flex;
-  gap: .875rem;
+	color: var(--lsc-color-accent);
+	font-size: .875rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	display: flex;
+	gap: .875rem;
+	margin-top: 1.7rem;
 }
 @media only screen and (max-width: 991px) {
 .case-study-card__media img {
@@ -2492,8 +2493,9 @@ border-radius: .75rem;
   justify-content: center;
 }
 .download-item__button:hover {
-  color: var(--lsc-color-white);
-  background-color: var(--lsc-color-primary);
+	color: var(--lsc-color-white);
+	background-color: var(--lsc-color-primary);
+	border-color: var(--lsc-color-primary);
 }
 .download-item__button-icon svg {
   width: .75rem;
@@ -2728,16 +2730,27 @@ Contact Panel Style Start
 	position: relative;
 	z-index: 2;
 }
+.contact-panel--overlap .contact-form-card__title {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 150%;
+	letter-spacing: -0.031rem;
+	text-transform: uppercase;
+}
+.contact-panel--overlap .contact-info-card__title {
+	font-size: 1.5rem;
+}
 .contact-info-card__hours {
   margin-top: 3.75rem;
 }
 .contact-panel__map {
   margin-top: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 1rem;
+  border: 0.063rem solid rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  height: 15rem;
 }
 .contact-panel__map iframe {
-  height: 15rem;
+  height: 100%;
   border-radius: 1rem;
 }
 .contact-panel__form .contact-form-card {
@@ -2757,9 +2770,15 @@ Contact Panel Style Start
 }
 @media only screen and (max-width: 991px) {
   .contact-panel__grid {
-	grid-template-columns: 1fr 1fr;
-  column-gap: 2rem;
-}
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .contact-panel--overlap .contact-form-card__title {
+    font-size: 1.5rem;
+  }
+  .contact-panel--overlap .contact-info-card__title {
+    font-size: 1.3rem;
+  }
 }
 @media only screen and (max-width: 767px) {
 .contact-panel--overlap .contact-panel__grid {
@@ -2769,6 +2788,9 @@ Contact Panel Style Start
 	grid-template-columns: 1fr;
   row-gap: 2rem;
 }
+.contact-panel--overlap .contact-form-card__title {
+    font-size: 1.25rem;
+  }
 }
 /*
 ===============================================
