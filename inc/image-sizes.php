@@ -33,6 +33,12 @@ add_filter( 'max_srcset_image_width', function() {
 	return 3840;
 } );
 
+// Scale freshly-uploaded originals down to 2048px max (WP default is 2560).
+// Affects new uploads only; keeps the largest served file leaner.
+add_filter( 'big_image_size_threshold', function() {
+	return 2048;
+} );
+
 add_filter( 'mime_types', function( $mimes ) {
 	$mimes['webp'] = 'image/webp';
 	return $mimes;
