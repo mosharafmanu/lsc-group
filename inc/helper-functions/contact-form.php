@@ -6,7 +6,7 @@
  * <button type="submit"> so it can carry an icon beside the label (an input is
  * a replaced element and cannot contain child SVG / pseudo-content). The base
  * `button[type="submit"]` styling already matches the input, so the look is
- * preserved; faisal.css adds the gap + icon sizing.
+ * preserved; style.css adds the gap + icon sizing.
  *
  * @package lsc-group
  */

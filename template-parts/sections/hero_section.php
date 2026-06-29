@@ -410,7 +410,7 @@ if ( 0 === $section_index ) {
 		if ( $rotation_active ) :
 			// Cross-fade styles: scoped to rotating heroes, printed once per page.
 			// Kept inline so they reach the browser independent of the cached
-			// scripts.js / faisal.css build pipeline.
+			// scripts.js / style.css build pipeline.
 			if ( empty( $GLOBALS['lsc_hero_rotation_style_printed'] ) ) :
 				$GLOBALS['lsc_hero_rotation_style_printed'] = true;
 				?>
@@ -435,8 +435,8 @@ if ( 0 === $section_index ) {
 							.hero-section--rotating .hero-section__mobile-image { display: block; }
 						}
 						/* Only the final word + rotator go inline (their own block line);
-						   every other title part keeps faisal.css's per-part line break.
-						   Specificity beats faisal.css ".hero-section__title span { display: block }". */
+						   every other title part keeps style.css's per-part line break.
+						   Specificity beats style.css ".hero-section__title span { display: block }". */
 						.hero-section__title .hero-section__title-rotating-group {
 							display: flex;
 							flex-wrap: wrap;

@@ -5,7 +5,7 @@
  * Adds a per-menu-item "Menu Type" toggle (Regular / Mega) via ACF on nav menu
  * items. Regular items keep WordPress's default dropdown; mega items render a
  * full-width panel of cards (from a post type or a manual repeater) plus a CTA
- * bar. Markup only — BEM hooks are styled in faisal.css.
+ * bar. Markup only — BEM hooks are styled in style.css.
  *
  * @package lsc-group
  */
@@ -73,7 +73,7 @@ add_filter(
 );
 
 /**
- * Flag mega items on the <li> so faisal.css can hook them.
+ * Flag mega items on the <li> so style.css can hook them.
  */
 add_filter(
 	'nav_menu_css_class',

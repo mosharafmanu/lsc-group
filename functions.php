@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.123' );
+	define( 'LSC_GROUP_VERSION', '1.0.124' );
 }
 
 
@@ -118,11 +118,9 @@ function lsc_scripts() {
 	}
 	wp_enqueue_style( 'lsc-group-design-style',   get_template_directory_uri() . '/assets/css/lsc-group-design-style.css',    array(), LSC_GROUP_VERSION );
 	wp_enqueue_style( 'lsc-group-form-style',    get_template_directory_uri() . '/assets/css/lsc-group-form.css',             array(), LSC_GROUP_VERSION );
+	// style.css now carries all design CSS — the former imran.css + faisal.css
+	// were consolidated into it (header → sections → blog → footer order).
 	wp_enqueue_style( 'lsc-group-style',          get_stylesheet_uri(),                                                           array(), LSC_GROUP_VERSION );
-
-	// ── Developer CSS (Temporary) ────────────────────────────────
-	wp_enqueue_style( 'lsc-imran-style',          get_template_directory_uri() . '/imran.css',                                    array(), LSC_GROUP_VERSION );
-	wp_enqueue_style( 'lsc-faisal-style',         get_template_directory_uri() . '/faisal.css',                                   array(), LSC_GROUP_VERSION );
 
 	// ── Core JS ──────────────────────────────────────────────────
 	// scripts.js no longer hard-depends on Slick — its carousel inits self-guard
