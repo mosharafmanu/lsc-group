@@ -1158,7 +1158,7 @@ h6,.h6-style {
 /* Base button styles — shared across all variants */
 .site-btn {
 	display: inline-block;
-	padding: .5rem 1.5rem;
+	padding: .5rem 1.5rem; /* 8px 24px */
 	font-size: .9375rem;
 	line-height: 150%;
 	font-family: var(--lsc-font-body);
@@ -1171,11 +1171,7 @@ h6,.h6-style {
 	transition: all var(--lsc-transition);
 	text-align: center;
 }
-@media only screen and (max-width: 767px) {
-	.site-btn {
-     padding: .75rem 1.75rem;
-  }
-}
+
 /* ── Primary action: orange accent fill, dark text → dark fill on hover */
 .btn-primary {
     background: var(--lsc-color-accent);
@@ -1220,6 +1216,18 @@ h6,.h6-style {
     border-color: var(--lsc-color-accent);
 }
 
+/* ── Outline (light): for dark backgrounds — light border/text → light fill on hover */
+.btn-outline-light {
+	background: transparent;
+	color: var(--lsc-color-light);
+	border-color: var(--lsc-color-light);
+}
+.btn-outline-light:hover {
+	background-color: var(--lsc-color-light);
+	color: var(--lsc-color-primary);
+	border-color: var(--lsc-color-light);
+}
+
 /* ── Text link: no background or border, just styled text */
 .btn-text-link {
     background: transparent;
@@ -1238,6 +1246,20 @@ h6,.h6-style {
 .site-btn.btn-has-border {
     padding-top: .875rem;
     padding-bottom: .875rem;
+}
+
+/* ── Size & layout variants — use these globally instead of per-section button classes */
+.site-btn--lg {
+	padding: .875rem 1.75rem;
+}
+.site-btn--wide {
+	padding-inline: 3.125rem;
+}
+.site-btn--block {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /* Global Submit Field Wrapper with Icon */

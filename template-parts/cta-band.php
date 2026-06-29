@@ -90,7 +90,7 @@ $section_classes = [
 						$button_link,
 						[
 							'style'     => $button_style,
-							'class'     => 'cta-section__button',
+							'class'     => 'site-btn--lg',
 							'show_icon' => false,
 						]
 					);

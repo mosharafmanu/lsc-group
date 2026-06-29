@@ -115,7 +115,7 @@ $section_classes = [
 									$button_link,
 									[
 										'style'     => $button_style,
-										'class'     => 'content-card-5050__card-button',
+										'class'     => 'site-btn--block',
 										'show_icon' => false,
 									]
 								);

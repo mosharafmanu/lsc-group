@@ -156,7 +156,7 @@ if ( $enable_background ) {
 								$button_link,
 								[
 									'style'     => $button_style,
-									'class'     => 'media-content-5050__button',
+									'class'     => '',
 									'show_icon' => false,
 								]
 							);

@@ -119,7 +119,7 @@ if ( $has_facts_bar ) {
 							$button_link,
 							[
 								'style'     => $button_style,
-								'class'     => 'inner-hero__button',
+								'class'     => 'site-btn--lg',
 								'show_icon' => false,
 							]
 						);

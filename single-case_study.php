@@ -63,7 +63,7 @@ if ( $lsc_has_sidebar ) :
 						$lsc_apply_link,
 						[
 							'style'     => 'btn-primary',
-							'class'     => 'case-summary__apply-btn',
+							'class'     => 'site-btn--block',
 							'show_icon' => false,
 						]
 					);

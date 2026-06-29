@@ -134,7 +134,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -612,7 +613,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -2208,7 +2210,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -2869,7 +2872,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -4088,7 +4092,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -4405,7 +4410,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",
@@ -4670,7 +4676,8 @@
                                     "required": 0,
                                     "choices": {
                                         "btn-primary": "Primary",
-                                        "btn-outline": "Outline",
+                                        "btn-outline": "Outline (Accent)",
+                                        "btn-outline-light": "Outline (Light)",
                                         "btn-secondary": "Secondary"
                                     },
                                     "default_value": "btn-primary",

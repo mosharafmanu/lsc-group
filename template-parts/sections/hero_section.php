@@ -168,7 +168,7 @@ if ( 0 === $section_index ) {
 							$button_link,
 							[
 								'style'     => $button_style,
-								'class'     => 'hero-section__button',
+								'class'     => 'site-btn--lg',
 								'show_icon' => false,
 							]
 						);

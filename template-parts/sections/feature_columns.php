@@ -136,7 +136,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 									$button_link,
 									[
 										'style'     => $button_style,
-										'class'     => 'feature-columns__card-button',
+										'class'     => 'site-btn--block',
 										'show_icon' => false,
 									]
 								);

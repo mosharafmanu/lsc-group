@@ -87,7 +87,7 @@ $section_classes = [
 							$button_link,
 							[
 								'style'     => $button_style,
-								'class'     => 'media-card-5050__button',
+								'class'     => 'site-btn--wide',
 								'show_icon' => false,
 							]
 						);
