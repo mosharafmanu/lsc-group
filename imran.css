@@ -200,8 +200,8 @@
 	font-weight: 600;
 	line-height: 1.5;
 	letter-spacing: 0.02625rem;
+	padding: .438rem 1.5rem; /* 7px 24px */
 }
-
 @media only screen and ( max-width: 1499px ) {
   .site-branding {
     max-width: 11rem;
