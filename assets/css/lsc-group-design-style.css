@@ -448,11 +448,16 @@ h6,.h6-style {
 .layout-inset {
 	padding-inline: var(--lsc-grid-inset);
 }
-@media only screen and (max-width: 991px) {
-	:root { --lsc-grid-inset: 1.5rem; }
-}
-@media only screen and (max-width: 767px) {
-	:root { --lsc-grid-inset: 0rem; }
+/* The inset only earns its keep while the container is centered with free
+   space beside it. Once the viewport reaches the container's outer width
+   (content max 1342px + 2 × 32px gutter = 1406px) the container goes
+   edge-to-edge, so remove the inset — no extra inner padding at or below
+   the container width. Zero the padding directly (not via the :root var)
+   and use px so neither the style.css base token nor rem-in-MQ can win. */
+@media only screen and (max-width: 1406px) {
+	.layout-inset {
+		padding-inline: 0;
+	}
 }
 
 /* ── Section header ──────────────────────────────────────────────────────────
