@@ -24,7 +24,8 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 }
 ?>
 
-<section class="feature-columns pt-50 pb-50 pt-lg-100">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="feature-columns pt-50 pb-50 pt-lg-100">
 	<div class="feature-columns__inner lsc-container layout-padding">
 		<div class="feature-columns__content">
 			<?php if ( $eyebrow ) : ?>
@@ -163,4 +164,4 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 		</div>
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

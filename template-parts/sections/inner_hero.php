@@ -43,7 +43,8 @@ if ( $has_facts_bar ) {
 }
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php // The page hero carries the main <h1>, so it is a <div>: its heading titles <main>, not a peer sub-section. ?>
+<div class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<?php if ( 'image' === $hero_style && $show_image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
 		<div class="inner-hero__media" aria-hidden="true">
 			<?php
@@ -203,4 +204,4 @@ if ( $has_facts_bar ) {
 			</div>
 		</div>
 	<?php endif; ?>
-</section>
+</div>

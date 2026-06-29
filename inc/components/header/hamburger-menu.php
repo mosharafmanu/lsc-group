@@ -15,6 +15,7 @@ if ( ! function_exists( 'lsc_render_mobile_navigation' ) ) {
 		<div class="mobile-menu-overlay" aria-hidden="true"></div>
 
 		<nav id="mobile-navigation" class="mobile-navigation" aria-label="<?php esc_attr_e( 'Mobile navigation', 'lsc-group' ); ?>" aria-hidden="true">
+			<h2 class="sr-only"><?php esc_html_e( 'Mobile navigation', 'lsc-group' ); ?></h2>
 			<div class="mobile-nav-inner">
 
 				<div class="mobile-nav-header">

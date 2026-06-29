@@ -80,7 +80,16 @@ $section_classes = [
 $stacked_palette = [ 'dark', 'orange', 'light' ];
 ?>
 
+<?php
+// Always a <section>: it groups heading-level testimonials (the h3 author names),
+// so it needs to be a named region that contains them. Fall back to an sr-only
+// heading when the editor sets no visible title.
+$lsc_has_title = ! empty( $title_lines ) && is_array( $title_lines );
+?>
 <section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+	<?php if ( ! $lsc_has_title ) : ?>
+		<h2 class="sr-only"><?php esc_html_e( 'Testimonials', 'lsc-group' ); ?></h2>
+	<?php endif; ?>
 	<div class="section-header testimonials-section__header lsc-container">
 		<?php if ( $eyebrow ) : ?>
 			<div class="testimonials-section__eyebrow-wrap layout-padding-mobile">
@@ -183,7 +192,7 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 							<?php endif; ?>
 							<div class="testimonial-card__author-info">
 								<?php if ( $author_name ) : ?>
-									<p class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></p>
+									<h3 class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></h3>
 								<?php endif; ?>
 								<?php if ( $author_role ) : ?>
 									<p class="testimonial-card__author-role"><?php echo esc_html( $author_role ); ?></p>
@@ -249,7 +258,7 @@ $stacked_palette = [ 'dark', 'orange', 'light' ];
 							<?php endif; ?>
 							<div class="testimonial-card__author-info">
 								<?php if ( $author_name ) : ?>
-									<p class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></p>
+									<h3 class="testimonial-card__author-name"><?php echo esc_html( $author_name ); ?></h3>
 								<?php endif; ?>
 								<?php if ( $author_role ) : ?>
 									<p class="testimonial-card__author-role"><?php echo esc_html( $author_role ); ?></p>

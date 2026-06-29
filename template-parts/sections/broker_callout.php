@@ -26,7 +26,8 @@ $section_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-100 pb-lg-110">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?> pt-50 pb-50 pt-lg-100 pb-lg-110">
 	<div class="broker-callout__inner lsc-container layout-padding">
 		<div class="broker-callout__card media-<?php echo esc_attr( sanitize_html_class( $media_position ) ); ?>">
 			<div class="broker-callout__media">
@@ -131,4 +132,4 @@ $section_classes = [
 			</div>
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

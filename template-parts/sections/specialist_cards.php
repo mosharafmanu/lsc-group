@@ -27,7 +27,8 @@ $grid_classes = [
 ];
 ?>
 
-<section class="specialist-cards pt-50 pb-50 pt-lg-90 pb-lg-90">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="specialist-cards pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header specialist-cards__header text-center">
@@ -99,7 +100,7 @@ $grid_classes = [
 						<?php endif; ?>
 
 						<?php if ( $card_title ) : ?>
-							<h5 class="specialist-cards__card-title"><?php echo esc_html( $card_title ); ?></h5>
+							<h3 class="specialist-cards__card-title h5-style"><?php echo esc_html( $card_title ); ?></h3>
 						<?php endif; ?>
 
 						<?php if ( $card_description ) : ?>
@@ -116,4 +117,4 @@ $grid_classes = [
 			</div>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

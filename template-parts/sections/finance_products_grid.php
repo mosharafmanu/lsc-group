@@ -57,7 +57,8 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 }
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="finance-products-section__inner lsc-container layout-padding layout-padding0 pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header finance-products-section__header layout-padding-mobile">
@@ -98,7 +99,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 			</div>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>
 
 <?php
 if ( isset( $product_query ) && $product_query instanceof WP_Query ) {

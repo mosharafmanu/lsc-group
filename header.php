@@ -25,6 +25,7 @@
 
 		  <div class="header-right">
                     <nav id="primary-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'lsc-group' ); ?>">
+                        <h2 class="sr-only"><?php esc_html_e( 'Main navigation', 'lsc-group' ); ?></h2>
                         <?php
                         wp_nav_menu( [
                             'theme_location' => 'mainMenu',

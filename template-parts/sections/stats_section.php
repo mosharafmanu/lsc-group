@@ -37,7 +37,7 @@ if ( $is_cards ) {
 }
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding <?php echo esc_attr( implode( ' ', $grid_classes ) ); ?>">
 		<?php foreach ( $stats as $stat ) : ?>
 			<?php
@@ -59,4 +59,4 @@ if ( $is_cards ) {
 			</div>
 		<?php endforeach; ?>
 	</div>
-</section>
+</div>

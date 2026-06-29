@@ -18,7 +18,8 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 }
 ?>
 
-<section class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-110">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="timeline-section pt-60 pb-50 pt-lg-100 pb-lg-110">
 	<div class="timeline-section__inner lsc-container layout-padding">
 		<?php if ( $eyebrow || $title_lines || $description ) : ?>
 			<header class="section-header timeline-section__header text-center">
@@ -92,7 +93,7 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 							<?php endif; ?>
 
 							<?php if ( $item_title ) : ?>
-								<h5 class="timeline-section__item-title"><?php echo esc_html( $item_title ); ?></h5>
+								<h3 class="timeline-section__item-title h5-style"><?php echo esc_html( $item_title ); ?></h3>
 							<?php endif; ?>
 
 							<?php if ( $item_text ) : ?>
@@ -104,4 +105,4 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $items ) {
 			</ol>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

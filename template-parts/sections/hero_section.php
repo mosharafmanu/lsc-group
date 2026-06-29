@@ -86,7 +86,8 @@ if ( 0 === $section_index ) {
 
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>"<?php echo $rotation_id ? ' id="' . esc_attr( $rotation_id ) . '"' : ''; ?>>
+<?php // The hero carries the page's main <h1>, so it is a <div>: its heading titles <main>, not a peer sub-section. ?>
+<div class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>"<?php echo $rotation_id ? ' id="' . esc_attr( $rotation_id ) . '"' : ''; ?>>
 	<div class="hero-section__media" aria-hidden="true">
 		<?php if ( $rotation_active ) : ?>
 			<?php foreach ( $rotating_slides as $slide_index => $slide ) : ?>
@@ -473,4 +474,4 @@ if ( 0 === $section_index ) {
 			<?php
 		endif;
 		?>
-</section>
+</div>

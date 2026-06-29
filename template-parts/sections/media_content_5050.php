@@ -44,7 +44,8 @@ if ( $enable_background ) {
 }
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<div class="media-content-5050__grid">
 			<div class="media-content-5050__media media">
@@ -167,4 +168,4 @@ if ( $enable_background ) {
 			</div>
 		</div>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>

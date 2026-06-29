@@ -59,7 +59,8 @@ $grid_classes = [
 ];
 ?>
 
-<section class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="finance-products-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header finance-products-section__header">
@@ -95,7 +96,7 @@ $grid_classes = [
 			?>
 		<?php endif; ?>
 	</div>
-</section>
+</<?php echo $lsc_section_el; ?>>
 
 <?php
 wp_reset_postdata();
