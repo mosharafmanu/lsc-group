@@ -69,3 +69,23 @@ add_filter(
 		return $field;
 	}
 );
+
+/**
+ * Surface the video upload spec on every self-hosted video field.
+ *
+ * WordPress does not compress video on upload — whatever file is chosen is
+ * served full-size. Targeting by field name covers all self_host video
+ * fields across every layout (and any added later) in one place.
+ */
+add_filter(
+	'acf/load_field/name=video_self_host_file',
+	function ( $field ) {
+		$spec = __( 'Upload a web-optimised MP4: 1080p max, under ~3&nbsp;MB, H.264, no audio track. Export a compressed / "for web" version — not the original 4K or camera file. Large videos noticeably slow the page (the file is served at full size; WordPress does not compress it).', 'lsc-group' );
+
+		$field['instructions'] = $field['instructions']
+			? $field['instructions'] . '<br>' . $spec
+			: $spec;
+
+		return $field;
+	}
+);
