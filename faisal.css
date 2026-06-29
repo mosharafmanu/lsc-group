@@ -262,7 +262,11 @@
 	gap: .5rem;
 	margin-top: 1.375rem;
 }
-
+@media only screen and (max-width:767px) {
+  .finance-products-grid {
+	margin-top: 0;
+}
+}
  /*
 ===============================================
  Finance Style End
@@ -1041,6 +1045,11 @@ button.wpcf7-submit:focus-visible {
 	grid-template-columns: 1fr 1fr;
   column-gap: 1.25rem;
 }
+.contact-section__col.contact-section__col--info {
+	position: sticky;
+	top: 2rem;
+	align-self: start;
+}
 .contact-form-card__form .lsc-contact-form {
 	grid-template-columns: 1fr;
 }
@@ -1059,6 +1068,9 @@ button.wpcf7-submit:focus-visible {
 .contact-section__grid {
 	grid-template-columns: 1fr;
   row-gap: 1.5rem;
+}
+.contact-section__col.contact-section__col--info {
+	position: initial;
 }
 .contact-info-card__list {
 	margin-top: 2rem;
@@ -1318,7 +1330,8 @@ button.wpcf7-submit:focus-visible {
 
 @media only screen and (max-width:991px) {
 .inner-hero__media {
-	height: 100%;
+	min-height: 100%;
+	height: 30rem;
 }
 .inner-hero__title {
   font-size: 2.5rem;
@@ -1423,7 +1436,7 @@ button.wpcf7-submit:focus-visible {
 	margin-top: 1.5rem;
 }
 .content-card-5050__card-buttons {
-	margin-top: 1.5rem;
+	margin-top: 1.2rem;
 	row-gap: 1rem;
 }
 .content-card-5050__card-buttons .site-btn {
@@ -1640,7 +1653,6 @@ Finance Product Style Start
 .inner-hero__fact span {
   display: block;
 }
-
 .inner-hero__fact-label {
   color: rgba(26, 22, 20, 0.50);
   font-size: .875rem;
@@ -1780,6 +1792,9 @@ Media Content 5050 Style Start
 	line-height: 162.5%;
  	max-width: 34.1875rem;
 }
+.lsc-list.media-content-5050__features li {
+	font-weight: 400;
+}
 .media-content-5050__figure img {
 	border-radius: .75rem;
 	box-shadow: 0 0.063rem .1875rem 0 rgba(0, 0, 0, 0.10), 0 0.063rem .125rem -0.063rem rgba(0, 0, 0, 0.10);
@@ -1800,6 +1815,14 @@ Media Content 5050 Style Start
 }
 }
 @media only screen and (max-width: 991px) {
+.media-content-5050__grid {
+	column-gap: 2.5rem;
+}
+.media-content-5050__media {
+	position: sticky;
+	top: 2rem;
+	align-self: start;
+}
 .media-content-5050__figure {
 	height: 20rem;
 }
@@ -2292,6 +2315,7 @@ Single Case Study Style Start
 	line-height: 150%;
 	text-transform: capitalize;
 	margin-bottom: 1.25rem;
+	margin-top: 3rem;
 }
 .rich-text__content.entry-content p {
   color: rgba(26, 22, 20, 0.70);
@@ -2708,6 +2732,11 @@ Feature Column Style Start
 .feature-columns__inner{
 	column-gap: 3rem;
 }
+.feature-columns__content {
+	position: sticky;
+	top: 2rem;
+	align-self: start;
+}
 .feature-columns-cards-right {
 	grid-template-columns: 1fr;
 }
@@ -2716,6 +2745,9 @@ Feature Column Style Start
 .feature-columns__inner{
   grid-template-columns: 1fr;
 	row-gap: 2rem;
+}
+.feature-columns__content {
+	position: initial;
 }
 .feature-columns__card-description{
 	margin-top: 1rem;
@@ -3101,6 +3133,10 @@ Specialist Cards Style End
     row-gap: 1.25rem;
     padding-bottom: 4rem;
     margin-top: 3rem;
+  }
+  .footer-bottom-inner {
+	  text-align: left;
+    gap: .625rem;
   }
 }
  /*
