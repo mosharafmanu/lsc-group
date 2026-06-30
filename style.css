@@ -1417,9 +1417,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .stats-section {
 	padding-top: 3rem;
 }
-.stats-section__grid {
-	row-gap: 2.375rem;
-}
 .stats-section__label {
 	margin-top: 0;
 }
@@ -1795,9 +1792,10 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050--media-left .media-content-5050__grid {
     grid-template-areas: "media content";
 }   
-.media-content-5050__figure {
+.media-content-5050__media,
+.media-content-5050__figure{
   margin: 0;
-  height: 25rem;
+  height: 31.125rem;
 }
 .media-content-5050--has-bg .media-content-5050__figure, 
 .media-content-5050--has-bg .media-content-5050__media  {
@@ -1845,8 +1843,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	top: 2rem;
 	align-self: start;
 }
-.media-content-5050__figure {
-	height: 20rem;
+.media-content-5050__media,
+.media-content-5050__figure{
+  height: 20rem;
 }
 .media-content-5050--has-bg .media-content-5050__figure, 
 .media-content-5050--has-bg .media-content-5050__media {
@@ -1878,8 +1877,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	margin-top: 1rem;
 	row-gap: 0;
 }
-.media-content-5050__figure {
-	height: 14rem;
+.media-content-5050__media,
+.media-content-5050__figure{
+  height: 14rem;
 }
 .media-content-5050__media {
   grid-row: 1;
@@ -2524,6 +2524,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   .testimonials-section__slider-wrap {
 	 padding-inline: 0;
   }
+  .testimonial-card--stacked .testimonial-card__author {
+	 margin-top: 1.2rem;
+  }
 }
 /* Theme: Dark */
 .testimonial-card--theme-dark {
@@ -2676,6 +2679,8 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	background-color: transparent;
 	cursor: pointer;
 	padding: 1.5rem;
+	appearance: none;
+	color: inherit;
 }
 .faqs__question-heading {
   display: flex;
@@ -3521,6 +3526,10 @@ button.wpcf7-submit:focus-visible {
 }
 .stats-section--cards .card-grid .stats-section__item:last-child {
 	grid-column: 1;
+}
+.stats-section--cards {
+	padding-top: 1rem;
+	padding-bottom: 2rem;
 }
 }
 
@@ -4716,7 +4725,8 @@ button.wpcf7-submit:focus-visible {
 	font-style: normal;
 	font-weight: 400;
 	line-height: 165%;
-	 margin-top: .625rem;
+	margin-top: .625rem;
+	max-width: 24rem;
 }
 .footer-bottom {
 	border-top: 0.063rem solid rgba(26, 22, 20, 0.06);
@@ -4726,6 +4736,7 @@ button.wpcf7-submit:focus-visible {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
   padding-top: 1.25rem;
   padding-bottom: 1rem;
   color: #666;
@@ -4768,7 +4779,7 @@ button.wpcf7-submit:focus-visible {
     grid-template-columns: 1fr;
     row-gap: 1.25rem;
     padding-bottom: 4rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
   .footer-bottom-inner {
 	  text-align: left;
