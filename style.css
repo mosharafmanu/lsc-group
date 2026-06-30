@@ -1155,7 +1155,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 @media only screen and (max-width: 991px) {
 .inner-hero--split .inner-hero__media {
-	height: 18rem;
+	height: 14rem;
 }
 }
 @media only screen and (max-width: 767px) {
@@ -1877,6 +1877,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050__features {
 	margin-top: 1rem;
 	row-gap: 0;
+}
+.media-content-5050__figure {
+	height: 14rem;
 }
 .media-content-5050__media {
   grid-row: 1;
@@ -2658,7 +2661,11 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	padding: 2.2rem 2.2rem 2.0625rem 2.2rem;
 }
 }
-
+@media only screen and (max-width: 767px) {
+.testimonials-section--stacked {
+	margin-top: 2rem;
+}
+}
 /* Faq Section */
 .faqs__item {
   border-radius: .5rem;
@@ -2714,6 +2721,10 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 .faqs__item button {
 	padding: 1.2rem;
+}
+.faqs__answer {
+	max-width: 100%;
+	padding: 0 2.1875rem 1.2rem 1.2rem;
 }
 }
 
