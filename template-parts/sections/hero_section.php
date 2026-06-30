@@ -271,32 +271,38 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 			);
 			?>
 			<?php
-			// Start non-rotating hero videos on desktop once the DOM is ready. Mobile
-			// and reduced-motion users keep the static poster (the LCP). Printed once.
+			// Start non-rotating hero videos. Desktop: as soon as the DOM is ready.
+			// Mobile: AFTER the page loads so the deferred video never competes with the
+			// LCP poster on cellular. Reduced-motion users keep the static poster. Once.
 			if ( empty( $GLOBALS['lsc_hero_video_script_printed'] ) ) :
 				$GLOBALS['lsc_hero_video_script_printed'] = true;
 				?>
 				<script>
 					( function () {
-						if ( window.matchMedia ) {
-							if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
-							if ( ! window.matchMedia( '(min-width: 768px)' ).matches ) { return; }
-						}
-						function startHeroVideos() {
+						if ( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
+																		function startHeroVideos() {
 							var vids = document.querySelectorAll( '.hero-section:not(.hero-section--rotating) .hero-section__video' );
 							for ( var i = 0; i < vids.length; i++ ) {
 								( function ( v ) {
-									// Reveal (fade in over the poster) only once a frame is ready.
-									v.addEventListener( 'playing', function () { v.classList.add( 'is-playing' ); } );
+									try { v.preload = 'auto'; v.load(); } catch ( e ) {} // Warm the buffer (ships preload="none").
+									v.muted = true; v.playsInline = true; // Safari needs these as properties to autoplay.
+									// Fade in over the poster as soon as a real frame is on screen.
+									var reveal = function () { v.classList.add( 'is-playing' ); };
+									v.addEventListener( 'playing', reveal );
+									v.addEventListener( 'timeupdate', reveal ); // Safari sometimes skips 'playing'.
 									var p = v.play();
 									if ( p && p.catch ) { p.catch( function () {} ); }
 								} )( vids[ i ] );
 							}
 						}
-						if ( 'loading' === document.readyState ) {
-							document.addEventListener( 'DOMContentLoaded', startHeroVideos );
+						// Begin once the page has settled — capped so the poster never lingers.
+						var started = false;
+						function begin() { if ( started ) { return; } started = true; startHeroVideos(); }
+						if ( 'complete' === document.readyState ) {
+							window.setTimeout( begin, 150 );
 						} else {
-							startHeroVideos();
+							window.addEventListener( 'load', begin );
+							window.setTimeout( begin, 2500 );
 						}
 					} )();
 				</script>
@@ -591,50 +597,62 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 					var count = Math.max( media.length, words.length );
 					if ( count < 2 ) { return; }
 
-					// Only play the background videos on desktop. On mobile every slide is
-					// deferred and never played, so the connection stays free for the LCP
-					// poster and zero video bytes download — the words/posters still rotate.
-					var canPlayVideo = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
+										function videoIn( slide ) { return slide ? slide.querySelector( 'video' ) : null; }
 
-					// Play the incoming slide's video (deferred slides have preload="none"
-					// + no autoplay, so .play() is what actually fetches them) and pause the
-					// outgoing one so only the visible slide ever decodes.
-					function videoIn( slide ) { return slide ? slide.querySelector( 'video' ) : null; }
+					// Warm a slide's video buffer (they ship preload="none", so nothing fetches
+					// until we ask here) so it can start quickly and play smoothly. Idempotent.
+					function prime( i ) {
+						var v = videoIn( media[ i ] );
+						if ( ! v || v.getAttribute( 'data-primed' ) ) { return; }
+						v.setAttribute( 'data-primed', '1' );
+						try { v.preload = 'auto'; v.load(); } catch ( e ) {}
+					}
 					function playSlide( i ) {
-						if ( ! canPlayVideo ) { return; }
 						var v = videoIn( media[ i ] );
 						if ( ! v ) { return; }
+						prime( i );
+						v.muted = true; v.playsInline = true; // Safari needs these as properties to autoplay.
 						if ( ! v.getAttribute( 'data-reveal-bound' ) ) {
 							v.setAttribute( 'data-reveal-bound', '1' );
-							// Fade the video in over the poster only once a frame is ready.
-							v.addEventListener( 'playing', function () { v.classList.add( 'is-playing' ); } );
+							// Fade the video in over the poster as soon as a real frame is on screen.
+							var reveal = function () { v.classList.add( 'is-playing' ); };
+							v.addEventListener( 'playing', reveal );
+							v.addEventListener( 'timeupdate', reveal ); // Safari sometimes skips 'playing'.
 						}
 						var p = v.play();
 						if ( p && p.catch ) { p.catch( function () {} ); }
+						prime( ( i + 1 ) % count ); // Pre-warm the next slide so the swap is smooth.
 					}
 					function pauseSlide( i ) {
 						var v = videoIn( media[ i ] );
 						if ( v && ! v.paused ) { v.pause(); }
 					}
 
-					// Kick off the first slide's video (deferred = no autoplay attribute).
-					playSlide( 0 );
-
+										// Slide 0 is already active; play its video, then rotate words + media.
 					var index = 0;
-					window.setInterval( function () {
+					function tick() {
 						var prev = index;
 						index = ( index + 1 ) % count;
-						// Swap the background media on desktop only. On mobile the media stays on
-						// slide 0 (its poster is the LCP) — swapping the other slides' full-bleed
-						// posters in over a throttled connection keeps the LCP from ever settling.
-						// Only the words rotate on mobile.
-						if ( canPlayVideo ) {
-							if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
-							if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
-						}
+						if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
+						if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
 						if ( words[ prev ] ) { words[ prev ].classList.remove( 'is-active' ); }
 						if ( words[ index ] ) { words[ index ].classList.add( 'is-active' ); }
-					}, <?php echo (int) $rotation_interval; ?> );
+					}
+										function startRotation() {
+						playSlide( 0 );
+						window.setInterval( tick, <?php echo (int) $rotation_interval; ?> );
+					}
+					// Begin once the page has settled — but cap the wait so the poster never
+					// lingers: start on window 'load', or 2.5s after this runs, whichever is first.
+					// Nothing fetches before this point (protects the LCP poster).
+					var started = false;
+					function begin() { if ( started ) { return; } started = true; startRotation(); }
+					if ( 'complete' === document.readyState ) {
+						window.setTimeout( begin, 150 );
+					} else {
+						window.addEventListener( 'load', begin );
+						window.setTimeout( begin, 2500 );
+					}
 				} )();
 			</script>
 			<?php
