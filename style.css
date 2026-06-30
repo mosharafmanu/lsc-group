@@ -1487,12 +1487,13 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	border-radius: .75rem;
 }
 .broker-callout__title {
-  color: var(--lsc-color-white);
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
-  letter-spacing: -0.055rem;
-  text-transform: uppercase;
+	color: var(--lsc-color-white);
+	font-style: normal;
+	font-weight: 700;
+	line-height: 110%;
+	letter-spacing: -0.055rem;
+	text-transform: uppercase;
+	max-width: 34.25rem;
 }
 .broker-callout__description {
   margin-top: 1.875rem;
@@ -2164,7 +2165,10 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   flex-direction: column;
   row-gap: 1.25rem;
 }
-
+.feature-columns__video,
+.video-play-overlay {
+	border-radius: .75rem;
+}
 @media only screen and (max-width:1199px) {
 .feature-columns__inner {
 	column-gap: 3rem;
@@ -4691,6 +4695,7 @@ button.wpcf7-submit:focus-visible {
 }
 .footer-contact-item {
   display: flex;
+  align-items: start;
   column-gap: .625rem;
   color: rgba(26, 22, 20, 0.50);
   font-size: .875rem;
@@ -4709,6 +4714,9 @@ button.wpcf7-submit:focus-visible {
 .footer-contact-icon [fill]:not([fill="none"]):not([fill="white"]) {
   fill: var(--lsc-color-accent);
   fill-opacity: 1;
+}
+.footer-contact-item:first-child span {
+	max-width: 6.75rem;
 }
 .footer-contact-item a {
   color: rgba(26, 22, 20, 0.50);
