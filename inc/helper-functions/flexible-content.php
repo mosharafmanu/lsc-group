@@ -245,18 +245,23 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 					if ( 'video' === ( $slide['media_type'] ?? 'image' ) ) {
 						$poster        = $slide['video']['video_self_host_poster'] ?? null;
 						$attachment_id = ( is_array( $poster ) && ! empty( $poster['ID'] ) ) ? (int) $poster['ID'] : 0;
+						// Mobile poster lives inside the video group.
+						if ( ! empty( $slide['video']['mobile_poster']['ID'] ) ) {
+							$mobile_id = (int) $slide['video']['mobile_poster']['ID'];
+						}
 					} elseif ( ! empty( $slide['image']['ID'] ) ) {
 						$attachment_id = (int) $slide['image']['ID'];
-					}
-
-					if ( ! empty( $slide['mobile_image']['ID'] ) ) {
-						$mobile_id = (int) $slide['mobile_image']['ID'];
+						if ( ! empty( $slide['mobile_image']['ID'] ) ) {
+							$mobile_id = (int) $slide['mobile_image']['ID'];
+						}
 					}
 				} elseif ( 'video' === $media_type ) {
 					$video         = get_sub_field( 'video' );
 					$poster        = $video['video_self_host_poster'] ?? null;
 					$attachment_id = ( is_array( $poster ) && ! empty( $poster['ID'] ) ) ? (int) $poster['ID'] : 0;
-					$mobile_id     = $base_mob_id;
+					if ( ! empty( $video['mobile_poster']['ID'] ) ) {
+						$mobile_id = (int) $video['mobile_poster']['ID'];
+					}
 				} else {
 					$attachment_id = $base_id;
 					$mobile_id     = $base_mob_id;

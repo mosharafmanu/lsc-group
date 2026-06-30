@@ -213,11 +213,10 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first, $
 				<div class="<?php echo esc_attr( implode( ' ', $slide_classes ) ); ?>" data-slide-index="<?php echo (int) $slide_index; ?>">
 					<?php if ( 'video' === $slide_type && $slide_video && function_exists( 'lsc_render_video' ) ) : ?>
 						<?php
-						// Poster <img> = the painted LCP, behind the deferred video.
-						// Pass the slide's mobile_image so a portrait crop can replace the
-						// landscape poster on phones (set per slide in ACF; falls back to the
-						// landscape poster when empty).
-						$render_hero_poster( $slide_video, $hero_fallback_poster, $slide_is_first, $slide['mobile_image'] ?? null );
+						// Poster <img> = the painted LCP, behind the deferred video. The video
+						// group's own "Mobile Poster Image" (mobile_poster) gives phones a
+						// portrait crop instead of the landscape poster; empty = landscape.
+						$render_hero_poster( $slide_video, $hero_fallback_poster, $slide_is_first, $slide_video['mobile_poster'] ?? null );
 
 						lsc_render_video(
 							$slide_video,
@@ -271,8 +270,9 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first, $
 			<?php endforeach; ?>
 		<?php elseif ( 'video' === $media_type && $video && function_exists( 'lsc_render_video' ) ) : ?>
 			<?php
-			// Poster <img> = the painted LCP, behind the deferred video.
-			$render_hero_poster( $video, $hero_fallback_poster, 0 === $section_index, $mobile_image );
+			// Poster <img> = the painted LCP, behind the deferred video. The video
+			// group's "Mobile Poster Image" gives phones a portrait crop; empty = landscape.
+			$render_hero_poster( $video, $hero_fallback_poster, 0 === $section_index, $video['mobile_poster'] ?? null );
 
 			lsc_render_video(
 				$video,
