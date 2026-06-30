@@ -1042,6 +1042,15 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   max-width: 50rem;
   color: var(--lsc-color-light);
 }
+/* On facts heroes the content area is taller than the base image height, so the
+   fixed-height image left empty space below it — the card's -100px overlap landed
+   on that empty space (only ~22px actually over the image). Let the image fill
+   the whole hero (height:100%, with the base height as a minimum) so the overlap
+   is genuinely over the image. */
+.inner-hero--has-facts .inner-hero__media {
+  height: 100%;
+  min-height: 35.4375rem;
+}
 /* When the facts card overlaps the hero (<=991px), bottom-anchor the hero
    content so it sits a consistent gap above the card at every width — the JS
    adds the padding-bottom that becomes that gap. margin-top:auto pushes the
