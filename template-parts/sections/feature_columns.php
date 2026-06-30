@@ -17,9 +17,11 @@ $info_cards       = get_sub_field( 'info_cards' );
 $card_title       = get_sub_field( 'card_title' );
 $card_description = get_sub_field( 'card_description' );
 $card_buttons     = get_sub_field( 'card_buttons' );
+$media_type       = get_sub_field( 'media_type' ) ?: 'image';
 $image            = get_sub_field( 'image' );
+$video            = get_sub_field( 'video' );
 
-if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_cards && ! $card_title && ! $card_buttons && ! $image ) {
+if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_cards && ! $card_title && ! $card_buttons && ! $image && ! $video ) {
 	return;
 }
 ?>
@@ -148,7 +150,29 @@ if ( ! $eyebrow && ! $title_lines && ! $description && ! $features && ! $info_ca
 				</div>
 			<?php endif; ?>
 
-			<?php if ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
+			<?php if ( 'video' === $media_type && $video && function_exists( 'lsc_render_video' ) ) : ?>
+				<figure class="feature-columns__figure media">
+					<?php
+					$fc_behavior = $video['video_behavior'] ?? 'autoplay';
+
+					lsc_render_video(
+						$video,
+						[
+							'behavior'           => $fc_behavior,
+							'autoplay'           => ! empty( $video['video_autoplay'] ),
+							'autoplay_on_scroll' => ! empty( $video['video_autoplay_on_scroll'] ),
+							'controls'           => 'autoplay' === $fc_behavior && ! empty( $video['video_controls'] ),
+							'muted'              => ! empty( $video['video_muted'] ),
+							'loop'               => ! empty( $video['video_loop'] ),
+							'popup_autoplay'     => ! empty( $video['video_popup_autoplay'] ),
+							'popup_controls'     => ! empty( $video['video_popup_controls'] ),
+							'class'              => 'feature-columns__video',
+							'container_class'    => 'feature-columns__video-wrap',
+						]
+					);
+					?>
+				</figure>
+			<?php elseif ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
 				<figure class="feature-columns__figure media">
 					<?php
 					lsc_render_responsive_picture(
