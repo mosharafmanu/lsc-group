@@ -177,7 +177,7 @@ if ( ! function_exists( 'lsc_get_mega_menu_cards' ) ) {
 		foreach ( $posts as $post ) {
 			$post_id    = $post->ID;
 			$image_html = has_post_thumbnail( $post_id )
-				? get_the_post_thumbnail( $post_id, 'lsc-600', [ 'class' => 'mega-menu__card-image', 'sizes' => '(max-width: 991px) 50vw, 300px' ] )
+				? get_the_post_thumbnail( $post_id, 'lsc-600', [ 'class' => 'mega-menu__card-image', 'loading' => 'lazy', 'sizes' => '(max-width: 991px) 50vw, 300px' ] )
 				: '';
 
 			$cards[] = [

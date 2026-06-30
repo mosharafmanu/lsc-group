@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.127' );
+	define( 'LSC_GROUP_VERSION', '1.0.128' );
 }
 
 
@@ -137,6 +137,29 @@ function lsc_scripts() {
 	wp_register_script( 'lsc-group-video-popup',    get_template_directory_uri() . '/assets/js/video-popup.js',               array( 'jquery' ), LSC_GROUP_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'lsc_scripts' );
+
+
+// ─────────────────────────────────────────────────────────────────
+// Move jQuery to the footer so it stops blocking the first paint.
+// WordPress loads jQuery render-blocking in <head> by default; nothing
+// above the footer needs it (the hero rotator is vanilla JS, and every
+// jQuery-dependent script — scripts.js, slick, CF7 — already loads in the
+// footer, so dependency order is preserved). Skips admin + the login page.
+// ─────────────────────────────────────────────────────────────────
+
+function lsc_jquery_to_footer() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$scripts = wp_scripts();
+	foreach ( [ 'jquery', 'jquery-core', 'jquery-migrate' ] as $handle ) {
+		if ( isset( $scripts->registered[ $handle ] ) ) {
+			$scripts->add_data( $handle, 'group', 1 );
+		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'lsc_jquery_to_footer', 100 );
 
 
 // ─────────────────────────────────────────────────────────────────

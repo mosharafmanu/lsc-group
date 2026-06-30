@@ -192,6 +192,83 @@ if ( ! function_exists( 'lsc_page_needs_contact_form' ) ) {
 	}
 }
 
+if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
+	/**
+	 * URL of the image the leading hero paints as its LCP, so it can be
+	 * <link rel="preload">ed (fetchpriority=high) from the document <head>.
+	 *
+	 * The hero's background <video> used to be the LCP: its eager autoplay
+	 * download saturated the connection and starved the poster image, pushing
+	 * mobile LCP past 14s. The video is now deferred and the poster image is the
+	 * LCP — preloading it lets it paint immediately. Returns the SAME lsc-1600
+	 * URL the <video poster> / hero <img> resolves to (so the preload is reused,
+	 * not double-fetched).
+	 *
+	 * @param int|null $post_id Defaults to the queried object.
+	 * @return string Empty when the page has no resolvable leading hero image.
+	 */
+	function lsc_get_hero_lcp_poster( $post_id = null ) {
+		if ( ! function_exists( 'have_rows' ) ) {
+			return '';
+		}
+
+		if ( null === $post_id ) {
+			$post_id = get_queried_object_id();
+		}
+
+		if ( ! $post_id || ! have_rows( 'cms', $post_id ) ) {
+			return '';
+		}
+
+		$attachment_id = 0;
+
+		if ( have_rows( 'cms', $post_id ) ) {
+			the_row();
+
+			if ( 'hero_section' === get_row_layout() ) {
+				$media_type = get_sub_field( 'media_type' ) ?: 'image';
+				$base_image = get_sub_field( 'image' );
+				$base_id    = ( is_array( $base_image ) && ! empty( $base_image['ID'] ) ) ? (int) $base_image['ID'] : 0;
+
+				$rotation_on = get_sub_field( 'enable_word_rotation' );
+				$slides      = $rotation_on ? get_sub_field( 'rotating_slides' ) : [];
+
+				if ( $rotation_on && is_array( $slides ) && ! empty( $slides ) ) {
+					// Rotating hero: the LCP is the first slide's poster/image.
+					$slide = $slides[0];
+
+					if ( 'video' === ( $slide['media_type'] ?? 'image' ) ) {
+						$poster        = $slide['video']['video_self_host_poster'] ?? null;
+						$attachment_id = ( is_array( $poster ) && ! empty( $poster['ID'] ) ) ? (int) $poster['ID'] : 0;
+					} elseif ( ! empty( $slide['image']['ID'] ) ) {
+						$attachment_id = (int) $slide['image']['ID'];
+					}
+				} elseif ( 'video' === $media_type ) {
+					$video         = get_sub_field( 'video' );
+					$poster        = $video['video_self_host_poster'] ?? null;
+					$attachment_id = ( is_array( $poster ) && ! empty( $poster['ID'] ) ) ? (int) $poster['ID'] : 0;
+				} else {
+					$attachment_id = $base_id;
+				}
+
+				if ( ! $attachment_id ) {
+					$attachment_id = $base_id;
+				}
+			}
+		}
+
+		reset_rows();
+
+		if ( ! $attachment_id ) {
+			return '';
+		}
+
+		$src = wp_get_attachment_image_src( $attachment_id, 'lsc-1600' );
+
+		return $src ? $src[0] : '';
+	}
+}
+
 if ( ! function_exists( 'lsc_has_hero_first_section' ) ) {
 	function lsc_has_hero_first_section( $field_name = 'cms', $post_id = null ) {
 		// Blog page uses inner_hero from options, not flexible content

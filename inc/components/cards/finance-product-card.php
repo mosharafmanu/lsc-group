@@ -27,7 +27,7 @@ if ( ! function_exists( 'lsc_render_finance_product_card' ) ) {
 		<a class="finance-product-card" href="<?php echo esc_url( $url ); ?>"<?php echo $product_title ? ' aria-label="' . esc_attr( $product_title ) . '"' : ''; ?>>
 			<?php if ( has_post_thumbnail( $product_id ) ) : ?>
 				<div class="finance-product-card__media">
-					<?php echo get_the_post_thumbnail( $product_id, 'lsc-900', [ 'class' => 'finance-product-card__image', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw' ] ); ?>
+					<?php echo get_the_post_thumbnail( $product_id, 'lsc-900', [ 'class' => 'finance-product-card__image', 'loading' => 'lazy', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw' ] ); ?>
 				</div>
 			<?php endif; ?>
 
