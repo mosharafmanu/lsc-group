@@ -1675,7 +1675,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	height: 100%;
 	margin: .625rem 1.5rem;
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 	border-radius: 1.25rem;
 	overflow: hidden;
 	box-shadow: 0 2rem 5rem 0 rgba(0, 0, 0, 0.50);
@@ -1735,11 +1735,12 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
     right: .4375rem;
     width: 6rem;
     height: 6rem;
+    top: -.4375rem;
 }
   .media-card-5050__media::before {
-    left: .5rem;
-    bottom: -0.875rem;
-  }
+	 left: .5rem;
+	 bottom: -1.625rem;
+}
 }
 @media only screen and (max-width:767px) {
   .media-card-5050__inner {
