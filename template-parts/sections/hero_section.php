@@ -271,17 +271,16 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 			);
 			?>
 			<?php
-			// Start non-rotating hero videos on desktop once the DOM is ready. Mobile
-			// and reduced-motion users keep the static poster (the LCP). Printed once.
+			// Start non-rotating hero videos. Desktop: as soon as the DOM is ready.
+			// Mobile: AFTER the page loads so the deferred video never competes with the
+			// LCP poster on cellular. Reduced-motion users keep the static poster. Once.
 			if ( empty( $GLOBALS['lsc_hero_video_script_printed'] ) ) :
 				$GLOBALS['lsc_hero_video_script_printed'] = true;
 				?>
 				<script>
 					( function () {
-						if ( window.matchMedia ) {
-							if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
-							if ( ! window.matchMedia( '(min-width: 768px)' ).matches ) { return; }
-						}
+						if ( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
+						var isDesktop = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
 						function startHeroVideos() {
 							var vids = document.querySelectorAll( '.hero-section:not(.hero-section--rotating) .hero-section__video' );
 							for ( var i = 0; i < vids.length; i++ ) {
@@ -293,10 +292,16 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 								} )( vids[ i ] );
 							}
 						}
-						if ( 'loading' === document.readyState ) {
-							document.addEventListener( 'DOMContentLoaded', startHeroVideos );
+						if ( isDesktop ) {
+							if ( 'loading' === document.readyState ) {
+								document.addEventListener( 'DOMContentLoaded', startHeroVideos );
+							} else {
+								startHeroVideos();
+							}
+						} else if ( 'complete' === document.readyState ) {
+							window.setTimeout( startHeroVideos, 200 );
 						} else {
-							startHeroVideos();
+							window.addEventListener( 'load', function () { window.setTimeout( startHeroVideos, 200 ); } );
 						}
 					} )();
 				</script>
@@ -591,17 +596,16 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 					var count = Math.max( media.length, words.length );
 					if ( count < 2 ) { return; }
 
-					// Only play the background videos on desktop. On mobile every slide is
-					// deferred and never played, so the connection stays free for the LCP
-					// poster and zero video bytes download — the words/posters still rotate.
-					var canPlayVideo = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
+					// Media SWAP (rotation) is desktop-only; slide 0's video also plays on
+					// mobile but only after load (see below) so it never competes with the
+					// LCP poster. The other slides' videos never load on mobile.
+					var isDesktop = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
 
 					// Play the incoming slide's video (deferred slides have preload="none"
 					// + no autoplay, so .play() is what actually fetches them) and pause the
 					// outgoing one so only the visible slide ever decodes.
 					function videoIn( slide ) { return slide ? slide.querySelector( 'video' ) : null; }
 					function playSlide( i ) {
-						if ( ! canPlayVideo ) { return; }
 						var v = videoIn( media[ i ] );
 						if ( ! v ) { return; }
 						if ( ! v.getAttribute( 'data-reveal-bound' ) ) {
@@ -617,8 +621,17 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 						if ( v && ! v.paused ) { v.pause(); }
 					}
 
-					// Kick off the first slide's video (deferred = no autoplay attribute).
-					playSlide( 0 );
+					// Kick off slide 0's video. Desktop: immediately. Mobile: AFTER the page
+					// has loaded, so the deferred video never competes with the LCP poster on
+					// the cellular connection — the poster wins the LCP, the video then plays in.
+					function startFirstSlide() { playSlide( 0 ); }
+					if ( isDesktop ) {
+						startFirstSlide();
+					} else if ( 'complete' === document.readyState ) {
+						window.setTimeout( startFirstSlide, 200 );
+					} else {
+						window.addEventListener( 'load', function () { window.setTimeout( startFirstSlide, 200 ); } );
+					}
 
 					var index = 0;
 					window.setInterval( function () {
@@ -628,7 +641,7 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 						// slide 0 (its poster is the LCP) — swapping the other slides' full-bleed
 						// posters in over a throttled connection keeps the LCP from ever settling.
 						// Only the words rotate on mobile.
-						if ( canPlayVideo ) {
+						if ( isDesktop ) {
 							if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
 							if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
 						}
