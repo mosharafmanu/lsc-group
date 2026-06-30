@@ -2150,7 +2150,10 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   flex-direction: column;
   row-gap: 1.25rem;
 }
-
+.feature-columns__video,
+.video-play-overlay {
+	border-radius: .75rem;
+}
 @media only screen and (max-width:1199px) {
 .feature-columns__inner {
 	column-gap: 3rem;
