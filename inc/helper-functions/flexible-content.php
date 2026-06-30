@@ -163,7 +163,7 @@ if ( ! function_exists( 'lsc_page_needs_slick' ) ) {
 			return true;
 		}
 
-		return lsc_queried_cms_has_layout( [ 'case_studies_grid', 'finance_products_grid', 'testimonials_section' ] );
+		return lsc_queried_cms_has_layout( [ 'case_studies_grid', 'testimonials_section' ] );
 	}
 }
 

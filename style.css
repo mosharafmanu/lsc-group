@@ -1227,17 +1227,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .finance-products-grid {
     --lsc-card-grid-gap: 1.5rem;
 }
-.finance-products-carousel.slick-slider {
-    display: block;
-}
-.finance-products-section__arrows {
-    display: none;
-}
-@media only screen and (max-width: 991px) {
-    .finance-products-section__arrows {
-        display: flex;
-    }
-}
 .case-studies-carousel.slick-slider {
     display: block;
 }
