@@ -70,7 +70,7 @@
 			$mobileNav.addClass( 'is-active' );
 			$overlay.addClass( 'is-active' );
 			$toggle.addClass( 'is-open' ).attr( 'aria-expanded', 'true' );
-			$mobileNav.attr( 'aria-hidden', 'false' );
+			$mobileNav.attr( 'aria-hidden', 'false' ).removeAttr( 'inert' );
 			$body.addClass( 'no-scroll' );
 			// Move focus to first focusable element inside panel
 			$mobileNav.find( FOCUSABLE ).first().trigger( 'focus' );
@@ -80,7 +80,7 @@
 			$mobileNav.removeClass( 'is-active' );
 			$overlay.removeClass( 'is-active' );
 			$toggle.removeClass( 'is-open' ).attr( 'aria-expanded', 'false' );
-			$mobileNav.attr( 'aria-hidden', 'true' );
+			$mobileNav.attr( 'aria-hidden', 'true' ).attr( 'inert', '' );
 			$body.removeClass( 'no-scroll' );
 			$toggle.trigger( 'focus' );
 		}

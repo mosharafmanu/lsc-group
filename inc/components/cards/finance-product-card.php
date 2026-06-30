@@ -24,7 +24,8 @@ if ( ! function_exists( 'lsc_render_finance_product_card' ) ) {
 		$url           = get_permalink( $product_id );
 		$excerpt       = has_excerpt( $product_id ) ? get_the_excerpt( $product_id ) : '';
 		?>
-		<a class="finance-product-card" href="<?php echo esc_url( $url ); ?>"<?php echo $product_title ? ' aria-label="' . esc_attr( $product_title ) . '"' : ''; ?>>
+		<?php // No aria-label: the link's accessible name comes from its content (title + excerpt), so it matches the visible text (WCAG 2.5.3). ?>
+		<a class="finance-product-card" href="<?php echo esc_url( $url ); ?>">
 			<?php if ( has_post_thumbnail( $product_id ) ) : ?>
 				<div class="finance-product-card__media">
 					<?php echo get_the_post_thumbnail( $product_id, 'lsc-900', [ 'class' => 'finance-product-card__image', 'loading' => 'lazy', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw' ] ); ?>

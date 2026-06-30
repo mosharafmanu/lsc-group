@@ -25,7 +25,8 @@ if ( ! function_exists( 'lsc_render_case_study_card' ) ) {
 		$url         = get_permalink( $study_id );
 		$excerpt     = has_excerpt( $study_id ) ? get_the_excerpt( $study_id ) : '';
 		?>
-		<a class="case-study-card" href="<?php echo esc_url( $url ); ?>"<?php echo $study_title ? ' aria-label="' . esc_attr( $study_title ) . '"' : ''; ?>>
+		<?php // No aria-label: the link's accessible name comes from its content, matching the visible text (WCAG 2.5.3). ?>
+		<a class="case-study-card" href="<?php echo esc_url( $url ); ?>">
 			<?php if ( has_post_thumbnail( $study_id ) ) : ?>
 				<div class="case-study-card__media">
 					<?php echo get_the_post_thumbnail( $study_id, 'lsc-900', [ 'class' => 'case-study-card__image', 'loading' => 'lazy', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 33vw' ] ); ?>

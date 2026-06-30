@@ -4,7 +4,7 @@
  */
 
 if ( ! defined( 'LSC_GROUP_VERSION' ) ) {
-	define( 'LSC_GROUP_VERSION', '1.0.133' );
+	define( 'LSC_GROUP_VERSION', '1.0.134' );
 }
 
 
@@ -177,6 +177,24 @@ function lsc_cf7_conditional_assets( $load ) {
 }
 add_filter( 'wpcf7_load_js',  'lsc_cf7_conditional_assets' );
 add_filter( 'wpcf7_load_css', 'lsc_cf7_conditional_assets' );
+
+// Associate each Contact Form 7 <label> with its control. The form templates
+// place a bare <label> next to the field (no for/id, not wrapping), so screen
+// readers can't tie them together (fails the a11y "label" check). This adds a
+// matching for/id pair to every plain <label> that precedes a CF7 control —
+// no markup move, so the visual layout is untouched.
+function lsc_cf7_associate_labels( $html ) {
+	return preg_replace_callback(
+		'#<label>(.*?)</label>((?:\s|<br\s*/?>)*<span class="wpcf7-form-control-wrap"[^>]*data-name="([^"]+)"[^>]*>\s*)<(input|textarea|select)#s',
+		static function ( $m ) {
+			$id = 'lsc-cf-' . sanitize_html_class( $m[3] );
+			return '<label for="' . esc_attr( $id ) . '">' . $m[1] . '</label>'
+				. $m[2] . '<' . $m[4] . ' id="' . esc_attr( $id ) . '"';
+		},
+		$html
+	);
+}
+add_filter( 'wpcf7_form_elements', 'lsc_cf7_associate_labels' );
 
 
 // ─────────────────────────────────────────────────────────────────
