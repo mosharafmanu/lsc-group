@@ -176,9 +176,23 @@ if ( ! function_exists( 'lsc_get_mega_menu_cards' ) ) {
 
 		foreach ( $posts as $post ) {
 			$post_id    = $post->ID;
-			$image_html = has_post_thumbnail( $post_id )
-				? get_the_post_thumbnail( $post_id, 'lsc-600', [ 'class' => 'mega-menu__card-image', 'loading' => 'lazy', 'sizes' => '(max-width: 991px) 50vw, 300px' ] )
-				: '';
+			// Render a SINGLE lsc-600 image (no srcset). The mega menu is a hidden
+			// dropdown, so WP's responsive `sizes="auto"` (added to lazy images)
+			// resolves a near-zero width and downgrades to the tiny 300px thumbnail,
+			// which then looks blurry once the card is shown. A single right-sized
+			// source avoids that downgrade while staying lazy.
+			$image_html = '';
+			if ( has_post_thumbnail( $post_id ) ) {
+				$thumb_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'lsc-600' );
+				if ( $thumb_src ) {
+					$image_html = sprintf(
+						'<img class="mega-menu__card-image" src="%s" width="%d" height="%d" alt="" loading="lazy" decoding="async">',
+						esc_url( $thumb_src[0] ),
+						(int) $thumb_src[1],
+						(int) $thumb_src[2]
+					);
+				}
+			}
 
 			$cards[] = [
 				'title'       => get_the_title( $post_id ),
