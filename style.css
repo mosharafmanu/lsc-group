@@ -1160,12 +1160,12 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	grid-template-columns: 1fr 1fr;
 }
 .inner-hero--split .inner-hero__media {
-	height: 26rem;
+	height: 22rem;
 }
 }
 @media only screen and (max-width: 1199px) {
 .inner-hero--split .inner-hero__media {
-	height: 22rem;
+	height: 18rem;
 }
 }
 @media only screen and (max-width: 991px) {
