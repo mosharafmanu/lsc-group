@@ -971,6 +971,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   letter-spacing: 0.015rem;
   gap: .375rem;
 }
+.hero-section__feature-label {
+	margin-top: .125rem;
+}
 @media only screen and (max-width:1399px) {
 
   .hero-section__content{
@@ -1107,7 +1110,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 @media only screen and (max-width:767px) {
 .inner-hero__inner {
   padding-top: 4.25rem;
-  padding-bottom: 3.375rem;
+  padding-bottom: 2rem;
 }
 .inner-hero__title {
   font-size: 2rem;
@@ -1190,7 +1193,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 @media only screen and (max-width: 767px) {
 .inner-hero--text {
-	padding-bottom: 2rem;
+	padding-bottom: 1rem;
 }
 }
 
@@ -1766,10 +1769,16 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050 {
   background-color: var(--lsc-color-white);
 }
+.media-content-5050--has-bg {
+	background-color: var(--lsc-color-subtle);
+}
 .media-content-5050__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 4rem;
+}
+.media-content-5050--has-bg .media-content-5050__description {
+	margin-top: 2.125rem;
 }
 .media-content-5050__content{
     grid-area: content;
@@ -1786,6 +1795,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050__figure {
   margin: 0;
   height: 25rem;
+}
+.media-content-5050--has-bg .media-content-5050__figure {
+  height: 33.5625rem;
 }
 .media-content-5050__description {
 	color: rgba(26, 22, 20, 0.70);
@@ -1826,14 +1838,17 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050__figure {
 	height: 20rem;
 }
+.media-content-5050--has-bg .media-content-5050__figure {
+	height: 28rem;
+}
 }
 @media only screen and (max-width: 767px) {
-.media-content-5050__figure {
-	height: 15rem;
+.media-content-5050--has-bg .media-content-5050__figure {
+	height: 18rem;
 }
 .media-content-5050__grid {
   grid-template-columns: 1fr;
-  row-gap: 1.875rem;
+  row-gap: 2rem;
 }
 .media-content-5050--media-right .media-content-5050__grid {
     grid-template-areas: "content" "media";
@@ -1844,6 +1859,13 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .media-content-5050__features {
 	margin-top: 1rem;
 	row-gap: 0;
+}
+.media-content-5050__media {
+  grid-row: 1;
+  position: initial;
+}
+.media-content-5050__content {
+  grid-row: 2;
 }
 }
 
@@ -1880,7 +1902,8 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   column-gap: 12.5rem;
 }
 .content-card-5050__inner .content-card-5050__title {
-  margin-top: 1.25rem;
+	margin-top: 1.25rem;
+	max-width: 31.25rem;
 }
 .content-card-5050 {
   background-color: var(--lsc-color-subtle);
@@ -2486,7 +2509,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   background-color: var(--lsc-color-dark);
 }
 .testimonial-card--theme-dark .testimonial-card__body {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--lsc-color-white);
 }
 .testimonial-card--theme-dark .testimonial-card__author-name {
   color: var(--lsc-color-white);
@@ -2506,7 +2529,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   background-color: var(--lsc-color-accent);
 }
 .testimonial-card--theme-orange .testimonial-card__body {
-  color: rgba(26, 22, 20, 0.92);
+  color: var(--lsc-color-primary);
 }
 .testimonial-card--theme-orange .testimonial-card__author-name {
   color: var(--lsc-color-white);
@@ -2529,7 +2552,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   background-color: var(--lsc-color-subtle);
 }
 .testimonial-card--theme-light .testimonial-card__body {
-  color: rgba(26, 22, 20, 0.82);
+  color: var(--lsc-color-primary);
 }
 .testimonial-card--theme-light .testimonial-card__author-name {
   color: var(--lsc-color-primary);
