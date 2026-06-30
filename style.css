@@ -1162,7 +1162,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .inner-hero--split .inner-hero__inner {
 	grid-template-columns: 1fr;
 	row-gap: 1.875rem;
-	padding-bottom: .625rem;
+	padding-bottom: 3.125rem;
 }
 .inner-hero--split .inner-hero__content {
 	padding-top: 0;
@@ -2803,8 +2803,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	flex-shrink: 0;
 }
 .download-item__title {
-  line-height: 150%;
-  margin-bottom: 0;
+	line-height: 150%;
+	margin-bottom: 0;
+	text-transform: capitalize;
 }
 .download-item__subtitle {
   margin-top: .3125rem;
@@ -2846,7 +2847,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 .download-item-wrapper {
 	flex-direction: column;
-	row-gap: 1.875rem;
+	row-gap: 1rem;
 }
 .download-item-left {
 	flex-direction: column;
