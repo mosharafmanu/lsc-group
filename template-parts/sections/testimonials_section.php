@@ -269,7 +269,7 @@ $lsc_has_title = ! empty( $title_lines ) && is_array( $title_lines );
 				<?php endforeach; ?>
 			</div>
 
-			<div class="testimonials-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Testimonial carousel controls', 'lsc-group' ); ?>">
+			<div class="testimonials-section__arrows lsc-group-slick-arrow-container" role="group" aria-label="<?php esc_attr_e( 'Testimonial carousel controls', 'lsc-group' ); ?>">
 				<button class="lsc-group-slick-arrow testimonials-section__arrow testimonials-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous testimonial', 'lsc-group' ); ?>">
 					<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
 				</button>

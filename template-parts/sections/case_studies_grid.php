@@ -94,7 +94,7 @@ $grid_classes = [
 					<?php endforeach; ?>
 				</div>
 
-				<div class="case-studies-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Case studies carousel controls', 'lsc-group' ); ?>">
+				<div class="case-studies-section__arrows lsc-group-slick-arrow-container" role="group" aria-label="<?php esc_attr_e( 'Case studies carousel controls', 'lsc-group' ); ?>">
 					<button class="lsc-group-slick-arrow case-studies-section__arrow case-studies-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous case study', 'lsc-group' ); ?>">
 						<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
 					</button>

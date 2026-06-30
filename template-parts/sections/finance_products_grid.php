@@ -88,7 +88,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $products ) {
 					<?php endforeach; ?>
 				</div>
 
-				<div class="finance-products-section__arrows lsc-group-slick-arrow-container" aria-label="<?php esc_attr_e( 'Finance products carousel controls', 'lsc-group' ); ?>">
+				<div class="finance-products-section__arrows lsc-group-slick-arrow-container" role="group" aria-label="<?php esc_attr_e( 'Finance products carousel controls', 'lsc-group' ); ?>">
 					<button class="lsc-group-slick-arrow finance-products-section__arrow finance-products-section__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous product', 'lsc-group' ); ?>">
 						<?php get_template_part( 'assets/svgs/angle-left-pagination' ); ?>
 					</button>
