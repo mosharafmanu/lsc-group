@@ -464,16 +464,16 @@
 
 
 		// ─────────────────────────────────────────────────────────────
-		// PRODUCT HERO — FACTS OVERLAP
-		// Pulls the .inner-hero__facts-wrap up over the hero by half the
-		// rendered height of its .inner-hero__facts card, so the card
-		// straddles the hero edge regardless of content/columns. The same
-		// negative value is applied as margin-bottom on .inner-hero--has-facts
-		// so the following section rises to meet the straddling card, and the
-		// same positive value is ADDED to that next section's existing top
-		// padding so its content clears the overlapping card.
-		// Recalculated on load and resize. Desktop only (>991px); on
-		// mobile the inline values are cleared so the CSS fallback wins.
+		// PRODUCT HERO — FACTS OVERLAP (runs at all widths, on load + resize)
+		// The .inner-hero__facts card is pulled up over the hero by `overlap`:
+		//   > 991px : half the card's height (short row → straddles the edge).
+		//   <= 991px: a fixed 100px (the card is tall/stacked, so a half overlap
+		//             would cover the hero content — instead it peeks 100px over
+		//             the hero and the rest hangs below).
+		// The card's portion below the hero edge (cardHeight - overlap) is applied
+		// as a negative margin-bottom on .inner-hero--has-facts so the next section
+		// rises to meet the card's bottom, and added to that next section's top
+		// padding so its content clears the card.
 		// ─────────────────────────────────────────────────────────────
 
 		const $heroFactsWraps = $( '.inner-hero__facts-wrap' );
@@ -488,16 +488,33 @@
 				const $next = $section.next();
 				if ( ! $card.length ) return;
 
-				if ( window.innerWidth <= 991 ) {
-					$wrap.css( 'margin-top', '' );
-					$section.css( 'margin-bottom', '' );
-					$next.css( 'padding-top', '' );
-					return;
-				}
+				const cardH = $card.outerHeight();
 
-				const half = $card.outerHeight() / 2;
-				$wrap.css( 'margin-top', -half + 'px' );
-				$section.css( 'margin-bottom', -half + 'px' );
+				// Overlap amount applied to the wrap's margin-top (how far the card
+				// is pulled up over the hero). Desktop straddles by half the (short)
+				// card; at <=991px the card is tall/stacked, so we overlap the hero
+				// by a fixed 100px and let the rest of the card hang below.
+				const overlap = ( window.innerWidth <= 991 ) ? 100 : ( cardH / 2 );
+
+				// The card's portion that sits BELOW the hero edge = card height minus
+				// the overlap. The hero section rises by that amount so the next
+				// section meets the card's bottom, and the next section's top padding
+				// is grown by the same amount so its content clears the card.
+				const below = Math.max( cardH - overlap, 0 );
+
+				$wrap.css( 'margin-top', -overlap + 'px' );
+				$section.css( 'margin-bottom', -below + 'px' );
+
+				// The card now covers the bottom `overlap` px of the hero content,
+				// so add that much padding-bottom to the hero's inner container —
+				// plus a 50px gap so the content (e.g. the buttons) isn't flush
+				// against the overlapping card.
+				const $inner = $section.find( '.inner-hero__inner' );
+				if ( $inner.length ) {
+					$inner.css( 'padding-bottom', '' );
+					const baseInnerPad = parseFloat( $inner.css( 'padding-bottom' ) ) || 0;
+					$inner.css( 'padding-bottom', ( baseInnerPad + overlap + 50 ) + 'px' );
+				}
 
 				// Add the overlap to the next section's existing top padding.
 				// Reset the inline value first so we always read the real CSS
@@ -505,7 +522,7 @@
 				if ( $next.length ) {
 					$next.css( 'padding-top', '' );
 					const basePad = parseFloat( $next.css( 'padding-top' ) ) || 0;
-					$next.css( 'padding-top', ( basePad + half ) + 'px' );
+					$next.css( 'padding-top', ( basePad + below ) + 'px' );
 				}
 			} );
 		}

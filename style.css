@@ -1042,6 +1042,19 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   max-width: 50rem;
   color: var(--lsc-color-light);
 }
+/* When the facts card overlaps the hero (<=991px), bottom-anchor the hero
+   content so it sits a consistent gap above the card at every width — the JS
+   adds the padding-bottom that becomes that gap. margin-top:auto pushes the
+   content down only when there's spare height, so long content never clips. */
+@media only screen and (max-width: 991px) {
+.inner-hero--has-facts .inner-hero__inner {
+  display: flex;
+  flex-direction: column;
+}
+.inner-hero--has-facts .inner-hero__content {
+  margin-top: auto;
+}
+}
 .inner-hero__eyebrow {
   display: inline-block;
   border-radius: 62.4375rem;
