@@ -205,11 +205,13 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 	 * not double-fetched).
 	 *
 	 * @param int|null $post_id Defaults to the queried object.
-	 * @return string Empty when the page has no resolvable leading hero image.
+	 * @return array{desktop:string,mobile:string} Both empty when no leading hero.
 	 */
 	function lsc_get_hero_lcp_poster( $post_id = null ) {
+		$empty = [ 'desktop' => '', 'mobile' => '' ];
+
 		if ( ! function_exists( 'have_rows' ) ) {
-			return '';
+			return $empty;
 		}
 
 		if ( null === $post_id ) {
@@ -217,10 +219,11 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 		}
 
 		if ( ! $post_id || ! have_rows( 'cms', $post_id ) ) {
-			return '';
+			return $empty;
 		}
 
 		$attachment_id = 0;
+		$mobile_id     = 0;
 
 		if ( have_rows( 'cms', $post_id ) ) {
 			the_row();
@@ -229,6 +232,8 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 				$media_type = get_sub_field( 'media_type' ) ?: 'image';
 				$base_image = get_sub_field( 'image' );
 				$base_id    = ( is_array( $base_image ) && ! empty( $base_image['ID'] ) ) ? (int) $base_image['ID'] : 0;
+				$base_mob   = get_sub_field( 'mobile_image' );
+				$base_mob_id = ( is_array( $base_mob ) && ! empty( $base_mob['ID'] ) ) ? (int) $base_mob['ID'] : 0;
 
 				$rotation_on = get_sub_field( 'enable_word_rotation' );
 				$slides      = $rotation_on ? get_sub_field( 'rotating_slides' ) : [];
@@ -243,12 +248,18 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 					} elseif ( ! empty( $slide['image']['ID'] ) ) {
 						$attachment_id = (int) $slide['image']['ID'];
 					}
+
+					if ( ! empty( $slide['mobile_image']['ID'] ) ) {
+						$mobile_id = (int) $slide['mobile_image']['ID'];
+					}
 				} elseif ( 'video' === $media_type ) {
 					$video         = get_sub_field( 'video' );
 					$poster        = $video['video_self_host_poster'] ?? null;
 					$attachment_id = ( is_array( $poster ) && ! empty( $poster['ID'] ) ) ? (int) $poster['ID'] : 0;
+					$mobile_id     = $base_mob_id;
 				} else {
 					$attachment_id = $base_id;
+					$mobile_id     = $base_mob_id;
 				}
 
 				if ( ! $attachment_id ) {
@@ -260,12 +271,16 @@ if ( ! function_exists( 'lsc_get_hero_lcp_poster' ) ) {
 		reset_rows();
 
 		if ( ! $attachment_id ) {
-			return '';
+			return $empty;
 		}
 
-		$src = wp_get_attachment_image_src( $attachment_id, 'lsc-1600' );
+		$desktop = wp_get_attachment_image_src( $attachment_id, 'lsc-1600' );
+		$mobile  = $mobile_id ? wp_get_attachment_image_src( $mobile_id, 'lsc-1200' ) : false;
 
-		return $src ? $src[0] : '';
+		return [
+			'desktop' => $desktop ? $desktop[0] : '',
+			'mobile'  => $mobile ? $mobile[0] : '',
+		];
 	}
 }
 

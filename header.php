@@ -11,12 +11,18 @@
 	<link rel="preload" href="<?php echo esc_url( get_template_directory_uri() . '/assets/fonts/instrument-sans-latin-variable.woff2' ); ?>" as="font" type="font/woff2" crossorigin>
 	<?php
 	// Preload the leading hero's poster as the LCP image. The hero <video> is
-	// deferred (and skipped entirely on mobile), so this image is what paints —
-	// fetchpriority=high gets it on the wire ahead of everything else.
+	// deferred until after load, so this image is what paints — fetchpriority=high
+	// gets it on the wire ahead of everything else. When a portrait mobile poster
+	// is set we preload per-viewport (media=) so each device fetches only its own.
 	if ( function_exists( 'lsc_get_hero_lcp_poster' ) ) {
-		$lsc_hero_lcp_poster = lsc_get_hero_lcp_poster();
-		if ( $lsc_hero_lcp_poster ) {
-			echo '<link rel="preload" as="image" fetchpriority="high" href="' . esc_url( $lsc_hero_lcp_poster ) . '">' . "\n";
+		$lsc_hero_lcp = lsc_get_hero_lcp_poster();
+		if ( ! empty( $lsc_hero_lcp['desktop'] ) ) {
+			if ( ! empty( $lsc_hero_lcp['mobile'] ) ) {
+				echo '<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" href="' . esc_url( $lsc_hero_lcp['mobile'] ) . '">' . "\n";
+				echo '<link rel="preload" as="image" fetchpriority="high" media="(min-width: 768px)" href="' . esc_url( $lsc_hero_lcp['desktop'] ) . '">' . "\n";
+			} else {
+				echo '<link rel="preload" as="image" fetchpriority="high" href="' . esc_url( $lsc_hero_lcp['desktop'] ) . '">' . "\n";
+			}
 		}
 	}
 	?>

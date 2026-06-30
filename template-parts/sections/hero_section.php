@@ -114,7 +114,7 @@ if ( $rotation_active ) {
 // <video poster> resolves to (its own poster, else the base-image fallback), so
 // the head preload is reused, not double-fetched. The first slide is the LCP:
 // eager + fetchpriority=high; the rest are lazy.
-$render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) {
+$render_hero_poster = static function ( $video_data, $fallback_url, $is_first, $mobile_image = null ) {
 	$poster = ( is_array( $video_data ) && ! empty( $video_data['video_self_host_poster'] ) )
 		? $video_data['video_self_host_poster']
 		: null;
@@ -135,13 +135,32 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 		return;
 	}
 
-	printf(
+	// Dedicated portrait mobile poster (art-direction) when the slide has a
+	// mobile_image. The wide landscape poster gets upscaled/blurry when cover-
+	// cropped into the tall mobile hero; a portrait crop stays sharp. Falls back
+	// to the landscape poster when no mobile image is set.
+	$mobile_src = '';
+	if ( is_array( $mobile_image ) && ! empty( $mobile_image['url'] ) ) {
+		$mobile_src = $mobile_image['sizes']['lsc-1200'] ?? ( $mobile_image['sizes']['lsc-900'] ?? $mobile_image['url'] );
+	}
+
+	$img = sprintf(
 		'<img class="hero-section__poster" src="%s" alt=""%s decoding="async" loading="%s"%s>',
 		esc_url( $src ),
 		( $width && $height ) ? ' width="' . $width . '" height="' . $height . '"' : '',
 		$is_first ? 'eager' : 'lazy',
 		$is_first ? ' fetchpriority="high"' : ''
 	);
+
+	if ( $mobile_src ) {
+		printf(
+			'<picture><source media="(max-width: 767px)" srcset="%s">%s</picture>',
+			esc_url( $mobile_src ),
+			$img // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		);
+	} else {
+		echo $img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
 };
 ?>
 
@@ -195,7 +214,10 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 					<?php if ( 'video' === $slide_type && $slide_video && function_exists( 'lsc_render_video' ) ) : ?>
 						<?php
 						// Poster <img> = the painted LCP, behind the deferred video.
-						$render_hero_poster( $slide_video, $hero_fallback_poster, $slide_is_first );
+						// Pass the slide's mobile_image so a portrait crop can replace the
+						// landscape poster on phones (set per slide in ACF; falls back to the
+						// landscape poster when empty).
+						$render_hero_poster( $slide_video, $hero_fallback_poster, $slide_is_first, $slide['mobile_image'] ?? null );
 
 						lsc_render_video(
 							$slide_video,
@@ -250,7 +272,7 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 		<?php elseif ( 'video' === $media_type && $video && function_exists( 'lsc_render_video' ) ) : ?>
 			<?php
 			// Poster <img> = the painted LCP, behind the deferred video.
-			$render_hero_poster( $video, $hero_fallback_poster, 0 === $section_index );
+			$render_hero_poster( $video, $hero_fallback_poster, 0 === $section_index, $mobile_image );
 
 			lsc_render_video(
 				$video,
