@@ -1339,29 +1339,43 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .inner-hero__fact {
   padding-left: 2rem;
 }
+@media only screen and (max-width:1199px) {
+.inner-hero__fact-value {
+	font-size: 1rem;
+	margin-top: .3125rem;
+}
+}
 @media only screen and (max-width:991px) {
-  .inner-hero__fact-value {
-	font-size: 1.3rem;
-  }
-.inner-hero__fact {
-	border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
-	padding-bottom: 2rem;
-  text-align: center;
-  padding-left: 0;
+.inner-hero__facts.card-grid {
+	grid-template-columns: repeat(4, 1fr);
 }
 .inner-hero__facts {
-	row-gap: 2rem;
+	padding: 2rem;
 }
-.inner-hero__fact:not(:first-child) {
-	border-left: 0;
+.inner-hero__fact-label {
+	font-size: .75rem;
+}
+.inner-hero__fact {
+	padding-left: 1.2rem;
 }
 }
 @media only screen and (max-width:767px) {
 .inner-hero__facts-wrap {
   margin-top: -2rem;
 }
+.inner-hero__facts.card-grid {
+	grid-template-columns: 1fr;
 }
-
+.inner-hero__fact {
+  border-bottom: 0.063rem solid rgba(0, 0, 0, 0.10);
+  padding-bottom: 2rem;
+  text-align: center;
+  padding-left: 0;
+}
+.inner-hero__fact:not(:first-child) {
+  border-left: 0;
+}
+}
 /* stats */
 .stats-section {
   border: .125rem solid rgba(16, 20, 25, 0.10);
