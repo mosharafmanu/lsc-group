@@ -91,9 +91,85 @@ if ( 0 === $section_index ) {
 
 ?>
 
+<?php
+// Whether this hero paints a background <video>. When it does we render a real
+// <img> poster behind it: a deferred <video> never produces a paint (its bytes
+// are skipped on mobile), so Chrome would otherwise pick the <video> as the LCP
+// and resolve it absurdly late (~16s). The <img> gives Chrome a fast, real LCP;
+// the video fades in over it once it plays on desktop.
+$hero_has_video = false;
+
+if ( $rotation_active ) {
+	foreach ( $rotating_slides as $rotation_slide ) {
+		if ( 'video' === ( $rotation_slide['media_type'] ?? 'image' ) && ! empty( $rotation_slide['video'] ) ) {
+			$hero_has_video = true;
+			break;
+		}
+	}
+} elseif ( 'video' === $media_type && $video ) {
+	$hero_has_video = true;
+}
+
+// Render the poster <img> for a hero video. Uses the SAME lsc-1600 URL the
+// <video poster> resolves to (its own poster, else the base-image fallback), so
+// the head preload is reused, not double-fetched. The first slide is the LCP:
+// eager + fetchpriority=high; the rest are lazy.
+$render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) {
+	$poster = ( is_array( $video_data ) && ! empty( $video_data['video_self_host_poster'] ) )
+		? $video_data['video_self_host_poster']
+		: null;
+
+	$src    = '';
+	$width  = 0;
+	$height = 0;
+
+	if ( is_array( $poster ) && ! empty( $poster['url'] ) ) {
+		$src    = $poster['sizes']['lsc-1600'] ?? $poster['url'];
+		$width  = (int) ( $poster['sizes']['lsc-1600-width'] ?? $poster['width'] ?? 0 );
+		$height = (int) ( $poster['sizes']['lsc-1600-height'] ?? $poster['height'] ?? 0 );
+	} elseif ( $fallback_url ) {
+		$src = $fallback_url;
+	}
+
+	if ( ! $src ) {
+		return;
+	}
+
+	printf(
+		'<img class="hero-section__poster" src="%s" alt=""%s decoding="async" loading="%s"%s>',
+		esc_url( $src ),
+		( $width && $height ) ? ' width="' . $width . '" height="' . $height . '"' : '',
+		$is_first ? 'eager' : 'lazy',
+		$is_first ? ' fetchpriority="high"' : ''
+	);
+};
+?>
+
 <?php // The hero carries the page's main <h1>, so it is a <div>: its heading titles <main>, not a peer sub-section. ?>
 <div class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>"<?php echo $rotation_id ? ' id="' . esc_attr( $rotation_id ) . '"' : ''; ?>>
 	<div class="hero-section__media" aria-hidden="true">
+		<?php
+		if ( $hero_has_video && empty( $GLOBALS['lsc_hero_poster_style_printed'] ) ) :
+			$GLOBALS['lsc_hero_poster_style_printed'] = true;
+			?>
+			<style>
+				/* Stack the poster <img> and the deferred video in one grid cell. */
+				.hero-section--media-video .hero-section__media { display: grid; }
+				.hero-section--media-video .hero-section__media > * { grid-column: 1; grid-row: 1; }
+				.hero-section__media-slide { display: grid; }
+				.hero-section__media-slide > * { grid-column: 1; grid-row: 1; }
+				/* The poster is the painted LCP; the video fades in over it once it
+				   actually plays (desktop). Until then — and always on mobile — the
+				   poster shows and no video bytes are fetched. */
+				.hero-section__video { opacity: 0; transition: opacity 0.4s ease; }
+				.hero-section__video.is-playing { opacity: 1; }
+				@media ( prefers-reduced-motion: reduce ) {
+					.hero-section__video { transition: none; }
+				}
+			</style>
+			<?php
+		endif;
+		?>
 		<?php if ( $rotation_active ) : ?>
 			<?php foreach ( $rotating_slides as $slide_index => $slide ) : ?>
 				<?php
@@ -118,6 +194,9 @@ if ( 0 === $section_index ) {
 				<div class="<?php echo esc_attr( implode( ' ', $slide_classes ) ); ?>" data-slide-index="<?php echo (int) $slide_index; ?>">
 					<?php if ( 'video' === $slide_type && $slide_video && function_exists( 'lsc_render_video' ) ) : ?>
 						<?php
+						// Poster <img> = the painted LCP, behind the deferred video.
+						$render_hero_poster( $slide_video, $hero_fallback_poster, $slide_is_first );
+
 						lsc_render_video(
 							$slide_video,
 							[
@@ -128,9 +207,11 @@ if ( 0 === $section_index ) {
 								'controls'        => false,
 								'muted'           => true,
 								'loop'            => true,
-								// Only the first slide loads eagerly; the rest wait for
-								// the rotator to play them (preload="none", no autoplay).
-								'defer'           => ! $slide_is_first,
+								// Every slide is deferred (preload="none", no autoplay) so
+								// no video competes with the LCP poster on load. The rotator
+								// JS plays them — but only on desktop, so mobile downloads
+								// zero video and the poster image alone is the LCP.
+								'defer'           => true,
 								'poster'          => $hero_fallback_poster,
 							]
 						);
@@ -168,6 +249,9 @@ if ( 0 === $section_index ) {
 			<?php endforeach; ?>
 		<?php elseif ( 'video' === $media_type && $video && function_exists( 'lsc_render_video' ) ) : ?>
 			<?php
+			// Poster <img> = the painted LCP, behind the deferred video.
+			$render_hero_poster( $video, $hero_fallback_poster, 0 === $section_index );
+
 			lsc_render_video(
 				$video,
 				[
@@ -178,8 +262,46 @@ if ( 0 === $section_index ) {
 					'controls'        => false,
 					'muted'           => true,
 					'loop'            => true,
+					// Deferred (preload="none", no autoplay) so the poster — not the
+					// video — is the LCP. Started by the inline script below on desktop
+					// only; mobile keeps the poster and downloads no video.
+					'defer'           => true,
+					'poster'          => $hero_fallback_poster,
 				]
 			);
+			?>
+			<?php
+			// Start non-rotating hero videos on desktop once the DOM is ready. Mobile
+			// and reduced-motion users keep the static poster (the LCP). Printed once.
+			if ( empty( $GLOBALS['lsc_hero_video_script_printed'] ) ) :
+				$GLOBALS['lsc_hero_video_script_printed'] = true;
+				?>
+				<script>
+					( function () {
+						if ( window.matchMedia ) {
+							if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
+							if ( ! window.matchMedia( '(min-width: 768px)' ).matches ) { return; }
+						}
+						function startHeroVideos() {
+							var vids = document.querySelectorAll( '.hero-section:not(.hero-section--rotating) .hero-section__video' );
+							for ( var i = 0; i < vids.length; i++ ) {
+								( function ( v ) {
+									// Reveal (fade in over the poster) only once a frame is ready.
+									v.addEventListener( 'playing', function () { v.classList.add( 'is-playing' ); } );
+									var p = v.play();
+									if ( p && p.catch ) { p.catch( function () {} ); }
+								} )( vids[ i ] );
+							}
+						}
+						if ( 'loading' === document.readyState ) {
+							document.addEventListener( 'DOMContentLoaded', startHeroVideos );
+						} else {
+							startHeroVideos();
+						}
+					} )();
+				</script>
+				<?php
+			endif;
 			?>
 		<?php elseif ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
 			<?php
@@ -469,25 +591,47 @@ if ( 0 === $section_index ) {
 					var count = Math.max( media.length, words.length );
 					if ( count < 2 ) { return; }
 
+					// Only play the background videos on desktop. On mobile every slide is
+					// deferred and never played, so the connection stays free for the LCP
+					// poster and zero video bytes download — the words/posters still rotate.
+					var canPlayVideo = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
+
 					// Play the incoming slide's video (deferred slides have preload="none"
 					// + no autoplay, so .play() is what actually fetches them) and pause the
 					// outgoing one so only the visible slide ever decodes.
 					function videoIn( slide ) { return slide ? slide.querySelector( 'video' ) : null; }
 					function playSlide( i ) {
+						if ( ! canPlayVideo ) { return; }
 						var v = videoIn( media[ i ] );
-						if ( v ) { var p = v.play(); if ( p && p.catch ) { p.catch( function () {} ); } }
+						if ( ! v ) { return; }
+						if ( ! v.getAttribute( 'data-reveal-bound' ) ) {
+							v.setAttribute( 'data-reveal-bound', '1' );
+							// Fade the video in over the poster only once a frame is ready.
+							v.addEventListener( 'playing', function () { v.classList.add( 'is-playing' ); } );
+						}
+						var p = v.play();
+						if ( p && p.catch ) { p.catch( function () {} ); }
 					}
 					function pauseSlide( i ) {
 						var v = videoIn( media[ i ] );
 						if ( v && ! v.paused ) { v.pause(); }
 					}
 
+					// Kick off the first slide's video (deferred = no autoplay attribute).
+					playSlide( 0 );
+
 					var index = 0;
 					window.setInterval( function () {
 						var prev = index;
 						index = ( index + 1 ) % count;
-						if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
-						if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
+						// Swap the background media on desktop only. On mobile the media stays on
+						// slide 0 (its poster is the LCP) — swapping the other slides' full-bleed
+						// posters in over a throttled connection keeps the LCP from ever settling.
+						// Only the words rotate on mobile.
+						if ( canPlayVideo ) {
+							if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
+							if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
+						}
 						if ( words[ prev ] ) { words[ prev ].classList.remove( 'is-active' ); }
 						if ( words[ index ] ) { words[ index ].classList.add( 'is-active' ); }
 					}, <?php echo (int) $rotation_interval; ?> );
