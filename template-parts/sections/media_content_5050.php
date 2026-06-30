@@ -31,16 +31,20 @@ $show_image = $image && ! $is_video;
 $section_classes = [
 	'media-content-5050',
 	'media-content-5050--media-' . sanitize_html_class( $media_position ),
-	// Default top gap between sections (managed here, not by the editor).
-	'pt-50',
-	'pb-50',
-	'pt-lg-90',
-	'pb-lg-90'
+	// Always: top gap between sections (margin, regardless of background).
+	'mt-50',
+	'mt-md-70',
+	'mt-lg-90',
 ];
 
-// Background is a toggle; Faisal's CSS gives this modifier its colour + padding.
+// Background is a toggle. Only when it's on do we add the inner padding (so the
+// content isn't flush to the coloured block's edges); off = plain, no padding.
 if ( $enable_background ) {
 	$section_classes[] = 'media-content-5050--has-bg';
+	$section_classes[] = 'pt-50';
+	$section_classes[] = 'pb-50';
+	$section_classes[] = 'pt-lg-90';
+	$section_classes[] = 'pb-lg-90';
 }
 ?>
 

@@ -41,6 +41,13 @@ $section_classes = [ 'inner-hero ', 'inner-hero--' . $hero_style ];
 if ( $has_facts_bar ) {
 	$section_classes[] = 'inner-hero--has-facts';
 }
+
+// Text-only hero has no media to set its height, so add a bottom gap.
+if ( 'text' === $hero_style ) {
+	$section_classes[] = 'pb-50';
+	$section_classes[] = 'pb-md-70';
+	$section_classes[] = 'pb-lg-90';
+}
 ?>
 
 <?php // The page hero carries the main <h1>, so it is a <div>: its heading titles <main>, not a peer sub-section. ?>

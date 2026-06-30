@@ -26,7 +26,7 @@ $grid_classes = [
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
-<<?php echo $lsc_section_el; ?> class="process-steps pt-50 pb-50 pt-lg-90 pb-lg-90">
+<<?php echo $lsc_section_el; ?> class="process-steps mt-50 mt-lg-90 pt-50 pb-50 pt-lg-90 pb-lg-90">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header process-steps__header text-center">
