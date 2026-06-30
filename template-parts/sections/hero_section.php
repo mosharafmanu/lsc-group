@@ -280,8 +280,7 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 				<script>
 					( function () {
 						if ( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) { return; }
-						var isDesktop = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
-						function startHeroVideos() {
+												function startHeroVideos() {
 							var vids = document.querySelectorAll( '.hero-section:not(.hero-section--rotating) .hero-section__video' );
 							for ( var i = 0; i < vids.length; i++ ) {
 								( function ( v ) {
@@ -292,13 +291,8 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 								} )( vids[ i ] );
 							}
 						}
-						if ( isDesktop ) {
-							if ( 'loading' === document.readyState ) {
-								document.addEventListener( 'DOMContentLoaded', startHeroVideos );
-							} else {
-								startHeroVideos();
-							}
-						} else if ( 'complete' === document.readyState ) {
+						// Start only after the page is fully loaded (desktop + mobile).
+						if ( 'complete' === document.readyState ) {
 							window.setTimeout( startHeroVideos, 200 );
 						} else {
 							window.addEventListener( 'load', function () { window.setTimeout( startHeroVideos, 200 ); } );
@@ -596,11 +590,6 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 					var count = Math.max( media.length, words.length );
 					if ( count < 2 ) { return; }
 
-					// Media SWAP (rotation) is desktop-only; slide 0's video also plays on
-					// mobile but only after load (see below) so it never competes with the
-					// LCP poster. The other slides' videos never load on mobile.
-					var isDesktop = ! window.matchMedia || window.matchMedia( '(min-width: 768px)' ).matches;
-
 					// Play the incoming slide's video (deferred slides have preload="none"
 					// + no autoplay, so .play() is what actually fetches them) and pause the
 					// outgoing one so only the visible slide ever decodes.
@@ -635,12 +624,10 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 						playSlide( 0 );
 						window.setInterval( tick, <?php echo (int) $rotation_interval; ?> );
 					}
-					// Desktop starts immediately. Mobile waits for the load event so the deferred
-					// videos never compete with the LCP poster on cellular — the poster wins the
-					// LCP, then words + background media rotate on mobile too (client requirement).
-					if ( isDesktop ) {
-						startRotation();
-					} else if ( 'complete' === document.readyState ) {
+					// Start ONLY after the page is fully loaded (desktop AND mobile): nothing in
+					// the hero animates or fetches video while the page is still loading — the
+					// static poster is the LCP, then the rotation (text + video) begins.
+					if ( 'complete' === document.readyState ) {
 						window.setTimeout( startRotation, 200 );
 					} else {
 						window.addEventListener( 'load', function () { window.setTimeout( startRotation, 200 ); } );
