@@ -162,6 +162,35 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first, $
 		echo $img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 };
+
+// Render the hero's IMAGE media as a single <picture> with an art-directed
+// mobile <source> (so phones get the portrait crop and desktops the landscape)
+// — no CSS toggle needed, the browser swaps by viewport. Empty mobile = desktop
+// image everywhere (unchanged).
+$render_hero_image = static function ( $desktop, $mobile, $is_first ) {
+	if ( ! $desktop || ! function_exists( 'lsc_render_responsive_picture' ) ) {
+		return;
+	}
+
+	$html = lsc_render_responsive_picture(
+		$desktop,
+		[
+			'class'         => 'hero-section__image',
+			'sizes'         => '100vw',
+			'lazy'          => $is_first ? 0 : 1,
+			'fetchpriority' => $is_first ? 'high' : 'auto',
+			'echo'          => false,
+		]
+	);
+
+	if ( $html && is_array( $mobile ) && ! empty( $mobile['url'] ) ) {
+		$mobile_src = $mobile['sizes']['lsc-1200'] ?? ( $mobile['sizes']['lsc-900'] ?? $mobile['url'] );
+		$source     = '<source media="(max-width: 767px)" srcset="' . esc_url( $mobile_src ) . '" sizes="100vw">';
+		$html       = preg_replace( '/<picture>/', '<picture>' . $source, $html, 1 );
+	}
+
+	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+};
 ?>
 
 <?php // The hero carries the page's main <h1>, so it is a <div>: its heading titles <main>, not a peer sub-section. ?>
@@ -333,32 +362,11 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first, $
 			?>
 		<?php elseif ( $image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
 			<?php
-			lsc_render_responsive_picture(
-				$image,
-					[
-						'class'         => 'hero-section__image',
-						'sizes'         => '100vw',
-						'lazy'          => 0 !== $section_index,
-						'fetchpriority' => 0 === $section_index ? 'high' : 'auto',
-					]
-				);
+			// One <picture>: art-directed mobile crop via <source>, desktop via <img>.
+			// (The old separate .hero-section__mobile-image div had no show/hide CSS, so
+			// the mobile image never appeared on phones.)
+			$render_hero_image( $image, $mobile_image, 0 === $section_index );
 			?>
-		<?php endif; ?>
-
-		<?php if ( ! $rotation_active && 'image' === $media_type && $mobile_image && function_exists( 'lsc_render_responsive_picture' ) ) : ?>
-			<div class="hero-section__mobile-image">
-				<?php
-				lsc_render_responsive_picture(
-					$mobile_image,
-					[
-						'class'         => 'hero-section__image hero-section__image--mobile',
-						'sizes'         => '100vw',
-						'lazy'          => 0 !== $section_index,
-						'fetchpriority' => 0 === $section_index ? 'high' : 'auto',
-					]
-				);
-				?>
-			</div>
 		<?php endif; ?>
 	</div>
 
