@@ -621,33 +621,30 @@ $render_hero_poster = static function ( $video_data, $fallback_url, $is_first ) 
 						if ( v && ! v.paused ) { v.pause(); }
 					}
 
-					// Kick off slide 0's video. Desktop: immediately. Mobile: AFTER the page
-					// has loaded, so the deferred video never competes with the LCP poster on
-					// the cellular connection — the poster wins the LCP, the video then plays in.
-					function startFirstSlide() { playSlide( 0 ); }
-					if ( isDesktop ) {
-						startFirstSlide();
-					} else if ( 'complete' === document.readyState ) {
-						window.setTimeout( startFirstSlide, 200 );
-					} else {
-						window.addEventListener( 'load', function () { window.setTimeout( startFirstSlide, 200 ); } );
-					}
-
+										// Slide 0 is already active; play its video, then rotate words + media.
 					var index = 0;
-					window.setInterval( function () {
+					function tick() {
 						var prev = index;
 						index = ( index + 1 ) % count;
-						// Swap the background media on desktop only. On mobile the media stays on
-						// slide 0 (its poster is the LCP) — swapping the other slides' full-bleed
-						// posters in over a throttled connection keeps the LCP from ever settling.
-						// Only the words rotate on mobile.
-						if ( isDesktop ) {
-							if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
-							if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
-						}
+						if ( media[ prev ] ) { media[ prev ].classList.remove( 'is-active' ); pauseSlide( prev ); }
+						if ( media[ index ] ) { media[ index ].classList.add( 'is-active' ); playSlide( index ); }
 						if ( words[ prev ] ) { words[ prev ].classList.remove( 'is-active' ); }
 						if ( words[ index ] ) { words[ index ].classList.add( 'is-active' ); }
-					}, <?php echo (int) $rotation_interval; ?> );
+					}
+					function startRotation() {
+						playSlide( 0 );
+						window.setInterval( tick, <?php echo (int) $rotation_interval; ?> );
+					}
+					// Desktop starts immediately. Mobile waits for the load event so the deferred
+					// videos never compete with the LCP poster on cellular — the poster wins the
+					// LCP, then words + background media rotate on mobile too (client requirement).
+					if ( isDesktop ) {
+						startRotation();
+					} else if ( 'complete' === document.readyState ) {
+						window.setTimeout( startRotation, 200 );
+					} else {
+						window.addEventListener( 'load', function () { window.setTimeout( startRotation, 200 ); } );
+					}
 				} )();
 			</script>
 			<?php
