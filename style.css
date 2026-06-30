@@ -1155,7 +1155,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 /* Below full desktop the fixed 48.4375rem media column overflows — make the two
    columns flexible so the media fits before it stacks at 767px. */
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 1399px) {
 .inner-hero--split .inner-hero__inner {
 	grid-template-columns: 1fr 1fr;
 }
