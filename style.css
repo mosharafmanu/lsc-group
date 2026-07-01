@@ -1027,6 +1027,19 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	grid-row: 1;
 	grid-column: 1;
 }
+/* Image hero: 465px tall as a floor, content sitting 55px below the top edge
+   and 60px above the bottom edge. The media keeps min-height:100% (from the
+   shared .inner-hero__media rule), so it grows past 465px with the content and
+   the 60px bottom gap stays constant at every width.
+   Excludes --has-facts: that product variant keeps its own 567px floor and its
+   overlap JS reads the inner's CSS padding-bottom as its baseline. */
+.inner-hero--image:not(.inner-hero--has-facts) .inner-hero__media {
+	height: 29.0625rem;
+}
+.inner-hero--image:not(.inner-hero--has-facts) .inner-hero__inner {
+	padding-top: 3.4375rem;
+	padding-bottom: 3.75rem;
+}
 .inner-hero__media img {
 	width: 100%;
 	height: 100%;
@@ -1050,6 +1063,14 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .inner-hero--has-facts .inner-hero__media {
   height: 100%;
   min-height: 35.4375rem;
+}
+/* Let the facts hero overflow: the card is pulled up so its bottom edge sits on
+   the section's box bottom, and the base .inner-hero overflow:hidden was clipping
+   the card's drop shadow into a hard horizontal line (square-looking bottom
+   corners). The media image is fully contained by its own box, so nothing else
+   leaks — the shadow now renders rounded on all four corners. */
+.inner-hero--has-facts {
+  overflow: visible;
 }
 /* When the facts card overlaps the hero (<=991px), bottom-anchor the hero
    content so it sits a consistent gap above the card at every width — the JS
