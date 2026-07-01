@@ -1072,11 +1072,13 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .inner-hero--has-facts {
   overflow: visible;
 }
-/* When the facts card overlaps the hero (<=991px), bottom-anchor the hero
-   content so it sits a consistent gap above the card at every width — the JS
-   adds the padding-bottom that becomes that gap. margin-top:auto pushes the
-   content down only when there's spare height, so long content never clips. */
-@media only screen and (max-width: 991px) {
+/* Only once the card stacks into one tall column (<=767px) does it peek 100px
+   over the hero and hang below — there we bottom-anchor the hero content so it
+   keeps a consistent gap above the card (the JS adds the padding-bottom that
+   becomes that gap; margin-top:auto only pushes down into spare height, so long
+   content never clips). From 768px up the card is a short straddling row, so the
+   content flows from the top like desktop — no bottom-anchoring, no empty top. */
+@media only screen and (max-width: 767px) {
 .inner-hero--has-facts .inner-hero__inner {
   display: flex;
   flex-direction: column;

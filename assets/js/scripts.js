@@ -491,10 +491,12 @@
 				const cardH = $card.outerHeight();
 
 				// Overlap amount applied to the wrap's margin-top (how far the card
-				// is pulled up over the hero). Desktop straddles by half the (short)
-				// card; at <=991px the card is tall/stacked, so we overlap the hero
-				// by a fixed 100px and let the rest of the card hang below.
-				const overlap = ( window.innerWidth <= 991 ) ? 100 : ( cardH / 2 );
+				// is pulled up over the hero). Down to 768px the card is a short
+				// single row, so it straddles the hero edge by half its height (like
+				// desktop). Only at <=767px does the card stack into one tall column,
+				// where a half overlap would swallow the hero content — there we peek
+				// the hero by a fixed 100px and let the rest of the card hang below.
+				const overlap = ( window.innerWidth <= 767 ) ? 100 : ( cardH / 2 );
 
 				// The card's portion that sits BELOW the hero edge = card height minus
 				// the overlap. The hero section rises by that amount so the next
