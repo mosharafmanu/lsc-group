@@ -7,7 +7,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'layout-padding pt-50 pt-md-70 pt-lg-100 pb-50 pb-md-70 pb-lg-100' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'lsc-container layout-padding pt-50 pt-md-70 pt-lg-100 pb-50 pb-md-70 pb-lg-100' ); ?>>
 
 	<?php
 	$show_title = true;
