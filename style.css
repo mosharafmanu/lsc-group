@@ -1218,7 +1218,6 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .inner-hero--split .inner-hero__inner {
 	grid-template-columns: 1fr;
 	row-gap: 1.875rem;
-	padding-bottom: 3.125rem;
 }
 .inner-hero--split .inner-hero__content {
 	padding-top: 0;
