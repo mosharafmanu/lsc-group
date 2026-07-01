@@ -720,24 +720,6 @@
             ]
         },
         {
-            "key": "field_global_cta_background",
-            "label": "Background",
-            "name": "global_cta_background",
-            "type": "button_group",
-            "required": 0,
-            "instructions": "Background colour of the band.",
-            "choices": {
-                "light": "Light",
-                "subtle": "Subtle",
-                "primary": "Primary",
-                "dark": "Dark"
-            },
-            "default_value": "dark",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
             "key": "field_apply_now_link",
             "label": "Apply Now Link",
             "name": "apply_now_link",
@@ -814,5 +796,5 @@
     "description": "Configure the global header and footer content.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782618382
+    "modified": 1782880476
 }

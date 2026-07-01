@@ -58,12 +58,12 @@ if ( ! function_exists( 'lsc_get_global_cta' ) ) {
 			return [];
 		}
 
+		// No background option: the Global CTA always uses the cta-band default (dark).
 		return [
 			'eyebrow'     => get_field( 'global_cta_eyebrow', 'options' ),
 			'title_lines' => get_field( 'global_cta_title_lines', 'options' ),
 			'description' => get_field( 'global_cta_description', 'options' ),
 			'buttons'     => get_field( 'global_cta_buttons', 'options' ),
-			'background'  => get_field( 'global_cta_background', 'options' ),
 		];
 	}
 }
