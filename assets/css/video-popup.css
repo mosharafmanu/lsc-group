@@ -250,9 +250,10 @@
 
 @media (max-width: 480px) {
     .video-popup-container {
-        width: 100%;
+        /* Keep a 16px gap on each side instead of full-bleed, and let the base
+           8px radius stand so the popup doesn't touch the screen edges. */
+        width: calc(100% - 2rem);
         max-height: 80vh;
-        border-radius: 0;
     }
 
     .video-popup-close {
