@@ -1270,14 +1270,22 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .finance-product-card {
   border-radius: .75rem;
   height: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
 }
+/* The card-grid row stretches every card to the tallest one's height. Make the
+   content area grow into that stretched height (flex:1) and lay it out as a
+   column so the "Learn More" link can bottom-anchor — the CTA then lines up
+   across cards regardless of how many lines the excerpt runs. */
 .finance-product-card__content {
   padding: 1.5rem;
   background-color: var(--lsc-color-white);
   border-radius: 0 0 .75rem .75rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 .finance-product-card__media {
   overflow: hidden;
@@ -1330,7 +1338,10 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	text-decoration: none;
 	display: flex;
 	gap: .5rem;
-	margin-top: 1.375rem;
+	/* auto pushes the CTA to the bottom of the stretched card; padding-top keeps
+	   a consistent minimum gap above it even on the tallest card (no free space). */
+	margin-top: auto;
+	padding-top: 1.375rem;
 }
 
 
