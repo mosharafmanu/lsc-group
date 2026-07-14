@@ -1,0 +1,73 @@
+{
+    "key": "group_testimonial",
+    "title": "Testimonial Details",
+    "fields": [
+        {
+            "key": "field_testimonial_quote",
+            "label": "Quote",
+            "name": "quote",
+            "type": "textarea",
+            "required": 1,
+            "instructions": "The testimonial text.",
+            "placeholder": "Testimonial text...",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_testimonial_author_role",
+            "label": "Author Role / Company",
+            "name": "author_role",
+            "type": "text",
+            "required": 0,
+            "instructions": "Shown under the author name.",
+            "placeholder": "CEO at Acme Corp"
+        },
+        {
+            "key": "field_testimonial_author_initial",
+            "label": "Author Initial",
+            "name": "author_initial",
+            "type": "text",
+            "required": 0,
+            "instructions": "Optional single letter for the avatar. Defaults to the first letter of the testimonial title (author name).",
+            "placeholder": "J"
+        },
+        {
+            "key": "field_testimonial_rating",
+            "label": "Rating",
+            "name": "rating",
+            "type": "select",
+            "required": 0,
+            "instructions": "Shown in the Carousel layout only.",
+            "choices": {
+                "1": "1 Star",
+                "2": "2 Stars",
+                "3": "3 Stars",
+                "4": "4 Stars",
+                "5": "5 Stars"
+            },
+            "default_value": "5",
+            "return_format": "value",
+            "allow_null": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "testimonial"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Reusable testimonial authored once and referenced by Testimonials sections. The post title is the author's name.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1782294170
+}

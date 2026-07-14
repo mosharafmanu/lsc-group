@@ -1,0 +1,85 @@
+{
+    "key": "group_finance_product",
+    "title": "Finance Product Details",
+    "fields": [
+        {
+            "key": "field_finance_product_facts",
+            "label": "Key Facts",
+            "name": "product_facts",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Key facts shown as the bar overlapping the product hero (e.g. LOAN SIZE / £500k – £50M+). Turn on \"Show Product Key Facts Bar\" on the Page Hero to display them. 2–5 facts work best.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 6,
+            "collapsed": "",
+            "button_label": "Add Fact",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_finance_product_fact_label",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "required": 0,
+                    "placeholder": "e.g. LOAN SIZE, TERMS, TYPICAL USE, SECURITY",
+                    "parent_repeater": "field_finance_product_facts"
+                },
+                {
+                    "key": "field_finance_product_fact_value",
+                    "label": "Value",
+                    "name": "value",
+                    "aria-label": "",
+                    "type": "text",
+                    "required": 0,
+                    "placeholder": "e.g. £500k – £50M+, Up to 36 Months, Ground Up PDR",
+                    "parent_repeater": "field_finance_product_facts"
+                },
+                {
+                    "key": "field_finance_product_fact_highlight",
+                    "label": "Highlight Value",
+                    "name": "highlight",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "required": 0,
+                    "instructions": "Show this value in the accent (orange) colour.",
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Yes",
+                    "ui_off_text": "No",
+                    "parent_repeater": "field_finance_product_facts"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "finance_product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Structured details for a single Finance Product.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1782281434
+}
