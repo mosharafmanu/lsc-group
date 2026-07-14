@@ -58,30 +58,8 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
-<?php
-// Detect last downloads section on this page
-static $lsc_dl_count = 0;
-static $lsc_dl_total = null;
-
-if ( null === $lsc_dl_total ) {
-	$lsc_dl_total = 0;
-	$tmp_post_id = get_the_ID();
-	if ( function_exists( 'have_rows' ) && have_rows( 'cms', $tmp_post_id ) ) {
-		while ( have_rows( 'cms', $tmp_post_id ) ) {
-			the_row();
-			if ( 'downloads_section' === get_row_layout() ) {
-				$lsc_dl_total++;
-			}
-		}
-		reset_rows();
-	}
-}
-
-$lsc_dl_count++;
-$lsc_is_last_dl = ( $lsc_dl_count === $lsc_dl_total );
-?>
-<<?php echo $lsc_section_el; ?> class="downloads-section<?php echo $lsc_is_last_dl ? ' downloads-section--last' : ''; ?>">
-	<div class="downloads-section__inner lsc-container layout-padding pt-50 pt-lg-90">
+<<?php echo $lsc_section_el; ?> class="downloads-section">
+	<div class="downloads-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
 					<span class="section-header__divider" aria-hidden="true"></span>
