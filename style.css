@@ -2836,6 +2836,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 
 /* Downloads Section */
+.downloads-section__header {
+  margin-bottom: 1.875rem;
+}
 .downloads-section__list {
   margin: 0;
   padding: 0;
