@@ -17,15 +17,6 @@ if ( ! function_exists( 'lsc_flexible_content' ) ) {
 			return;
 		}
 
-		// Pre-compute the last layout name so templates can detect if they are last
-		$last_layout_name = '';
-		while ( have_rows( $field_name, $post_id ) ) {
-			the_row();
-			$last_layout_name = get_row_layout();
-		}
-		reset_rows();
-		$GLOBALS['lsc_last_layout'] = $last_layout_name;
-
 		// Track previous layout and section index for conditional styling
 		$previous_layout = '';
 		$section_index   = 0;
@@ -55,9 +46,10 @@ if ( ! function_exists( 'lsc_flexible_content' ) ) {
 			$section_index++;
 		}
 
+		$GLOBALS['lsc_last_layout'] = $previous_layout;
+
 		unset( $GLOBALS['lsc_previous_layout'] );
 		unset( $GLOBALS['lsc_section_index'] );
-		unset( $GLOBALS['lsc_last_layout'] );
 	}
 }
 
