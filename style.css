@@ -2846,6 +2846,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   max-width: 69.625rem;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 1.875rem;
 }
 .downloads-section__header + .downloads-section__list {
   max-width: 100%;
