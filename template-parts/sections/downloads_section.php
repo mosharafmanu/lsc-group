@@ -58,7 +58,8 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
-<<?php echo $lsc_section_el; ?> class="downloads-section">
+<?php $lsc_is_last = ( isset( $GLOBALS['lsc_last_layout'] ) && get_row_layout() === $GLOBALS['lsc_last_layout'] ); ?>
+<<?php echo $lsc_section_el; ?> class="downloads-section<?php echo $lsc_is_last ? ' downloads-section--last' : ''; ?>">
 	<div class="downloads-section__inner lsc-container layout-padding pt-50 pt-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
