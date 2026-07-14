@@ -59,7 +59,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 
 <?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
 <<?php echo $lsc_section_el; ?> class="downloads-section">
-	<div class="downloads-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
+	<div class="downloads-section__inner lsc-container layout-padding pt-50 pt-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
 					<span class="section-header__divider" aria-hidden="true"></span>
