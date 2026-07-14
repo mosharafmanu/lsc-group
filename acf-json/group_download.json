@@ -23,6 +23,24 @@
             "min_size": "",
             "max_size": "",
             "mime_types": "pdf"
+        },
+        {
+            "key": "field_download_web_form_url",
+            "label": "Web Form URL",
+            "name": "web_form_url",
+            "type": "url",
+            "required": 0,
+            "instructions": "Optional manual link for the web form button shown next to the PDF download.",
+            "placeholder": "https:\/\/"
+        },
+        {
+            "key": "field_download_web_form_button_label",
+            "label": "Web Form Button Label",
+            "name": "web_form_button_label",
+            "type": "text",
+            "required": 0,
+            "instructions": "Optional custom label for the web form button. Defaults to \"Web Form\".",
+            "placeholder": "Web Form"
         }
     ],
     "location": [
@@ -44,5 +62,5 @@
     "description": "Reusable downloadable document (PDF). The post title is the document name; page order controls list order.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782361088
+    "modified": 1784020868
 }

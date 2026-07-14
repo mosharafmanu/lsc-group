@@ -2847,6 +2847,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   margin-left: auto;
   margin-right: auto;
 }
+.downloads-section__header + .downloads-section__list {
+  max-width: 100%;
+}
 .download-item {
   border-radius: .75rem;
   background-color: var(--lsc-color-subtle);
@@ -2863,6 +2866,15 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .download-item-left {
   display: flex;
   column-gap: 1.875rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.download-item-right {
+  display: flex;
+  flex: 0 1 27rem;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: flex-end;
 }
 .download-item__icon {
 	flex-shrink: 0;
@@ -2898,6 +2910,11 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	background-color: var(--lsc-color-primary);
 	border-color: var(--lsc-color-primary);
 }
+.download-item__button--web-form:hover {
+	color: var(--lsc-color-primary);
+	background-color: var(--lsc-color-accent);
+	border-color: var(--lsc-color-accent);
+}
 .download-item__button-icon svg {
   width: .75rem;
 }
@@ -2905,20 +2922,42 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .download-item {
 	padding: 3rem 4rem;
 }
-}
-@media only screen and (max-width: 767px) {
-.download-item {
-	padding: 2rem 3rem;
-}
 .download-item-wrapper {
 	flex-direction: column;
-	row-gap: 1rem;
+	justify-content: flex-start;
+	row-gap: 1.5rem;
 }
 .download-item-left {
 	flex-direction: column;
 	row-gap: .9375rem;
 	align-items: center;
 	text-align: center;
+}
+.download-item-right {
+	flex: 0 1 auto;
+	justify-content: center;
+	width: 100%;
+}
+}
+@media only screen and (max-width: 767px) {
+.download-item {
+	padding: 2rem 3rem;
+}
+.download-item__button {
+	width: min(100%, 13.125rem);
+}
+}
+@media only screen and (max-width: 575px) {
+.download-item {
+	padding: 2rem 1.5rem;
+}
+.download-item-right {
+	flex-direction: column;
+	align-items: center;
+}
+.download-item__button {
+	width: 100%;
+	max-width: 13.125rem;
 }
 }
 
