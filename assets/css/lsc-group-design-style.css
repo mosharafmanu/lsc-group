@@ -62,6 +62,7 @@ html {
     font-size: 16px; /* Base font size — held fixed past 1920px so the layout
                         never scales up beyond the design canvas. */
 }
+
 body {
     color: var(--lsc-color-text);
     background-color: var(--lsc-color-background);
@@ -436,6 +437,11 @@ h6,.h6-style {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+.process-steps__step {
+	padding-left: 2rem;
+	padding-right: 2rem;
+
 }
 .card-grid--center-last-row.columns-2 > * { flex: 0 1 calc((100% - 1 * var(--lsc-card-grid-gap)) / 2 - 0.5px); }
 .card-grid--center-last-row.columns-3 > * { flex: 0 1 calc((100% - 2 * var(--lsc-card-grid-gap)) / 3 - 0.5px); }
@@ -1235,6 +1241,11 @@ h6,.h6-style {
 }
 
 /* ── Outline (light): for dark backgrounds — light border/text → light fill on hover */
+.inner-hero__buttons .btn-outline-light {
+	color: var(--lsc-color-white);
+	border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
 .btn-outline-light {
 	background: transparent;
 	color: var(--lsc-color-light);

@@ -3,8 +3,8 @@
  * Downloads Section
  *
  * Optional header above a stacked list of download rows (icon, title, subtitle,
- * Download button and optional Web Form button). Pulls from the Download CPT —
- * all published or a hand-picked selection — mirroring the case_studies_grid / testimonials Source pattern.
+ * Download button). Pulls from the Download CPT — all published or a hand-picked
+ * selection — mirroring the case_studies_grid / testimonials Source pattern.
  * CSS is Faisal's; this template emits BEM hooks only.
  *
  * @package lsc-group
@@ -89,9 +89,6 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 					$subtitle       = (string) get_field( 'subtitle', $download_id );
 					$file           = get_field( 'file', $download_id );
 					$file_url       = is_array( $file ) ? ( $file['url'] ?? '' ) : '';
-					$web_form_url   = (string) get_field( 'web_form_url', $download_id );
-					$web_form_label = (string) get_field( 'web_form_button_label', $download_id );
-					$web_form_label = $web_form_label ?: __( 'Web Form', 'lsc-group' );
 
 					if ( ! $file_url ) {
 						continue;
@@ -112,17 +109,12 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 									<p class="download-item__subtitle"><?php echo esc_html( $subtitle ); ?></p>
 								<?php endif; ?>
 							 </div>
-						</div>
+					      </div>
 						<div class="download-item-right">
 							<a class="download-item__button site-btn btn-primary" href="<?php echo esc_url( $file_url ); ?>" download target="_blank" rel="noopener">
 							   <span class="download-item__button-text"><?php esc_html_e( 'Download', 'lsc-group' ); ?></span>
 							   <span class="download-item__button-icon" aria-hidden="true"><?php get_template_part( 'assets/svgs/arrow-down' ); ?></span>
 						    </a>
-							<?php if ( $web_form_url ) : ?>
-								<a class="download-item__button download-item__button--web-form site-btn btn-secondary" href="<?php echo esc_url( $web_form_url ); ?>" target="_blank" rel="noopener">
-								   <span class="download-item__button-text"><?php echo esc_html( $web_form_label ); ?></span>
-								</a>
-							<?php endif; ?>
 						</div>
 					   </div>
 					</li>
