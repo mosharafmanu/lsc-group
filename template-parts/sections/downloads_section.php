@@ -58,31 +58,7 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
-<?php
-// Count this instance and compare against total download sections on the page
-static $lsc_download_index = 0;
-$lsc_download_index++;
-
-global $lsc_download_section_total;
-if ( null === $lsc_download_section_total ) {
-	// First download section: count all download sections on this page
-	$lsc_download_section_total = 0;
-	if ( function_exists( 'have_rows' ) ) {
-		$post_id = get_the_ID();
-		if ( have_rows( 'cms', $post_id ) ) {
-			while ( have_rows( 'cms', $post_id ) ) {
-				the_row();
-				if ( 'downloads_section' === get_row_layout() ) {
-					$lsc_download_section_total++;
-				}
-			}
-			reset_rows();
-		}
-	}
-}
-$lsc_is_last = ( $lsc_download_index === $lsc_download_section_total );
-?>
-<<?php echo $lsc_section_el; ?> class="downloads-section<?php echo $lsc_is_last ? ' downloads-section--last' : ''; ?>">
+<<?php echo $lsc_section_el; ?> class="downloads-section">
 	<div class="downloads-section__inner lsc-container layout-padding pt-50 pt-lg-90">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
