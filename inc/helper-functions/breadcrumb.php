@@ -21,8 +21,7 @@ if ( ! function_exists( 'lsc_breadcrumb' ) ) {
 			$classes[] = $margin_bottom;
 		}
 
-		echo '<nav class="' . esc_attr( implode( ' ', $classes ) ) . '" role="navigation" aria-label="Breadcrumb navigation">';
-		echo '<h2 class="sr-only">Breadcrumb navigation</h2>';
+		echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" role="navigation" aria-label="Breadcrumb navigation">';
 		echo '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'lsc-group' ) . '</a>';
 		echo ' <span class="breadcrumb-separator">/</span> ';
 
@@ -102,6 +101,6 @@ if ( ! function_exists( 'lsc_breadcrumb' ) ) {
 			}
 		}
 
-		echo '</nav>';
+		echo '</div>';
 	}
 }

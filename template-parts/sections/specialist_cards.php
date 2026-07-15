@@ -25,10 +25,21 @@ $grid_classes = [
 	'card-grid--center-last-row',
 	sanitize_html_class( $columns ),
 ];
+
+$section_classes = [ 'specialist-cards', 'pb-50', 'pb-lg-90' ];
+
+if ( isset( $GLOBALS['lsc_previous_layout'] ) && 'contact_panel' === $GLOBALS['lsc_previous_layout'] ) {
+	$section_classes[] = 'specialist-cards--overlap-contact-panel';
+	$section_classes[] = 'pt-100';
+	$section_classes[] = 'pt-lg-180';
+} else {
+	$section_classes[] = 'pt-50';
+	$section_classes[] = 'pt-lg-90';
+}
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
-<<?php echo $lsc_section_el; ?> class="specialist-cards pt-50 pb-50 pt-lg-90 pb-lg-90">
+<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header specialist-cards__header text-center">

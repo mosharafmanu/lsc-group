@@ -55,11 +55,39 @@ if ( 'selected' === $download_source && $selected && is_array( $selected ) ) {
 if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 	return;
 }
+
+$inner_classes             = [ 'downloads-section__inner', 'lsc-container', 'layout-padding', 'pt-50', 'pt-lg-90' ];
+$lsc_current_section_index = isset( $GLOBALS['lsc_section_index'] ) ? (int) $GLOBALS['lsc_section_index'] : null;
+$lsc_is_last_downloads     = false;
+
+if ( null !== $lsc_current_section_index && function_exists( 'get_field' ) ) {
+	$lsc_cms_rows = get_field( 'cms', get_the_ID() );
+
+	if ( is_array( $lsc_cms_rows ) ) {
+		$lsc_is_last_downloads = true;
+
+		foreach ( $lsc_cms_rows as $lsc_row_index => $lsc_cms_row ) {
+			if ( $lsc_row_index <= $lsc_current_section_index ) {
+				continue;
+			}
+
+			if ( isset( $lsc_cms_row['acf_fc_layout'] ) && 'downloads_section' === $lsc_cms_row['acf_fc_layout'] ) {
+				$lsc_is_last_downloads = false;
+				break;
+			}
+		}
+	}
+}
+
+if ( $lsc_is_last_downloads ) {
+	$inner_classes[] = 'pb-50';
+	$inner_classes[] = 'pb-lg-90';
+}
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title ) ) ? 'section' : 'div'; ?>
 <<?php echo $lsc_section_el; ?> class="downloads-section">
-	<div class="downloads-section__inner lsc-container layout-padding pt-50 pb-50 pt-lg-90 pb-lg-90">
+	<div class="<?php echo esc_attr( implode( ' ', $inner_classes ) ); ?>">
 		<?php if ( $eyebrow || $title || $description ) : ?>
 			<header class="section-header downloads-section__header">
 					<span class="section-header__divider" aria-hidden="true"></span>

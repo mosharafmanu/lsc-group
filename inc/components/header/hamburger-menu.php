@@ -15,8 +15,7 @@ if ( ! function_exists( 'lsc_render_mobile_navigation' ) ) {
 		<div class="mobile-menu-overlay" aria-hidden="true"></div>
 
 		<?php // `inert` (closed by default) keeps the drawer's links out of the tab order + a11y tree while hidden; the toggle JS removes it on open. ?>
-		<nav id="mobile-navigation" class="mobile-navigation" aria-label="<?php esc_attr_e( 'Mobile navigation', 'lsc-group' ); ?>" aria-hidden="true" inert>
-			<h2 class="sr-only"><?php esc_html_e( 'Mobile navigation', 'lsc-group' ); ?></h2>
+		<div id="mobile-navigation" class="mobile-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Mobile navigation', 'lsc-group' ); ?>" aria-hidden="true" inert>
 			<div class="mobile-nav-inner">
 
 				<div class="mobile-nav-header">
@@ -67,7 +66,7 @@ if ( ! function_exists( 'lsc_render_mobile_navigation' ) ) {
 				<?php endif; ?>
 
 			</div>
-		</nav>
+		</div>
 
 		<?php
 	}

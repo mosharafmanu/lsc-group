@@ -39,7 +39,7 @@ if ( is_singular() ) {
 
 					if ( $lsc_prev || $lsc_next ) :
 						?>
-						<nav class="post-nav post-inner layout-padding mt-40 mt-lg-60" aria-label="<?php esc_attr_e( 'Article navigation', 'lsc-group' ); ?>">
+						<div class="post-nav post-inner layout-padding mt-40 mt-lg-60" role="navigation" aria-label="<?php esc_attr_e( 'Article navigation', 'lsc-group' ); ?>">
 							<?php if ( $lsc_prev ) : ?>
 								<a class="post-nav__link post-nav__link--prev" href="<?php echo esc_url( get_permalink( $lsc_prev ) ); ?>" rel="prev">
 									<span class="post-nav__label"><span aria-hidden="true">&larr;</span> <?php esc_html_e( 'Previous', 'lsc-group' ); ?></span>
@@ -55,7 +55,7 @@ if ( is_singular() ) {
 									<span class="post-nav__title"><?php echo esc_html( get_the_title( $lsc_next ) ); ?></span>
 								</a>
 							<?php endif; ?>
-						</nav>
+						</div>
 						<?php
 					endif;
 				endif;

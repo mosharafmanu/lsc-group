@@ -88,8 +88,8 @@ function lsc_render_pagination( $query = null, $page_var = 'cs_page' ) {
 		],
 	];
 	?>
-	<nav class="blog-pagination pagination" aria-label="<?php esc_attr_e( 'Blog pagination', 'lsc-group' ); ?>">
+	<div class="blog-pagination pagination" role="navigation" aria-label="<?php esc_attr_e( 'Blog pagination', 'lsc-group' ); ?>">
 		<?php echo wp_kses( $pagination, $allowed_tags ); ?>
-	</nav>
+	</div>
 	<?php
 }

@@ -635,6 +635,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   position: relative;
   width: 2.5rem;
   height: 2.5rem;
+  margin-right: -0.5rem;
   flex-shrink: 0;
   border: 0;
   background: transparent;
@@ -1060,6 +1061,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	height: 100%;
 	object-fit: cover;
 }
+.page-about-us .inner-hero--image .inner-hero__media img {
+	object-position: 62% center;
+}
 .inner-hero__inner {
   position: relative;
   z-index: 2;
@@ -1168,6 +1172,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 }
 @media only screen and (max-width:767px) {
+.page-about-us .inner-hero--image .inner-hero__media img {
+	object-position: 72% center;
+}
 .inner-hero__title {
   font-size: 2rem;
 }
@@ -2250,6 +2257,24 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 
 /* Specialist Cards */
+.specialist-cards--overlap-contact-panel {
+  margin-top: -11.25rem;
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(
+    to bottom,
+    var(--lsc-color-panel) 0,
+    var(--lsc-color-panel) var(--specialist-panel-bg-height, 12rem),
+    var(--lsc-color-white) var(--specialist-panel-bg-height, 12rem),
+    var(--lsc-color-white) 100%
+  );
+}
+.contact-panel--before-specialist {
+  padding-bottom: 11.25rem;
+}
+.specialist-cards--overlap-contact-panel .specialist-cards__grid {
+  margin-top: 3.75rem;
+}
 
 .specialist-cards__card {
   border-radius: .75rem;
@@ -2303,6 +2328,14 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   height: 3rem;
 }
 }
+@media only screen and (min-width: 992px) {
+.specialist-cards--overlap-contact-panel {
+  margin-top: -18.75rem;
+}
+.contact-panel--before-specialist {
+  padding-bottom: 18.75rem;
+}
+}
 
 /* Process Steps */
 .process-steps {
@@ -2349,9 +2382,36 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 	font-size: .9375rem;
 	line-height: 150%;
 }
+@media only screen and (max-width: 1399px) {
+.process-steps__grid {
+	--lsc-card-grid-gap: .75rem;
+}
+.process-steps__step {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+}
 @media only screen and (max-width: 991px) {
 .process-steps .card-grid.card-grid--center-last-row {
-	flex-wrap: initial;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: 2rem;
+	row-gap: 2.5rem;
+	max-width: 44rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+.process-steps__step {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+.process-steps__step-title {
+	margin-top: 1.25rem;
+}
+.process-steps__step-description {
+	max-width: 17rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 }
 @media only screen and (max-width: 767px) {
@@ -2364,6 +2424,16 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .process-steps__number {
 	width: 3rem;
 	height: 3rem;
+}
+}
+@media only screen and (max-width: 575px) {
+.process-steps .card-grid.card-grid--center-last-row {
+	grid-template-columns: 1fr;
+	row-gap: 2rem;
+	max-width: 20rem;
+}
+.process-steps__step-description {
+	max-width: 18rem;
 }
 }
 
@@ -2837,7 +2907,7 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 
 /* Downloads Section */
 .downloads-section__header {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 .downloads-section__list {
   margin: 0;
@@ -2922,6 +2992,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   width: .75rem;
 }
 @media only screen and (max-width: 991px) {
+.downloads-section__header {
+	margin-bottom: 2rem;
+}
 .download-item {
 	padding: 3rem 4rem;
 }
@@ -2943,6 +3016,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 }
 @media only screen and (max-width: 767px) {
+.downloads-section__header {
+	margin-bottom: 1.75rem;
+}
 .download-item {
 	padding: 2rem 3rem;
 }
@@ -2951,6 +3027,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 }
 }
 @media only screen and (max-width: 575px) {
+.downloads-section__header {
+	margin-bottom: 1.5rem;
+}
 .download-item {
 	padding: 2rem 1.5rem;
 }
@@ -3158,6 +3237,14 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
 .lsc-contact-submit {
   grid-column: span 2;
 }
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(3),
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(4) {
+  grid-column: auto;
+}
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(5),
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(6) {
+  grid-column: span 2;
+}
 .wpcf7-spinner {
 	display: none;
 }
@@ -3177,9 +3264,9 @@ Tags: custom-logo, custom-menu, featured-images, translation-ready, acf, flexibl
   transition: 0.3s all ease;
 }
 .contact-form-card__form .wpcf7-submit:hover {
-    background-color: transparent;
-    color: var(--lsc-color-accent);
-    border-color: var(--lsc-color-accent);
+    background-color: var(--lsc-color-primary);
+    color: var(--lsc-color-white);
+    border-color: var(--lsc-color-primary);
     opacity: 1;
 }
 .wpcf7-submit {
@@ -3205,6 +3292,84 @@ button.wpcf7-submit:focus-visible {
 .wpcf7-submit__icon svg path {
   stroke: currentColor;
 }
+.lsc-submit--plain .wpcf7-submit__icon {
+  display: none;
+}
+.contact-form-card__form .wpcf7-response-output {
+  grid-column: span 2;
+  display: flex;
+  align-items: flex-start;
+  column-gap: .625rem;
+  margin: 1.25rem 0 0 !important;
+  padding: 1rem 1.125rem !important;
+  border: 0 !important;
+  border-radius: .5rem;
+  background-color: rgba(255, 138, 59, 0.10);
+  color: var(--lsc-color-primary);
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 150%;
+  box-shadow: inset .25rem 0 0 var(--lsc-color-accent);
+}
+.contact-form-card__form .wpcf7-response-output::before {
+  content: "!";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: .0625rem;
+  border-radius: 50%;
+  background-color: var(--lsc-color-accent);
+  color: var(--lsc-color-primary);
+  font-size: .8125rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.contact-form-card__form form.invalid .wpcf7-response-output,
+.contact-form-card__form form.unaccepted .wpcf7-response-output,
+.contact-form-card__form form.payment-required .wpcf7-response-output {
+  background-color: rgba(201, 42, 42, 0.10);
+  color: #8a1f1f;
+  box-shadow: inset .25rem 0 0 #c92a2a;
+}
+.contact-form-card__form form.invalid .wpcf7-response-output::before,
+.contact-form-card__form form.unaccepted .wpcf7-response-output::before,
+.contact-form-card__form form.payment-required .wpcf7-response-output::before {
+  background-color: #c92a2a;
+  color: var(--lsc-color-white);
+}
+.contact-form-card__form form.sent .wpcf7-response-output {
+  background-color: rgba(36, 143, 93, 0.12);
+  color: #185c3d;
+  box-shadow: inset .25rem 0 0 #248f5d;
+}
+.contact-form-card__form form.sent .wpcf7-response-output::before {
+  content: "\2713";
+  background-color: #248f5d;
+  color: var(--lsc-color-white);
+}
+.contact-form-card__form form.failed .wpcf7-response-output,
+.contact-form-card__form form.aborted .wpcf7-response-output,
+.contact-form-card__form form.spam .wpcf7-response-output {
+  background-color: rgba(190, 42, 42, 0.10);
+  color: #8a1f1f;
+  box-shadow: inset .25rem 0 0 #be2a2a;
+}
+.contact-form-card__form form.failed .wpcf7-response-output::before,
+.contact-form-card__form form.aborted .wpcf7-response-output::before,
+.contact-form-card__form form.spam .wpcf7-response-output::before {
+  background-color: #be2a2a;
+  color: var(--lsc-color-white);
+}
+.contact-form-card__form .wpcf7-not-valid-tip {
+  margin-top: .375rem;
+  color: #c92a2a;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 140%;
+}
 @media only screen and (max-width: 991px) {
 .contact-section__grid {
 	grid-template-columns: 1fr 1fr;
@@ -3223,6 +3388,15 @@ button.wpcf7-submit:focus-visible {
 .lsc-contact-field:nth-child(5), 
 .lsc-contact-submit {
 	grid-column: inherit;
+}
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(3),
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(4),
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(5),
+.lsc-contact-form--contact-page .lsc-contact-field:nth-child(6) {
+	grid-column: inherit;
+}
+.contact-form-card__form .wpcf7-response-output {
+	grid-column: 1;
 }
 .lsc-contact-field input, .lsc-contact-field textarea {
 	padding: .875rem;
@@ -3321,6 +3495,13 @@ button.wpcf7-submit:focus-visible {
   }
 }
 @media only screen and (max-width: 767px) {
+.specialist-cards--overlap-contact-panel {
+  margin-top: -13.75rem;
+  padding-top: 6.25rem;
+}
+.contact-panel--before-specialist {
+  padding-bottom: 13.75rem;
+}
 .contact-panel--overlap .contact-panel__grid {
 	margin-top: -2rem;
 }

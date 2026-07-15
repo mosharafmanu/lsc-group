@@ -31,7 +31,34 @@ if ( ! $has_form && ! $has_info && ! $map_embed ) {
 	return;
 }
 
-$section_classes = [ 'contact-panel pb-50 pb-lg-100' ];
+$section_classes = [ 'contact-panel' ];
+$next_layout     = '';
+
+if ( isset( $GLOBALS['lsc_section_index'] ) && function_exists( 'get_field' ) ) {
+	$cms_rows = get_field( 'cms', get_the_ID() );
+
+	if ( is_array( $cms_rows ) ) {
+		$current_index = (int) $GLOBALS['lsc_section_index'];
+
+		foreach ( $cms_rows as $row_index => $cms_row ) {
+			if ( $row_index <= $current_index || ! is_array( $cms_row ) || empty( $cms_row['acf_fc_layout'] ) ) {
+				continue;
+			}
+
+			$next_layout = $cms_row['acf_fc_layout'];
+			break;
+		}
+	}
+}
+
+if ( 'specialist_cards' === $next_layout ) {
+	$section_classes[] = 'contact-panel--before-specialist';
+	$section_classes[] = 'pb-120';
+	$section_classes[] = 'pb-lg-200';
+} else {
+	$section_classes[] = 'pb-50';
+	$section_classes[] = 'pb-lg-100';
+}
 
 if ( $overlap ) {
 	$section_classes[] = 'contact-panel--overlap';

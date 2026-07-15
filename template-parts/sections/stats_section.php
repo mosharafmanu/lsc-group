@@ -14,6 +14,30 @@ if ( ! $stats || ! is_array( $stats ) ) {
 	return;
 }
 
+if ( ! function_exists( 'lsc_parse_stat_counter_value' ) ) {
+	function lsc_parse_stat_counter_value( $value ) {
+		$value = trim( (string) $value );
+
+		if ( '' === $value || ! preg_match( '/-?\d+(?:,\d{3})*(?:\.\d+)?|-?\d+(?:\.\d+)?/', $value, $matches, PREG_OFFSET_CAPTURE ) ) {
+			return false;
+		}
+
+		$number_text = $matches[0][0];
+		$number_pos  = $matches[0][1];
+		$prefix      = substr( $value, 0, $number_pos );
+		$suffix      = substr( $value, $number_pos + strlen( $number_text ) );
+		$target      = (float) str_replace( ',', '', $number_text );
+		$decimals    = false === strpos( $number_text, '.' ) ? 0 : strlen( substr( strrchr( $number_text, '.' ), 1 ) );
+
+		return [
+			'prefix'   => $prefix,
+			'target'   => $target,
+			'suffix'   => $suffix,
+			'decimals' => $decimals,
+		];
+	}
+}
+
 $is_cards = 'cards' === $style;
 
 // Background: White (default) or Cream. Field values: light = White, subtle = Cream.
@@ -43,6 +67,7 @@ if ( $is_cards ) {
 			<?php
 			$value = $stat['value'] ?? '';
 			$label = $stat['label'] ?? '';
+			$counter_data = lsc_parse_stat_counter_value( $value );
 
 			if ( ! $value && ! $label ) {
 				continue;
@@ -50,7 +75,15 @@ if ( $is_cards ) {
 			?>
 			<div class="stats-section__item">
 				<?php if ( $value ) : ?>
-					<p class="stats-section__value"><?php echo esc_html( $value ); ?></p>
+					<p
+						class="stats-section__value<?php echo $counter_data ? ' js-stat-counter' : ''; ?>"
+						<?php if ( $counter_data ) : ?>
+							data-counter-prefix="<?php echo esc_attr( $counter_data['prefix'] ); ?>"
+							data-counter-target="<?php echo esc_attr( $counter_data['target'] ); ?>"
+							data-counter-suffix="<?php echo esc_attr( $counter_data['suffix'] ); ?>"
+							data-counter-decimals="<?php echo esc_attr( $counter_data['decimals'] ); ?>"
+						<?php endif; ?>
+					><?php echo esc_html( $value ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $label ) : ?>

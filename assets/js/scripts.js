@@ -360,6 +360,69 @@
 		} );
 
 		// ─────────────────────────────────────────────────────────────
+		// PROCESS STEPS — EQUAL TITLE HEIGHTS
+		// Keeps descriptions aligned even when editors enter longer titles.
+		// ─────────────────────────────────────────────────────────────
+
+		function equalizeProcessStepTitles() {
+			$( '.process-steps__grid' ).each( function () {
+				const $titles = $( this ).find( '.process-steps__step-title' );
+				let maxHeight = 0;
+
+				$titles.css( 'height', '' );
+
+				if ( window.innerWidth < 768 || ! $titles.length ) return;
+
+				$titles.each( function () {
+					maxHeight = Math.max( maxHeight, $( this ).outerHeight() );
+				} );
+
+				$titles.css( 'height', maxHeight + 'px' );
+			} );
+		}
+
+		equalizeProcessStepTitles();
+
+		let processStepsResizeTimer;
+		$( window ).on( 'resize orientationchange', function () {
+			clearTimeout( processStepsResizeTimer );
+			processStepsResizeTimer = setTimeout( equalizeProcessStepTitles, 150 );
+		} );
+
+		$( window ).on( 'load', equalizeProcessStepTitles );
+
+		// ─────────────────────────────────────────────────────────────
+		// SPECIALIST CARDS — DYNAMIC OVERLAP BACKGROUND
+		// When this section overlaps the contact panel, keep only the
+		// heading/header area on the panel background; cards sit on white.
+		// ─────────────────────────────────────────────────────────────
+
+		function updateSpecialistOverlapBackground() {
+			$( '.specialist-cards--overlap-contact-panel' ).each( function () {
+				const section = this;
+				const header = section.querySelector( '.specialist-cards__header' );
+
+				if ( ! header ) return;
+
+				const sectionTop = section.getBoundingClientRect().top;
+				const headerBottom = header.getBoundingClientRect().bottom;
+				const bgHeight = Math.max( headerBottom - sectionTop + 40, 0 );
+
+				section.style.setProperty( '--specialist-panel-bg-height', bgHeight + 'px' );
+			} );
+		}
+
+		updateSpecialistOverlapBackground();
+
+		let specialistOverlapTimer;
+		$( window ).on( 'resize orientationchange', function () {
+			clearTimeout( specialistOverlapTimer );
+			specialistOverlapTimer = setTimeout( updateSpecialistOverlapBackground, 150 );
+		} );
+
+		$( window ).on( 'load', updateSpecialistOverlapBackground );
+
+		// ─────────────────────────────────────────────────────────────
 		// TESTIMONIALS CAROUSEL
 		// ─────────────────────────────────────────────────────────────
 
@@ -412,6 +475,25 @@
 					},
 				],
 			} );
+		} );
+
+		function refreshTestimonialsCarousel() {
+			if ( typeof $.fn.slick !== 'function' ) return;
+
+			$( '.js-testimonials-carousel.slick-initialized' ).each( function () {
+				const $carousel = $( this );
+
+				$carousel.find( '.testimonial-card, .slick-slide, .slick-track' ).css( 'height', '' );
+				$carousel.slick( 'setPosition' );
+			} );
+		}
+
+		setTimeout( refreshTestimonialsCarousel, 150 );
+
+		let testimonialsResizeTimer;
+		$( window ).on( 'resize orientationchange', function () {
+			clearTimeout( testimonialsResizeTimer );
+			testimonialsResizeTimer = setTimeout( refreshTestimonialsCarousel, 180 );
 		} );
 			// ─────────────────────────────────────────────────────────────
 			// CASE STUDIES CAROUSEL — TABLET & MOBILE ONLY
@@ -594,6 +676,96 @@
 	} );
 
 } )( jQuery );
+
+
+// ─────────────────────────────────────────────────────────────────
+// STATS COUNT-UP
+// Animates numeric stat values when the stats section scrolls into view.
+// Prefixes/suffixes such as £, M+, %, and + are preserved from data attributes.
+// ─────────────────────────────────────────────────────────────────
+
+document.addEventListener( 'DOMContentLoaded', function () {
+	const counters = document.querySelectorAll( '.js-stat-counter' );
+	if ( ! counters.length ) return;
+
+	const prefersReducedMotion = window.matchMedia &&
+		window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+	function formatCounterValue( value, decimals ) {
+		return value.toLocaleString( undefined, {
+			minimumFractionDigits: decimals,
+			maximumFractionDigits: decimals
+		} );
+	}
+
+	function setCounterValue( counter, value ) {
+		const prefix = counter.dataset.counterPrefix || '';
+		const suffix = counter.dataset.counterSuffix || '';
+		const decimals = parseInt( counter.dataset.counterDecimals || '0', 10 );
+
+		counter.textContent = prefix + formatCounterValue( value, decimals ) + suffix;
+	}
+
+	function animateCounter( counter ) {
+		const target = parseFloat( counter.dataset.counterTarget || '0' );
+		const duration = 1400;
+		const startTime = performance.now();
+
+		counter.dataset.counterAnimating = 'true';
+
+		if ( prefersReducedMotion || ! Number.isFinite( target ) ) {
+			setCounterValue( counter, target );
+			counter.dataset.counterAnimating = 'false';
+			return;
+		}
+
+		function tick( now ) {
+			const progress = Math.min( ( now - startTime ) / duration, 1 );
+			const eased = 1 - Math.pow( 1 - progress, 3 );
+
+			setCounterValue( counter, target * eased );
+
+			if ( progress < 1 ) {
+				window.requestAnimationFrame( tick );
+			} else {
+				setCounterValue( counter, target );
+				counter.dataset.counterAnimating = 'false';
+			}
+		}
+
+		setCounterValue( counter, 0 );
+		window.requestAnimationFrame( tick );
+	}
+
+	if ( !( 'IntersectionObserver' in window ) ) {
+		counters.forEach( animateCounter );
+		return;
+	}
+
+	const observer = new IntersectionObserver( function ( entries ) {
+		entries.forEach( function ( entry ) {
+			if ( entry.isIntersecting ) {
+				if ( entry.target.dataset.countersInView === 'true' ) return;
+
+				entry.target.dataset.countersInView = 'true';
+				entry.target.querySelectorAll( '.js-stat-counter' ).forEach( function ( counter ) {
+					if ( counter.dataset.counterAnimating === 'true' ) return;
+					animateCounter( counter );
+				} );
+				return;
+			}
+
+			entry.target.dataset.countersInView = 'false';
+		} );
+	}, {
+		rootMargin: '0px 0px -15% 0px',
+		threshold: 0.35
+	} );
+
+	document.querySelectorAll( '.stats-section' ).forEach( function ( section ) {
+		observer.observe( section );
+	} );
+} );
 
 
 // ─────────────────────────────────────────────────────────────────
