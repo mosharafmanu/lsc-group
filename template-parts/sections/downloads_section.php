@@ -56,8 +56,9 @@ if ( ! $eyebrow && ! $title && ! $description && ! $downloads ) {
 	return;
 }
 
-$inner_classes             = [ 'downloads-section__inner', 'lsc-container', 'layout-padding', 'pt-50', 'pt-lg-90' ];
+$inner_classes             = [ 'downloads-section__inner', 'lsc-container', 'layout-padding' ];
 $lsc_current_section_index = isset( $GLOBALS['lsc_section_index'] ) ? (int) $GLOBALS['lsc_section_index'] : null;
+$lsc_is_first_downloads    = true;
 $lsc_is_last_downloads     = false;
 
 if ( null !== $lsc_current_section_index && function_exists( 'get_field' ) ) {
@@ -67,16 +68,28 @@ if ( null !== $lsc_current_section_index && function_exists( 'get_field' ) ) {
 		$lsc_is_last_downloads = true;
 
 		foreach ( $lsc_cms_rows as $lsc_row_index => $lsc_cms_row ) {
-			if ( $lsc_row_index <= $lsc_current_section_index ) {
+			if ( $lsc_row_index === $lsc_current_section_index ) {
 				continue;
 			}
 
-			if ( isset( $lsc_cms_row['acf_fc_layout'] ) && 'downloads_section' === $lsc_cms_row['acf_fc_layout'] ) {
+			if ( ! isset( $lsc_cms_row['acf_fc_layout'] ) || 'downloads_section' !== $lsc_cms_row['acf_fc_layout'] ) {
+				continue;
+			}
+
+			if ( $lsc_row_index < $lsc_current_section_index ) {
+				$lsc_is_first_downloads = false;
+			} else {
 				$lsc_is_last_downloads = false;
-				break;
 			}
 		}
 	}
+}
+
+if ( $lsc_is_first_downloads ) {
+	$inner_classes[] = 'pt-50';
+	$inner_classes[] = 'pt-lg-90';
+} else {
+	$inner_classes[] = 'pt-45';
 }
 
 if ( $lsc_is_last_downloads ) {

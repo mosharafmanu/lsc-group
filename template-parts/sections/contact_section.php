@@ -16,6 +16,9 @@ if ( ! $title_lines && ! $description && ! $contact_info && ! $form_card ) {
 
 $background_style = get_sub_field( 'background_style' ) ?: 'light';
 
+// Optional anchor id so buttons/links elsewhere on the page can jump to this section.
+$lsc_anchor_id = sanitize_title( (string) get_sub_field( 'anchor_id' ) );
+
 $section_classes = [
 	'contact-section',
 	'contact-section--bg-' . $background_style,
@@ -25,7 +28,9 @@ $section_classes = [
 ?>
 
 <?php $lsc_section_el = ( ! empty( $title_lines ) && is_array( $title_lines ) ) ? 'section' : 'div'; ?>
-<<?php echo $lsc_section_el; ?> class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>">
+<<?php echo $lsc_section_el; ?>
+	class="<?php echo esc_attr( implode( ' ', $section_classes ) ); ?>"
+	<?php if ( $lsc_anchor_id ) : ?>id="<?php echo esc_attr( $lsc_anchor_id ); ?>"<?php endif; ?>>
 	<div class="lsc-container layout-padding">
 		<?php if ( $title_lines || $description ) : ?>
 			<div class="section-header contact-section__header text-center">
